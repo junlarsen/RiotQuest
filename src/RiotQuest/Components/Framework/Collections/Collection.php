@@ -17,14 +17,34 @@ class Collection implements
 
     private $stack = [];
 
-    public function __construct($stack)
+    public function __construct($stack = [])
     {
         $this->stack = $stack;
     }
 
+    public function put($key, $value)
+    {
+        $this->stack[$key] = $value;
+    }
+
+    public function all()
+    {
+        return $this->stack;
+    }
+
+    public function merge($stack = [])
+    {
+        return new static(array_merge($this->stack, $stack));
+    }
+
+    public function json()
+    {
+        return \json_encode($this->stack);
+    }
+
     public function count()
     {
-        return count($this->stack);
+        return \count($this->stack);
     }
 
     public function offsetGet($offset)

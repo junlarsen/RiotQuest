@@ -27,15 +27,22 @@ class Token
     private $type;
 
     /**
+     * @var string
+     */
+    private $limits;
+
+    /**
      * Create a new API key
      *
      * @param $key
      * @param $type
+     * @param $limits
      */
-    public function __construct($key, $type)
+    public function __construct($key, $type, $limits)
     {
         $this->type = $type;
         $this->key = $key;
+        $this->limits = $limits;
     }
 
     /**
@@ -52,6 +59,19 @@ class Token
     public function getKey()
     {
         return $this->key;
+    }
+
+    /**
+     * Get the given rate limit for this key
+     *
+     * @return array
+     */
+    public function getLimits()
+    {
+        return [
+            'interval' => explode(':', $this->limits)[1],
+            'count' => explode(':', $this->limits)[0]
+        ];
     }
 
 }

@@ -164,21 +164,25 @@ class Request
      *
      * @return Response
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws RiotQuestException
      */
     public function send()
     {
-        $client = new HttpClient();
+        if (Client::available($this->arguments['region'], $this->parent[0] . '.' . $this->parent[1])) {
+            $client = new HttpClient();
 
-        $response = $client->request($this->method, $this->destination, [
-            'body' => json_encode($this->payload),
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'X-Riot-Token' => Client::getKeys()[$this->key]->getKey()
-            ],
-            'http_errors' => false
-        ]);
+            $response = $client->request($this->method, $this->destination, [
+                'body' => json_encode($this->payload),
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'X-Riot-Token' => Client::getKeys()[$this->key]->getKey()
+                ],
+                'http_errors' => false
+            ]);
 
-        return new Response($this, $response);
+            return new Response($this, $response);
+        }
+        throw new RiotQuestException('Rate Limit would be exceeded by making this call');
     }
 
 }

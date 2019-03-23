@@ -2,6 +2,9 @@
 
 namespace RiotQuest\Support\Helpers;
 
+use RiotQuest\Components\Framework\Collections\LeaguePositionList;
+use RiotQuest\Components\Framework\Collections\Summoner;
+
 /**
  * Class League
  *
@@ -76,6 +79,15 @@ class League
         'americas' => 'americas',
         'europe' => 'europe',
         'asia' => 'asia'
+    ];
+
+    public static $returnTypes = [
+        'summoner' => [
+            'name' => Summoner::class
+        ],
+        'league' => [
+            'positions' => LeaguePositionList::class
+        ]
     ];
 
     /**

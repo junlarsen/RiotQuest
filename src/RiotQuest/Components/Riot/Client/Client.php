@@ -2,6 +2,9 @@
 
 namespace RiotQuest\Components\Riot\Client;
 
+use RiotQuest\Components\RateLimit\Application;
+use RiotQuest\Components\RateLimit\Endpoint;
+use RiotQuest\Components\Riot\Endpoints\League;
 use RiotQuest\Components\Riot\Endpoints\Summoner;
 
 use Closure;
@@ -27,11 +30,18 @@ class Client
         foreach ($keys as $key) {
             static::$keys[$key->getType()] = $key;
         }
+        Application::enable();
+        Endpoint::enable();
     }
 
     public static function enable()
     {
 
+    }
+
+    public static function getLimits($key)
+    {
+        return static::$keys[$key] ? static::$keys[$key]->getLimits() : [];
     }
 
     public static function on($event, Closure $closure)
@@ -44,6 +54,17 @@ class Client
         foreach (static::$listeners[$event] as $listener) {
             call_user_func_array([$listener, 'call'], array_merge([new static], $args));
         }
+    }
+
+    public static function hit($region, $endpoint, $lim)
+    {
+        Application::hit($region);
+        Endpoint::hit($region, $endpoint, null, $lim);
+    }
+
+    public static function available($region, $endpoint)
+    {
+        return Endpoint::available($region, $endpoint) && Application::available($region);
     }
 
     public static function getCache()
@@ -61,9 +82,9 @@ class Client
 
     }
 
-    public static function league()
+    public static function league($region)
     {
-
+        return new League($region);
     }
 
     public static function status()

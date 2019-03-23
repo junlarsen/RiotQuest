@@ -8,9 +8,9 @@ use RiotQuest\Components\Riot\Client\Token;
 class Client extends Module
 {
 
-    public static function token($token, $type)
+    public static function token($token, $type, $limit)
     {
-        return new Token($token, $type);
+        return new Token($token, $type, $limit);
     }
 
 
