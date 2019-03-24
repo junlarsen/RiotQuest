@@ -229,7 +229,7 @@ class Request
     {
         $ref = Library::$returnTypes[$this->parent[0]][$this->parent[1]];
         if ($response instanceof \GuzzleHttp\Psr7\Response) {
-            if ($response->getStatusCode() === 200) {
+            if ($response->getStatusCode() == 200) {
                 $limits = $response->getHeaders()['X-Method-Rate-Limit'][0];
                 Client::hit(
                     $this->arguments['region'],
@@ -238,14 +238,22 @@ class Request
                         'interval' => explode(':', $limits)[1],
                         'count' => explode(':', $limits)[0]
                     ]);
+
                 $load = (array)json_decode($response->getBody()->getContents(), 1);
                 Client::getCache()->set($this->getKey(), json_encode($load));
-                return Library::traverse($load, Library::template($ref));
+                if ($ref) {
+                    return Library::traverse($load, Library::template($ref));
+                } else {
+                    return $response->getBody()->getContents();
+                }
             } else {
                 throw new RiotQuestException(json_decode($response->getBody()->getContents(), 1)['status']['message'], $response->getStatusCode());
             }
         } else {
-            return Library::traverse($response, Library::template($ref));
+            if ($ref) {
+                return Library::traverse($response, Library::template($ref));
+            }
+            return $response[0];
         }
     }
 

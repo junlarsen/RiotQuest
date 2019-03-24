@@ -69,7 +69,7 @@ class Endpoint implements RateLimit
                     $endpoint => [
                         'cap' => $lim['count'],
                         'count' => 1,
-                        'ttl' => $time + $lim['interval']
+                        'ttl' => (int) $time + $lim['interval']
                     ]
                 ]
             ]), (int) $lim['interval']);
@@ -79,7 +79,7 @@ class Endpoint implements RateLimit
                 $current[$region][$endpoint] = [
                     'cap' => $lim['count'],
                     'count' => $current[$region][$endpoint]['count'] + 1,
-                    'ttl' => $current[$region][$endpoint]['ttl']
+                    'ttl' => (int) $current[$region][$endpoint]['ttl']
                 ];
                 static::$cache->set('riotquest.limits.ends', json_encode($current), (int) $current[$region][$endpoint]['ttl'] - $time);
             }

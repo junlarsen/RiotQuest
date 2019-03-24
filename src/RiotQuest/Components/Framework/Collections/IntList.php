@@ -3,13 +3,13 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 /**
- * Class LeaguePositionList
+ * Class IntList
  *
- * @list LeaguePosition 3
+ * @list int 1000
  *
  * @package RiotQuest\Components\Framework\Collections
  */
-class LeaguePositionList extends Collection
+class IntList extends Collection
 {
 
 

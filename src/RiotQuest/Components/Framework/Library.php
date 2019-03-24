@@ -3,6 +3,10 @@
 namespace RiotQuest\Components\Framework;
 
 use ReflectionClass;
+use RiotQuest\Components\Framework\Collections\ChampionInfo;
+use RiotQuest\Components\Framework\Collections\ChampionMastery;
+use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
+use RiotQuest\Components\Framework\Collections\League;
 use RiotQuest\Components\Framework\Collections\Summoner;
 use RiotQuest\Components\Framework\Collections\LeaguePositionList;
 
@@ -85,13 +89,47 @@ class Library
      * Return types for each endpoint
      *
      * @var array
+     *
+     * TODO: single value response collections
      */
     public static $returnTypes = [
-        'summoner' => [
-            'name' => Summoner::class
+        'mastery' => [
+            'all' => ChampionMasteryList::class,
+            'id' => ChampionMastery::class,
+            'score' => false
+        ],
+        'champion' => [
+            'rotation' => ChampionInfo::class
         ],
         'league' => [
-            'positions' => LeaguePositionList::class
+            'positions' => LeaguePositionList::class,
+            'id' => League::class,
+            'grandmaster',
+            'challenger',
+            'master'
+        ],
+        'status' => [
+            'shard'
+        ],
+        'match' => [
+            'tournamentList',
+            'id',
+            'tournament',
+            'list',
+            'timeline'
+        ],
+        'spectator' => [
+            'featured',
+            'active'
+        ],
+        'summoner' => [
+            'name' => Summoner::class,
+            'account' => Summoner::class,
+            'id' => Summoner::class,
+            'unique' => Summoner::class
+        ],
+        'code' => [
+            'id'
         ]
     ];
 
@@ -136,21 +174,39 @@ class Library
      */
     public static function template($reflector)
     {
-        $ref = new ReflectionClass($reflector);
-        // Match something like [ @property boolean $prop ]
-        $ex = '/(@property ([\w\[\]]+) \$([\w]+))/m';
-        preg_match_all($ex, $ref->getDocComment(), $matches, 1);
-        $combined = [];
-        foreach ($matches[3] as $key => $value) {
-            $combined[$value] = $matches[2][$key];
-        }
-        foreach ($combined as $key => $value) {
-            if (!in_array($value, ['int', 'boolean', 'float', 'double', 'array', 'string', 'bool', 'integer'])) {
-                $combined[$key] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . $value);
+        if (strpos($reflector, 'List')) {
+            $ref = new ReflectionClass($reflector);
+            $ex = '/(@list ([\w]+) ([\d]+))/m';
+            preg_match($ex, $ref->getDocComment(), $matches);
+            $combined = [];
+            for ($i = 0; $i < $matches[3]; $i++) {
+                $combined[] = $matches[2];
             }
+            $combined['_class'] = $reflector;
+            return $combined;
+        } else {
+            $ref = new ReflectionClass(str_replace('[]', '', $reflector));
+            // Match something like [ @property boolean $prop ]
+            $ex = '/(@property ([\w\[\]]+) \$([\w]+))/m';
+            preg_match_all($ex, $ref->getDocComment(), $matches, 1);
+            $combined = [];
+            foreach ($matches[3] as $key => $value) {
+                $combined[$value] = $matches[2][$key];
+            }
+            foreach ($combined as $key => $value) {
+                if (!in_array($value, ['int', 'boolean', 'float', 'double', 'array', 'string', 'bool', 'integer'])) {
+                    if (class_exists("\\RiotQuest\\Components\\Framework\\Collections\\" . $value)) {
+                        $combined[$key] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . str_replace('[]', '', $value));
+                    } else {
+                        $template = "\\RiotQuest\\Components\\Framework\\Collections\\" . ucfirst(str_replace('[]', '', $value)) . 'List';
+                        $combined[$key] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . ucfirst(str_replace('[]', '', $value)));
+                        var_dump($template);
+                    }
+                }
+            }
+            $combined['_class'] = $reflector;
+            return $combined;
         }
-        $combined['_class'] = $reflector;
-        return $combined;
     }
 
     /**
@@ -158,6 +214,8 @@ class Library
      * template and assigns values to the collection type passed in the
      * template.
      *
+     *
+     * TODO: FIX THIS
      * @param $load
      * @param $template
      * @return mixed

@@ -4,10 +4,15 @@ namespace RiotQuest\Components\Riot\Client;
 
 use RiotQuest\Components\RateLimit\Application;
 use RiotQuest\Components\RateLimit\Endpoint;
+use RiotQuest\Components\Riot\Endpoints\Champion;
+use RiotQuest\Components\Riot\Endpoints\Code;
 use RiotQuest\Components\Riot\Endpoints\League;
+use RiotQuest\Components\Riot\Endpoints\Mastery;
+use RiotQuest\Components\Riot\Endpoints\Match;
+use RiotQuest\Components\Riot\Endpoints\Spectator;
+use RiotQuest\Components\Riot\Endpoints\Status;
 use RiotQuest\Components\Riot\Endpoints\Summoner;
 use Psr\SimpleCache\CacheInterface;
-use Closure;
 
 /**
  * Class Client
@@ -34,13 +39,6 @@ class Client
      * @var array
      */
     protected static $limits;
-
-    /**
-     * List of set event listeners
-     *
-     * @var array
-     */
-    protected static $listeners = [];
 
     /**
      * The API keys
@@ -79,30 +77,6 @@ class Client
     public static function getLimits($key)
     {
         return static::$keys[$key] ? static::$keys[$key]->getLimits() : [];
-    }
-
-    /**
-     * Add an event listener for given event
-     *
-     * @param $event
-     * @param Closure $closure
-     */
-    public static function on($event, Closure $closure)
-    {
-        static::$listeners[$event][] = $closure;
-    }
-
-    /**
-     * Dispatch event listeners for given event with args
-     *
-     * @param $event
-     * @param mixed ...$args
-     */
-    public static function emit($event, ...$args)
-    {
-        foreach (static::$listeners[$event] as $listener) {
-            call_user_func_array([$listener, 'call'], array_merge([new static], $args));
-        }
     }
 
     /**
@@ -152,9 +126,14 @@ class Client
         return static::$keys;
     }
 
-    public static function mastery()
+    public static function champion($region, $ttl = 3600)
     {
+        return new Champion($region, $ttl);
+    }
 
+    public static function mastery($region, $ttl = 3600)
+    {
+        return new Mastery($region, $ttl);
     }
 
     public static function league($region, $ttl = 3600)
@@ -162,19 +141,19 @@ class Client
         return new League($region, $ttl);
     }
 
-    public static function status()
+    public static function status($region, $ttl = 3600)
     {
-
+        return new Status($region, $ttl);
     }
 
-    public static function match()
+    public static function match($region, $ttl = 3600)
     {
-
+        return new Match($region, $ttl);
     }
 
-    public static function spectator()
+    public static function spectator($region, $ttl = 3600)
     {
-
+        return new Spectator($region, $ttl);
     }
 
     public static function summoner($region, $ttl = 3600)
@@ -182,9 +161,9 @@ class Client
         return new Summoner($region, $ttl);
     }
 
-    public static function code()
+    public static function code($region, $ttl = 3600)
     {
-
+        return new Code($region, $ttl);
     }
 
     public static function stub()
