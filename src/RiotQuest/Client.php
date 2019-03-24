@@ -1,9 +1,9 @@
 <?php
 
-namespace RiotQuest\Support\Facades;
+namespace RiotQuest;
 
-use RiotQuest\Components\Riot\Client\Client as Module;
 use RiotQuest\Components\Riot\Client\Token;
+use RiotQuest\Components\Riot\Client\Client as Module;
 
 /**
  * Class Client
@@ -29,6 +29,4 @@ class Client extends Module
     {
         return new Token($token, $type, $limit);
     }
-
-
 }

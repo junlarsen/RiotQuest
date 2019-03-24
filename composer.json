@@ -6,10 +6,7 @@
   "autoload": {
     "psr-4": {
       "RiotQuest\\": "src/RiotQuest/"
-    },
-    "files": [
-      "src/RiotQuest/Support/autoload.php"
-    ]
+    }
   },
   "require": {
     "php": "^7",

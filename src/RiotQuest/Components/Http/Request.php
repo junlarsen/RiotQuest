@@ -2,8 +2,6 @@
 
 namespace RiotQuest\Components\Http;
 
-use RiotQuest\Support\Helpers\League;
-use RiotQuest\Support\Str;
 use RiotQuest\Contracts\RiotQuestException;
 use RiotQuest\Components\Riot\Client\Client;
 use RiotQuest\Components\Framework\Library;
@@ -170,10 +168,10 @@ class Request
      */
     public function compile()
     {
-        if (!($this->arguments['region'] = League::region($this->arguments['region']))) {
+        if (!($this->arguments['region'] = Library::region($this->arguments['region']))) {
             throw new RiotQuestException('ERROR: Specificed region could not be resolved.');
         }
-        $this->destination = Str::replace($this->destination, $this->arguments);
+        $this->destination = Library::replace($this->destination, $this->arguments);
         return $this;
     }
 
@@ -193,6 +191,7 @@ class Request
      * @throws RiotQuestException
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function send()
     {
@@ -216,24 +215,39 @@ class Request
     }
 
 
+    /**
+     * Turns a api cache response or guzzle response into a
+     * collection or throws an exception if an error was met
+     *
+     * @param $response
+     * @return mixed
+     * @throws RiotQuestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     */
     public function handle($response)
     {
-        $ref = League::$returnTypes[$this->parent[0]][$this->parent[1]];
+        $ref = Library::$returnTypes[$this->parent[0]][$this->parent[1]];
         if ($response instanceof \GuzzleHttp\Psr7\Response) {
-            $limits = $response->getHeaders()['X-Method-Rate-Limit'][0];
-            Client::hit(
-                $this->arguments['region'],
-                $this->parent[0] . '.' . $this->parent[1],
-                [
-                    'interval' => explode(':', $limits)[1],
-                    'count' => explode(':', $limits)[0]
-                ]);
-            $load = (array) json_decode($response->getBody()->getContents(), 1);
-            Client::getCache()->set($this->getKey(), json_encode($load));
-            return Library::traverse($load, Library::template($ref));
+            if ($response->getStatusCode() === 200) {
+                $limits = $response->getHeaders()['X-Method-Rate-Limit'][0];
+                Client::hit(
+                    $this->arguments['region'],
+                    $this->parent[0] . '.' . $this->parent[1],
+                    [
+                        'interval' => explode(':', $limits)[1],
+                        'count' => explode(':', $limits)[0]
+                    ]);
+                $load = (array)json_decode($response->getBody()->getContents(), 1);
+                Client::getCache()->set($this->getKey(), json_encode($load));
+                return Library::traverse($load, Library::template($ref));
+            } else {
+                throw new RiotQuestException(json_decode($response->getBody()->getContents(), 1)['status']['message'], $response->getStatusCode());
+            }
         } else {
             return Library::traverse($response, Library::template($ref));
         }
     }
+
 
 }

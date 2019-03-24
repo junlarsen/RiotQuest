@@ -8,6 +8,14 @@ use IteratorAggregate;
 use Countable;
 use Serializable;
 
+/**
+ * Class Collection
+ *
+ * Definition which each DTO extends to make working with
+ * API responses easier and more flexible
+ *
+ * @package RiotQuest\Components\Framework\Collections
+ */
 class Collection implements
     ArrayAccess,
     Countable,
@@ -15,69 +23,144 @@ class Collection implements
     Serializable
 {
 
+    /**
+     * The items in the stack
+     * @var array
+     */
     private $stack = [];
 
+    /**
+     * Create a new Collection
+     *
+     * @param array $stack
+     */
     public function __construct($stack = [])
     {
         $this->stack = $stack;
     }
 
+    /**
+     * Adds a key and value pair into collection
+     *
+     * @param $key
+     * @param $value
+     */
     public function put($key, $value)
     {
         $this->stack[$key] = $value;
     }
 
+    /**
+     * Gets all the items
+     *
+     * @return array
+     */
     public function all()
     {
         return $this->stack;
     }
 
+    /**
+     * Merges two stacks
+     *
+     * @param array $stack
+     * @return Collection
+     */
     public function merge($stack = [])
     {
         return new static(array_merge($this->stack, $stack));
     }
 
+    /**
+     * Json encodes the stack
+     *
+     * @return false|string
+     */
     public function json()
     {
         return \json_encode($this->stack);
     }
 
-    public function count()
+    /**
+     * Count of items in array
+     *
+     * @param int $recursive
+     * @return int
+     */
+    public function count($recursive = 0)
     {
-        return \count($this->stack);
+        return \count($this->stack, $recursive);
     }
 
+    /**
+     * ArrayAccess implementation
+     *
+     * @param mixed $offset
+     * @return mixed|null
+     */
     public function offsetGet($offset)
     {
         return $this->stack[$offset] ?? null;
     }
 
+    /**
+     * ArrayAccess implementation
+     *
+     * @param mixed $offset
+     * @param mixed $value
+     */
     public function offsetSet($offset, $value)
     {
         $this->stack[$offset] = $value;
-        return $this;
     }
 
+    /**
+     * ArrayAccess implementation
+     *
+     * @param mixed $offset
+     */
     public function offsetUnset($offset)
     {
         unset($this->stack[$offset]);
     }
 
+    /**
+     * ArrayAccess implementation
+     *
+     * @param mixed $offset
+     * @return bool
+     */
     public function offsetExists($offset)
     {
         return isset($this->stack[$offset]);
     }
 
+    /**
+     * ArrayIterator implementation
+     *
+     * @return ArrayIterator|\Traversable
+     */
     public function getIterator()
     {
         return new ArrayIterator($this->stack);
     }
 
+    /**
+     * Serializes the stack
+     *
+     * @return string
+     */
     public function serialize()
     {
         return \serialize($this->stack);
     }
 
+    /**
+     * Unserialize a stack
+     *
+     * @param string $serialized
+     * @return mixed|void
+     */
     public function unserialize($serialized)
     {
         return \unserialize($serialized);
