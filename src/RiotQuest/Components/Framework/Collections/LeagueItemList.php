@@ -5,7 +5,7 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class LeagueItemList
  *
- * @list LeagueItem 1000
+ * @list LeagueItem
  *
  * @package RiotQuest\Components\Framework\Collections
  */

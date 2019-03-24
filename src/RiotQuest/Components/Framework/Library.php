@@ -164,14 +164,33 @@ class Library
         }, $subject);
     }
 
-    /**
-     * Retrieve a template for traversing through with a load
-     * based on class.
-     *
-     * @param $reflector
-     * @return array
-     * @throws \ReflectionException
-     */
+    public static function template($class)
+    {
+        $template = [];
+        $ref = new ReflectionClass($class);
+        if (strpos($class, 'List')) {
+            preg_match('/(@list ([\w]+))/m', $ref->getDocComment(), $matches);
+            $template['_list'] = static::template($matches[2]);
+        } else {
+            preg_match_all('/(@property ([\w\[\]]+) \$([\w]+))/m', $ref->getDocComment(), $matches);
+            foreach ($matches[3] as $key => $value) {
+                $template[$value] = $matches[2][$key];
+            }
+            foreach ($template as $key => $value) {
+                if (in_array($value), ['int', 'boolean', 'double', 'array', 'string'])) {
+                    // TODO: CONTINUE
+                }
+            }
+        }
+        return $template;
+    }
+
+    public static function traverse($data, $template)
+    {
+
+    }
+
+    /*
     public static function template($reflector)
     {
         if (strpos($reflector, 'List')) {
@@ -209,17 +228,6 @@ class Library
         }
     }
 
-    /**
-     * Iterates over a load (typically an API  response) with a given
-     * template and assigns values to the collection type passed in the
-     * template.
-     *
-     *
-     * TODO: FIX THIS
-     * @param $load
-     * @param $template
-     * @return mixed
-     */
     public static function traverse($load, $template)
     {
         $collection = new $template['_class'];
@@ -247,5 +255,6 @@ class Library
 
         return $collection;
     }
+    */
 
 }
