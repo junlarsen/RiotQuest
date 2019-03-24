@@ -2,16 +2,41 @@
 
 namespace RiotQuest\Components\RateLimit;
 
+use Psr\SimpleCache\CacheInterface;
 use RiotQuest\Components\Riot\Client\Client;
 use RiotQuest\Contracts\RateLimit;
 
+/**
+ * Class Application
+ *
+ * Rate Limit handler for the X-Application-Limit headers
+ * Throttles on last request before limit would be reached.
+ *
+ * @package RiotQuest\Components\RateLimit
+ */
 class Application implements RateLimit
 {
 
+    /**
+     * The max limits for the given STANDARD | TOURNAMENT
+     * API keys
+     *
+     * @var array
+     */
     protected static $limits = [];
 
+
+    /**
+     * PSR-16 Compliant CacheProvider for storing
+     * current rate limits.
+     *
+     * @var CacheInterface
+     */
     protected static $cache;
 
+    /**
+     * Boot up function to set static props
+     */
     public static function enable()
     {
         static::$limits['STANDARD'] = Client::getLimits('STANDARD') ?? [];
@@ -19,6 +44,14 @@ class Application implements RateLimit
         static::$cache = Client::getCache();
     }
 
+    /**
+     * Determine whether you're able to call given region or not
+     * @param $region
+     *
+     * @param null $endpoint
+     * @return bool
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public static function available($region, $endpoint = null)
     {
         if (static::$cache->has('riotquest.limits.app')) {
@@ -30,6 +63,14 @@ class Application implements RateLimit
         return true;
     }
 
+    /**
+     * Hit defined region for one request.
+     *
+     * @param string $region Targetted region
+     * @param null $endpoint Interface requirement - null
+     * @param string $scope  The scope to target, either STANDARD or TOURNAMENT
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public static function hit($region, $endpoint = null, $scope = 'STANDARD')
     {
         $time = time();

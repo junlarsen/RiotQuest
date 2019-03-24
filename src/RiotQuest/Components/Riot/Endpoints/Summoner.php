@@ -21,9 +21,9 @@ class Summoner extends Template
             ->setDestination('https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{name}')
             ->setMethod('GET')
             ->setArguments(['region' => $this->region, 'name' => $name])
+            ->setTtl($this->ttl)
             ->compile()
-            ->send()
-            ->collect();
+            ->send();
     }
 
 }

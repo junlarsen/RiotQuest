@@ -6,6 +6,7 @@ use RiotQuest\Support\Helpers\League;
 use RiotQuest\Support\Str;
 use RiotQuest\Contracts\RiotQuestException;
 use RiotQuest\Components\Riot\Client\Client;
+use RiotQuest\Components\Framework\Library;
 use GuzzleHttp\Client as HttpClient;
 
 /**
@@ -62,6 +63,13 @@ class Request
     public $parent;
 
     /**
+     * Seconds for the item to live in cache if its fetched from API
+     *
+     * @var int
+     */
+    public $ttl;
+
+    /**
      * Tell request to use standard API key
      *
      * @return $this
@@ -105,6 +113,16 @@ class Request
     public function setPayload($payload)
     {
         $this->payload = $payload;
+        return $this;
+    }
+
+    /**
+     * @param int $ttl
+     * @return $this
+     */
+    public function setTtl(int $ttl)
+    {
+        $this->ttl = $ttl;
         return $this;
     }
 
@@ -159,16 +177,28 @@ class Request
         return $this;
     }
 
+    public function getKey()
+    {
+        $str = "riotquest." . $this->parent[0] . '.' . $this->parent[1] . '?';
+        foreach ($this->arguments as $k => $v) {
+            $str .= "$k=$v,";
+        }
+        return trim($str, ',');
+    }
+
     /**
      * Send the http request and return a response
      *
-     * @return Response
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return mixed
      * @throws RiotQuestException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function send()
     {
-        if (Client::available($this->arguments['region'], $this->parent[0] . '.' . $this->parent[1])) {
+        if (Client::getCache()->has($this->getKey())) {
+            return $this->handle(json_decode(Client::getCache()->get($this->getKey()), 1));
+        } else if (Client::available($this->arguments['region'], $this->parent[0] . '.' . $this->parent[1])) {
             $client = new HttpClient();
 
             $response = $client->request($this->method, $this->destination, [
@@ -180,9 +210,30 @@ class Request
                 'http_errors' => false
             ]);
 
-            return new Response($this, $response);
+            return $this->handle($response);
         }
         throw new RiotQuestException('Rate Limit would be exceeded by making this call');
+    }
+
+
+    public function handle($response)
+    {
+        $ref = League::$returnTypes[$this->parent[0]][$this->parent[1]];
+        if ($response instanceof \GuzzleHttp\Psr7\Response) {
+            $limits = $response->getHeaders()['X-Method-Rate-Limit'][0];
+            Client::hit(
+                $this->arguments['region'],
+                $this->parent[0] . '.' . $this->parent[1],
+                [
+                    'interval' => explode(':', $limits)[1],
+                    'count' => explode(':', $limits)[0]
+                ]);
+            $load = (array) json_decode($response->getBody()->getContents(), 1);
+            Client::getCache()->set($this->getKey(), json_encode($load));
+            return Library::traverse($load, Library::template($ref));
+        } else {
+            return Library::traverse($response, Library::template($ref));
+        }
     }
 
 }

@@ -4,6 +4,13 @@ namespace RiotQuest\Components\Framework;
 
 use ReflectionClass;
 
+/**
+ * Class Library
+ *
+ * Performs basic actions for compiling resources
+ *
+ * @package RiotQuest\Components\Framework
+ */
 class Library
 {
 
