@@ -5,7 +5,8 @@
   "type": "library",
   "autoload": {
     "psr-4": {
-      "RiotQuest\\": "src/RiotQuest/"
+      "RiotQuest\\": "src/RiotQuest/",
+      "RiotQuest\\Docs\\": "docs/"
     }
   },
   "require": {
@@ -13,7 +14,8 @@
     "ext-json": "*",
     "guzzlehttp/guzzle": "6.3",
     "symfony/cache": "4.2",
-    "symfony/dotenv": "4.2"
+    "symfony/dotenv": "4.2",
+    "jenssegers/blade": "1.1.*"
   },
   "require-dev": {
     "phpunit/phpunit": "7.5"

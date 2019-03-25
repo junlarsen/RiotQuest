@@ -1,0 +1,11 @@
+#!/usr/bin/php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use RiotQuest\Docs\Generator;
+
+$generator = new Generator();
+$generator->make();
+
+echo "Documents have been crafted at /docs/out!";

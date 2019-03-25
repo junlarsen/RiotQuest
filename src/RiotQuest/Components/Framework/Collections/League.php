@@ -7,7 +7,7 @@ namespace RiotQuest\Components\Framework\Collections;
  *
  * @property string $leagueId
  * @property string $tier
- * @property LeagueItem[] $entries
+ * @property LeagueItemList $entries
  * @property string $queue
  * @property string $name
  *
