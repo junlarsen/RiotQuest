@@ -27,7 +27,7 @@ class Collection implements
      * The items in the stack
      * @var array
      */
-    private $stack = [];
+    protected $stack = [];
 
     /**
      * Create a new Collection

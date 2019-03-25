@@ -27,6 +27,19 @@ namespace RiotQuest\Components\Framework\Collections;
 class LeaguePosition extends Collection
 {
 
+    public function winrate()
+    {
+        return $this['wins'] / ($this['wins'] + $this['losses']) * 100;
+    }
 
+    public function name()
+    {
+        return sprintf("%s %s %d LP", $this['tier'], $this['rank'], $this['leaguePoints']);
+    }
+
+    public function games()
+    {
+        return $this['wins'] + $this['losses'];
+    }
 
 }

@@ -1,5 +1,5 @@
 {
-  "name": "supergrecko/RiotQuest",
+  "name": "supergrecko/riot-quest",
   "description": "Riot Games API Framework",
   "license": "GPL-3.0",
   "type": "library",
@@ -11,7 +11,6 @@
   "require": {
     "php": "^7",
     "ext-json": "*",
-    "ext-curl": "*",
     "guzzlehttp/guzzle": "6.3",
     "symfony/cache": "4.2",
     "symfony/dotenv": "4.2"

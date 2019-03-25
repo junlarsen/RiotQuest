@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Framework;
 
+use function foo\func;
 use ReflectionClass;
 use RiotQuest\Components\Framework\Collections\ChampionInfo;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
@@ -170,91 +171,62 @@ class Library
         $ref = new ReflectionClass($class);
         if (strpos($class, 'List')) {
             preg_match('/(@list ([\w]+))/m', $ref->getDocComment(), $matches);
-            $template['_list'] = static::template($matches[2]);
+            if (!in_array($matches[2], ['int', 'boolean', 'double', 'array', 'string'])) {
+                $template['_list'] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . $matches[2]);
+            } else {
+                $template['_list'] = $matches[2];
+            }
         } else {
             preg_match_all('/(@property ([\w\[\]]+) \$([\w]+))/m', $ref->getDocComment(), $matches);
             foreach ($matches[3] as $key => $value) {
                 $template[$value] = $matches[2][$key];
             }
             foreach ($template as $key => $value) {
-                if (in_array($value), ['int', 'boolean', 'double', 'array', 'string'])) {
-                    // TODO: CONTINUE
+                if (!in_array($value, ['int', 'boolean', 'double', 'array', 'string'])) {
+                    $template[$key] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . $value);
                 }
             }
         }
+        $template['_class'] = $class;
         return $template;
     }
 
     public static function traverse($data, $template)
     {
-
-    }
-
-    /*
-    public static function template($reflector)
-    {
-        if (strpos($reflector, 'List')) {
-            $ref = new ReflectionClass($reflector);
-            $ex = '/(@list ([\w]+) ([\d]+))/m';
-            preg_match($ex, $ref->getDocComment(), $matches);
-            $combined = [];
-            for ($i = 0; $i < $matches[3]; $i++) {
-                $combined[] = $matches[2];
+        $col = new $template['_class'];
+        if (isset($template['_list'])) {
+            foreach ($data as $key => $value) {
+                if (isset($template['_list']['_class'])) {
+                    $co = static::traverse($value, $template['_list']);
+                    $col->put($key, $co);
+                } else {
+                    $col->put($key, $value);
+                }
             }
-            $combined['_class'] = $reflector;
-            return $combined;
         } else {
-            $ref = new ReflectionClass(str_replace('[]', '', $reflector));
-            // Match something like [ @property boolean $prop ]
-            $ex = '/(@property ([\w\[\]]+) \$([\w]+))/m';
-            preg_match_all($ex, $ref->getDocComment(), $matches, 1);
-            $combined = [];
-            foreach ($matches[3] as $key => $value) {
-                $combined[$value] = $matches[2][$key];
-            }
-            foreach ($combined as $key => $value) {
-                if (!in_array($value, ['int', 'boolean', 'float', 'double', 'array', 'string', 'bool', 'integer'])) {
-                    if (class_exists("\\RiotQuest\\Components\\Framework\\Collections\\" . $value)) {
-                        $combined[$key] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . str_replace('[]', '', $value));
-                    } else {
-                        $template = "\\RiotQuest\\Components\\Framework\\Collections\\" . ucfirst(str_replace('[]', '', $value)) . 'List';
-                        $combined[$key] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . ucfirst(str_replace('[]', '', $value)));
-                        var_dump($template);
+            foreach ($data as $key => $value) {
+                if (is_array($template[$key])) {
+                    $co = static::traverse($value, $template[$key]);
+                    $col->put($key, $co);
+                } else {
+                    switch ($template[$key]) {
+                        case 'string':
+                            $value = (string) $value; break;
+                        case 'int':
+                        case 'integer':
+                            $value = (int) $value; break;
+                        case 'double':
+                        case 'float':
+                            $value = (double) $value; break;
+                        case 'bool':
+                        case 'boolean':
+                            $value = (bool) $value; break;
                     }
+                    $col->put($key, $value);
                 }
             }
-            $combined['_class'] = $reflector;
-            return $combined;
         }
+        return $col;
     }
-
-    public static function traverse($load, $template)
-    {
-        $collection = new $template['_class'];
-
-        foreach ($load as $key => $value) {
-            if (is_array($template[$key])) {
-                $collection->put($key, static::traverse($value, $template[$key]));
-            } else {
-                switch ($template[$key]) {
-                    case 'string':
-                        $value = (string) $value; break;
-                    case 'int':
-                    case 'integer':
-                        $value = (int) $value; break;
-                    case 'double':
-                    case 'float':
-                        $value = (double) $value; break;
-                    case 'bool':
-                    case 'boolean':
-                        $value = (bool) $value; break;
-                }
-                $collection->put($key, $value);
-            }
-        }
-
-        return $collection;
-    }
-    */
 
 }
