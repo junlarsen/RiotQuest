@@ -36,4 +36,28 @@ class Match extends Template
             ->send();
     }
 
+    public function timeline($id)
+    {
+        return Request::make(['match', __FUNCTION__])
+            ->useStandard()
+            ->setDestination('https://{region}.api.riotgames.com/lol/match/v4/timelines/by-match/{id}')
+            ->setMethod('GET')
+            ->setArguments(['region' => $this->region, 'id' => $id])
+            ->setTtl($this->ttl)
+            ->compile()
+            ->send();
+    }
+
+    public function id($id)
+    {
+        return Request::make(['match', __FUNCTION__])
+            ->useStandard()
+            ->setDestination('https://{region}.api.riotgames.com/lol/match/v4/matches/{id}')
+            ->setMethod('GET')
+            ->setArguments(['region' => $this->region, 'id' => $id])
+            ->setTtl($this->ttl)
+            ->compile()
+            ->send();
+    }
+
 }

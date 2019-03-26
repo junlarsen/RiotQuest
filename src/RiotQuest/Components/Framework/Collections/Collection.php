@@ -7,6 +7,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use Countable;
 use Serializable;
+use Closure;
 
 /**
  * Class Collection
@@ -81,6 +82,65 @@ class Collection implements
     public function json()
     {
         return \json_encode($this->stack);
+    }
+
+    /**
+     * Performs array_key_exists on collection
+     *
+     * @param $key
+     * @return bool
+     */
+    public function exists($key)
+    {
+        return isset($this->stack[$key]);
+    }
+
+    /**
+     * Runs a foreach on collection calling Closure each time
+     *
+     * @param Closure $closure
+     * @return $this
+     */
+    public function each(Closure $closure)
+    {
+        foreach ($this->stack as $key => $item) {
+            if (!($closure->call($this, $item, $key))) {
+                break;
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Performs an array_filter on collection
+     *
+     * @param Closure $closure
+     * @return array
+     */
+    public function filter(Closure $closure)
+    {
+        return array_filter($this->stack, $closure);
+    }
+
+    /**
+     * Get array keys for collection
+     *
+     * @return array
+     */
+    public function keys()
+    {
+        return array_keys($this->stack);
+    }
+
+    /**
+     * Performs an array_map on collection
+     *
+     * @param Closure $closure
+     * @return array
+     */
+    public function map(Closure $closure)
+    {
+        return array_map($closure, $this->stack);
     }
 
     /**

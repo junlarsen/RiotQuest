@@ -223,7 +223,6 @@ class Request
      * @return mixed
      * @throws RiotQuestException
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
      */
     public function handle($response)
     {

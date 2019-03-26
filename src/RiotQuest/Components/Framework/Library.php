@@ -9,7 +9,9 @@ use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
 use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
 use RiotQuest\Components\Framework\Collections\FeaturedGames;
 use RiotQuest\Components\Framework\Collections\League;
+use RiotQuest\Components\Framework\Collections\Match;
 use RiotQuest\Components\Framework\Collections\MatchHistory;
+use RiotQuest\Components\Framework\Collections\MatchTimeline;
 use RiotQuest\Components\Framework\Collections\ShardStatus;
 use RiotQuest\Components\Framework\Collections\Summoner;
 use RiotQuest\Components\Framework\Collections\LeaguePositionList;
@@ -121,10 +123,10 @@ class Library
         ],
         'match' => [
             'tournamentList', // n/a
-            'id',
+            'id' => Match::class,
             'tournament', // n/a
             'list' => MatchHistory::class,
-            'timeline'
+            'timeline' => MatchTimeline::class
         ],
         // complete
         'spectator' => [
