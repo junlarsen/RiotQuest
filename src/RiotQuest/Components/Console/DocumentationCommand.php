@@ -1,6 +1,6 @@
 <?php
 
-namespace RiotQuest\Components\CommandLine;
+namespace RiotQuest\Components\Console;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use RiotQuest\Docs\Generator;
 
-class CreateDocumentationCommand extends Command
+class DocumentationCommand extends Command
 {
 
     protected static $defaultName = 'docs:make';
@@ -24,7 +24,7 @@ class CreateDocumentationCommand extends Command
     {
         $output->writeln([
             '<info>================================</info>',
-            ' RiotQuest CLI 1.0              ',
+            '* RiotQuest CLI 1.0              ',
             '<info>================================</info>'
         ]);
 

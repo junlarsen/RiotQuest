@@ -4,10 +4,13 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-use RiotQuest\Components\CommandLine\CreateDocumentationCommand;
+
+use RiotQuest\Components\Console\LeagueCommand;
+use RiotQuest\Components\Console\DocumentationCommand;
 
 $app = new Application();
 
-$app->add(new CreateDocumentationCommand());
+$app->add(new DocumentationCommand());
+$app->add(new LeagueCommand());
 
 $app->run();
