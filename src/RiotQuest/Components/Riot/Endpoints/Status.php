@@ -14,6 +14,15 @@ use RiotQuest\Components\Http\Request;
 class Status extends Template
 {
 
+    /**
+     * @see https://developer.riotgames.com/api-methods/#lol-status-v3/GET_getShardData
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
     public function shard()
     {
         return Request::make(['status', __FUNCTION__])

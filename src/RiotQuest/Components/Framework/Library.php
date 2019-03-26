@@ -2,12 +2,14 @@
 
 namespace RiotQuest\Components\Framework;
 
-use function foo\func;
 use ReflectionClass;
 use RiotQuest\Components\Framework\Collections\ChampionInfo;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
 use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
+use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
+use RiotQuest\Components\Framework\Collections\FeaturedGames;
 use RiotQuest\Components\Framework\Collections\League;
+use RiotQuest\Components\Framework\Collections\MatchHistory;
 use RiotQuest\Components\Framework\Collections\ShardStatus;
 use RiotQuest\Components\Framework\Collections\Summoner;
 use RiotQuest\Components\Framework\Collections\LeaguePositionList;
@@ -95,43 +97,50 @@ class Library
      * TODO: single value response collections
      */
     public static $returnTypes = [
+        // complete
         'mastery' => [
             'all' => ChampionMasteryList::class,
             'id' => ChampionMastery::class,
             'score' => false
         ],
+        // complete
         'champion' => [
             'rotation' => ChampionInfo::class
         ],
+        // complete
         'league' => [
             'positions' => LeaguePositionList::class,
             'id' => League::class,
-            'grandmaster',
-            'challenger',
-            'master'
+            'grandmaster' => League::class,
+            'challenger' => League::class,
+            'master' => League::class
         ],
+        // complete
         'status' => [
             'shard' => ShardStatus::class
         ],
         'match' => [
-            'tournamentList',
+            'tournamentList', // n/a
             'id',
-            'tournament',
-            'list',
+            'tournament', // n/a
+            'list' => MatchHistory::class,
             'timeline'
         ],
+        // complete
         'spectator' => [
-            'featured',
-            'active'
+            'featured' => FeaturedGames::class,
+            'active' => CurrentGameInfo::class
         ],
+        // complete
         'summoner' => [
             'name' => Summoner::class,
             'account' => Summoner::class,
             'id' => Summoner::class,
             'unique' => Summoner::class
         ],
+        // complete
         'code' => [
-            'id'
+            'id' => false
         ]
     ];
 
