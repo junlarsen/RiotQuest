@@ -8,6 +8,7 @@ use RiotQuest\Components\Framework\Collections\ChampionInfo;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
 use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
 use RiotQuest\Components\Framework\Collections\League;
+use RiotQuest\Components\Framework\Collections\ShardStatus;
 use RiotQuest\Components\Framework\Collections\Summoner;
 use RiotQuest\Components\Framework\Collections\LeaguePositionList;
 
@@ -110,7 +111,7 @@ class Library
             'master'
         ],
         'status' => [
-            'shard'
+            'shard' => ShardStatus::class
         ],
         'match' => [
             'tournamentList',

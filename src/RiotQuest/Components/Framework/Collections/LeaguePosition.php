@@ -5,6 +5,8 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class LeaguePosition
  *
+ * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getAllLeaguePositionsForSummoner
+ *
  * @property string $queueType
  * @property string $summonerName
  * @property string $position

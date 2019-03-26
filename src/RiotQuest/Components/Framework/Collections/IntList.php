@@ -5,6 +5,8 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class IntList
  *
+ * @see https://www.php.net/manual/en/language.types.integer.php
+ *
  * @list int
  *
  * @package RiotQuest\Components\Framework\Collections

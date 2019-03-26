@@ -14,6 +14,16 @@ use RiotQuest\Components\Http\Request;
 class Status extends Template
 {
 
-
+    public function shard()
+    {
+        return Request::make(['status', __FUNCTION__])
+            ->useStandard()
+            ->setDestination('https://{region}.api.riotgames.com/lol/status/v3/shard-data')
+            ->setMethod('GET')
+            ->setArguments(['region' => $this->region])
+            ->setTtl($this->ttl)
+            ->compile()
+            ->send();
+    }
 
 }

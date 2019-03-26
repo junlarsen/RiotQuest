@@ -5,6 +5,8 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class LeaguePositionList
  *
+ * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getAllLeaguePositionsForSummoner
+ *
  * @list LeaguePosition
  *
  * @package RiotQuest\Components\Framework\Collections
@@ -32,5 +34,5 @@ class LeaguePositionList extends Collection
             return $e['queueType'] === 'RANKED_FLEX_TT';
         })[0];
     }
-    
+
 }

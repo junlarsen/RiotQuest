@@ -5,6 +5,8 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class League
  *
+ * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getAllLeaguePositionsForSummoner
+ *
  * @property string $leagueId
  * @property string $tier
  * @property LeagueItemList $entries

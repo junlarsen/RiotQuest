@@ -5,6 +5,8 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class LeagueItemList
  *
+ * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getAllLeaguePositionsForSummoner
+ *
  * @list LeagueItem
  *
  * @package RiotQuest\Components\Framework\Collections
