@@ -36,6 +36,16 @@ class Match extends Template
             ->send();
     }
 
+    /**
+     * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatchTimeline
+     *
+     * @param $id
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
     public function timeline($id)
     {
         return Request::make(['match', __FUNCTION__])
@@ -48,6 +58,16 @@ class Match extends Template
             ->send();
     }
 
+    /**
+     * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatch
+     *
+     * @param $id
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
     public function id($id)
     {
         return Request::make(['match', __FUNCTION__])

@@ -1,6 +1,6 @@
 <?php
 
-namespace RiotQuest\Components\Riot\Endpoints;
+namespace RiotQuest\Components\Framework\Endpoints;
 
 use RiotQuest\Components\Framework\Engine\Request;
 

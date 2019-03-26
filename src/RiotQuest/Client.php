@@ -12,6 +12,9 @@ use RiotQuest\Components\Framework\Client\Client as Module;
  * Provies helper method to essential usages
  * for the API.
  *
+ * TODO: cache templates for collections
+ * TODO: unit tests
+ *
  * @package RiotQuest\Support\Facades
  */
 class Client extends Module

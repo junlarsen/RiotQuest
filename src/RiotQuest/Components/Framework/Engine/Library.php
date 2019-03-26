@@ -93,23 +93,21 @@ class Library
 
     /**
      * Return types for each endpoint
+     * The array value is the Collection subclass the
+     * endpoint should load its data into. If value
+     * is false, it should return the plain value
      *
      * @var array
-     *
-     * TODO: single value response collections
      */
     public static $returnTypes = [
-        // complete
         'mastery' => [
             'all' => ChampionMasteryList::class,
             'id' => ChampionMastery::class,
             'score' => false
         ],
-        // complete
         'champion' => [
             'rotation' => ChampionInfo::class
         ],
-        // complete
         'league' => [
             'positions' => LeaguePositionList::class,
             'id' => League::class,
@@ -117,7 +115,6 @@ class Library
             'challenger' => League::class,
             'master' => League::class
         ],
-        // complete
         'status' => [
             'shard' => ShardStatus::class
         ],
@@ -128,19 +125,16 @@ class Library
             'list' => MatchHistory::class,
             'timeline' => MatchTimeline::class
         ],
-        // complete
         'spectator' => [
             'featured' => FeaturedGames::class,
             'active' => CurrentGameInfo::class
         ],
-        // complete
         'summoner' => [
             'name' => Summoner::class,
             'account' => Summoner::class,
             'id' => Summoner::class,
             'unique' => Summoner::class
         ],
-        // complete
         'code' => [
             'id' => false
         ]
@@ -177,6 +171,17 @@ class Library
         }, $subject);
     }
 
+    /**
+     * Makes a skeleton for a Collection class by reading its
+     * @property and @list tags. Functions recursively to make
+     * sure every object is included.
+     *
+     * TODO: mechanism to cache templates for faster load
+     *
+     * @param $class
+     * @return array
+     * @throws \ReflectionException
+     */
     public static function template($class)
     {
         $template = [];
@@ -203,6 +208,14 @@ class Library
         return $template;
     }
 
+    /**
+     * Fills a skeleton from static::template with the data
+     * from $data.
+     *
+     * @param $data
+     * @param $template
+     * @return mixed
+     */
     public static function traverse($data, $template)
     {
         $col = new $template['_class'];
@@ -217,10 +230,12 @@ class Library
             }
         } else {
             foreach ($data as $key => $value) {
+                // If it's a recursive component
                 if (is_array($template[$key])) {
                     $co = static::traverse($value, $template[$key]);
                     $col->put($key, $co);
                 } else {
+                    // Properly typecasting the data
                     switch ($template[$key]) {
                         case 'string':
                             $value = (string) $value; break;

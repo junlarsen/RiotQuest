@@ -126,54 +126,118 @@ class Client
         return static::$keys;
     }
 
+    /**
+     * Access Champion V3 endpoints
+     *
+     * @param $region
+     * @param int $ttl
+     * @return Champion
+     */
     public static function champion($region, $ttl = 3600)
     {
         return new Champion($region, $ttl);
     }
 
+    /**
+     * Access Champion Mastery V4 endpoints
+     *
+     * @param $region
+     * @param int $ttl
+     * @return Mastery
+     */
     public static function mastery($region, $ttl = 3600)
     {
         return new Mastery($region, $ttl);
     }
 
+    /**
+     * Access League V4 endpoints
+     *
+     * @param $region
+     * @param int $ttl
+     * @return League
+     */
     public static function league($region, $ttl = 3600)
     {
         return new League($region, $ttl);
     }
 
+    /**
+     * Access LOL Status V3 endpoints
+     *
+     * @param $region
+     * @param int $ttl
+     * @return Status
+     */
     public static function status($region, $ttl = 3600)
     {
         return new Status($region, $ttl);
     }
 
+    /**
+     * Access Match V4 endpoints
+     *
+     * @param $region
+     * @param int $ttl
+     * @return Match
+     */
     public static function match($region, $ttl = 3600)
     {
         return new Match($region, $ttl);
     }
 
+    /**
+     * Access Spectator V4 endpoints
+     *
+     * @param $region
+     * @param int $ttl
+     * @return Spectator
+     */
     public static function spectator($region, $ttl = 3600)
     {
         return new Spectator($region, $ttl);
     }
 
+    /**
+     * Access Summoner V4 endpoints
+     *
+     * @param $region
+     * @param int $ttl
+     * @return Summoner
+     */
     public static function summoner($region, $ttl = 3600)
     {
         return new Summoner($region, $ttl);
     }
 
+    /**
+     * Access Third Party Code V4 endpoint
+     *
+     * @param $region
+     * @param int $ttl
+     * @return Code
+     */
     public static function code($region, $ttl = 3600)
     {
         return new Code($region, $ttl);
     }
 
+    /**
+     * @todo
+     * @return bool
+     */
     public static function stub()
     {
-
+        return false;
     }
 
+    /**
+     * @todo
+     * @return bool
+     */
     public static function tournament()
     {
-
+        return false;
     }
 
 }
