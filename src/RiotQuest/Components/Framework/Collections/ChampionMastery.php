@@ -5,6 +5,8 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class ChampionMastery
  *
+ * @see https://developer.riotgames.com/api-methods/#champion-mastery-v4/GET_getChampionMastery
+ *
  * @property boolean $chestGranted
  * @property int $championLevel
  * @property int $championPoints

@@ -11,6 +11,8 @@ use Serializable;
 /**
  * Class Collection
  *
+ * @see https://github.com/supergrecko/RiotQuest/wiki/Return-Types
+ *
  * Definition which each DTO extends to make working with
  * API responses easier and more flexible
  *

@@ -5,7 +5,9 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class ChampionMasteryList
  *
- * @list MasteryList 143
+ * @see https://developer.riotgames.com/api-methods/#champion-mastery-v4/GET_getAllChampionMasteries
+ *
+ * @list MasteryList
  *
  * @package RiotQuest\Components\Framework\Collections
  */

@@ -177,7 +177,7 @@ class Library
                 $template['_list'] = $matches[2];
             }
         } else {
-            preg_match_all('/(@property ([\w\[\]]+) \$([\w]+))/m', $ref->getDocComment(), $matches);
+            preg_match_all('/(@property ([\w\[\]]+) \$([\w]+))/', $ref->getDocComment(), $matches);
             foreach ($matches[3] as $key => $value) {
                 $template[$value] = $matches[2][$key];
             }
