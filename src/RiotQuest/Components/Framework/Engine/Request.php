@@ -1,10 +1,10 @@
 <?php
 
-namespace RiotQuest\Components\Http;
+namespace RiotQuest\Components\Framework\Engine;
 
 use RiotQuest\Contracts\RiotQuestException;
-use RiotQuest\Components\Riot\Client\Client;
-use RiotQuest\Components\Framework\Library;
+use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Components\Framework\Engine\Library;
 use GuzzleHttp\Client as HttpClient;
 
 /**

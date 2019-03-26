@@ -1,6 +1,6 @@
 <?php
 
-namespace RiotQuest\Components\Framework;
+namespace RiotQuest\Components\Framework\Engine;
 
 use ReflectionClass;
 use RiotQuest\Components\Framework\Collections\ChampionInfo;

@@ -1,21 +1,21 @@
 <?php
 
-namespace RiotQuest\Components\Riot\Endpoints;
+namespace RiotQuest\Components\Framework\Endpoints;
 
-use RiotQuest\Components\Http\Request;
+use RiotQuest\Components\Framework\Engine\Request;
 
 /**
  * Class League
  *
- * Platform to perform all Champion MasteryTest V4 related calls.
+ * Platform to perform all LOL Status V4 related calls.
  *
  * @package RiotQuest\Components\Riot\Endpoints
  */
-class Champion extends Template
+class Status extends Template
 {
 
     /**
-     * @see https://developer.riotgames.com/api-methods/#champion-v3/GET_getChampionInfo
+     * @see https://developer.riotgames.com/api-methods/#lol-status-v3/GET_getShardData
      *
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -23,11 +23,11 @@ class Champion extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function rotation()
+    public function shard()
     {
-        return Request::make(['champion', __FUNCTION__])
+        return Request::make(['status', __FUNCTION__])
             ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/platform/v3/champion-rotations')
+            ->setDestination('https://{region}.api.riotgames.com/lol/status/v3/shard-data')
             ->setMethod('GET')
             ->setArguments(['region' => $this->region])
             ->setTtl($this->ttl)

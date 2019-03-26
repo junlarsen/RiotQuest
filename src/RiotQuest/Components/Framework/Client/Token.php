@@ -1,6 +1,6 @@
 <?php
 
-namespace RiotQuest\Components\Riot\Client;
+namespace RiotQuest\Components\Framework\Client;
 
 /**
  * Class Token

@@ -3,7 +3,7 @@
 namespace RiotQuest\Components\RateLimit;
 
 use Psr\SimpleCache\CacheInterface;
-use RiotQuest\Components\Riot\Client\Client;
+use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Contracts\RateLimit;
 
 /**

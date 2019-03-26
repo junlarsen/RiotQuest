@@ -1,17 +1,17 @@
 <?php
 
-namespace RiotQuest\Components\Riot\Client;
+namespace RiotQuest\Components\Framework\Client;
 
 use RiotQuest\Components\RateLimit\Application;
 use RiotQuest\Components\RateLimit\Endpoint;
-use RiotQuest\Components\Riot\Endpoints\Champion;
-use RiotQuest\Components\Riot\Endpoints\Code;
-use RiotQuest\Components\Riot\Endpoints\League;
-use RiotQuest\Components\Riot\Endpoints\Mastery;
-use RiotQuest\Components\Riot\Endpoints\Match;
-use RiotQuest\Components\Riot\Endpoints\Spectator;
-use RiotQuest\Components\Riot\Endpoints\Status;
-use RiotQuest\Components\Riot\Endpoints\Summoner;
+use RiotQuest\Components\Framework\Endpoints\Champion;
+use RiotQuest\Components\Framework\Endpoints\Code;
+use RiotQuest\Components\Framework\Endpoints\League;
+use RiotQuest\Components\Framework\Endpoints\Mastery;
+use RiotQuest\Components\Framework\Endpoints\Match;
+use RiotQuest\Components\Framework\Endpoints\Spectator;
+use RiotQuest\Components\Framework\Endpoints\Status;
+use RiotQuest\Components\Framework\Endpoints\Summoner;
 use Psr\SimpleCache\CacheInterface;
 
 /**
