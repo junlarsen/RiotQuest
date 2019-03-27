@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use RiotQuest\Client;
+
 /**
  * Class MatchReference
  *
@@ -21,6 +23,18 @@ namespace RiotQuest\Components\Framework\Collections;
 class MatchReference extends Collection
 {
 
-
+    /**
+     * Get the current match for this reference
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
+    public function getMatch()
+    {
+        return Client::match($this->region)->id($this->gameId);
+    }
 
 }

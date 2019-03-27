@@ -14,21 +14,36 @@ namespace RiotQuest\Components\Framework\Collections;
 class LeaguePositionList extends Collection
 {
 
-    public function solo(): LeaguePosition
+    /**
+     * Get the SoloQ LeaguePosition
+     *
+     * @return LeaguePosition
+     */
+    public function solo()
     {
         return array_filter($this->stack, function ($e) {
             return $e['queueType'] === 'RANKED_SOLO_5x5';
         })[0];
     }
 
-    public function treeline(): LeaguePosition
+    /**
+     * Get the 3v3 LeaguePosition
+     *
+     * @return LeaguePosition
+     */
+    public function treeline()
     {
         return array_filter($this->stack, function ($e) {
             return $e['queueType'] === 'RANKED_FLEX_SR';
         })[0];
     }
 
-    public function flex(): LeaguePosition
+    /**
+     * Get the 5v5 LeaguePosition
+     *
+     * @return LeaguePosition
+     */
+    public function flex()
     {
         return array_filter($this->stack, function ($e) {
             return $e['queueType'] === 'RANKED_FLEX_TT';

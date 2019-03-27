@@ -183,7 +183,7 @@ class Library
      * @return array
      * @throws \ReflectionException
      */
-    public static function template($class): array 
+    public static function template($class): array
     {
         $template = [];
         $ref = new ReflectionClass($class);
@@ -217,13 +217,14 @@ class Library
      * @param $template
      * @return mixed
      */
-    public static function traverse($data, $template): Collection
+    public static function traverse($data, $template, $region): Collection
     {
         $col = new $template['_class'];
+        $col->setRegion($region);
         if (isset($template['_list'])) {
             foreach ($data as $key => $value) {
                 if (isset($template['_list']['_class'])) {
-                    $co = static::traverse($value, $template['_list']);
+                    $co = static::traverse($value, $template['_list'], $region);
                     $col->put($key, $co);
                 } else {
                     $col->put($key, $value);
@@ -233,7 +234,7 @@ class Library
             foreach ($data as $key => $value) {
                 // If it's a recursive component
                 if (is_array($template[$key])) {
-                    $co = static::traverse($value, $template[$key]);
+                    $co = static::traverse($value, $template[$key], $region);
                     $col->put($key, $co);
                 } else {
                     // Properly typecasting the data

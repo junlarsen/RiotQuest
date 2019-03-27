@@ -32,7 +32,19 @@ class MakeCommand extends Command
             '- Generating Documentation',
         ]);
 
-        (new Generator())->make();
+        $gen = new Generator\Generator();
+
+        $gen->collections();
+
+        $output->writeln([
+            '- Completed Collections',
+        ]);
+
+        $gen->sidebar();
+
+        $output->writeln([
+            '- Completed Sidebar',
+        ]);
 
         $output->writeln([
             '- Completed Generation',

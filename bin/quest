@@ -7,14 +7,12 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 
-use RiotQuest\Components\Console\Api\LeaguePositionsCommand;
 use RiotQuest\Components\Console\Docs\MakeCommand;
-use RiotQuest\Components\Console\Api\Summoner\Name;
+use RiotQuest\Components\Console\Api\Summoner\NameCommand;
 
 $app = new Application();
 
 $app->add(new MakeCommand());
-$app->add(new LeaguePositionsCommand());
-$app->add(new Name());
+$app->add(new NameCommand());
 
 $app->run();

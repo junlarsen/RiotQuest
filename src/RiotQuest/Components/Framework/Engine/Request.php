@@ -246,7 +246,7 @@ class Request
                 $load = (array)json_decode($response->getBody()->getContents(), 1);
                 Client::getCache()->set($this->getKey(), json_encode($load));
                 if ($ref && RIOTQUEST_ENV === 'API') {
-                    return Library::traverse($load, Library::template($ref));
+                    return Library::traverse($load, Library::template($ref), $this->arguments['region']);
                 } else {
                     return $response->getBody()->getContents();
                 }
@@ -255,7 +255,7 @@ class Request
             }
         } else {
             if ($ref && RIOTQUEST_ENV === 'API') {
-                return Library::traverse($response, Library::template($ref));
+                return Library::traverse($response, Library::template($ref), $this->arguments['region']);
             } else if (RIOTQUEST_ENV === 'CLI') {
                 return $response;
             }
