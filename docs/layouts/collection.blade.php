@@ -25,7 +25,7 @@ Collection extension for [{{ $class->short }}]({{ $class->ref }}).
 | Property | Data Type | Description |
 |----------|-----------|-------------|
 @foreach ($class->properties as $prop)
-| {{ $prop->name }} | {{ $prop->type }} | {{ $prop->desc }} |
+| `{{ $prop->name }}` | `{{ $prop->type }}` | {{ $prop->desc }} |
 @endforeach
 # Methods
 
@@ -33,7 +33,7 @@ Collection extension for [{{ $class->short }}]({{ $class->ref }}).
 |--------|------------|--------------|-------------|
 @foreach ($class->methods as $method)
 @if($method->defined->getShortName() == $method->parent->reflector->getShortName())
-| {{ $method->name }}  | {{ $method->paramsText }} | {{ str_replace('|', ',', $method->type) }} | {{ $method->desc }} |
+| `{{ $method->name }}`  | `{{ $method->paramsText }}` | `{{ str_replace('|', ',', $method->type) }}` | {{ $method->desc }} |
 @endif
 @endforeach
 

@@ -7,9 +7,9 @@ namespace RiotQuest\Components\Framework\Collections;
  *
  * @see https://developer.riotgames.com/api-methods/#champion-v3/GET_getChampionInfo
  *
- * @property IntList $freeChampionIdsForNewPlayers
- * @property IntList $freeChampionIds
- * @property int $maxNewPlayerLevel
+ * @property IntList $freeChampionIdsForNewPlayers List of champions that are free for level < 10 players
+ * @property IntList $freeChampionIds List of champions that are free for everybody else
+ * @property int $maxNewPlayerLevel Threshold to keep the forNewPlayers rotation
  *
  * @package RiotQuest\Components\Framework\Collections
  */
