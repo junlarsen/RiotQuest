@@ -72,7 +72,7 @@ class Request
      *
      * @return $this
      */
-    public function useStandard()
+    public function useStandard(): self
     {
         $this->key = 'STANDARD';
         return $this;
@@ -83,7 +83,7 @@ class Request
      *
      * @return $this
      */
-    public function useTournament()
+    public function useTournament(): self
     {
         $this->key = 'TOURNAMENT';
         return $this;
@@ -95,7 +95,7 @@ class Request
      * @param $parent
      * @return Request
      */
-    public function make($parent)
+    public function make($parent): self
     {
         $me = new static;
         $me->parent = $parent;
@@ -108,7 +108,7 @@ class Request
      * @param $payload
      * @return $this
      */
-    public function setPayload($payload)
+    public function setPayload($payload): self
     {
         $this->payload = $payload;
         return $this;
@@ -118,7 +118,7 @@ class Request
      * @param int $ttl
      * @return $this
      */
-    public function setTtl(int $ttl)
+    public function setTtl(int $ttl): self
     {
         $this->ttl = $ttl;
         return $this;
@@ -130,7 +130,7 @@ class Request
      * @param $method
      * @return $this
      */
-    public function setMethod($method)
+    public function setMethod($method): self
     {
         $this->method = $method;
         return $this;
@@ -142,7 +142,7 @@ class Request
      * @param $destination
      * @return $this
      */
-    public function setDestination($destination)
+    public function setDestination($destination): self
     {
         $this->destination = $destination;
         return $this;
@@ -154,7 +154,7 @@ class Request
      * @param $arguments
      * @return $this
      */
-    public function setArguments($arguments)
+    public function setArguments($arguments): self
     {
         $this->arguments = $arguments;
         return $this;
@@ -166,7 +166,7 @@ class Request
      * @return $this
      * @throws RiotQuestException
      */
-    public function compile()
+    public function compile(): self
     {
         if (!($this->arguments['region'] = Library::region($this->arguments['region']))) {
             throw new RiotQuestException('ERROR: Specificed region could not be resolved.');
@@ -175,7 +175,12 @@ class Request
         return $this;
     }
 
-    public function getKey()
+    /**
+     * Turns url into a cache key
+     *
+     * @return string
+     */
+    public function getKey(): string
     {
         $str = "riotquest." . $this->parent[0] . '.' . $this->parent[1] . '?';
         foreach ($this->arguments as $k => $v) {
@@ -240,7 +245,7 @@ class Request
 
                 $load = (array)json_decode($response->getBody()->getContents(), 1);
                 Client::getCache()->set($this->getKey(), json_encode($load));
-                if ($ref) {
+                if ($ref && RIOTQUEST_ENV === 'API') {
                     return Library::traverse($load, Library::template($ref));
                 } else {
                     return $response->getBody()->getContents();
@@ -249,8 +254,10 @@ class Request
                 throw new RiotQuestException(json_decode($response->getBody()->getContents(), 1)['status']['message'], $response->getStatusCode());
             }
         } else {
-            if ($ref) {
+            if ($ref && RIOTQUEST_ENV === 'API') {
                 return Library::traverse($response, Library::template($ref));
+            } else if (RIOTQUEST_ENV === 'CLI') {
+                return $response;
             }
             return $response[0];
         }

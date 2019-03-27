@@ -27,7 +27,7 @@ class Endpoint implements RateLimit
     /**
      * Boot up function to set static props
      */
-    public static function enable()
+    public static function enable(): void
     {
         static::$cache = Client::getCache();
     }
@@ -40,7 +40,7 @@ class Endpoint implements RateLimit
      * @return bool
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function available($region, $endpoint = null)
+    public static function available($region, $endpoint = null): bool
     {
         if (static::$cache->has('riotquest.limits.ends')) {
             $items = json_decode(static::$cache->get('riotquest.limits.ends'), 1);
@@ -60,7 +60,7 @@ class Endpoint implements RateLimit
      * @param array $lim
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function hit($region, $endpoint = null, $scope = 'STANDARD', $lim = ['interval' => 60, 'count' => 20])
+    public static function hit($region, $endpoint = null, $scope = 'STANDARD', $lim = ['interval' => 60, 'count' => 20]): void
     {
         $time = time();
         if (!static::$cache->has('riotquest.limits.ends')) {

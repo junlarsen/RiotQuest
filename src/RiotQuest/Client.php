@@ -28,7 +28,7 @@ class Client extends Module
      * @param $limit
      * @return Token
      */
-    public static function token($token, $type, $limit)
+    public static function token($token, $type, $limit): Token
     {
         return new Token($token, $type, $limit);
     }

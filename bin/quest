@@ -1,16 +1,20 @@
 #!/usr/bin/php
 <?php
 
+define('RIOTQUEST_ENV', 'CLI');
+
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 
-use RiotQuest\Components\Console\LeagueCommand;
-use RiotQuest\Components\Console\DocumentationCommand;
+use RiotQuest\Components\Console\Api\LeaguePositionsCommand;
+use RiotQuest\Components\Console\Docs\MakeCommand;
+use RiotQuest\Components\Console\Api\Summoner\Name;
 
 $app = new Application();
 
-$app->add(new DocumentationCommand());
-$app->add(new LeagueCommand());
+$app->add(new MakeCommand());
+$app->add(new LeaguePositionsCommand());
+$app->add(new Name());
 
 $app->run();

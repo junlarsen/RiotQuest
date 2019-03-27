@@ -48,9 +48,10 @@ class Collection implements
      * @param $key
      * @param $value
      */
-    public function put($key, $value)
+    public function put($key, $value): self
     {
         $this->stack[$key] = $value;
+        return $this;
     }
 
     /**
@@ -58,7 +59,7 @@ class Collection implements
      *
      * @return array
      */
-    public function all()
+    public function all(): int
     {
         return $this->stack;
     }
@@ -69,7 +70,7 @@ class Collection implements
      * @param array $stack
      * @return Collection
      */
-    public function merge($stack = [])
+    public function merge($stack = []): self
     {
         return new static(array_merge($this->stack, $stack));
     }
@@ -79,7 +80,7 @@ class Collection implements
      *
      * @return false|string
      */
-    public function json()
+    public function json(): string
     {
         return \json_encode($this->stack);
     }
@@ -90,7 +91,7 @@ class Collection implements
      * @param $key
      * @return bool
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         return isset($this->stack[$key]);
     }
@@ -101,7 +102,7 @@ class Collection implements
      * @param Closure $closure
      * @return $this
      */
-    public function each(Closure $closure)
+    public function each(Closure $closure): self
     {
         foreach ($this->stack as $key => $item) {
             if (!($closure->call($this, $item, $key))) {
@@ -117,7 +118,7 @@ class Collection implements
      * @param Closure $closure
      * @return array
      */
-    public function filter(Closure $closure)
+    public function filter(Closure $closure): array
     {
         return array_filter($this->stack, $closure);
     }
@@ -127,7 +128,7 @@ class Collection implements
      *
      * @return array
      */
-    public function keys()
+    public function keys(): array
     {
         return array_keys($this->stack);
     }
@@ -138,7 +139,7 @@ class Collection implements
      * @param Closure $closure
      * @return array
      */
-    public function map(Closure $closure)
+    public function map(Closure $closure): array 
     {
         return array_map($closure, $this->stack);
     }
@@ -149,7 +150,7 @@ class Collection implements
      * @param int $recursive
      * @return int
      */
-    public function count($recursive = 0)
+    public function count($recursive = 0): int
     {
         return \count($this->stack, $recursive);
     }
@@ -202,7 +203,7 @@ class Collection implements
      *
      * @return ArrayIterator|\Traversable
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new ArrayIterator($this->stack);
     }
@@ -212,7 +213,7 @@ class Collection implements
      *
      * @return string
      */
-    public function serialize()
+    public function serialize(): string
     {
         return \serialize($this->stack);
     }
@@ -226,6 +227,15 @@ class Collection implements
     public function unserialize($serialized)
     {
         return \unserialize($serialized);
+    }
+
+    /**
+     * @param $key
+     * @return mixed|null
+     */
+    public function __get($key)
+    {
+        return $this->stack[$key] ?? null;
     }
 
 }

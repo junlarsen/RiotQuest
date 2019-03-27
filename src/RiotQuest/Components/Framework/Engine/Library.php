@@ -6,6 +6,7 @@ use ReflectionClass;
 use RiotQuest\Components\Framework\Collections\ChampionInfo;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
 use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
+use RiotQuest\Components\Framework\Collections\Collection;
 use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
 use RiotQuest\Components\Framework\Collections\FeaturedGames;
 use RiotQuest\Components\Framework\Collections\League;
@@ -145,15 +146,15 @@ class Library
      * Returns false if no replacement was found.
      *
      * @param $region
-     * @return bool|mixed
+     * @return string
      */
-    public static function region($region)
+    public static function region($region): string
     {
         $region = strtolower(str_replace(' ', '-', $region));
         if (array_key_exists($region, static::$map)) {
             return static::$map[$region];
         }
-        return false;
+        return '';
     }
 
     /**
@@ -164,7 +165,7 @@ class Library
      * @param $replace
      * @return string|string[]|null
      */
-    public static function replace($subject, $replace)
+    public static function replace($subject, $replace): string
     {
         return preg_replace_callback('/\{(\w+)\}/', function ($matches) use ($replace) {
             return $replace[$matches[1]];
@@ -182,7 +183,7 @@ class Library
      * @return array
      * @throws \ReflectionException
      */
-    public static function template($class)
+    public static function template($class): array 
     {
         $template = [];
         $ref = new ReflectionClass($class);
@@ -216,7 +217,7 @@ class Library
      * @param $template
      * @return mixed
      */
-    public static function traverse($data, $template)
+    public static function traverse($data, $template): Collection
     {
         $col = new $template['_class'];
         if (isset($template['_list'])) {

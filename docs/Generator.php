@@ -2,43 +2,65 @@
 
 namespace RiotQuest\Docs;
 
+use foo\bar;
 use Jenssegers\Blade\Blade;
+use ReflectionClass;
+use RiotQuest\Docs\Types\ClassDocument;
 
 class Generator
 
 //TODO: megareflector
 {
 
-    /**
-     * @var Blade
-     */
-    public $blade;
+    public $documentors = [
+        'collections' => [],
+        'endpoints' => []
+    ];
 
-    public $files = [];
+    public static $map = [
+        'collections' => [
+            '\\RiotQuest\\Components\\Framework\\Collections\\',
+            'src/RiotQuest/Components/Framework/Collections'
+        ],
+        'endpoints' => [
+            '\\RiotQuest\\Components\\Framework\\Endpoints\\',
+            'src/RiotQuest/Components/Framework/Endpoints'
+        ]
+    ];
 
-    public $vars = [];
-
-    public $out = __DIR__ . '/out';
+    public $reflectors = [
+        'collections' => [],
+        'endpoints' => []
+    ];
 
     public function __construct()
     {
-        $this->blade = new Blade(__DIR__ . '/layouts', __DIR__ . '/cache');
-        $files = scandir(__DIR__ . '/../src/RiotQuest/Components/Framework/Collections');
-        array_shift($files);
-        array_shift($files);
-        $this->files = array_map(function ($e) {
-            return str_replace('.php', '', $e);
-        }, $files);
+        foreach (scandir(static::$map['collections'][1]) as $file) {
+            if ($file == '.' || $file == '..') continue;
+            $name = str_replace('.php', '', $file);
+            $this->reflectors['collections'][$name] = new ReflectionClass(static::$map['collections'][0] . $name);
+        }
+
+        foreach (scandir(static::$map['endpoints'][1]) as $file) {
+            if ($file == '.' || $file == '..') continue;
+            $name = str_replace('.php', '', $file);
+            $this->reflectors['endpoints'][$name] = new ReflectionClass(static::$map['endpoints'][0] . $name);
+        }
     }
 
-    public function make()
+    public function collections()
     {
-        foreach ($this->files as $file) {
-            $this->vars[] = $def = new Definition($file, "\\RiotQuest\\Components\\Framework\\Collections\\");
+        #foreach ($this->reflectors['collections'] as $key => $reflector) {
+        #    $this->documentors['collections'][$key] = new ClassDocument($reflector);
+        #}
+        $this->documentors['collections']['LeaguePositionList'] = new ClassDocument($this->reflectors['collections']['LeaguePositionList']);
+    }
 
-            $render = $this->blade->make('collection', ['class' => $def]);
-            file_put_contents($this->out . '/' . $def->dashed . '.md', $render);
-        }
+    public function endpoints()
+    {
+        #foreach ($this->reflectors['endpoints'] as $key => $reflector) {
+        #    $this->documentors['endpoints'][$key] = new ClassDocument($reflector);
+        #}
     }
 
 }

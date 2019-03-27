@@ -1,6 +1,6 @@
 <?php
 
-namespace RiotQuest\Components\Console;
+namespace RiotQuest\Components\Console\Docs;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use RiotQuest\Docs\Generator;
 
-class DocumentationCommand extends Command
+class MakeCommand extends Command
 {
 
     protected static $defaultName = 'docs:make';

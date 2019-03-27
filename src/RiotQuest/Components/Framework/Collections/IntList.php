@@ -19,7 +19,7 @@ class IntList extends Collection
      *
      * @return float|int
      */
-    public function avg()
+    public function avg(): int
     {
         $c = 0;
         foreach ($this as $num) {
@@ -33,7 +33,7 @@ class IntList extends Collection
      *
      * @return float|int
      */
-    public function sum()
+    public function sum(): int 
     {
         return array_sum($this->stack);
     }

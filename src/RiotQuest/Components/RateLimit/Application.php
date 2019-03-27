@@ -37,7 +37,7 @@ class Application implements RateLimit
     /**
      * Boot up function to set static props
      */
-    public static function enable()
+    public static function enable(): void
     {
         static::$limits['STANDARD'] = Client::getLimits('STANDARD') ?? [];
         static::$limits['TOURNAMENT'] = Client::getLimits('TOURNAMENT') ?? [];
@@ -52,7 +52,7 @@ class Application implements RateLimit
      * @return bool
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function available($region, $endpoint = null)
+    public static function available($region, $endpoint = null): bool
     {
         if (static::$cache->has('riotquest.limits.app')) {
             $items = json_decode(static::$cache->get('riotquest.limits.app'), 1);
@@ -71,7 +71,7 @@ class Application implements RateLimit
      * @param string $scope  The scope to target, either STANDARD or TOURNAMENT
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function hit($region, $endpoint = null, $scope = 'STANDARD')
+    public static function hit($region, $endpoint = null, $scope = 'STANDARD'): void
     {
         $time = time();
         if (!static::$cache->has('riotquest.limits.app')) {
