@@ -7,12 +7,15 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 
-use RiotQuest\Components\Console\Docs\MakeCommand;
+use RiotQuest\Components\Console\Make\DocsCommand;
+use RiotQuest\Components\Console\Make\TemplatesCommand;
+
 use RiotQuest\Components\Console\Api\Summoner\NameCommand;
 
 $app = new Application();
 
-$app->add(new MakeCommand());
+$app->add(new DocsCommand());
 $app->add(new NameCommand());
+$app->add(new TemplatesCommand());
 
 $app->run();

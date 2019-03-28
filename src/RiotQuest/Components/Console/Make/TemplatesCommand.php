@@ -1,23 +1,23 @@
 <?php
 
-namespace RiotQuest\Components\Console\Docs;
+namespace RiotQuest\Components\Console\Make;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use RiotQuest\Docs\Generator;
+use RiotQuest\Components\Framework\Engine\Filesystem;
 
-class MakeCommand extends Command
+class TemplatesCommand extends Command
 {
 
-    protected static $defaultName = 'docs:make';
+    protected static $defaultName = 'make:templates';
 
     protected function configure()
     {
         $this
-            ->setDescription('Generates the Documentation files.')
-            ->setHelp('This automatically builds the docs for the framework.');
+            ->setDescription('Generates the collection template files.')
+            ->setHelp('This automatically builds the collection templates for the framework.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -29,25 +29,15 @@ class MakeCommand extends Command
         ]);
 
         $output->writeln([
-            '- Generating Documentation',
+            '- Generating Templates',
         ]);
 
-        $gen = new Generator\Generator();
+        $gen = new Filesystem();
 
-        $gen->collections();
-
-        $output->writeln([
-            '- Completed Collections',
-        ]);
-
-        $gen->sidebar();
+        $gen->generateTemplates();
 
         $output->writeln([
-            '- Completed Sidebar',
-        ]);
-
-        $output->writeln([
-            '- Completed Generation',
+            '- Completed Template Generation',
         ]);
 
         $output->writeln([

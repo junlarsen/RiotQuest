@@ -246,7 +246,8 @@ class Request
                 $load = (array)json_decode($response->getBody()->getContents(), 1);
                 Client::getCache()->set($this->getKey(), json_encode($load));
                 if ($ref && RIOTQUEST_ENV === 'API') {
-                    return Library::traverse($load, Library::template($ref), $this->arguments['region']);
+                    $template = strtolower(array_reverse(explode('\\', $ref))[0]) . '.json';
+                    return Library::traverse($load, json_decode(file_get_contents(__DIR__ . '/../../../../storage/templates/' . $template), 1), $this->arguments['region']);
                 } else {
                     return $response->getBody()->getContents();
                 }

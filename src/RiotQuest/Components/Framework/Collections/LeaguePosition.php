@@ -29,16 +29,31 @@ namespace RiotQuest\Components\Framework\Collections;
 class LeaguePosition extends Collection
 {
 
+    /**
+     * Get the winrate for this player
+     *
+     * @return float|int
+     */
     public function getWinrate()
     {
         return $this['wins'] / ($this['wins'] + $this['losses']) * 100;
     }
 
+    /**
+     * Get the league string (eg. BRONZE I 76 LP)
+     *
+     * @return string
+     */
     public function getLeagueName()
     {
         return sprintf("%s %s %d LP", $this['tier'], $this['rank'], $this['leaguePoints']);
     }
 
+    /**
+     * Get amount of games played
+     *
+     * @return mixed
+     */
     public function getGamesPlayed()
     {
         return $this['wins'] + $this['losses'];
