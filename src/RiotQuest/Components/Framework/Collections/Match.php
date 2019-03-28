@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use RiotQuest\Components\Framework\Client\Client;
+
 /**
  * Class Match
  *
@@ -26,6 +28,18 @@ namespace RiotQuest\Components\Framework\Collections;
 class Match extends Collection
 {
 
-
+    /**
+     * Gets the timeline for this match
+     *
+     * @return MatchTimeline
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
+    public function getTimeline()
+    {
+        return Client::match($this->region)->timeline($this->gameId);
+    }
 
 }

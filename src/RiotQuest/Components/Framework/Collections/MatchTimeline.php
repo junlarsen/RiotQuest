@@ -15,6 +15,6 @@ namespace RiotQuest\Components\Framework\Collections;
 class MatchTimeline extends Collection
 {
 
-
+    
 
 }

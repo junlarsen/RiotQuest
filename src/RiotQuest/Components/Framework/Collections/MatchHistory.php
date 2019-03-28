@@ -39,9 +39,9 @@ class MatchHistory extends Collection
      */
     public function getWhereQueue($id)
     {
-        return $this->matches->filter(function (MatchReference $e) use ($id) {
+        return array_values($this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->queue == $id;
-        });
+        }));
     }
 
     /**
@@ -52,9 +52,9 @@ class MatchHistory extends Collection
      */
     public function getWhereChampion($id)
     {
-        return $this->matches->filter(function (MatchReference $e) use ($id) {
+        return array_values($this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->champion == $id;
-        });
+        }));
     }
 
     /**
@@ -65,9 +65,9 @@ class MatchHistory extends Collection
      */
     public function getWhereSeason($id)
     {
-        return $this->matches->filter(function (MatchReference $e) use ($id) {
+        return array_values($this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->season == $id;
-        });
+        }));
     }
 
 }

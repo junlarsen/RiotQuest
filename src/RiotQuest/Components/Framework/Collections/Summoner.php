@@ -44,7 +44,7 @@ class Summoner extends Collection
     /**
      * Get the ranked positions for summoner
      *
-     * @return mixed
+     * @return LeaguePositionList
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -58,7 +58,7 @@ class Summoner extends Collection
     /**
      * Get the matchlist for summoner
      *
-     * @return mixed
+     * @return MatchHistory
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -72,7 +72,7 @@ class Summoner extends Collection
     /**
      * Get the total mastery score for summoner
      *
-     * @return mixed
+     * @return int
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -86,7 +86,7 @@ class Summoner extends Collection
     /**
      * Get all masteries for summoner
      *
-     * @return mixed
+     * @return ChampionMasteryList
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -100,7 +100,7 @@ class Summoner extends Collection
     /**
      * Get the live game for summoner
      *
-     * @return mixed
+     * @return CurrentGameInfo
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -114,7 +114,7 @@ class Summoner extends Collection
     /**
      * Get the set third-party-code for summoner
      *
-     * @return mixed
+     * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
