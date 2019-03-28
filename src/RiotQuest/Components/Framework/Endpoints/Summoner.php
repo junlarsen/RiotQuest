@@ -18,7 +18,7 @@ class Summoner extends Template
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getByAccountId
      *
      * @param $id
-     * @return mixed
+     * @return \RiotQuest\Components\Framework\Collections\Summoner
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -40,7 +40,7 @@ class Summoner extends Template
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerName
      *
      * @param $id
-     * @return mixed
+     * @return \RiotQuest\Components\Framework\Collections\Summoner
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -62,7 +62,7 @@ class Summoner extends Template
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getByPUUID
      *
      * @param $id
-     * @return mixed
+     * @return \RiotQuest\Components\Framework\Collections\Summoner
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -84,7 +84,7 @@ class Summoner extends Template
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerId
      *
      * @param $id
-     * @return mixed
+     * @return \RiotQuest\Components\Framework\Collections\Summoner
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException

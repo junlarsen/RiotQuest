@@ -4,6 +4,12 @@ Collection extension for [{{ $class->short }}]({{ $class->ref }}).
 
 # Class Synopsis
 
+@if (strpos($class->short, 'List'))
+This is a List Collection. RiotQuest uses list objects over native arrays that way we can append functions to them.
+
+Lists work just like regular arrays, but in addition you can append methods to them.
+@endif
+
 ```php
 {{ $class->short }} extends Collection {
 

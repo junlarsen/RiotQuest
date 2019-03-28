@@ -19,7 +19,7 @@ class LeaguePositionList extends Collection
      *
      * @return LeaguePosition
      */
-    public function solo()
+    public function getSoloQueue()
     {
         return array_filter($this->stack, function ($e) {
             return $e['queueType'] === 'RANKED_SOLO_5x5';
@@ -31,7 +31,7 @@ class LeaguePositionList extends Collection
      *
      * @return LeaguePosition
      */
-    public function treeline()
+    public function getFlexTreeline()
     {
         return array_filter($this->stack, function ($e) {
             return $e['queueType'] === 'RANKED_FLEX_SR';
@@ -43,7 +43,7 @@ class LeaguePositionList extends Collection
      *
      * @return LeaguePosition
      */
-    public function flex()
+    public function getFlexRift()
     {
         return array_filter($this->stack, function ($e) {
             return $e['queueType'] === 'RANKED_FLEX_TT';

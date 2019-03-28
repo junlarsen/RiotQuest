@@ -14,6 +14,16 @@ namespace RiotQuest\Components\Framework\Collections;
 class BannedChampionList extends Collection
 {
 
-
+    /**
+     * Get the list of banned Champions in this list
+     *
+     * @return array
+     */
+    public function getListIds()
+    {
+        return $this->map(function (BannedChampion $e) {
+            return $e->championId;
+        });
+    }
 
 }

@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use RiotQuest\Components\Framework\Collections\ChampionMastery;
+use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
 use RiotQuest\Components\Framework\Engine\Request;
 
 /**
@@ -18,7 +20,7 @@ class Mastery extends Template
      * @see https://developer.riotgames.com/api-methods/#champion-mastery-v4/GET_getAllChampionMasteries
      *
      * @param $id
-     * @return mixed
+     * @return ChampionMasteryList
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -40,7 +42,7 @@ class Mastery extends Template
      * @see https://developer.riotgames.com/api-methods/#champion-mastery-v4/GET_getChampionMastery
      *
      * @param $id
-     * @param $champion
+     * @param ChampionMastery
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -63,7 +65,7 @@ class Mastery extends Template
      * @see https://developer.riotgames.com/api-methods/#champion-mastery-v4/GET_getChampionMasteryScore
      *
      * @param $id
-     * @return mixed
+     * @return integer
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException

@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use RiotQuest\Components\Framework\Collections\LeaguePositionList;
 use RiotQuest\Components\Framework\Engine\Request;
 
 /**
@@ -18,7 +19,7 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getAllLeaguePositionsForSummoner
      *
      * @param $id
-     * @return mixed
+     * @return LeaguePositionList
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -40,7 +41,7 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getLeagueById
      *
      * @param $id
-     * @return mixed
+     * @return \RiotQuest\Components\Framework\Collections\League
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -62,7 +63,7 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getChallengerLeague
      *
      * @param $queue
-     * @return mixed
+     * @return \RiotQuest\Components\Framework\Collections\League
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -84,7 +85,7 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getMasterLeague
      *
      * @param $queue
-     * @return mixed
+     * @return \RiotQuest\Components\Framework\Collections\League
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -106,7 +107,7 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getGrandmasterLeague
      *
      * @param $queue
-     * @return mixed
+     * @return \RiotQuest\Components\Framework\Collections\League
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException

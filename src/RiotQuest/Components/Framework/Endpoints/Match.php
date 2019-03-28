@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use RiotQuest\Components\Framework\Collections\MatchHistory;
+use RiotQuest\Components\Framework\Collections\MatchTimeline;
 use RiotQuest\Components\Framework\Engine\Request;
 
 /**
@@ -18,7 +20,7 @@ class Match extends Template
      * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatchlist
      *
      * @param $id
-     * @return mixed
+     * @return MatchHistory
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -40,7 +42,7 @@ class Match extends Template
      * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatchTimeline
      *
      * @param $id
-     * @return mixed
+     * @return MatchTimeline
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -62,7 +64,7 @@ class Match extends Template
      * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatch
      *
      * @param $id
-     * @return mixed
+     * @return Match
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException

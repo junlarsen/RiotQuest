@@ -18,7 +18,7 @@ class Code extends Template
      * @see https://developer.riotgames.com/api-methods/#third-party-code-v4/GET_getThirdPartyCodeBySummonerId
      *
      * @param $id
-     * @return mixed
+     * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException

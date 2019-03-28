@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use RiotQuest\Components\Framework\Collections\ShardStatus;
 use RiotQuest\Components\Framework\Engine\Request;
 
 /**
@@ -17,7 +18,7 @@ class Status extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#lol-status-v3/GET_getShardData
      *
-     * @return mixed
+     * @return ShardStatus
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException

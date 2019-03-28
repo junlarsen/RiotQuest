@@ -50,7 +50,7 @@ class Summoner extends Collection
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function rankedPositions()
+    public function getRanked()
     {
         return Client::league($this->region)->positions($this->id);
     }
@@ -64,7 +64,7 @@ class Summoner extends Collection
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function matchlist()
+    public function getMatchlist()
     {
         return Client::match($this->region)->list($this->accountId);
     }
@@ -78,7 +78,7 @@ class Summoner extends Collection
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function masteryScore()
+    public function getMasteryScore()
     {
         return Client::mastery($this->region)->score($this->id);
     }
@@ -92,7 +92,7 @@ class Summoner extends Collection
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function masteries()
+    public function getMasteryList()
     {
         return Client::mastery($this->region)->all($this->id);
     }
@@ -106,7 +106,7 @@ class Summoner extends Collection
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function liveGame()
+    public function getCurrentGame()
     {
         return Client::spectator($this->region)->active($this->id);
     }
@@ -120,7 +120,7 @@ class Summoner extends Collection
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function code()
+    public function getExternalCode()
     {
         return Client::code($this->region)->id($this->id);
     }

@@ -23,7 +23,7 @@ class MatchHistory extends Collection
      * @param $id
      * @return bool
      */
-    public function findMatch($id)
+    public function getMatch($id)
     {
         $matches = $this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->gameId == $id;
@@ -37,7 +37,7 @@ class MatchHistory extends Collection
      * @param $id
      * @return array
      */
-    public function whereQueue($id)
+    public function getWhereQueue($id)
     {
         return $this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->queue == $id;
@@ -50,7 +50,7 @@ class MatchHistory extends Collection
      * @param $id
      * @return array
      */
-    public function whereChampion($id)
+    public function getWhereChampion($id)
     {
         return $this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->champion == $id;
@@ -63,7 +63,7 @@ class MatchHistory extends Collection
      * @param $id
      * @return array
      */
-    public function whereSeason($id)
+    public function getWhereSeason($id)
     {
         return $this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->season == $id;

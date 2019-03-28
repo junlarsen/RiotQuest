@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
+use RiotQuest\Components\Framework\Collections\FeaturedGameInfoList;
 use RiotQuest\Components\Framework\Engine\Request;
 
 /**
@@ -17,7 +19,7 @@ class Spectator extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#spectator-v4/GET_getFeaturedGames
      *
-     * @return mixed
+     * @return FeaturedGameInfoList
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -39,7 +41,7 @@ class Spectator extends Template
      * @see https://developer.riotgames.com/api-methods/#spectator-v4/GET_getCurrentGameInfoBySummoner
      *
      * @param $id
-     * @return mixed
+     * @return CurrentGameInfo
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException

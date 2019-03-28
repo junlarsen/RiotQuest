@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use RiotQuest\Components\Framework\Collections\ChampionInfo;
 use RiotQuest\Components\Framework\Engine\Request;
 
 /**
@@ -17,7 +18,7 @@ class Champion extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#champion-v3/GET_getChampionInfo
      *
-     * @return mixed
+     * @return ChampionInfo
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
