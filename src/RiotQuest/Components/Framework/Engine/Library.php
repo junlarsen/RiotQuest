@@ -142,6 +142,24 @@ class Library
     ];
 
     /**
+     * The loaded templates from file
+     *
+     * @var array
+     */
+    static $templates = [
+        
+    ];
+
+    public static function loadTemplate($path)
+    {
+        if (!isset(static::$templates[$path])) {
+            $template = json_decode(file_get_contents(__DIR__ . '/../../../../storage/templates/' . $path), 1);
+            static::$templates[$path] = $template;
+        }
+        return static::$templates[$path];
+    }
+
+    /**
      * Matches given region against the static map. Returns the match if the subject matches any of the aliases.
      * Returns false if no replacement was found.
      *

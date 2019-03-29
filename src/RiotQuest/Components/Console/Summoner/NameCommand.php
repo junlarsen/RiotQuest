@@ -1,6 +1,6 @@
 <?php
 
-namespace RiotQuest\Components\Console\Api\Summoner;
+namespace RiotQuest\Components\Console\Summoner;
 
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Contracts\RiotQuestException;

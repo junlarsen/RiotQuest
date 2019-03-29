@@ -39,12 +39,18 @@ class Filesystem
      */
     public function generateTemplates()
     {
+        @mkdir(__DIR__ . '/../../../../storage/templates', 755);
         foreach (scandir(static::$in['collections']) as $file) {
             if ($file == '.' || $file == '..') continue;
             $file = str_replace('.php', '', $file);
             file_put_contents(static::$out['collections'] . strtolower($file) . '.json', json_encode(Library::template(static::$namespaces['collections'] . $file)));
-            file_put_contents(static::$out['collections'] . '/manifest.json', json_encode(['time' => time()]));
         }
+        file_put_contents(static::$out['collections'] . '/manifest.json', json_encode(['time' => time()]));
+    }
+
+    public function flushTemplates()
+    {
+        array_map('unlink', glob(static::$out['collections'] . '*.json'));
     }
 
 }

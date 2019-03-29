@@ -10,12 +10,20 @@ use Symfony\Component\Console\Application;
 use RiotQuest\Components\Console\Make\DocsCommand;
 use RiotQuest\Components\Console\Make\TemplatesCommand;
 
-use RiotQuest\Components\Console\Api\Summoner\NameCommand;
+use RiotQuest\Components\Console\Cache\ClearCommand;
+
+use RiotQuest\Components\Console\Summoner\NameCommand;
 
 $app = new Application();
 
+// Make commands
 $app->add(new DocsCommand());
-$app->add(new NameCommand());
 $app->add(new TemplatesCommand());
+
+// API commands
+$app->add(new NameCommand());
+
+// Cache Flushes
+$app->add(new ClearCommand());
 
 $app->run();
