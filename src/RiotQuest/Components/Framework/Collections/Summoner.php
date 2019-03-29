@@ -3,7 +3,7 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Utils\Versions;
+use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 
 /**
  * Class Summoner
@@ -26,19 +26,12 @@ class Summoner extends Collection
     /**
      * Get the current summoner icon link
      *
-     * @param string $provider
      * @return string
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function getIconLink($provider = 'ddragon'): string
+    public function getIconLink()
     {
-        switch ($provider) {
-            case 'ddragon':
-                return sprintf('https://ddragon.leagueoflegends.com/cdn/%s/img/profileicon/%d.png', Versions::current(), $this['profileIconId']);
-            case 'sdragon':
-                return sprintf('https://static.supergrecko.com/superdragon/icon/%d.png', $this['profileIconId']);
-        }
-        return null;
+        return Dragon::getProfileIcon($this->profileIconId);
     }
 
     /**

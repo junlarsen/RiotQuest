@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use RiotQuest\Components\Framework\Client\Client;
+
 /**
  * Class LeagueItem
  *
@@ -24,6 +26,18 @@ namespace RiotQuest\Components\Framework\Collections;
 class LeagueItem extends Collection
 {
 
-
+    /**
+     * Get the summoner object for this league item
+     *
+     * @return Summoner
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
+    public function getSummoner()
+    {
+        return Client::summoner($this->region)->id($this->summonerId);
+    }
 
 }
