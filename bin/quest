@@ -6,12 +6,10 @@ define('RIOTQUEST_ENV', 'CLI');
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-
 use RiotQuest\Components\Console\Make\DocsCommand;
 use RiotQuest\Components\Console\Make\TemplatesCommand;
-
+use RiotQuest\Components\Console\Make\StaticCommand;
 use RiotQuest\Components\Console\Cache\ClearCommand;
-
 use RiotQuest\Components\Console\Summoner\NameCommand;
 
 $app = new Application();
@@ -19,6 +17,7 @@ $app = new Application();
 // Make commands
 $app->add(new DocsCommand());
 $app->add(new TemplatesCommand());
+$app->add(new StaticCommand());
 
 // API commands
 $app->add(new NameCommand());

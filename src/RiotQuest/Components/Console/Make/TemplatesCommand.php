@@ -8,6 +8,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use RiotQuest\Components\Framework\Engine\Filesystem;
 
+/**
+ * Class TemplatesCommand
+ *
+ * Command to generate Collection templates
+ *
+ * @package RiotQuest\Components\Console\Make
+ */
 class TemplatesCommand extends Command
 {
 

@@ -8,6 +8,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ClearCommand
+ *
+ * Command to wipe a cache component
+ *
+ * @package RiotQuest\Components\Console\Cache
+ */
 class ClearCommand extends Command
 {
 

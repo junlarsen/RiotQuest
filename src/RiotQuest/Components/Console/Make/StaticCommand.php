@@ -9,7 +9,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use RiotQuest\Components\DataProvider\DataDragon\Assets;
 
-class TemplatesCommand extends Command
+/**
+ * Class StaticCommand
+ *
+ * Command to generate all static assets for a given locale
+ *
+ * @package RiotQuest\Components\Console\Make
+ */
+class StaticCommand extends Command
 {
 
     protected static $defaultName = 'make:static';

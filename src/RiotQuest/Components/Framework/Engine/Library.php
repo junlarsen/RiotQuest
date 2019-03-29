@@ -146,10 +146,14 @@ class Library
      *
      * @var array
      */
-    static $templates = [
-        
-    ];
+    static $templates = [];
 
+    /**
+     * Load template from file and save into memory
+     *
+     * @param $path
+     * @return mixed
+     */
     public static function loadTemplate($path)
     {
         if (!isset(static::$templates[$path])) {
@@ -192,10 +196,8 @@ class Library
 
     /**
      * Makes a skeleton for a Collection class by reading its
-     * @property and @list tags. Functions recursively to make
+     * property and list tags. Functions recursively to make
      * sure every object is included.
-     *
-     * TODO: mechanism to cache templates for faster load
      *
      * @param $class
      * @return array
@@ -233,42 +235,27 @@ class Library
      *
      * @param $data
      * @param $template
+     * @param $region
      * @return mixed
      */
-    public static function traverse($data, $template, $region): Collection
+    public static function traverse($data, $template, $region)
     {
         $col = new $template['_class'];
         $col->setRegion($region);
         if (isset($template['_list'])) {
             foreach ($data as $key => $value) {
-                if (isset($template['_list']['_class'])) {
-                    $co = static::traverse($value, $template['_list'], $region);
-                    $col->put($key, $co);
-                } else {
-                    $col->put($key, $value);
-                }
+                isset($template['_list']['_class'])
+                    ? $col->put($key, static::traverse($value, $template['_list'], $region))
+                    : $col->put($key, $value);
             }
         } else {
             foreach ($data as $key => $value) {
                 // If it's a recursive component
                 if (is_array($template[$key])) {
-                    $co = static::traverse($value, $template[$key], $region);
-                    $col->put($key, $co);
+                    // Recursively traverse
+                    $col->put($key, static::traverse($value, $template[$key], $region));
                 } else {
-                    // Properly typecasting the data
-                    switch ($template[$key]) {
-                        case 'string':
-                            $value = (string) $value; break;
-                        case 'int':
-                        case 'integer':
-                            $value = (int) $value; break;
-                        case 'double':
-                        case 'float':
-                            $value = (double) $value; break;
-                        case 'bool':
-                        case 'boolean':
-                            $value = (bool) $value; break;
-                    }
+                    settype($value, $template[$key]);
                     $col->put($key, $value);
                 }
             }

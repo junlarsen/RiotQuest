@@ -89,6 +89,11 @@ class Assets
      */
     public static function update($path)
     {
+        // Create directory if necessary
+        if (!is_dir(self::OUTPUT_DIRECTORY . static::$locale)) {
+            mkdir(self::OUTPUT_DIRECTORY . static::$locale, 755);
+        }
+        // Fetch files and store them
         if (in_array($path, array_keys(static::$map))) {
             $file = sprintf(static::$basePath . static::$map[$path], static::$version, static::$locale);
             $output = sprintf(static::$out[$path], static::$locale);

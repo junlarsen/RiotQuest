@@ -40,14 +40,17 @@ class Filesystem
     public function generateTemplates()
     {
         @mkdir(__DIR__ . '/../../../../storage/templates', 755);
-        foreach (scandir(static::$in['collections']) as $file) {
-            if ($file == '.' || $file == '..') continue;
+        array_map(function ($file) {
+            if ($file == '.' || $file == '..') return;
             $file = str_replace('.php', '', $file);
             file_put_contents(static::$out['collections'] . strtolower($file) . '.json', json_encode(Library::template(static::$namespaces['collections'] . $file)));
-        }
+        }, scandir(static::$in['collections']));
         file_put_contents(static::$out['collections'] . '/manifest.json', json_encode(['time' => time()]));
     }
 
+    /**
+     * Deletes every saved template inside the template directory
+     */
     public function flushTemplates()
     {
         array_map('unlink', glob(static::$out['collections'] . '*.json'));

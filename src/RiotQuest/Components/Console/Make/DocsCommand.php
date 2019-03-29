@@ -8,6 +8,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use RiotQuest\Docs\Generator;
 
+/**
+ * Class DocsCommand
+ *
+ * Command to write out the documentation files
+ *
+ * @package RiotQuest\Components\Console\Make
+ */
 class DocsCommand extends Command
 {
 
