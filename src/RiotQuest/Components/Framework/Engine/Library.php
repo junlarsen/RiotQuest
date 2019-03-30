@@ -170,7 +170,7 @@ class Library
      * @param $region
      * @return string
      */
-    public static function region($region): string
+    public static function resolveRegion($region): string
     {
         $region = strtolower(str_replace(' ', '-', $region));
         if (array_key_exists($region, static::$map)) {

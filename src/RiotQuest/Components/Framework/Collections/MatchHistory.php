@@ -7,10 +7,10 @@ namespace RiotQuest\Components\Framework\Collections;
  *
  * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatchlist
  *
- * @property MatchReferenceList $matches
- * @property int $totalGames
- * @property int $startIndex
- * @property int $endIndex
+ * @property MatchReferenceList $matches Match reference list
+ * @property int $totalGames Total amount of games ( might be bugged due to Riot bug )
+ * @property int $startIndex Start index in match list
+ * @property int $endIndex End index in match list
  *
  * @package RiotQuest\Components\Framework\Collections
  */

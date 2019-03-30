@@ -33,7 +33,7 @@ class Summoner extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -55,7 +55,7 @@ class Summoner extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -77,7 +77,7 @@ class Summoner extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -99,7 +99,7 @@ class Summoner extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
 }

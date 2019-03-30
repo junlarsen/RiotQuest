@@ -35,9 +35,7 @@ class ClearCommand extends Command
             '<info>================================</info>'
         ]);
 
-        $output->writeln([
-            '- Cleaning Cache',
-        ]);
+        $output->writeln('- Cleaning Cache');
 
         $gen = new Filesystem();
         switch ($input->getArgument('entity')) {
@@ -45,13 +43,8 @@ class ClearCommand extends Command
                 $gen->flushTemplates();
         }
 
-        $output->writeln([
-            '- Cache Flushed',
-        ]);
-
-        $output->writeln([
-            '<info>================================</info>'
-        ]);
+        $output->writeln('- Cache Flushed');
+        $output->writeln('<info>================================</info>');
     }
 
 }

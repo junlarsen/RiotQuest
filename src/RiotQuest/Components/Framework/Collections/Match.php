@@ -9,19 +9,19 @@ use RiotQuest\Components\Framework\Client\Client;
  *
  * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatch
  *
- * @property int $seasonId
- * @property int $queueId
- * @property double $gameId
- * @property ParticipantIdentityList $participantIdentities
- * @property string $gameVersion
- * @property string $platformId
- * @property string $gameMode
- * @property int $mapId
- * @property string $gameType
- * @property TeamStatsList $teams
- * @property MatchParticipantList $participants
- * @property double $gameDuration
- * @property double $gameCreation
+ * @property int $seasonId Season ID the game was played on
+ * @property int $queueId Queue game was played on
+ * @property double $gameId Game ID of game
+ * @property ParticipantIdentityList $participantIdentities List of participants in this game
+ * @property string $gameVersion Game version game was played on
+ * @property string $platformId Region game was played on
+ * @property string $gameMode Game mode of game
+ * @property int $mapId Which map the game was played on
+ * @property string $gameType Which type of game this was
+ * @property TeamStatsList $teams List of team stats
+ * @property MatchParticipantList $participants List of player stats
+ * @property double $gameDuration Game duration in ms
+ * @property double $gameCreation Game creation in UNIX timestamp
  *
  * @package RiotQuest\Components\Framework\Collections
  */

@@ -50,7 +50,14 @@ class Assets
      * @var array
      */
     public static $map = [
-        'champion' => "/data/%s/champion.json"
+        'champion' => '/data/%s/champion.json',
+        'item' => '/data/%s/item.json',
+        'champion.full' => '/data/%s/championFull.json',
+        'runes' => '/data/%s/runesReforged.json',
+        'summoner' => '/data/%s/summoner.json',
+        'icon' => '/data/%s/profileicon.json',
+        'map' => '/data/%s/map.json',
+        'language' => '/data/%s/language.json',
     ];
 
     /**
@@ -59,7 +66,14 @@ class Assets
      * @var array
      */
     public static $out = [
-        'champion' => self::OUTPUT_DIRECTORY . '%s/champion.json'
+        'champion' => self::OUTPUT_DIRECTORY . '%s/champion.json',
+        'item' => self::OUTPUT_DIRECTORY . '%s/item.json',
+        'champion.full' => self::OUTPUT_DIRECTORY . '%s/championFull.json',
+        'runes' => self::OUTPUT_DIRECTORY . '%s/runes.json',
+        'summoner' => self::OUTPUT_DIRECTORY . '%s/summoner.json',
+        'icon' => self::OUTPUT_DIRECTORY . '%s/icon.json',
+        'map' => self::OUTPUT_DIRECTORY . '%s/map.json',
+        'language' => self::OUTPUT_DIRECTORY . '%s/language.json'
     ];
 
     /***

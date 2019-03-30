@@ -35,7 +35,7 @@ class Match extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -57,7 +57,7 @@ class Match extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -79,7 +79,7 @@ class Match extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
 }

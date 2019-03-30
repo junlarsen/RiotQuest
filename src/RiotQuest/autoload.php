@@ -29,10 +29,5 @@ if (file_exists(__DIR__ . '/../../.env')) {
     }
 }
 
-// If manifest for collections are not generated
-if (file_exists(__DIR__ . '../storage/manifest.json')) {
-    (new Filesystem())->generateTemplates();
-}
-
 Dragon::enable();
 Assets::enable();

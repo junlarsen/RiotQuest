@@ -35,29 +35,18 @@ class DocsCommand extends Command
             '<info>================================</info>'
         ]);
 
-        $output->writeln([
-            '- Generating Documentation',
-        ]);
+        $output->writeln('- Generating Documentation');
 
         $gen = new Generator\Generator();
-
         $gen->collections();
 
-        $output->writeln([
-            '- Completed Collections',
-        ]);
+        $output->writeln('- Completed Collections');
 
         $gen->sidebar();
 
         $output->writeln([
             '- Completed Sidebar',
-        ]);
-
-        $output->writeln([
             '- Completed Generation',
-        ]);
-
-        $output->writeln([
             '<info>================================</info>'
         ]);
     }

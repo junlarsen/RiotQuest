@@ -7,9 +7,9 @@ namespace RiotQuest\Components\Framework\Collections;
  *
  * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatchTimeline
  *
- * @property double $timestamp
- * @property MatchParticipantFrameList $participantFrames
- * @property MatchEventList $events
+ * @property double $timestamp Timestamp frame happened
+ * @property MatchParticipantFrameList $participantFrames Frames inside this frame
+ * @property MatchEventList $events Events inside this frame
  *
  * @package RiotQuest\Components\Framework\Collections
  */

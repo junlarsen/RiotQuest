@@ -37,9 +37,7 @@ class StaticCommand extends Command
             '<info>================================</info>'
         ]);
 
-        $output->writeln([
-            '- Generating Static Assets',
-        ]);
+        $output->writeln('- Generating Static Assets');
 
         Assets::setLocate($input->getArgument('locale'));
         foreach (Assets::$map as $key => $value)
@@ -49,9 +47,6 @@ class StaticCommand extends Command
 
         $output->writeln([
             '- Completed Static Asset Generation',
-        ]);
-
-        $output->writeln([
             '<info>================================</info>'
         ]);
     }

@@ -35,19 +35,13 @@ class TemplatesCommand extends Command
             '<info>================================</info>'
         ]);
 
-        $output->writeln([
-            '- Generating Templates',
-        ]);
+        $output->writeln('- Generating Templates');
 
         $gen = new Filesystem();
-
         $gen->generateTemplates();
 
         $output->writeln([
             '- Completed Template Generation',
-        ]);
-
-        $output->writeln([
             '<info>================================</info>'
         ]);
     }

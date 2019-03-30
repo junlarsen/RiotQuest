@@ -87,7 +87,7 @@ class Client
      * @param $lim
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function hit($region, $endpoint, $lim)
+    public static function registerHit($region, $endpoint, $lim)
     {
         Application::hit($region);
         Endpoint::hit($region, $endpoint, null, $lim);
@@ -101,7 +101,7 @@ class Client
      * @return bool
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function available($region, $endpoint)
+    public static function isHittable($region, $endpoint)
     {
         return Endpoint::available($region, $endpoint) && Application::available($region);
     }

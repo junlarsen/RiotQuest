@@ -33,7 +33,7 @@ class Status extends Template
             ->setArguments(['region' => $this->region])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
 }

@@ -34,7 +34,7 @@ class Spectator extends Template
             ->setArguments(['region' => $this->region])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -56,7 +56,7 @@ class Spectator extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
 }

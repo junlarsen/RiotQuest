@@ -35,7 +35,7 @@ class Mastery extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -58,7 +58,7 @@ class Mastery extends Template
             ->setArguments(['region' => $this->region, 'id' => $id, 'champion' => $champion])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -80,7 +80,7 @@ class Mastery extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
 }

@@ -13,6 +13,9 @@ use GuzzleHttp\Client as HttpClient;
  * Definition to send HTTP request to the
  * Riot Games API
  *
+ * Uses a sort-of query builder to make a nice
+ * method-chaining API to build requests
+ *
  * @package RiotQuest\Components\Http
  */
 class Request
@@ -47,7 +50,7 @@ class Request
     public $arguments;
 
     /**
-     * Key to use: STANDARD | TORUNAMENT
+     * Key to use: STANDARD | TOURNAMENT
      *
      * @var string
      */
@@ -168,8 +171,8 @@ class Request
      */
     public function compile(): self
     {
-        if (!($this->arguments['region'] = Library::region($this->arguments['region']))) {
-            throw new RiotQuestException('ERROR: Specificed region could not be resolved.');
+        if (!($this->arguments['region'] = Library::resolveRegion($this->arguments['region']))) {
+            throw new RiotQuestException('ERROR: Specified region could not be resolved.');
         }
         $this->destination = Library::replace($this->destination, $this->arguments);
         return $this;
@@ -198,13 +201,12 @@ class Request
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function send()
+    public function sendRequest()
     {
         if (Client::getCache()->has($this->getKey())) {
-            return $this->handle(json_decode(Client::getCache()->get($this->getKey()), 1));
-        } else if (Client::available($this->arguments['region'], $this->parent[0] . '.' . $this->parent[1])) {
+            return $this->completeRequest(json_decode(Client::getCache()->get($this->getKey()), 1));
+        } else if (Client::isHittable($this->arguments['region'], $this->parent[0] . '.' . $this->parent[1])) {
             $client = new HttpClient();
-
             $response = $client->request($this->method, $this->destination, [
                 'body' => json_encode($this->payload),
                 'headers' => [
@@ -214,7 +216,7 @@ class Request
                 'http_errors' => false
             ]);
 
-            return $this->handle($response);
+            return $this->completeRequest($response);
         }
         throw new RiotQuestException('Rate Limit would be exceeded by making this call');
     }
@@ -229,13 +231,13 @@ class Request
      * @throws RiotQuestException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function handle($response)
+    public function completeRequest($response)
     {
         $ref = Library::$returnTypes[$this->parent[0]][$this->parent[1]];
         if ($response instanceof \GuzzleHttp\Psr7\Response) {
             if ($response->getStatusCode() == 200) {
                 $limits = $response->getHeaders()['X-Method-Rate-Limit'][0];
-                Client::hit(
+                Client::registerHit(
                     $this->arguments['region'],
                     $this->parent[0] . '.' . $this->parent[1],
                     [
@@ -243,8 +245,9 @@ class Request
                         'count' => explode(':', $limits)[0]
                     ]);
 
-                $load = (array)json_decode($response->getBody()->getContents(), 1);
-                Client::getCache()->set($this->getKey(), json_encode($load));
+                $load = (array) json_decode($response->getBody()->getContents(), 1);
+                Client::getCache()->set($this->getKey(), $response->getBody()->getContents());
+                // If request is not from command line
                 if ($ref && RIOTQUEST_ENV === 'API') {
                     $template = strtolower(array_reverse(explode('\\', $ref))[0]) . '.json';
                     return Library::traverse($load, Library::loadTemplate($template), $this->arguments['region']);
@@ -255,6 +258,7 @@ class Request
                 throw new RiotQuestException(json_decode($response->getBody()->getContents(), 1)['status']['message'], $response->getStatusCode());
             }
         } else {
+            // If request is not from command line
             if ($ref && RIOTQUEST_ENV === 'API') {
                 return Library::traverse($response, Library::template($ref), $this->arguments['region']);
             } else if (RIOTQUEST_ENV === 'CLI') {

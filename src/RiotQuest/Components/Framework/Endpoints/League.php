@@ -34,7 +34,7 @@ class League extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -56,7 +56,7 @@ class League extends Template
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -78,7 +78,7 @@ class League extends Template
             ->setArguments(['region' => $this->region, 'queue' => $queue])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -100,7 +100,7 @@ class League extends Template
             ->setArguments(['region' => $this->region, 'queue' => $queue])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
     /**
@@ -122,7 +122,7 @@ class League extends Template
             ->setArguments(['region' => $this->region, 'queue' => $queue])
             ->setTtl($this->ttl)
             ->compile()
-            ->send();
+            ->sendRequest();
     }
 
 }

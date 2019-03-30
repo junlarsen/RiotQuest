@@ -13,6 +13,8 @@ use RiotQuest\Components\Framework\Client\Client as Module;
  * for the API.
  *
  * TODO: unit tests
+ * TODO: cli
+ * TODO: documentation
  *
  * @package RiotQuest\Support\Facades
  */
