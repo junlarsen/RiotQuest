@@ -6,11 +6,17 @@ define('RIOTQUEST_ENV', 'CLI');
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
+
 use RiotQuest\Components\Console\Make\DocsCommand;
 use RiotQuest\Components\Console\Make\TemplatesCommand;
 use RiotQuest\Components\Console\Make\StaticCommand;
+
 use RiotQuest\Components\Console\Cache\ClearCommand;
-use RiotQuest\Components\Console\Summoner\NameCommand;
+
+use RiotQuest\Components\Console\Summoner\NameCommand as SummonerName;
+use RiotQuest\Components\Console\Summoner\IdCommand as SummonerId;
+use RiotQuest\Components\Console\Summoner\UniqueCommand as SummonerUnique;
+use RiotQuest\Components\Console\Summoner\AccountCommand as SummonerAccount;
 
 $app = new Application();
 
@@ -20,7 +26,10 @@ $app->add(new TemplatesCommand());
 $app->add(new StaticCommand());
 
 // API commands
-$app->add(new NameCommand());
+$app->add(new SummonerName());
+$app->add(new SummonerId());
+$app->add(new SummonerUnique());
+$app->add(new SummonerAccount());
 
 // Cache Flushes
 $app->add(new ClearCommand());

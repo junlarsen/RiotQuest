@@ -9,23 +9,23 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class NameCommand extends Command
+class IdCommand extends Command
 {
 
     protected function configure()
     {
         $this
-            ->setDescription('Summoner::name()')
-            ->setHelp('Summoner::name() function in the CLI')
-            ->setName('summoner:name')
+            ->setDescription('Summoner::id()')
+            ->setHelp('Summoner::id() function in the CLI')
+            ->setName('summoner:id')
             ->addArgument('region', InputArgument::REQUIRED, 'Region')
-            ->addArgument('name', InputArgument::REQUIRED, 'Summoner Name');
+            ->addArgument('id', InputArgument::REQUIRED, 'Summoner ID');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (RIOTQUEST_ENVLOAD) {
-            $out = Client::summoner($input->getArgument('region'))->name($input->getArgument('name'));
+            $out = Client::summoner($input->getArgument('region'))->id($input->getArgument('id'));
             $output->write(json_encode($out));
         } else {
             throw new RiotQuestException("App needs to be loaded using Environment to use RiotQuest from CLI.");

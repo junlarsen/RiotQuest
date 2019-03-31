@@ -98,7 +98,7 @@ class Request
      * @param $parent
      * @return Request
      */
-    public function make($parent): self
+    public static function make($parent): self
     {
         $me = new static;
         $me->parent = $parent;
@@ -252,7 +252,7 @@ class Request
                     $template = strtolower(array_reverse(explode('\\', $ref))[0]) . '.json';
                     return Library::traverse($load, Library::loadTemplate($template), $this->arguments['region']);
                 } else {
-                    return $response->getBody()->getContents();
+                    return $load;
                 }
             } else {
                 throw new RiotQuestException(json_decode($response->getBody()->getContents(), 1)['status']['message'], $response->getStatusCode());
