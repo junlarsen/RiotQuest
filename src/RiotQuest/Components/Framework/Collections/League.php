@@ -18,6 +18,17 @@ namespace RiotQuest\Components\Framework\Collections;
 class League extends Collection
 {
 
-
+    /**
+     * Get player in league where summoner ID is equal to given ID
+     *
+     * @param $id
+     * @return LeagueItem
+     */
+    public function getPlayerWhereId($id)
+    {
+        return array_values($this->map(function (LeagueItem $leagueItem) use ($id) {
+            return $leagueItem->summonerId == $id;
+        }))[0] ?? null;
+    }
 
 }

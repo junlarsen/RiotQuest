@@ -29,7 +29,7 @@ class Summoner extends Collection
      * @return string
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function getIconLink()
+    public function getSummonerIcon()
     {
         return Dragon::getProfileIcon($this->profileIconId);
     }

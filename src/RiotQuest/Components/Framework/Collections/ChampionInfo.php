@@ -16,6 +16,17 @@ namespace RiotQuest\Components\Framework\Collections;
 class ChampionInfo extends Collection
 {
 
-
+    /**
+     * Get a collection of combined lists
+     *
+     * @return Collection
+     */
+    public function getCombinedList()
+    {
+        return new Collection([
+            'veteran' => $this->freeChampionIds,
+            'new' => $this->freeChampionIdsForNewPlayers
+        ]);
+    }
 
 }

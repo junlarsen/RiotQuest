@@ -2,6 +2,10 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use Carbon\Carbon;
+use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\Framework\Client\Client;
+
 /**
  * Class ChampionMastery
  *
@@ -22,6 +26,38 @@ namespace RiotQuest\Components\Framework\Collections;
 class ChampionMastery extends Collection
 {
 
+    /**
+     * Gets the summoner which holds this mastery
+     *
+     * @return Summoner
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
+    public function getSummoner()
+    {
+        return Client::summoner($this->region)->id($this->summonerId);
+    }
 
+    /**
+     * Gets the url to champion image
+     *
+     * @return string
+     */
+    public function getChampionIcon()
+    {
+        return Dragon::getChampionSquare($this->championId);
+    }
+
+    /**
+     * Get Carbon instance for last playtime
+     *
+     * @return Carbon|\Carbon\CarbonInterface
+     */
+    public function getLastPlayed()
+    {
+        return Carbon::createFromTimestamp($this->lastPlayTime);
+    }
 
 }

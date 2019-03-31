@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use Carbon\Carbon;
+
 /**
  * Class CurrentGameInfo
  *
@@ -24,6 +26,24 @@ namespace RiotQuest\Components\Framework\Collections;
 class CurrentGameInfo extends Collection
 {
 
+    /**
+     * Get Carbon instance for start time
+     *
+     * @return Carbon|\Carbon\CarbonInterface
+     */
+    public function getStartTime()
+    {
+        return Carbon::createFromTimestamp($this->gameStartTime);
+    }
 
+    /**
+     * Get the observer key
+     *
+     * @return string
+     */
+    public function getObserverKey()
+    {
+        return $this->observers->encryptionKey;
+    }
 
 }

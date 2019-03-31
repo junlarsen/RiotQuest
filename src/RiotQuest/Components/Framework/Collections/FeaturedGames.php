@@ -15,6 +15,16 @@ namespace RiotQuest\Components\Framework\Collections;
 class FeaturedGames extends Collection
 {
 
-
+    /**
+     * Get game IDs
+     *
+     * @return array
+     */
+    public function getGameIds()
+    {
+        return $this->map(function (FeaturedGameInfo $featuredGameInfo) {
+            return $featuredGameInfo->gameId;
+        });
+    }
 
 }
