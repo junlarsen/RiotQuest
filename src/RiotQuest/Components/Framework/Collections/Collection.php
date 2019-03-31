@@ -248,7 +248,7 @@ class Collection implements
      */
     public function unserialize($serialized)
     {
-        return \unserialize($serialized);
+        $this->stack = \unserialize($serialized);
     }
 
     /**

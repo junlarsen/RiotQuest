@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Client;
 
+use RiotQuest\Components\Framework\RateLimit\Manager;
 use RiotQuest\Components\RateLimit\Application;
 use RiotQuest\Components\RateLimit\Endpoint;
 use RiotQuest\Components\Framework\Endpoints\Champion;
@@ -41,6 +42,13 @@ class Client
     protected static $limits;
 
     /**
+     * Rate Limit handler
+     *
+     * @var Manager
+     */
+    protected static $manager;
+
+    /**
      * The API keys
      *
      * @var array
@@ -64,8 +72,15 @@ class Client
         foreach ($keys as $key) {
             static::$keys[$key->getType()] = $key;
         }
-        Application::enable();
-        Endpoint::enable();
+        static::$manager = new Manager();
+    }
+
+    /**
+     * @return Manager
+     */
+    public static function getManager()
+    {
+        return self::$manager;
     }
 
     /**

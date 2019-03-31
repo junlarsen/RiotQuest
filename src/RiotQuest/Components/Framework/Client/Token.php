@@ -68,10 +68,7 @@ class Token
      */
     public function getLimits()
     {
-        return [
-            'interval' => explode(':', $this->limits)[1],
-            'count' => explode(':', $this->limits)[0]
-        ];
+        return explode(':', $this->limits);
     }
 
 }
