@@ -69,7 +69,7 @@ class Endpoint implements RateLimit
                     $endpoint => [
                         'cap' => $lim['count'],
                         'count' => 1,
-                        'ttl' => (int) $time + $lim['interval']
+                        'ttl' => (float) $time + (float) $lim['interval']
                     ]
                 ]
             ]), (int) $lim['interval']);

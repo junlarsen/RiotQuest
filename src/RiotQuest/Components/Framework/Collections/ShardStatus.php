@@ -7,12 +7,12 @@ namespace RiotQuest\Components\Framework\Collections;
  *
  * @see https://developer.riotgames.com/api-methods/#lol-status-v3/GET_getShardData
  *
- * @property string $name
- * @property string $region_tag
- * @property string $hostname
- * @property ServiceList $services
- * @property StringList $locales
- * @property string $slug
+ * @property string $name Name of status
+ * @property string $region_tag Region of status
+ * @property string $hostname Hostname of status
+ * @property ServiceList $services List of services
+ * @property StringList $locales List of locales
+ * @property string $slug Slug of shard
  *
  * @package RiotQuest\Components\Framework\Collections
  */

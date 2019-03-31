@@ -7,9 +7,9 @@ namespace RiotQuest\Components\Framework\Collections;
  *
  * @see https://developer.riotgames.com/api-methods/#spectator-v4/GET_getCurrentGameInfoBySummoner
  *
- * @property double $perkStyle
- * @property IntList $perkIds
- * @property double $perkSubStyle
+ * @property double $perkStyle Perk primary style
+ * @property IntList $perkIds List of selected perks
+ * @property double $perkSubStyle Perk sub style
  *
  * @package RiotQuest\Components\Framework\Collections
  */

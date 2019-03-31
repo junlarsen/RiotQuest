@@ -249,7 +249,7 @@ class Library
                     : $col->put($key, $value);
             }
         } else {
-            foreach ($data as $key => $value) {
+            foreach ((array) $data as $key => $value) {
                 // If it's a recursive component
                 if (is_array($template[$key])) {
                     // Recursively traverse

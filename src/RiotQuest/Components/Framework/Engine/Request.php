@@ -246,7 +246,7 @@ class Request
                     ]);
 
                 $load = (array) json_decode($response->getBody()->getContents(), 1);
-                Client::getCache()->set($this->getKey(), $response->getBody()->getContents());
+                Client::getCache()->set($this->getKey(), json_encode($load));
                 // If request is not from command line
                 if ($ref && RIOTQUEST_ENV === 'API') {
                     $template = strtolower(array_reverse(explode('\\', $ref))[0]) . '.json';

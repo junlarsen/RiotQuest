@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Console\Cache;
 
+use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Components\Framework\Engine\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -41,6 +42,10 @@ class ClearCommand extends Command
         switch ($input->getArgument('entity')) {
             case 'templates':
                 $gen->flushTemplates();
+                break;
+            case 'saved':
+                Client::getCache()->clear();
+                break;
         }
 
         $output->writeln('- Cache Flushed');

@@ -9,14 +9,14 @@ use RiotQuest\Client;
  *
  * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatchlist
  *
- * @property string $lane
- * @property double $gameId
- * @property int $champion
- * @property string $platformId
- * @property int $season
- * @property int $queue
- * @property string $role
- * @property double $timestamp
+ * @property string $lane Which lane player player ( TOP, JUNGLE, MID, BOT, NONE )
+ * @property double $gameId Game ID for game
+ * @property int $champion Champion which player played
+ * @property string $platformId Region game was played on
+ * @property int $season Season game was played in
+ * @property int $queue Queue game was played on
+ * @property string $role Role player player ( SOLO, DUO, DUO_SUPPORT, DUO_CARRY, NONE )
+ * @property double $timestamp UNIX timestamp for game end
  *
  * @package RiotQuest\Components\Framework\Collections
  */
