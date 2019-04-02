@@ -2,6 +2,9 @@
 
 namespace RiotQuest\Components\Framework\Client;
 
+use RiotQuest\Components\Framework\Cache\AutoLimitModel;
+use RiotQuest\Components\Framework\Cache\CacheModel;
+use RiotQuest\Components\Framework\Cache\RequestModel;
 use RiotQuest\Components\Framework\RateLimit\Manager;
 use RiotQuest\Components\RateLimit\Application;
 use RiotQuest\Components\RateLimit\Endpoint;
@@ -29,9 +32,9 @@ class Client
     /**
      * CacheProvider for caching. Must be PSR-16 compliant
      *
-     * @var CacheInterface
+     * @var array
      */
-    protected static $cache;
+    protected static $caches = [];
 
     /**
      * Set rate limits for the given TOURNAMENT and STANDARD
@@ -63,16 +66,43 @@ class Client
      * doesn't interfere with your program until you actually
      * load being using it.
      *
-     * @param CacheInterface $cache
      * @param mixed ...$keys
      */
-    public static function initialize(CacheInterface $cache, ...$keys)
+    public static function initialize(...$keys)
     {
-        static::$cache = $cache;
+        static::$caches = [
+            'generic' => new CacheModel(),
+            'request' => new RequestModel(),
+            'limits' => new AutoLimitModel()
+        ];
         foreach ($keys as $key) {
             static::$keys[$key->getType()] = $key;
         }
         static::$manager = new Manager();
+    }
+
+    /**
+     * Loads the client from the environment variables
+     */
+    public static function loadFromEnvironment()
+    {
+        $discoveredKeys = [];
+        if (getenv('RIOTQUEST_STANDARD_KEY')) $discoveredKeys[] = Client::loadKeyFromEnv('STANDARD');
+        if (getenv('RIOTQUEST_TOURNAMENT_KEY')) $discoveredKeys[] = Client::loadKeyFromEnv('TOURNAMENT');
+        if ($discoveredKeys) {
+            Client::initialize(...$discoveredKeys);
+        }
+    }
+
+    /**
+     * Loads a keytype from environment
+     *
+     * @param $key
+     * @return Token
+     */
+    public static function loadKeyFromEnv($key)
+    {
+        return new Token(getenv("RIOTQUEST_{$key}_KEY"), $key, "RIOTQUEST_{$key}_LIMIT");
     }
 
     /**
@@ -104,6 +134,7 @@ class Client
      */
     public static function registerHit($region, $endpoint, $lim)
     {
+        return null;
         Application::hit($region);
         Endpoint::hit($region, $endpoint, null, $lim);
     }
@@ -118,17 +149,19 @@ class Client
      */
     public static function isHittable($region, $endpoint)
     {
+        return true;
         return Endpoint::available($region, $endpoint) && Application::available($region);
     }
 
     /**
      * Get cacheprovider
      *
+     * @param string $key
      * @return CacheInterface
      */
-    public static function getCache()
+    public static function getCache($key = 'generic')
     {
-        return static::$cache;
+        return static::$caches[$key];
     }
 
     /**
@@ -238,8 +271,8 @@ class Client
     }
 
     /**
-     * @todo
      * @return bool
+     * @todo
      */
     public static function stub()
     {
@@ -247,8 +280,8 @@ class Client
     }
 
     /**
-     * @todo
      * @return bool
+     * @todo
      */
     public static function tournament()
     {

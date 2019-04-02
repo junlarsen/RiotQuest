@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * Command to wipe a cache component
  *
- * @package RiotQuest\Components\Console\Cache
+ * @package RiotQuest\Components\Console\CacheModel
  */
 class ClearCommand extends Command
 {
@@ -25,7 +25,7 @@ class ClearCommand extends Command
             ->setDescription('Clear a cache component.')
             ->setHelp('Clears a cache component. "templates", "limits"')
             ->setName('cache:clear')
-            ->addArgument('entity', InputArgument::REQUIRED, 'Cache to clear.');
+            ->addArgument('entity', InputArgument::REQUIRED, 'CacheModel to clear.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -36,7 +36,7 @@ class ClearCommand extends Command
             '<info>================================</info>'
         ]);
 
-        $output->writeln('- Cleaning Cache');
+        $output->writeln('- Cleaning CacheModel');
 
         $gen = new Filesystem();
         switch ($input->getArgument('entity')) {
@@ -48,7 +48,7 @@ class ClearCommand extends Command
                 break;
         }
 
-        $output->writeln('- Cache Flushed');
+        $output->writeln('- CacheModel Flushed');
         $output->writeln('<info>================================</info>');
     }
 

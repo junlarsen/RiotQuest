@@ -31,7 +31,7 @@ $app->add(new SummonerId());
 $app->add(new SummonerUnique());
 $app->add(new SummonerAccount());
 
-// Cache Flushes
+// CacheModel Flushes
 $app->add(new ClearCommand());
 
 $app->run();

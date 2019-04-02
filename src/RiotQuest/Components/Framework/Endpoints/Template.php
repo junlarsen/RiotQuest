@@ -20,7 +20,7 @@ class Template
     protected $region;
 
     /**
-     * Default time to live in Cache for item
+     * Default time to live in CacheModel for item
      *
      * @var int $ttl = 3600
      */

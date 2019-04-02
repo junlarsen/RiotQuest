@@ -203,8 +203,8 @@ class Request
      */
     public function sendRequest()
     {
-        if (Client::getCache()->has($this->getKey())) {
-            return $this->completeRequest(json_decode(Client::getCache()->get($this->getKey()), 1));
+        if (Client::getCache('request')->has($this->getKey())) {
+            return $this->completeRequest(json_decode(Client::getCache('request')->get($this->getKey()), 1));
         } else if (Client::isHittable($this->arguments['region'], $this->parent[0] . '.' . $this->parent[1])) {
             $client = new HttpClient();
             $response = $client->request($this->method, $this->destination, [
@@ -246,7 +246,7 @@ class Request
                     ]);
 
                 $load = (array) json_decode($response->getBody()->getContents(), 1);
-                Client::getCache()->set($this->getKey(), json_encode($load));
+                Client::getCache('request')->set($this->getKey(), json_encode($load), $this->ttl);
                 // If request is not from command line
                 if ($ref && RIOTQUEST_ENV === 'API') {
                     $template = strtolower(array_reverse(explode('\\', $ref))[0]) . '.json';

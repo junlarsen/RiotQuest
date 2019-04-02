@@ -35,39 +35,57 @@ class MatchHistory extends Collection
      * Pulls all matches where Queue is given id
      *
      * @param $id
-     * @return array
+     * @return MatchHistory
      */
     public function getWhereQueue($id)
     {
-        return array_values($this->matches->filter(function (MatchReference $e) use ($id) {
+        $matches = array_values($this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->queue == $id;
         }));
+        return new static([
+            'matches' => new MatchReferenceList($matches),
+            'totalGames' => count($matches),
+            'startIndex' => 0,
+            'endIndex' => count($matches)
+        ], $this->region);
     }
 
     /**
      * Pulls all matches where Champion is given id
      *
      * @param $id
-     * @return array
+     * @return MatchHistory
      */
     public function getWhereChampion($id)
     {
-        return array_values($this->matches->filter(function (MatchReference $e) use ($id) {
+        $matches = array_values($this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->champion == $id;
         }));
+        return new static([
+            'matches' => new MatchReferenceList($matches),
+            'totalGames' => count($matches),
+            'startIndex' => 0,
+            'endIndex' => count($matches)
+        ], $this->region);
     }
 
     /**
      * Pulls all matches where Season is given id
      *
      * @param $id
-     * @return array
+     * @return MatchHistory
      */
     public function getWhereSeason($id)
     {
-        return array_values($this->matches->filter(function (MatchReference $e) use ($id) {
+        $matches = array_values($this->matches->filter(function (MatchReference $e) use ($id) {
             return $e->season == $id;
         }));
+        return new static([
+            'matches' => new MatchReferenceList($matches),
+            'totalGames' => count($matches),
+            'startIndex' => 0,
+            'endIndex' => count($matches)
+        ], $this->region);
     }
 
 }

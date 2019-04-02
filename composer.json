@@ -18,8 +18,9 @@
     "guzzlehttp/guzzle": "6.3",
     "symfony/cache": "4.2",
     "symfony/dotenv": "4.2",
-    "jenssegers/blade": "1.1.*",
     "symfony/console": "4.2.*",
+    "symfony/var-dumper": "4.2.*",
+    "jenssegers/blade": "1.1.*",
     "nesbot/carbon": "2.9.*"
   },
   "require-dev": {

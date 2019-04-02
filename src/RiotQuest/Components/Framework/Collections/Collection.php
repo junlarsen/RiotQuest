@@ -44,10 +44,12 @@ class Collection implements
      * Create a new Collection
      *
      * @param array $stack
+     * @param mixed $region
      */
-    public function __construct($stack = [])
+    public function __construct($stack = [], $region = null)
     {
         $this->stack = $stack;
+        $this->region = $region;
     }
 
     /**
@@ -93,6 +95,15 @@ class Collection implements
     public function merge($stack = [])
     {
         return new static(array_merge($this->stack, $stack));
+    }
+
+    /**
+     * Dumps the stack and dies
+     */
+    public function dd()
+    {
+        dump($this);
+        die();
     }
 
     /**
