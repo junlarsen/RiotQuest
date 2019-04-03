@@ -102,7 +102,7 @@ class Client
      */
     public static function loadKeyFromEnv($key)
     {
-        return new Token(getenv("RIOTQUEST_{$key}_KEY"), $key, "RIOTQUEST_{$key}_LIMIT");
+        return new Token(getenv("RIOTQUEST_{$key}_KEY"), $key, getenv("RIOTQUEST_{$key}_LIMIT"));
     }
 
     /**
@@ -128,15 +128,15 @@ class Client
      * Hit an API region and endpoint
      *
      * @param $region
-     * @param $endpoint
-     * @param $lim
+     * @param $endpoint    
+     * @param $key
+     * @param $limits
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function registerHit($region, $endpoint, $lim)
+    public static function registerHit($region, $endpoint, $key, $limits = 'default')
     {
-        return null;
-        Application::hit($region);
-        Endpoint::hit($region, $endpoint, null, $lim);
+        static::getManager()->registerCall($region, $endpoint, $key, $limits);
+        static::getManager()->registerCall($region, 'default', $key, static::$keys[strtoupper($key)]->getLimits());
     }
 
     /**
@@ -147,10 +147,9 @@ class Client
      * @return bool
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function isHittable($region, $endpoint)
+    public static function isHittable($region, $endpoint, $key)
     {
-        return true;
-        return Endpoint::available($region, $endpoint) && Application::available($region);
+        return static::getManager()->canRequest($region, $endpoint, $key) && static::getManager()->canRequest($region, 'default', $key);
     }
 
     /**

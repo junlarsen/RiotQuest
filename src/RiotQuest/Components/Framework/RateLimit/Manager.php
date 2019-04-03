@@ -46,5 +46,24 @@ class Manager
         ]), $now['ttl'] ? $now['ttl'] - time() : $limits[1]);
     }
 
+    /**
+     * Decide whether you can hit an endpoint with region, key and endpoint or not.
+     * 
+     * @param $region
+     * @param string $endpoint
+     * @param string $key
+     * @return bool
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function canRequest($region, $endpoint = 'default', $key = 'standard')
+    {
+        $ref = implode('.', [$key, $region, $endpoint]);
+        if ($this->cache->has($ref)) {
+            $limits = json_decode($this->cache->get($ref), 1);
+            return $limits['count'] + 1 < $limits['max'];
+        }
+        return true;
+    }
+
 }
 

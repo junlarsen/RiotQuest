@@ -205,7 +205,7 @@ class Request
     {
         if (Client::getCache('request')->has($this->getKey())) {
             return $this->completeRequest(json_decode(Client::getCache('request')->get($this->getKey()), 1));
-        } else if (Client::isHittable($this->arguments['region'], $this->parent[0] . '.' . $this->parent[1])) {
+        } else if (Client::isHittable($this->arguments['region'], $this->parent[0] . '.' . $this->parent[1], strtolower($this->key))) {
             $client = new HttpClient();
             $response = $client->request($this->method, $this->destination, [
                 'body' => json_encode($this->payload),
@@ -240,12 +240,11 @@ class Request
                 Client::registerHit(
                     $this->arguments['region'],
                     $this->parent[0] . '.' . $this->parent[1],
-                    [
-                        'interval' => explode(':', $limits)[1],
-                        'count' => explode(':', $limits)[0]
-                    ]);
+                    strtolower($this->key),
+                    explode(':', $limits)
+                );
 
-                $load = (array) json_decode($response->getBody()->getContents(), 1);
+                $load = (array)json_decode($response->getBody()->getContents(), 1);
                 Client::getCache('request')->set($this->getKey(), json_encode($load), $this->ttl);
                 // If request is not from command line
                 if ($ref && RIOTQUEST_ENV === 'API') {
