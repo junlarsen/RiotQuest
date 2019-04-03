@@ -71,6 +71,7 @@ class CacheModel implements CacheInterface
      */
     public function set($key, $value, $ttl = null)
     {
+        if (is_string($ttl)) $ttl = explode(',', $ttl)[0];
         $key = $this->key($key);
         file_put_contents($this->path . $key, json_encode([
             'data' => (string) $value,
@@ -150,7 +151,7 @@ class CacheModel implements CacheInterface
      * @param $key
      * @return string
      */
-    private function key($key)
+    public function key($key)
     {
         return md5($key);
     }

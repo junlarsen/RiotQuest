@@ -156,6 +156,7 @@ class Library
      */
     public static function loadTemplate($path)
     {
+        $path = strtolower(array_reverse(explode('\\', $path))[0]) . '.json';
         if (!isset(static::$templates[$path])) {
             $template = json_decode(file_get_contents(__DIR__ . '/../../../../storage/templates/' . $path), 1);
             static::$templates[$path] = $template;

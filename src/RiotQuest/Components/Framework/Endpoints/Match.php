@@ -30,18 +30,27 @@ class Match extends Template
     public function list($id, $filters = [])
     {
         $filters = array_merge([
-            'startIndex' => 0,
-            'endIndex' => 100,
+            'startIndex' => false,
+            'endIndex' => false,
             'queue' => [],
             'champion' => [],
             'season' => [],
             'beginTime' => false,
             'endTime' => false
         ], $filters);
-        return $filters;
+        $filters = array_map(function ($e) {
+            return (array) $e;
+        }, $filters);
+        $str = '';
+        foreach ($filters as $key => $value) {
+             foreach ($value as $item) {
+                 if ($item) $str .= '&' . http_build_query([$key => $item]);
+             }
+        }
+
         return Request::make(['match', __FUNCTION__])
             ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{id}')
+            ->setDestination('https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{id}?' . trim($str, '&'))
             ->setMethod('GET')
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)

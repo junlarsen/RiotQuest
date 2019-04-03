@@ -7,6 +7,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use Countable;
 use Serializable;
+use JsonSerializable;
 use Closure;
 
 /**
@@ -23,7 +24,8 @@ class Collection implements
     ArrayAccess,
     Countable,
     IteratorAggregate,
-    Serializable
+    Serializable,
+    JsonSerializable
 {
 
     /**
@@ -184,6 +186,14 @@ class Collection implements
     public function count($recursive = 0)
     {
         return \count($this->stack, $recursive);
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function jsonSerialize()
+    {
+        return $this->stack;
     }
 
     /**

@@ -126,7 +126,7 @@ class Client
      * Hit an API region and endpoint
      *
      * @param $region
-     * @param $endpoint    
+     * @param $endpoint
      * @param $key
      * @param $limits
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -142,12 +142,13 @@ class Client
      *
      * @param $region
      * @param $endpoint
+     * @param $key
      * @return bool
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function isHittable($region, $endpoint, $key)
     {
-        return static::getManager()->canRequest($region, $endpoint, $key) && static::getManager()->canRequest($region, 'default', $key);
+        return static::getManager()->canRequest($region, $endpoint, strtolower($key)) && static::getManager()->canRequest($region, 'default', $key);
     }
 
     /**
