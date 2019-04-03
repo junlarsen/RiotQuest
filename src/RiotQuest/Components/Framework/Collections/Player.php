@@ -2,6 +2,9 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\Framework\Client\Client;
+
 /**
  * Class Player
  *
@@ -21,6 +24,29 @@ namespace RiotQuest\Components\Framework\Collections;
 class Player extends Collection
 {
 
+    /**
+     * Get the summoner icon link
+     *
+     * @return string
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function getSummonerIcon()
+    {
+        return Dragon::getProfileIcon($this->profileIconId);
+    }
 
+    /**
+     * Get the summoner object
+     *
+     * @return Summoner
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
+    public function getSummoner()
+    {
+        return Client::summoner($this->region)->account($this->accountId);
+    }
 
 }

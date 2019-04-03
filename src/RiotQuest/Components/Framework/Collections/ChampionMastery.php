@@ -5,6 +5,7 @@ namespace RiotQuest\Components\Framework\Collections;
 use Carbon\Carbon;
 use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Components\Framework\Utils\Champion;
 
 /**
  * Class ChampionMastery
@@ -41,13 +42,13 @@ class ChampionMastery extends Collection
     }
 
     /**
-     * Gets the url to champion image
+     * Get champion icon for banned champion
      *
      * @return string
      */
     public function getChampionIcon()
     {
-        return Dragon::getChampionSquare($this->championId);
+        return Dragon::getChampionSquare(Champion::getChampionId($this->championId));
     }
 
     /**
