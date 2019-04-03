@@ -43,11 +43,18 @@ class ClearCommand extends Command
             case 'templates':
                 $gen->flushTemplates();
                 break;
-            case 'saved':
-                Client::getCache()->clear();
+            case 'store':
+                Client::getCache('request')->clear();
                 break;
-        }
+            case 'ratelimit':
+                Client::getCache('limits')->clear();
+                break;
+            case 'clean':
+                $gen->flushTemplates();
+                Client::getCache('request')->clear();
+                Client::getCache('limits')->clear();
 
+        }
         $output->writeln('- CacheModel Flushed');
         $output->writeln('<info>================================</info>');
     }
