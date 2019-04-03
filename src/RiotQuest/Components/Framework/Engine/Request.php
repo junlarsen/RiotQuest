@@ -266,6 +266,5 @@ class Request
             return $response[0];
         }
     }
-
-
+    
 }

@@ -57,9 +57,9 @@ class Summoner extends Collection
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function getMatchlist()
+    public function getMatchlist($filters = [])
     {
-        return Client::match($this->region)->list($this->accountId);
+        return Client::match($this->region)->list($this->accountId, $filters);
     }
 
     /**

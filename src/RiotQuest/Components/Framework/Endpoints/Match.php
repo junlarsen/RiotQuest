@@ -20,14 +20,25 @@ class Match extends Template
      * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatchlist
      *
      * @param $id
+     * @param $filters
      * @return MatchHistory
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function list($id)
+    public function list($id, $filters = [])
     {
+        $filters = array_merge([
+            'startIndex' => 0,
+            'endIndex' => 100,
+            'queue' => [],
+            'champion' => [],
+            'season' => [],
+            'beginTime' => false,
+            'endTime' => false
+        ], $filters);
+        return $filters;
         return Request::make(['match', __FUNCTION__])
             ->useStandard()
             ->setDestination('https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{id}')

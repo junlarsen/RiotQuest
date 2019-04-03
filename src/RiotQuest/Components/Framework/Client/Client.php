@@ -6,8 +6,6 @@ use RiotQuest\Components\Framework\Cache\AutoLimitModel;
 use RiotQuest\Components\Framework\Cache\CacheModel;
 use RiotQuest\Components\Framework\Cache\RequestModel;
 use RiotQuest\Components\Framework\RateLimit\Manager;
-use RiotQuest\Components\RateLimit\Application;
-use RiotQuest\Components\RateLimit\Endpoint;
 use RiotQuest\Components\Framework\Endpoints\Champion;
 use RiotQuest\Components\Framework\Endpoints\Code;
 use RiotQuest\Components\Framework\Endpoints\League;
