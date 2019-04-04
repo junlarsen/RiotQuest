@@ -20,6 +20,7 @@ class LeagueTest extends TestCase
      */
     public function testRequestSingleLeague()
     {
+        // League ID
         $collection = Client::league('euw')->id('159026101e0-2cb7-11e9-9a42-c81f66dd2a8f');
 
         $this->assertInstanceOf(League::class, $collection);
@@ -54,6 +55,7 @@ class LeagueTest extends TestCase
      */
     public function testRequestPositions()
     {
+        // Summoner ID
         $collection = Client::league('euw')->positions('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
 
         $this->assertInstanceOf(LeaguePositionList::class, $collection);
