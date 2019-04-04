@@ -115,7 +115,7 @@ class Summoner extends Collection
      */
     public function getExternalCode()
     {
-        return Client::code($this->region)->id($this->id) ?: '';
+        return Client::code($this->region)->id($this->id);
     }
 
     /**

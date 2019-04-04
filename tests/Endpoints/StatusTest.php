@@ -1,0 +1,27 @@
+<?php
+
+namespace RiotQuest\Tests\Endpoints;
+
+use PHPUnit\Framework\TestCase;
+use RiotQuest\Client;
+use RiotQuest\Components\Framework\Collections\ShardStatus;
+
+class StatusTest extends TestCase
+{
+
+    /**
+     * Test the status endpoint
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
+    public function testRequestShard()
+    {
+        $collection = Client::status('euw')->shard();
+
+        $this->assertInstanceOf(ShardStatus::class, $collection);
+    }
+
+}
