@@ -118,4 +118,18 @@ class Summoner extends Collection
         return Client::code($this->region)->id($this->id);
     }
 
+    /**
+     * Returns whether this user is unranked or not
+     *
+     * @return bool
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\RiotQuestException
+     */
+    public function isUnranked()
+    {
+        return count($this->getRanked()->getRankedQueues()) === 0;
+    }
+
 }

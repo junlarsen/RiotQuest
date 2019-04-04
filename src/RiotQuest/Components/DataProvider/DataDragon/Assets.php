@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\DataProvider\DataDragon;
 
+use RiotQuest\Components\Framework\Collections\Collection;
 use RiotQuest\Components\Framework\Utils\Versions;
 
 class Assets
@@ -28,7 +29,7 @@ class Assets
      *
      * @var string
      */
-    public static $locale = 'en_GB';
+    public static $locale = 'en_US';
 
     /**
      * DataDragon basepath

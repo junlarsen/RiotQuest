@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use Carbon\Carbon;
 use RiotQuest\Components\Framework\Client\Client;
 
 /**
@@ -40,6 +41,16 @@ class Match extends Collection
     public function getTimeline()
     {
         return Client::match($this->region)->timeline($this->gameId);
+    }
+
+    /**
+     * Get relative time since this game was ended in ms
+     *
+     * @return int
+     */
+    public function getRelativeStartTimeMs()
+    {
+        return Carbon::now()->diffInMilliseconds(Carbon::createFromTimestampMs($this->gameCreation));
     }
 
 }

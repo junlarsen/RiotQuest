@@ -163,7 +163,9 @@ class Request
         $items = json_decode(Client::getCache('request')->get($request['url']), 1);
         return ($collection && RIOTQUEST_ENV === 'API')
             ? Library::traverse($items, Library::loadTemplate($collection), $request['region'])
-            : $items;
+            : (($collection)
+                ? $items
+                : $items[0] ?? null);
     }
 
     /**
@@ -191,10 +193,15 @@ class Request
             $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
             Client::registerHit($request['region'], $request['name'], $request['use'], explode(':', $response->getHeader('X-Method-Rate-Limit')[0]));
             $items = (array) json_decode($response->getBody()->getContents(), 1);
+            if (isset($items['status'])) {
+                throw new RiotQuestException(json_encode($items));
+            }
             Client::getCache('request')->set($request['url'], json_encode($items), $request['ttl']);
             return ($collection && RIOTQUEST_ENV === 'API')
                 ? Library::traverse($items, Library::loadTemplate($collection), $request['region'])
-                : $items;
+                : (($collection)
+                    ? $items
+                    : $items[0] ?? null);
 
         } else {
             throw new RiotQuestException("Rate Limit would be exceeded by making this call.");

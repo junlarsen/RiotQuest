@@ -50,4 +50,16 @@ class LeaguePositionList extends Collection
         })[0];
     }
 
+    /**
+     * Get the queues this user is ranked in
+     *
+     * @return StringList
+     */
+    public function getRankedQueues()
+    {
+        return new StringList(array_values(array_map(function (LeaguePosition $leaguePosition) {
+            return $leaguePosition->queueType;
+        }, $this->stack)));
+    }
+
 }

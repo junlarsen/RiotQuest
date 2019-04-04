@@ -29,11 +29,21 @@ class CurrentGameInfo extends Collection
     /**
      * Get Carbon instance for start time
      *
-     * @return Carbon|\Carbon\CarbonInterface
+     * @return Carbon
      */
     public function getStartTime()
     {
-        return Carbon::createFromTimestamp($this->gameStartTime);
+        return Carbon::createFromTimestampMs($this->gameStartTime);
+    }
+
+    /**
+     * Get relative start time
+     *
+     * @return int
+     */
+    public function getRelativeStartTimeMs()
+    {
+        return Carbon::now()->diffInMilliseconds(Carbon::createFromTimestampMs($this->gameStartTime));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use Carbon\Carbon;
 use RiotQuest\Client;
 
 /**
@@ -35,6 +36,16 @@ class MatchReference extends Collection
     public function getMatch()
     {
         return Client::match($this->region)->id($this->gameId);
+    }
+
+    /**
+     * Get relative time since this game was ended in ms
+     *
+     * @return int
+     */
+    public function getRelativeStartTimeMs()
+    {
+        return Carbon::now()->diffInMilliseconds((int) $this->timestamp);
     }
 
 }

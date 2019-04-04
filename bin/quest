@@ -18,6 +18,20 @@ use RiotQuest\Components\Console\Summoner\IdCommand as SummonerId;
 use RiotQuest\Components\Console\Summoner\UniqueCommand as SummonerUnique;
 use RiotQuest\Components\Console\Summoner\AccountCommand as SummonerAccount;
 
+use RiotQuest\Components\Console\Mastery\AllCommand as MasteryAll;
+use RiotQuest\Components\Console\Mastery\IdCommand as MasteryId;
+use RiotQuest\Components\Console\Mastery\ScoreCommand as MasteryScore;
+
+use RiotQuest\Components\Console\Champion\RotationCommand as ChampionRotation;
+
+use RiotQuest\Components\Console\League\IdCommand as LeagueId;
+use RiotQuest\Components\Console\League\ChallengerCommand as LeagueChallenger;
+use RiotQuest\Components\Console\League\MasterCommand as LeagueMaster;
+use RiotQuest\Components\Console\League\GrandmasterCommand as LeagueGrandmaster;
+use RiotQuest\Components\Console\League\PositionsCommand as LeaguePositions;
+
+use RiotQuest\Components\Console\Status\ShardCommand as StatusShard;
+
 $app = new Application();
 
 // Make commands
@@ -30,6 +44,20 @@ $app->add(new SummonerName());
 $app->add(new SummonerId());
 $app->add(new SummonerUnique());
 $app->add(new SummonerAccount());
+
+$app->add(new MasteryAll());
+$app->add(new MasteryId());
+$app->add(new MasteryScore());
+
+$app->add(new ChampionRotation());
+
+$app->add(new LeagueId());
+$app->add(new LeagueChallenger());
+$app->add(new LeagueMaster());
+$app->add(new LeagueGrandmaster());
+$app->add(new LeaguePositions());
+
+$app->add(new StatusShard());
 
 // CacheModel Flushes
 $app->add(new ClearCommand());

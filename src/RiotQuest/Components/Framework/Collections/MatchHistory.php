@@ -21,7 +21,7 @@ class MatchHistory extends Collection
      * Checks if given match is in this list
      *
      * @param $id
-     * @return bool
+     * @return MatchReference
      */
     public function getMatch($id)
     {
