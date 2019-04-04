@@ -113,7 +113,7 @@ class Summoner extends Collection
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\RiotQuestException
      */
-    public function getExternalCode()
+    public function getThirdPartyCode()
     {
         return Client::code($this->region)->id($this->id);
     }

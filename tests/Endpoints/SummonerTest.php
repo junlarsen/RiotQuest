@@ -19,6 +19,7 @@ class SummonerTest extends TestCase
      */
     public function testRequestByName()
     {
+        // Summoner Name
         $collection = Client::summoner('euw')->name('mm yes ok not ok');
 
         $this->assertInstanceOf(Summoner::class, $collection);
@@ -34,6 +35,7 @@ class SummonerTest extends TestCase
      */
     public function testRequestById()
     {
+        // Summoner ID
         $collection = Client::summoner('euw')->id('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
 
         $this->assertInstanceOf(Summoner::class, $collection);
@@ -49,6 +51,7 @@ class SummonerTest extends TestCase
      */
     public function testRequestByAccount()
     {
+        // Account ID
         $collection = Client::summoner('euw')->account('BfLfuDhG64nRnrs4f-mjHwWlk4iXTadzgixzxah_GzbI3Lk');
 
         $this->assertInstanceOf(Summoner::class, $collection);
@@ -64,6 +67,7 @@ class SummonerTest extends TestCase
      */
     public function testRequestByUnique()
     {
+        // PUUID
         $collection = Client::summoner('euw')->unique('d5YAQNue_6Ba49Ry1GunSgowlRAKLyOeM6zgpfQOK8uYm9HwT4LKU8zX4Dk9U40V0bNqHKQ9m2XG-w');
 
         $this->assertInstanceOf(Summoner::class, $collection);

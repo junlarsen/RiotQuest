@@ -36,6 +36,7 @@ class SpectatorTest extends TestCase
     public function testRequestActiveGame()
     {
         try {
+            // Summoner ID
             $collection = Client::spectator('euw')->active('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
             $this->assertInstanceOf(CurrentGameInfo::class, $collection);
         } catch (RiotQuestException $e) {

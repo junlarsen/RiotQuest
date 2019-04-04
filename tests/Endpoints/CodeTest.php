@@ -18,6 +18,7 @@ class CodeTest extends TestCase
      */
     public function testRequestCode()
     {
+        // Summoner ID
         $code = Client::code('euw')->id('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
 
         $this->assertTrue($code === null || gettype($code) === "string");

@@ -21,6 +21,7 @@ class MatchTest extends TestCase
      */
     public function testRequestSingleId()
     {
+        // Match ID
         $collection = Client::match('euw')->id(3982997035);
 
         $this->assertInstanceOf(Match::class, $collection);
@@ -36,6 +37,7 @@ class MatchTest extends TestCase
      */
     public function testRequestMatchList()
     {
+        // Account ID
         $collection = Client::match('euw')->list('BfLfuDhG64nRnrs4f-mjHwWlk4iXTadzgixzxah_GzbI3Lk');
 
         $this->assertInstanceOf(MatchHistory::class, $collection);
@@ -51,6 +53,7 @@ class MatchTest extends TestCase
      */
     public function testRequestTimeline()
     {
+        // Match ID
         $collection = Client::match('euw')->timeline(3982997035);
 
         $this->assertInstanceOf(MatchTimeline::class, $collection);

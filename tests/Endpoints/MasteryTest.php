@@ -20,6 +20,7 @@ class MasteryTest extends TestCase
      */
     public function testRequestAllMasteries()
     {
+        // Summoner ID
         $collection = Client::mastery('euw')->all('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
 
         $this->assertInstanceOf(ChampionMasteryList::class, $collection);
@@ -35,6 +36,7 @@ class MasteryTest extends TestCase
      */
     public function testRequestSingleMastery()
     {
+        // Summoner ID
         $collection = Client::mastery('euw')->id('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4', 1);
 
         $this->assertInstanceOf(ChampionMastery::class, $collection);
@@ -50,6 +52,7 @@ class MasteryTest extends TestCase
      */
     public function testRequestTotalScore()
     {
+        // Summoner ID
         $collection = Client::mastery('euw')->score('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
 
         $this->assertTrue(gettype($collection) === 'integer');
