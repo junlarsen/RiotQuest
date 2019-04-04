@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
 use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
 use RiotQuest\Components\Framework\Collections\FeaturedGames;
+use RiotQuest\Contracts\RiotQuestException;
 
 class SpectatorTest extends TestCase
 {
@@ -34,9 +35,13 @@ class SpectatorTest extends TestCase
      */
     public function testRequestActiveGame()
     {
-        $collection = Client::spectator('euw')->active('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
-
-        $this->assertTrue($collection === null || $collection instanceof CurrentGameInfo);
+        try {
+            $collection = Client::spectator('euw')->active('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
+            $this->assertInstanceOf(CurrentGameInfo::class, $collection);
+        } catch (RiotQuestException $e) {
+            // Caught 404 not found error, because user is not in game
+            $this->assertTrue(true);
+        }
     }
 
 }

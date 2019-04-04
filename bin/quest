@@ -30,7 +30,7 @@ use RiotQuest\Components\Console\League\MasterCommand as LeagueMaster;
 use RiotQuest\Components\Console\League\GrandmasterCommand as LeagueGrandmaster;
 use RiotQuest\Components\Console\League\PositionsCommand as LeaguePositions;
 
-use RiotQuest\Components\Console\League\ShardCommand as StatusShard;
+use RiotQuest\Components\Console\Status\ShardCommand as StatusShard;
 
 $app = new Application();
 

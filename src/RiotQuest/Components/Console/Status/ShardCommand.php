@@ -1,6 +1,6 @@
 <?php
 
-namespace RiotQuest\Components\Console\League;
+namespace RiotQuest\Components\Console\Status;
 
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Contracts\RiotQuestException;
