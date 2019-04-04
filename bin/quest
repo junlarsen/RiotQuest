@@ -30,6 +30,11 @@ use RiotQuest\Components\Console\League\MasterCommand as LeagueMaster;
 use RiotQuest\Components\Console\League\GrandmasterCommand as LeagueGrandmaster;
 use RiotQuest\Components\Console\League\PositionsCommand as LeaguePositions;
 
+use RiotQuest\Components\Console\Spectator\ActiveCommand as SpectatorActive;
+use RiotQuest\Components\Console\Spectator\FeaturedCommand as SpectatorFeatured;
+
+use RiotQuest\Components\Console\Code\IdCommand as CodeId;
+
 use RiotQuest\Components\Console\Status\ShardCommand as StatusShard;
 
 $app = new Application();
@@ -58,6 +63,11 @@ $app->add(new LeagueGrandmaster());
 $app->add(new LeaguePositions());
 
 $app->add(new StatusShard());
+
+$app->add(new SpectatorActive());
+$app->add(new SpectatorFeatured());
+
+$app->add(new CodeId());
 
 // CacheModel Flushes
 $app->add(new ClearCommand());
