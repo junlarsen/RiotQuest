@@ -84,7 +84,7 @@ class Match extends Template
      * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatch
      *
      * @param $id
-     * @return Match
+     * @return \RiotQuest\Components\Framework\Collections\Match
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException

@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use Carbon\Carbon;
+
 /**
  * Class Message
  *
@@ -20,6 +22,37 @@ namespace RiotQuest\Components\Framework\Collections;
 class Message extends Collection
 {
 
+    /**
+     * Get a translation by locale code
+     *
+     * @param $locale
+     * @return mixed
+     */
+    public function getTranslation($locale)
+    {
+        return $this->filter(function (Translation $translation) use ($locale) {
+            return $translation->locale === $locale;
+        })[$locale];
+    }
 
+    /**
+     * Get the Carbon interface for creation date
+     *
+     * @return Carbon|\Carbon\CarbonInterface
+     */
+    public function getCreationDate()
+    {
+        return Carbon::createFromTimestampMs($this->created_at);
+    }
+
+    /**
+     * Get the Carbon interface for last update time
+     *
+     * @return Carbon|\Carbon\CarbonInterface
+     */
+    public function getLastUpdateDate()
+    {
+        return Carbon::createFromTimestampMs($this->updated_at);
+    }
 
 }
