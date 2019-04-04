@@ -13,30 +13,6 @@ use RiotQuest\Components\Console\Make\StaticCommand;
 
 use RiotQuest\Components\Console\Cache\ClearCommand;
 
-use RiotQuest\Components\Console\Summoner\NameCommand as SummonerName;
-use RiotQuest\Components\Console\Summoner\IdCommand as SummonerId;
-use RiotQuest\Components\Console\Summoner\UniqueCommand as SummonerUnique;
-use RiotQuest\Components\Console\Summoner\AccountCommand as SummonerAccount;
-
-use RiotQuest\Components\Console\Mastery\AllCommand as MasteryAll;
-use RiotQuest\Components\Console\Mastery\IdCommand as MasteryId;
-use RiotQuest\Components\Console\Mastery\ScoreCommand as MasteryScore;
-
-use RiotQuest\Components\Console\Champion\RotationCommand as ChampionRotation;
-
-use RiotQuest\Components\Console\League\IdCommand as LeagueId;
-use RiotQuest\Components\Console\League\ChallengerCommand as LeagueChallenger;
-use RiotQuest\Components\Console\League\MasterCommand as LeagueMaster;
-use RiotQuest\Components\Console\League\GrandmasterCommand as LeagueGrandmaster;
-use RiotQuest\Components\Console\League\PositionsCommand as LeaguePositions;
-
-use RiotQuest\Components\Console\Spectator\ActiveCommand as SpectatorActive;
-use RiotQuest\Components\Console\Spectator\FeaturedCommand as SpectatorFeatured;
-
-use RiotQuest\Components\Console\Code\IdCommand as CodeId;
-
-use RiotQuest\Components\Console\Status\ShardCommand as StatusShard;
-
 $app = new Application();
 
 // Make commands
@@ -45,31 +21,35 @@ $app->add(new TemplatesCommand());
 $app->add(new StaticCommand());
 
 // API commands
-$app->add(new SummonerName());
-$app->add(new SummonerId());
-$app->add(new SummonerUnique());
-$app->add(new SummonerAccount());
+$app->add(new \RiotQuest\Components\Console\Summoner\NameCommand());
+$app->add(new \RiotQuest\Components\Console\Summoner\IdCommand());
+$app->add(new \RiotQuest\Components\Console\Summoner\UniqueCommand());
+$app->add(new \RiotQuest\Components\Console\Summoner\AccountCommand());
 
-$app->add(new MasteryAll());
-$app->add(new MasteryId());
-$app->add(new MasteryScore());
+$app->add(new \RiotQuest\Components\Console\Mastery\AllCommand());
+$app->add(new \RiotQuest\Components\Console\Mastery\IdCommand());
+$app->add(new \RiotQuest\Components\Console\Mastery\ScoreCommand());
 
-$app->add(new ChampionRotation());
+$app->add(new \RiotQuest\Components\Console\Champion\RotationCommand());
 
-$app->add(new LeagueId());
-$app->add(new LeagueChallenger());
-$app->add(new LeagueMaster());
-$app->add(new LeagueGrandmaster());
-$app->add(new LeaguePositions());
+$app->add(new \RiotQuest\Components\Console\League\IdCommand());
+$app->add(new \RiotQuest\Components\Console\League\ChallengerCommand());
+$app->add(new \RiotQuest\Components\Console\League\GrandmasterCommand());
+$app->add(new \RiotQuest\Components\Console\League\GrandmasterCommand());
+$app->add(new \RiotQuest\Components\Console\League\PositionsCommand());
 
-$app->add(new StatusShard());
+$app->add(new \RiotQuest\Components\Console\Status\ShardCommand());
 
-$app->add(new SpectatorActive());
-$app->add(new SpectatorFeatured());
+$app->add(new \RiotQuest\Components\Console\Spectator\ActiveCommand());
+$app->add(new \RiotQuest\Components\Console\Spectator\FeaturedCommand());
 
-$app->add(new CodeId());
+$app->add(new \RiotQuest\Components\Console\Match\IdCommand());
+$app->add(new \RiotQuest\Components\Console\Match\ListCommand());
+$app->add(new \RiotQuest\Components\Console\Match\TimelineCommand());
+
+$app->add(new \RiotQuest\Components\Console\Code\IdCommand());
 
 // CacheModel Flushes
-$app->add(new ClearCommand());
+$app->add(new Clear());
 
 $app->run();
