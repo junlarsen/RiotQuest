@@ -64,29 +64,5 @@ class Filesystem
         array_map('unlink', glob(static::$out['collections'] . '*.json'));
     }
 
-    /**
-     * Get from file in cache
-     *
-     * @param $path
-     * @return false|string
-     */
-    public static function getCacheFile($path)
-    {
-        @touch(__DIR__ . '/../../../../storage/cache/' . $path);
-        return file_get_contents(__DIR__ . '/../../../../storage/cache/' . $path);
-    }
-
-    /**
-     * Insert into file in cache
-     *
-     * @param $path
-     * @param $data
-     * @return bool|int
-     */
-    public static function putCacheFile($path, $data)
-    {
-        return file_put_contents(__DIR__ . '/../../../../storage/cache/' . $path, $data);
-    }
-
 }
 

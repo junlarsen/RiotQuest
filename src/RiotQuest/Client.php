@@ -12,8 +12,6 @@ use RiotQuest\Components\Framework\Client\Client as Module;
  * Provides helper method to essential usages
  * for the API.
  *
- * TODO: unit tests
- * TODO: cli
  * TODO: documentation
  *
  * @package RiotQuest\Support\Facades

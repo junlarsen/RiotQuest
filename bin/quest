@@ -50,6 +50,6 @@ $app->add(new \RiotQuest\Components\Console\Match\TimelineCommand());
 $app->add(new \RiotQuest\Components\Console\Code\IdCommand());
 
 // CacheModel Flushes
-$app->add(new Clear());
+$app->add(new ClearCommand());
 
 $app->run();
