@@ -3,9 +3,9 @@
 namespace RiotQuest\Components\Framework\Engine;
 
 use RiotQuest\Components\Framework\Cache\CacheModel;
+use RiotQuest\Components\Framework\Engine\Library;
 use RiotQuest\Contracts\RiotQuestException;
 use RiotQuest\Components\Framework\Client\Client;
-use RiotQuest\Components\Framework\Engine\Library;
 use GuzzleHttp\Client as HttpClient;
 
 /**
@@ -190,22 +190,58 @@ class Request
                     'http_errors' => false
                 ]
             );
-            $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
             Client::registerHit($request['region'], $request['name'], $request['use'], explode(':', $response->getHeader('X-Method-Rate-Limit')[0]));
-            $items = (array) json_decode($response->getBody()->getContents(), 1);
-            if (isset($items['status'])) {
+
+            // Work with the response
+            $items = (array)json_decode($response->getBody()->getContents(), 1);
+            if ($response->getStatusCode() >= 300 && !in_array($request['name'], Client::$config['HTTP_ERROR_EXCEPT'])) {
                 throw new RiotQuestException(json_encode($items));
             }
-            Client::getCache('request')->set($request['url'], json_encode($items), $request['ttl']);
-            return ($collection && RIOTQUEST_ENV === 'API')
-                ? Library::traverse($items, Library::loadTemplate($collection), $request['region'])
-                : (($collection)
-                    ? $items
-                    : $items[0] ?? null);
 
+            // using true switch here to match multiple cases
+            // TODO: add more fallbacks
+            switch (true) {
+                // if item should be cached
+                case (!in_array($request['name'], Client::$config['FORCE_CACHE_NONE'])):
+                    $this->saveToCache($request, $items);
+
+            }
+
+            return $this->finalize($request, $items);
         } else {
             throw new RiotQuestException("Rate Limit would be exceeded by making this call.");
         }
+    }
+
+    /**
+     * Save an item to the cache, whether the request resides permanently in cache or not
+     *
+     * @param $request
+     * @param $load
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    private function saveToCache($request, $load)
+    {
+        in_array($request['name'], Client::$config['FORCE_CACHE_PERMANENT'])
+            ? Client::getCache('request')->set($request['url'], json_encode($load))
+            : Client::getCache('request')->set($request['url'], json_encode($load), $request['ttl']);
+    }
+
+    /**
+     * Finalize the response
+     *
+     * @param $request
+     * @param $load
+     * @return mixed|null
+     */
+    private function finalize($request, $load)
+    {
+        $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
+        return ($collection && RIOTQUEST_ENV === 'API')
+            ? Library::traverse($load, Library::loadTemplate($collection), $request['region'])
+            : (($collection)
+                ? $load
+                : $load[0] ?? null);
     }
 
 }

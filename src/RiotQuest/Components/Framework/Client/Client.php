@@ -28,9 +28,26 @@ class Client
 {
 
     /**
-     * CacheProvider for caching. Must be PSR-16 compliant
+     * Rules for caching and throwing errors.
      *
      * @var array
+     */
+    public static $config = [
+        'HTTP_ERROR_EXCEPT' => [
+            'code.id'
+        ],
+        'FORCE_CACHE_PERMANENT' => [
+            'match.id', 'match.timeline'
+        ],
+        'FORCE_CACHE_NONE' => [
+            'code.id'
+        ]
+    ];
+
+    /**
+     * CacheProvider for caching. Must be PSR-16 compliant
+     *
+     * @var array                                                                                                           *
      */
     protected static $caches = [];
 
