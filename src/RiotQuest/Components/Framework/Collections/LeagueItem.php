@@ -40,4 +40,34 @@ class LeagueItem extends Collection
         return Client::summoner($this->region)->id($this->summonerId);
     }
 
+    /**
+     * Get the winrate for this player
+     *
+     * @return float|int
+     */
+    public function getWinrate()
+    {
+        return $this->wins / ($this->wins + $this->losses) * 100;
+    }
+
+    /**
+     * Get amount of games played
+     *
+     * @return int
+     */
+    public function getGamesPlayed()
+    {
+        return ($this->wins ?: 0) + ($this->losses ?: 0);
+    }
+
+    /**
+     * Determine whether this player is in a promotional series
+     *
+     * @return bool
+     */
+    public function isInMiniSeries()
+    {
+        return count($this->miniSeries) > 0;
+    }
+
 }

@@ -38,7 +38,7 @@ class LeaguePosition extends Collection
      */
     public function getWinrate()
     {
-        return $this['wins'] / ($this['wins'] + $this['losses']) * 100;
+        return $this->wins / ($this->wins + $this->losses) * 100;
     }
 
     /**
@@ -46,9 +46,9 @@ class LeaguePosition extends Collection
      *
      * @return string
      */
-    public function getLeagueName()
+    public function getFormattedName()
     {
-        return sprintf("%s %s %d LP", $this['tier'], $this['rank'], $this['leaguePoints']);
+        return sprintf("%s %s %d LP", $this->tier, $this->rank, $this->leaguePoints);
     }
 
     /**
@@ -58,7 +58,7 @@ class LeaguePosition extends Collection
      */
     public function getGamesPlayed()
     {
-        return ($this['wins'] ?: 0) + ($this['losses'] ?: 0);
+        return ($this->wins ?: 0) + ($this->losses ?: 0);
     }
 
     /**
@@ -73,6 +73,16 @@ class LeaguePosition extends Collection
     public function getSummoner()
     {
         return Client::summoner( $this->region)->id($this->summonerId);
+    }
+
+    /**
+     * Determine whether this player is in a promotional series
+     *
+     * @return bool
+     */
+    public function isInMiniSeries()
+    {
+        return count($this->miniSeries) > 0;
     }
 
 }

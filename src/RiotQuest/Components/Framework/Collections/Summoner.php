@@ -132,4 +132,14 @@ class Summoner extends Collection
         return count($this->getRanked()->getRankedQueues()) === 0;
     }
 
+    /**
+     * Determines whether the player gets to use the low-level or normal rotation
+     *
+     * @return bool
+     */
+    public function isAboveNewPlayerThreshold()
+    {
+        return $this->summonerLevel > 10;
+    }
+
 }
