@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\Framework\Utils\Champion;
 use RiotQuest\Components\Framework\Utils\Game;
 
 /**
@@ -35,6 +37,26 @@ class MatchParticipant extends Collection
     public function getTeamName()
     {
         return Game::translateTeam($this->teamId);
+    }
+
+    /**
+     * Get the champion icon URL
+     *
+     * @return string
+     */
+    public function getChampionIcon()
+    {
+        return Dragon::getChampionSquare($this->championId);
+    }
+
+    /**
+     * Get the champion name
+     *
+     * @return string
+     */
+    public function getChampionName()
+    {
+        return Champion::getChampionName($this->championId);
     }
 
 }

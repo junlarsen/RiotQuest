@@ -4,6 +4,8 @@ namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
 use RiotQuest\Client;
+use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\Framework\Utils\Champion;
 
 /**
  * Class MatchReference
@@ -23,6 +25,26 @@ use RiotQuest\Client;
  */
 class MatchReference extends Collection
 {
+
+    /**
+     * Get champion icon URL
+     *
+     * @return string
+     */
+    public function getChampionIcon()
+    {
+        return Dragon::getChampionSquare($this->champion);
+    }
+
+    /**
+     * Get champion name
+     *
+     * @return string
+     */
+    public function getChampionName()
+    {
+        return Champion::getChampionName($this->champion);
+    }
 
     /**
      * Get the current match for this reference
