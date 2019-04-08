@@ -46,7 +46,7 @@ class Player extends Collection
      */
     public function getSummoner()
     {
-        return Client::summoner($this->region)->account($this->accountId);
+        return Client::summoner($this->region)->id($this->summonerId);
     }
 
 }

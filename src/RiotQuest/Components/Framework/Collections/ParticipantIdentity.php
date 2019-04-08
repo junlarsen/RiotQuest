@@ -15,6 +15,4 @@ namespace RiotQuest\Components\Framework\Collections;
 class ParticipantIdentity extends Collection
 {
 
-
-
 }

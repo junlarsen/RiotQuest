@@ -17,6 +17,16 @@ namespace RiotQuest\Components\Framework\Collections;
 class MiniSeries extends Collection
 {
 
-
+    /**
+     * Turn the WLN format into true, false and nulls
+     *
+     * @return array
+     */
+    public function getParsedSeries()
+    {
+        return array_map(function ($e) {
+            return $e == 'W' ? true : ($e == 'L' ? false : null);
+        }, str_split($this->progress));
+    }
 
 }

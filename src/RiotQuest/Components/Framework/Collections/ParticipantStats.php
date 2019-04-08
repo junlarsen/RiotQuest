@@ -125,11 +125,98 @@ namespace RiotQuest\Components\Framework\Collections;
  * @property int $playerScore8
  * @property int $playerScore9
  *
+ * @todo runes reforged names
  * @package RiotQuest\Components\Framework\Collections
  */
 class ParticipantStats extends Collection
 {
 
+    /**
+     * Gets amount of multikills a player had
+     *
+     * @return int
+     */
+    public function getMultiKills()
+    {
+        return $this->unrealKills + $this->pentaKills + $this->quadraKills + $this->tripleKills + $this->doubleKills;
+    }
 
+    /**
+     * Return how much of the earned gold a user spent
+     *
+     * @return float|int
+     */
+    public function getGoldUsage()
+    {
+        return ($this->goldSpent / $this->goldEarned) * 100;
+    }
+
+    /**
+     * Get the total damage ddealt to champions
+     *
+     * @return array
+     */
+    public function getDamageToChampions()
+    {
+        return [
+            'total' => $this->totalDamageDealtToChampions,
+            'magic' => $this->magicDamageDealtToChampions,
+            'physical' => $this->physicalDamageDealtToChampions,
+            'true' => $this->trueDamageDealtToChampions
+        ];
+    }
+
+    /**
+     * Get the total damage dealt amounts
+     *
+     * @return array
+     */
+    public function getDamageAmounts()
+    {
+        return [
+            'total' => $this->totalDamageDealt,
+            'magic' => $this->magicDamageDealt,
+            'physical' => $this->physicalDamageDealt,
+            'true' => $this->trueDamageDealt
+        ];
+    }
+
+    /**
+     * Get player KDA as string
+     *
+     * @return string
+     */
+    public function getKDAString()
+    {
+        return "$this->kills / $this->deaths / $this->assists";
+    }
+
+    /**
+     * Get player KDA as an array
+     *
+     * @return array
+     */
+    public function getKDAArray()
+    {
+        return [$this->kills, $this->deaths, $this->assists];
+    }
+
+    /**
+     * Get the items as an array instead of indexing each property
+     *
+     * @return array
+     */
+    public function getItemList()
+    {
+        return [
+            $this->item0 ?? 0,
+            $this->item1 ?? 0,
+            $this->item2 ?? 0,
+            $this->item3 ?? 0,
+            $this->item4 ?? 0,
+            $this->item5 ?? 0,
+            $this->item6 ?? 0
+        ];
+    }
 
 }

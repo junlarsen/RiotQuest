@@ -5,6 +5,7 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class Mastery
  *
+ * @deprecated
  * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatch
  *
  * @property int $masteryId The mastery (old rune system) id

@@ -14,6 +14,14 @@ namespace RiotQuest\Components\Framework\Collections;
 class MatchReferenceList extends Collection
 {
 
-
+    /**
+     * Count total games in stack
+     *
+     * @return int
+     */
+    public function getTotalGames()
+    {
+        return count($this->stack);
+    }
 
 }

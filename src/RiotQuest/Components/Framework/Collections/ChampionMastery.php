@@ -3,6 +3,7 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Components\Framework\Utils\Champion;
@@ -54,11 +55,31 @@ class ChampionMastery extends Collection
     /**
      * Get Carbon instance for last playtime
      *
-     * @return Carbon|\Carbon\CarbonInterface
+     * @return Carbon|CarbonInterface
      */
     public function getLastPlayed()
     {
         return Carbon::createFromTimestamp($this->lastPlayTime);
+    }
+
+    /**
+     * Checks whether chest has been granted
+     *
+     * @return bool
+     */
+    public function isChestGranted()
+    {
+        return (bool) $this->chestGranted;
+    }
+
+    /**
+     * Gets the champion name for this mastery record
+     *
+     * @return string
+     */
+    public function getChampionName()
+    {
+        return Champion::getChampionName($this->championId);
     }
 
 }

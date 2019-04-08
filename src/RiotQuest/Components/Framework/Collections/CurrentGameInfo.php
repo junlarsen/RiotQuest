@@ -56,4 +56,14 @@ class CurrentGameInfo extends Collection
         return $this->observers->encryptionKey;
     }
 
+    /**
+     * Get the banned champion
+     *
+     * @return array
+     */
+    public function getBannedChampionIds()
+    {
+        return $this->bannedChampions->getListIds();
+    }
+
 }

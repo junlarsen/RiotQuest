@@ -4,6 +4,7 @@ namespace RiotQuest\Components\Framework\Collections;
 
 use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Components\Framework\Utils\Champion;
 use RiotQuest\Components\Framework\Utils\Game;
 
 /**
@@ -21,6 +22,8 @@ use RiotQuest\Components\Framework\Utils\Game;
  * @property double $spell2Id Spell slot two ID
  * @property double $teamId Team ID for player
  * @property string $summonerId Summoner ID of player
+ *
+ * @todo spell icons
  *
  * @package RiotQuest\Components\Framework\Collections
  */
@@ -59,6 +62,16 @@ class CurrentGameParticipant extends Collection
     public function getSummonerIcon()
     {
         return Dragon::getProfileIcon($this->profileIconId);
+    }
+
+    /**
+     * Get champion name by its id
+     *
+     * @return string
+     */
+    public function getChampionName()
+    {
+        return Champion::getChampionName($this->championId);
     }
 
     /**

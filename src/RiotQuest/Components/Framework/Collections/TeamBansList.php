@@ -14,6 +14,16 @@ namespace RiotQuest\Components\Framework\Collections;
 class TeamBansList extends Collection
 {
 
-
+    /**
+     * Get a list of banned champion ids
+     *
+     * @return array
+     */
+    public function getBannedIds()
+    {
+        return $this->map(function (TeamBans $e) {
+            return $e->championId;
+        });
+    }
 
 }

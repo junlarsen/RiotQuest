@@ -3,6 +3,7 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 /**
  * Class FeaturedGameInfo
@@ -29,11 +30,21 @@ class FeaturedGameInfo extends Collection
     /**
      * Get Carbon instance for start time
      *
-     * @return Carbon|\Carbon\CarbonInterface
+     * @return Carbon|CarbonInterface
      */
     public function getStartTime()
     {
         return Carbon::createFromTimestamp($this->gameStartTime);
+    }
+
+    /**
+     * Get relative start time
+     *
+     * @return int
+     */
+    public function getRelativeStartTimeMs()
+    {
+        return Carbon::now()->diffInMilliseconds(Carbon::createFromTimestampMs($this->gameStartTime));
     }
 
     /**
@@ -44,6 +55,16 @@ class FeaturedGameInfo extends Collection
     public function getObserverKey()
     {
         return $this->observers->encryptionKey;
+    }
+
+    /**
+     * Get the banned champion
+     *
+     * @return array
+     */
+    public function getBannedChampionIds()
+    {
+        return $this->bannedChampions->getListIds();
     }
 
 }

@@ -14,6 +14,14 @@ namespace RiotQuest\Components\Framework\Collections;
 class MatchEventList extends Collection
 {
 
-
+    /**
+     * Get amounts of events in stack
+     *
+     * @return int
+     */
+    public function getEventCount()
+    {
+        return count($this->stack);
+    }
 
 }

@@ -2,6 +2,10 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\Framework\Utils\Champion;
+use RiotQuest\Components\Framework\Utils\Game;
+
 /**
  * Class MatchParticipant
  *
@@ -18,11 +22,41 @@ namespace RiotQuest\Components\Framework\Collections;
  * @property string $highestAchievedSeasonTier Highest tier achieved this season
  * @property int $championId Champion ID of player
  *
+ * @todo spell icons
+ *
  * @package RiotQuest\Components\Framework\Collections
  */
 class MatchParticipant extends Collection
 {
 
+    /**
+     * Get the BLUE or RED name of team
+     *
+     * @return string
+     */
+    public function getTeamName()
+    {
+        return Game::translateTeam($this->teamId);
+    }
 
+    /**
+     * Get the champion icon URL
+     *
+     * @return string
+     */
+    public function getChampionIcon()
+    {
+        return Dragon::getChampionSquare($this->championId);
+    }
+
+    /**
+     * Get the champion name
+     *
+     * @return string
+     */
+    public function getChampionName()
+    {
+        return Champion::getChampionName($this->championId);
+    }
 
 }

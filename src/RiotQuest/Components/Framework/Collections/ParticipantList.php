@@ -14,6 +14,29 @@ namespace RiotQuest\Components\Framework\Collections;
 class ParticipantList extends Collection
 {
 
+    /**
+     * Get all the summoner objects in this list
+     *
+     * @return Collection
+     */
+    public function getSummoners()
+    {
+        return new Collection($this->map(function (Participant $e) {
+            return $e->getSummoner();
+        }));
+    }
 
+    /**
+     * Search for summoner name
+     *
+     * @param $name
+     * @return string
+     */
+    public function getWhereName($name)
+    {
+        return array_values($this->filter(function (Participant $e) use ($name) {
+            return $e->summonerName == $name;
+        }))[0];
+    }
 
 }
