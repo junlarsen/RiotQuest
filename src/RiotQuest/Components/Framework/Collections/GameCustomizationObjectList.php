@@ -14,6 +14,16 @@ namespace RiotQuest\Components\Framework\Collections;
 class GameCustomizationObjectList extends Collection
 {
 
-
+    /**
+     * Get list of categories
+     *
+     * @return array
+     */
+    public function getCategories()
+    {
+        return $this->map(function (GameCustomizationObject $e) {
+            return $e->category;
+        });
+    }
 
 }
