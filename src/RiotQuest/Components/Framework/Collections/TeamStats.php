@@ -29,6 +29,14 @@ namespace RiotQuest\Components\Framework\Collections;
 class TeamStats extends Collection
 {
 
-
+    /**
+     * Returns the team win result as a bool
+     *
+     * @return bool
+     */
+    public function getWinBoolean()
+    {
+        return $this->win == 'WIN';
+    }
 
 }
