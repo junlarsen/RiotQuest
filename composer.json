@@ -1,7 +1,7 @@
 {
   "name": "supergrecko/riot-quest",
   "description": "Riot Games API Framework",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "type": "library",
   "autoload": {
     "psr-4": {

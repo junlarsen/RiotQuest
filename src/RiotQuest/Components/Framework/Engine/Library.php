@@ -69,6 +69,7 @@ class Library
         'na1' => 'na1',
         'north-america' => 'na1',
         'na-og' => 'na',
+        'na-old' => 'na',
 
         'oce' => 'oc1',
         'oc1' => 'oc1',
