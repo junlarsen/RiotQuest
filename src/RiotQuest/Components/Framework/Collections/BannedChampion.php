@@ -31,6 +31,16 @@ class BannedChampion extends Collection
     }
 
     /**
+     * Get champion name for banned champion
+     *
+     * @return string
+     */
+    public function getChampionName()
+    {
+        return Champion::getChampionName($this->championId);
+    }
+
+    /**
      * Get team name ( BLUE or RED )
      *
      * @return string
