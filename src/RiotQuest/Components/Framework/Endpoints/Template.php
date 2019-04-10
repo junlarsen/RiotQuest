@@ -33,7 +33,7 @@ class Template
      * @param $region
      * @param $ttl
      */
-    public function __construct($region, $ttl)
+    public function __construct(string $region, int $ttl)
     {
         $this->region = $region;
         $this->ttl = $ttl;

@@ -20,7 +20,7 @@ class ChampionMasteryList extends Collection
      * @param $id
      * @return ChampionMastery
      */
-    public function findChampion($id)
+    public function findChampion(int $id)
     {
         return array_values($this->filter(function (ChampionMastery $e) use ($id) {
             return $e->championId == $id;
@@ -33,7 +33,7 @@ class ChampionMasteryList extends Collection
      * @param $level
      * @return Collection
      */
-    public function getWhereLevelEquals($level)
+    public function getWhereLevelEquals(int $level)
     {
         return new Collection(array_values($this->filter(function (ChampionMastery $e) use ($level) {
             return $e->championLevel == $level;
@@ -46,7 +46,7 @@ class ChampionMasteryList extends Collection
      * @param $level
      * @return Collection
      */
-    public function getWhereLevelMoreThan($level)
+    public function getWhereLevelMoreThan(int $level)
     {
         return new Collection(array_values($this->filter(function (ChampionMastery $e) use ($level) {
             return $e->championLevel > $level;
@@ -59,7 +59,7 @@ class ChampionMasteryList extends Collection
      * @param $level
      * @return Collection
      */
-    public function getWhereLevelLessThan($level)
+    public function getWhereLevelLessThan(int $level)
     {
         return new Collection(array_values($this->filter(function (ChampionMastery $e) use ($level) {
             return $e->championLevel < $level;
@@ -72,7 +72,7 @@ class ChampionMasteryList extends Collection
      * @param $points
      * @return Collection
      */
-    public function getWherePointsMoreThan($points)
+    public function getWherePointsMoreThan(int $points)
     {
         return new Collection(array_values($this->filter(function (ChampionMastery $e) use ($points) {
             return $e->championPoints > $points;
@@ -85,7 +85,7 @@ class ChampionMasteryList extends Collection
      * @param $points
      * @return Collection
      */
-    public function getWherePointsLessThan($points)
+    public function getWherePointsLessThan(int $points)
     {
         return new Collection(array_values($this->filter(function (ChampionMastery $e) use ($points) {
             return $e->championPoints < $points;

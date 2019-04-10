@@ -24,7 +24,7 @@ class League extends Collection
      * @param $id
      * @return LeagueItem
      */
-    public function getPlayerWhereId($id)
+    public function getPlayerWhereId(string $id)
     {
         return array_values($this->map(function (LeagueItem $leagueItem) use ($id) {
             return $leagueItem->summonerId == $id;

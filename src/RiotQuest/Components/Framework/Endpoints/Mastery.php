@@ -24,9 +24,9 @@ class Mastery extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function all($id)
+    public function all(string $id)
     {
         return Request::make(['mastery', __FUNCTION__])
             ->useStandard()
@@ -47,9 +47,9 @@ class Mastery extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function id($id, $champion)
+    public function id(string $id, $champion)
     {
         return Request::make(['mastery', __FUNCTION__])
             ->useStandard()
@@ -69,9 +69,9 @@ class Mastery extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function score($id)
+    public function score(string $id)
     {
         return Request::make(['mastery', __FUNCTION__])
             ->useStandard()

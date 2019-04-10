@@ -22,9 +22,9 @@ class Summoner extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function account($id)
+    public function account(string $id)
     {
         return Request::make(['summoner', __FUNCTION__])
             ->useStandard()
@@ -44,9 +44,9 @@ class Summoner extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function name($id)
+    public function name(string $id)
     {
         return Request::make(['summoner', __FUNCTION__])
             ->useStandard()
@@ -66,9 +66,9 @@ class Summoner extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function unique($id)
+    public function unique(string $id)
     {
         return Request::make(['summoner', __FUNCTION__])
             ->useStandard()
@@ -88,9 +88,9 @@ class Summoner extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function id($id)
+    public function id(string $id)
     {
         return Request::make(['summoner', __FUNCTION__])
             ->useStandard()

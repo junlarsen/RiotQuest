@@ -8,7 +8,6 @@ require __DIR__ . '/../vendor/autoload.php';
 use Symfony\Component\Console\Application;
 
 use RiotQuest\Components\Console\Make\DocsCommand;
-use RiotQuest\Components\Console\Make\TemplatesCommand;
 use RiotQuest\Components\Console\Make\StaticCommand;
 
 use RiotQuest\Components\Console\Cache\ClearCommand;
@@ -17,7 +16,6 @@ $app = new Application();
 
 // Make commands
 $app->add(new DocsCommand());
-$app->add(new TemplatesCommand());
 $app->add(new StaticCommand());
 
 // API commands

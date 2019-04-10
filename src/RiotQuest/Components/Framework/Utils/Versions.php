@@ -3,6 +3,7 @@
 namespace RiotQuest\Components\Framework\Utils;
 
 use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Contracts\LeagueException;
 
 class Versions
 {
@@ -19,8 +20,9 @@ class Versions
      *
      * @return string
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws LeagueException
      */
-    public static function current(): string
+    public static function current()
     {
         if (!static::$current) {
             if (!Client::getCache()->has('riotquest.framework.version')) {

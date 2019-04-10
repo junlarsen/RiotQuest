@@ -38,7 +38,7 @@ class Token
      * @param $type
      * @param $limits
      */
-    public function __construct($key, $type, $limits)
+    public function __construct(string $key, string $type, string $limits)
     {
         $this->type = $type;
         $this->key = $key;

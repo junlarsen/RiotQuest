@@ -2,9 +2,11 @@
 
 namespace RiotQuest\Components\Framework\Engine;
 
-use RiotQuest\Contracts\RiotQuestException;
+use RiotQuest\Contracts\APIException;
+use RiotQuest\Contracts\LeagueException;
 use RiotQuest\Components\Framework\Client\Client;
 use GuzzleHttp\Client as HttpClient;
+use RiotQuest\Contracts\ParameterException;
 
 /**
  * Class Request
@@ -50,7 +52,7 @@ class Request
      * @param $parent
      * @return Request
      */
-    public static function make($parent): self
+    public static function make(array $parent): self
     {
         $me = new static;
         $me->vars['name'] = implode('.', $parent);
@@ -86,7 +88,7 @@ class Request
      * @param $method
      * @return $this
      */
-    public function setMethod($method): self
+    public function setMethod(string $method): self
     {
         $this->vars['method'] = $method;
         return $this;
@@ -98,7 +100,7 @@ class Request
      * @param $destination
      * @return $this
      */
-    public function setDestination($destination): self
+    public function setDestination(string $destination): self
     {
         $this->vars['dest'] = $destination;
         return $this;
@@ -110,7 +112,7 @@ class Request
      * @param $arguments
      * @return $this
      */
-    public function setArguments($arguments): self
+    public function setArguments(array $arguments = []): self
     {
         $this->vars['args'] = $arguments;
         return $this;
@@ -120,12 +122,12 @@ class Request
      * Build the request from its own properties
      *
      * @return $this
-     * @throws RiotQuestException
+     * @throws LeagueException
      */
-    public function compile(): self
+    public function compile()
     {
         if (!($this->vars['region'] = $this->vars['args']['region'] = Library::resolveRegion($this->vars['args']['region']))) {
-            throw new RiotQuestException('ERROR: Specified region could not be resolved.');
+            throw new ParameterException('ERROR: Specified region could not be resolved.');
         }
         $this->vars['url'] = Library::replace($this->vars['dest'], $this->vars['args']);
         return $this;
@@ -135,7 +137,7 @@ class Request
      * Sends the request which has been produced
      *
      * @return array|mixed
-     * @throws RiotQuestException
+     * @throws LeagueException
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
@@ -154,8 +156,9 @@ class Request
      * @param $request
      * @return mixed
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws LeagueException
      */
-    private function completeFromCache($request)
+    private function completeFromCache(array $request)
     {
         $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
         $items = json_decode(Client::getCache('request')->get($request['url']), 1);
@@ -171,11 +174,11 @@ class Request
      *
      * @param $request
      * @return array|mixed
-     * @throws RiotQuestException
+     * @throws LeagueException
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    private function completeFromApi($request)
+    private function completeFromApi(array $request)
     {
         if (Client::isHittable($request['region'], $request['name'], $request['use'])) {
             $response = (new HttpClient())->request($request['method'], $request['url'],
@@ -193,7 +196,7 @@ class Request
             // Work with the response
             $items = (array)json_decode($response->getBody()->getContents(), 1);
             if ($response->getStatusCode() >= 300 && !in_array($request['name'], Client::$config['HTTP_ERROR_EXCEPT'])) {
-                throw new RiotQuestException(json_encode($items));
+                throw new APIException("API Error! Status Code:" . $response->getStatusCode(), $response->getStatusCode(), null, $items);
             }
 
             // using true switch here to match multiple cases
@@ -207,7 +210,7 @@ class Request
 
             return $this->finalize($request, $items);
         } else {
-            throw new RiotQuestException("Rate Limit would be exceeded by making this call.");
+            throw new APIException("Rate Limit would be exceeded by making this call.");
         }
     }
 
@@ -217,8 +220,9 @@ class Request
      * @param $request
      * @param $load
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws LeagueException
      */
-    private function saveToCache($request, $load)
+    private function saveToCache(array $request, $load)
     {
         in_array($request['name'], Client::$config['FORCE_CACHE_PERMANENT'])
             ? Client::getCache('request')->set($request['url'], json_encode($load))
@@ -232,7 +236,7 @@ class Request
      * @param $load
      * @return mixed|null
      */
-    private function finalize($request, $load)
+    private function finalize(array $request, $load)
     {
         $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
         return ($collection && RIOTQUEST_ENV === 'API')

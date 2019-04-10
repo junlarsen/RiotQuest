@@ -28,7 +28,7 @@ class Message extends Collection
      * @param $locale
      * @return mixed
      */
-    public function getTranslation($locale)
+    public function getTranslation(string $locale)
     {
         return $this->filter(function (Translation $translation) use ($locale) {
             return $translation->locale === $locale;

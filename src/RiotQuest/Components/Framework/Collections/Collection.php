@@ -48,7 +48,7 @@ class Collection implements
      * @param array $stack
      * @param mixed $region
      */
-    public function __construct($stack = [], $region = null)
+    public function __construct($stack = [], string $region = null)
     {
         $this->stack = $stack;
         $this->region = $region;
@@ -60,7 +60,7 @@ class Collection implements
      * @param $region
      * @return void
      */
-    public function setRegion($region)
+    public function setRegion(string $region)
     {
         $this->region = $region;
     }
@@ -94,7 +94,7 @@ class Collection implements
      * @param array $stack
      * @return Collection
      */
-    public function merge($stack = [])
+    public function merge(array $stack = [])
     {
         return new static(array_merge($this->stack, $stack));
     }
@@ -183,7 +183,7 @@ class Collection implements
      * @param int $recursive
      * @return int
      */
-    public function count($recursive = 0)
+    public function count(int $recursive = 0)
     {
         return \count($this->stack, $recursive);
     }

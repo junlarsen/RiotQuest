@@ -8,8 +8,6 @@ use RiotQuest\Components\Framework\Client\Client;
 class Manager
 {
 
-    private $limits = [];
-
     /**
      * Cache namespace for requests
      *
@@ -28,13 +26,14 @@ class Manager
     /**
      * Registers an API call to the cache
      *
+     * @todo refactor
      * @param $region
      * @param string $endpoint
      * @param string $key
      * @param array $limits
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function registerCall($region, $endpoint = 'default', $key = 'standard', $limits = [1, 5])
+    public function registerCall(string $region, string $endpoint = 'default', string $key = 'standard', array $limits = [1, 5])
     {
         $ref = implode('.', [$key, $region, $endpoint]);
         $now = json_decode($this->cache->get($ref), 1);
@@ -55,7 +54,7 @@ class Manager
      * @return bool
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function canRequest($region, $endpoint = 'default', $key = 'standard')
+    public function canRequest(string $region, string $endpoint = 'default', string $key = 'standard')
     {
         $ref = implode('.', [$key, $region, $endpoint]);
         if ($this->cache->has($ref)) {

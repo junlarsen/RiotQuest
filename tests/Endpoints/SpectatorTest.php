@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
 use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
 use RiotQuest\Components\Framework\Collections\FeaturedGames;
-use RiotQuest\Contracts\RiotQuestException;
+use RiotQuest\Contracts\LeagueException;
 
 class SpectatorTest extends TestCase
 {
@@ -17,7 +17,7 @@ class SpectatorTest extends TestCase
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function testRequestFeaturedGames()
     {
@@ -31,7 +31,7 @@ class SpectatorTest extends TestCase
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function testRequestActiveGame()
     {
@@ -39,7 +39,7 @@ class SpectatorTest extends TestCase
             // Summoner ID
             $collection = Client::spectator('euw')->active('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
             $this->assertInstanceOf(CurrentGameInfo::class, $collection);
-        } catch (RiotQuestException $e) {
+        } catch (LeagueException $e) {
             // Caught 404 not found error, because user is not in game
             $this->assertTrue(true);
         }
