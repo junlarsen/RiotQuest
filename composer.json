@@ -28,7 +28,7 @@
     "post-install-cmd": "cd bin && php quest make:static en_US && php quest make:templates"
   },
   "prefer-stable": true,
-  "minimum-stability": "rc",
+  "minimum-stability": "RC",
   "bin": [
     "bin/quest"
   ]
