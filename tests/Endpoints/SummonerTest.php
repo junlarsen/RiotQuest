@@ -15,7 +15,7 @@ class SummonerTest extends TestCase
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function testRequestByName()
     {
@@ -31,7 +31,7 @@ class SummonerTest extends TestCase
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function testRequestById()
     {
@@ -47,7 +47,7 @@ class SummonerTest extends TestCase
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function testRequestByAccount()
     {
@@ -63,7 +63,7 @@ class SummonerTest extends TestCase
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function testRequestByUnique()
     {

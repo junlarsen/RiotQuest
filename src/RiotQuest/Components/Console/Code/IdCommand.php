@@ -3,7 +3,7 @@
 namespace RiotQuest\Components\Console\Code;
 
 use RiotQuest\Components\Framework\Client\Client;
-use RiotQuest\Contracts\RiotQuestException;
+use RiotQuest\Contracts\ConsoleException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,7 +28,7 @@ class IdCommand extends Command
             $out = Client::code($input->getArgument('region'))->id($input->getArgument('id'));
             $output->write(json_encode($out));
         } else {
-            throw new RiotQuestException("App needs to be loaded using Environment to use RiotQuest from CLI.");
+            throw new ConsoleException("App needs to be loaded using Environment to use RiotQuest from CLI.");
         }
     }
 

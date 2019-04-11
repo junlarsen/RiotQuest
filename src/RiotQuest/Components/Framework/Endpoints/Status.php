@@ -22,7 +22,7 @@ class Status extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function shard()
     {

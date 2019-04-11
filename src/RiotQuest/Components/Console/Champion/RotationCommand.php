@@ -3,7 +3,7 @@
 namespace RiotQuest\Components\Console\Champion;
 
 use RiotQuest\Components\Framework\Client\Client;
-use RiotQuest\Contracts\RiotQuestException;
+use RiotQuest\Contracts\ConsoleException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,7 +27,7 @@ class RotationCommand extends Command
             $out = Client::champion($input->getArgument('region'))->rotation();
             $output->write(json_encode($out));
         } else {
-            throw new RiotQuestException("App needs to be loaded using Environment to use RiotQuest from CLI.");
+            throw new ConsoleException("App needs to be loaded using Environment to use RiotQuest from CLI.");
         }
     }
 

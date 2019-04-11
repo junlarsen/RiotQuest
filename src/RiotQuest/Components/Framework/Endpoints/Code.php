@@ -22,9 +22,9 @@ class Code extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function id($id)
+    public function id(string $id)
     {
         return Request::make(['code', __FUNCTION__])
             ->useStandard()

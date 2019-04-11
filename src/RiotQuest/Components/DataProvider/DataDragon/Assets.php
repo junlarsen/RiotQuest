@@ -2,8 +2,8 @@
 
 namespace RiotQuest\Components\DataProvider\DataDragon;
 
-use RiotQuest\Components\Framework\Collections\Collection;
 use RiotQuest\Components\Framework\Utils\Versions;
+use RiotQuest\Contracts\LeagueException;
 
 class Assets
 {
@@ -20,9 +20,7 @@ class Assets
      *
      * @var array
      */
-    public static $loaded = [
-
-    ];
+    public static $loaded = [];
 
     /**
      * Locale to pull data from
@@ -81,6 +79,7 @@ class Assets
      * Bootstrapper
      *
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws LeagueException
      */
     public static function enable()
     {

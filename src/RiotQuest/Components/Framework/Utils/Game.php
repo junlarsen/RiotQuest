@@ -11,7 +11,7 @@ class Game
      * @param $id
      * @return string
      */
-    public static function translateTeam($id)
+    public static function translateTeam(int $id)
     {
         return $id === 100 ? 'BLUE' : 'RED';
     }

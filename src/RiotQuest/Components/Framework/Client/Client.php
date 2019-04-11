@@ -15,6 +15,8 @@ use RiotQuest\Components\Framework\Endpoints\Spectator;
 use RiotQuest\Components\Framework\Endpoints\Status;
 use RiotQuest\Components\Framework\Endpoints\Summoner;
 use Psr\SimpleCache\CacheInterface;
+use RiotQuest\Contracts\LeagueException;
+use RiotQuest\Contracts\ParameterException;
 
 /**
  * Class Client
@@ -81,7 +83,8 @@ class Client
      * doesn't interfere with your program until you actually
      * load being using it.
      *
-     * @param mixed ...$keys
+     * @param Token ...$keys
+     * @throws ParameterException
      */
     public static function initialize(...$keys)
     {
@@ -90,10 +93,18 @@ class Client
             'request' => new RequestModel(),
             'limits' => new AutoLimitModel()
         ];
-        foreach ($keys as $key) {
-            static::$keys[$key->getType()] = $key;
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                if ($key instanceof Token) {
+                    static::$keys[$key->getType()] = $key;
+                } else {
+                    throw new ParameterException("The API key must be an instance of the " . Token::class . " class. (" . gettype($key) . " passed.)");
+                }
+            }
+            static::$manager = new Manager();
+        } else {
+            throw new ParameterException("You must provide at least one API key to this function.");
         }
-        static::$manager = new Manager();
     }
 
     /**
@@ -115,7 +126,7 @@ class Client
      * @param $key
      * @return Token
      */
-    public static function loadKeyFromEnv($key)
+    public static function loadKeyFromEnv(string $key)
     {
         return new Token(getenv("RIOTQUEST_{$key}_KEY"), $key, getenv("RIOTQUEST_{$key}_LIMIT"));
     }
@@ -134,7 +145,7 @@ class Client
      * @param $key
      * @return array
      */
-    public static function getLimits($key)
+    public static function getLimits(string $key)
     {
         return static::$keys[$key] ? static::$keys[$key]->getLimits() : [];
     }
@@ -148,7 +159,7 @@ class Client
      * @param $limits
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function registerHit($region, $endpoint, $key, $limits = 'default')
+    public static function registerHit(string $region, string $endpoint, string $key, $limits = 'default')
     {
         static::getManager()->registerCall($region, $endpoint, $key, $limits);
         static::getManager()->registerCall($region, 'default', $key, static::$keys[strtoupper($key)]->getLimits());
@@ -163,7 +174,7 @@ class Client
      * @return bool
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function isHittable($region, $endpoint, $key)
+    public static function isHittable(string $region, string $endpoint, string $key)
     {
         return static::getManager()->canRequest($region, $endpoint, strtolower($key)) && static::getManager()->canRequest($region, 'default', $key);
     }
@@ -173,20 +184,30 @@ class Client
      *
      * @param string $key
      * @return CacheInterface
+     * @throws LeagueException
      */
-    public static function getCache($key = 'generic')
+    public static function getCache(string $key = 'generic')
     {
-        return static::$caches[$key];
+        if (static::$caches[$key]) {
+            return static::$caches[$key];
+        } else {
+            throw new LeagueException("Cache Provider could not be found.");
+        }
     }
 
     /**
      * Get API keys
      *
      * @return array
+     * @throws LeagueException
      */
     public static function getKeys()
     {
-        return static::$keys;
+        if (count(static::$keys)) {
+            return static::$keys;
+        } else {
+            throw new LeagueException("No API keys were found.");
+        }
     }
 
     /**
@@ -196,7 +217,7 @@ class Client
      * @param int $ttl
      * @return Champion
      */
-    public static function champion($region, $ttl = 3600)
+    public static function champion(string $region, int $ttl = 3600)
     {
         return new Champion($region, $ttl);
     }
@@ -208,7 +229,7 @@ class Client
      * @param int $ttl
      * @return Mastery
      */
-    public static function mastery($region, $ttl = 3600)
+    public static function mastery(string $region, int $ttl = 3600)
     {
         return new Mastery($region, $ttl);
     }
@@ -220,7 +241,7 @@ class Client
      * @param int $ttl
      * @return League
      */
-    public static function league($region, $ttl = 3600)
+    public static function league(string $region, int $ttl = 3600)
     {
         return new League($region, $ttl);
     }
@@ -232,7 +253,7 @@ class Client
      * @param int $ttl
      * @return Status
      */
-    public static function status($region, $ttl = 3600)
+    public static function status(string $region, int $ttl = 3600)
     {
         return new Status($region, $ttl);
     }
@@ -244,7 +265,7 @@ class Client
      * @param int $ttl
      * @return Match
      */
-    public static function match($region, $ttl = 3600)
+    public static function match(string $region, int $ttl = 3600)
     {
         return new Match($region, $ttl);
     }
@@ -256,7 +277,7 @@ class Client
      * @param int $ttl
      * @return Spectator
      */
-    public static function spectator($region, $ttl = 3600)
+    public static function spectator(string $region, int $ttl = 3600)
     {
         return new Spectator($region, $ttl);
     }
@@ -268,7 +289,7 @@ class Client
      * @param int $ttl
      * @return Summoner
      */
-    public static function summoner($region, $ttl = 3600)
+    public static function summoner(string $region, int $ttl = 3600)
     {
         return new Summoner($region, $ttl);
     }
@@ -280,7 +301,7 @@ class Client
      * @param int $ttl
      * @return Code
      */
-    public static function code($region, $ttl = 3600)
+    public static function code(string $region, int $ttl = 3600)
     {
         return new Code($region, $ttl);
     }
@@ -288,19 +309,21 @@ class Client
     /**
      * @return bool
      * @todo
+     * @throws LeagueException
      */
     public static function stub()
     {
-        return false;
+        throw new LeagueException("Unsupported Endpoint.");
     }
 
     /**
      * @return bool
      * @todo
+     * @throws LeagueException
      */
     public static function tournament()
     {
-        return false;
+        throw new LeagueException("Unsupported Endpoint.");
     }
 
 }

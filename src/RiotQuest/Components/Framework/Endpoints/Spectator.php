@@ -23,7 +23,7 @@ class Spectator extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function featured()
     {
@@ -45,9 +45,9 @@ class Spectator extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function active($id)
+    public function active(string $id)
     {
         return Request::make(['spectator', __FUNCTION__])
             ->useStandard()

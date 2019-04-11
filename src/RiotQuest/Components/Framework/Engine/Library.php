@@ -155,7 +155,7 @@ class Library
      * @param $path
      * @return mixed
      */
-    public static function loadTemplate($path)
+    public static function loadTemplate(string $path)
     {
         $path = strtolower(array_reverse(explode('\\', $path))[0]) . '.json';
         if (!isset(static::$templates[$path])) {
@@ -170,15 +170,15 @@ class Library
      * Returns false if no replacement was found.
      *
      * @param $region
-     * @return string
+     * @return string|false
      */
-    public static function resolveRegion($region): string
+    public static function resolveRegion(string $region)
     {
         $region = strtolower(str_replace(' ', '-', $region));
         if (array_key_exists($region, static::$map)) {
             return static::$map[$region];
         }
-        return '';
+        return false;
     }
 
     /**
@@ -187,9 +187,9 @@ class Library
      *
      * @param $subject
      * @param $replace
-     * @return string|string[]|null
+     * @return string|null
      */
-    public static function replace($subject, $replace): string
+    public static function replace(string $subject, array $replace = [])
     {
         return preg_replace_callback('/\{(\w+)\}/', function ($matches) use ($replace) {
             return $replace[$matches[1]];
@@ -205,7 +205,7 @@ class Library
      * @return array
      * @throws \ReflectionException
      */
-    public static function template($class): array
+    public static function template(string $class)
     {
         $template = [];
         $ref = new ReflectionClass($class);
@@ -240,7 +240,7 @@ class Library
      * @param $region
      * @return mixed
      */
-    public static function traverse($data, $template, $region)
+    public static function traverse($data, array $template, string $region)
     {
         $col = new $template['_class'];
         $col->setRegion($region);

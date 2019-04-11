@@ -41,7 +41,7 @@ class Summoner extends Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function getRanked()
     {
@@ -55,7 +55,7 @@ class Summoner extends Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function getMatchlist($filters = [])
     {
@@ -69,7 +69,7 @@ class Summoner extends Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function getMasteryScore()
     {
@@ -83,7 +83,7 @@ class Summoner extends Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function getMasteryList()
     {
@@ -97,7 +97,7 @@ class Summoner extends Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function getCurrentGame()
     {
@@ -111,7 +111,7 @@ class Summoner extends Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function getThirdPartyCode()
     {
@@ -125,7 +125,7 @@ class Summoner extends Collection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function isUnranked()
     {

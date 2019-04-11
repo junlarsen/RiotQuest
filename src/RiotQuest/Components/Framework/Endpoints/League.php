@@ -23,9 +23,9 @@ class League extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function positions($id)
+    public function positions(string $id)
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
@@ -45,9 +45,9 @@ class League extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function id($id)
+    public function id(string $id)
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
@@ -67,9 +67,9 @@ class League extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function challenger($queue)
+    public function challenger(string $queue)
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
@@ -89,9 +89,9 @@ class League extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function master($queue)
+    public function master(string $queue)
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
@@ -111,9 +111,9 @@ class League extends Template
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\RiotQuestException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function grandmaster($queue)
+    public function grandmaster(string $queue)
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
