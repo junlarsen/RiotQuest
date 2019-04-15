@@ -1,0 +1,22 @@
+[
+  {
+    "championId": 6,
+    "pickTurn": 1
+  },
+  {
+    "championId": 117,
+    "pickTurn": 2
+  },
+  {
+    "championId": 10,
+    "pickTurn": 3
+  },
+  {
+    "championId": 24,
+    "pickTurn": 4
+  },
+  {
+    "championId": 51,
+    "pickTurn": 5
+  }
+]

@@ -2,7 +2,9 @@
 
 namespace RiotQuest;
 
-class Constants
+use RiotQuest\Components\DataProvider\Game\Client;
+
+class Constants extends Client
 {
 
 

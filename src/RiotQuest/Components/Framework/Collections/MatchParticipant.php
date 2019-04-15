@@ -5,6 +5,7 @@ namespace RiotQuest\Components\Framework\Collections;
 use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Utils\Champion;
 use RiotQuest\Components\Framework\Utils\Game;
+use RiotQuest\Constants;
 
 /**
  * Class MatchParticipant
@@ -56,7 +57,7 @@ class MatchParticipant extends Collection
      */
     public function getChampionName()
     {
-        return Champion::getChampionName($this->championId);
+        return Constants::champion()->getChampionName($this->championId);
     }
 
 }

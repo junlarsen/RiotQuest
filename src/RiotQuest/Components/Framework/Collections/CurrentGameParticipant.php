@@ -6,6 +6,7 @@ use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Components\Framework\Utils\Champion;
 use RiotQuest\Components\Framework\Utils\Game;
+use RiotQuest\Constants;
 
 /**
  * Class CurrentGameParticipant
@@ -71,7 +72,7 @@ class CurrentGameParticipant extends Collection
      */
     public function getChampionName()
     {
-        return Champion::getChampionName($this->championId);
+        return Constants::champion()->getChampionName($this->championId);
     }
 
     /**
