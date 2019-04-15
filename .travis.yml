@@ -17,7 +17,6 @@ cache:
 
 install:
   - composer install
-  - php ./bin/quest make:templates
 
 env:
   - RIOTQUEST_LOAD_ENV=true
