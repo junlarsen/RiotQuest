@@ -7,7 +7,6 @@ use Carbon\CarbonInterface;
 use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Components\Framework\Utils\Champion;
-use RiotQuest\Constants;
 
 /**
  * Class ChampionMastery
@@ -50,7 +49,7 @@ class ChampionMastery extends Collection
      */
     public function getChampionIcon()
     {
-        return Dragon::getChampionSquare(Constants::champion()->getChampionName($this->championId));
+        return Dragon::getChampionSquare(Champion::getChampionId($this->championId));
     }
 
     /**
@@ -80,7 +79,7 @@ class ChampionMastery extends Collection
      */
     public function getChampionName()
     {
-        return Constants::champion()->getChampionName($this->championId);
+        return Champion::getChampionName($this->championId);
     }
 
 }

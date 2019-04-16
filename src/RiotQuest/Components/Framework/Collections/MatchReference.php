@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use RiotQuest\Client;
 use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Utils\Champion;
-use RiotQuest\Constants;
 
 /**
  * Class MatchReference
@@ -44,7 +43,7 @@ class MatchReference extends Collection
      */
     public function getChampionName()
     {
-        return Constants::champion()->getChampionName($this->champion);
+        return Champion::getChampionName($this->champion);
     }
 
     /**
