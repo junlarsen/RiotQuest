@@ -61,6 +61,11 @@ class MatchReference extends Collection
         return Client::match($this->region)->id($this->gameId);
     }
 
+    public function getTimeline()
+    {
+        return Client::match($this->region)->timeline($this->gameId);
+    }
+
     /**
      * Get relative time since this game was ended in ms
      *

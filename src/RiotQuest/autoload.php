@@ -12,7 +12,7 @@ if (file_exists(__DIR__ . '/../../.env')) (new Dotenv())->load(__DIR__ . '/../..
 
 if (!file_exists(__DIR__ . '/../storage/templates/manifest.json')) (new Filesystem())->generateTemplates();
 
-if (getenv('RIOTQUEST_LOAD_ENV' || $_ENV['RIOTQUEST_LOAD_ENV'])) {
+if (getenv('RIOTQUEST_LOAD_ENV')) {
     Client::loadFromEnvironment();
     define('RIOTQUEST_ENVLOAD', 1);
 } else {

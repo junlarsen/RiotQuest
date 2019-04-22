@@ -24,9 +24,6 @@
   "require-dev": {
     "phpunit/phpunit": "7.5"
   },
-  "scripts": {
-    "post-install-cmd": "cd bin && php quest make:static en_US && php quest make:templates"
-  },
   "prefer-stable": true,
   "minimum-stability": "RC",
   "bin": [
