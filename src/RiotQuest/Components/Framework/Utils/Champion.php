@@ -1,6 +1,6 @@
 <?php
 
-namespace RiotQuest\Components\DataProvider\Game;
+namespace RiotQuest\Components\Framework\Utils;
 
 use RiotQuest\Components\DataProvider\DataDragon\Assets;
 
@@ -13,11 +13,11 @@ class Champion
      * @param $id
      * @return string
      */
-    public function getChampionName($id)
+    public static function getChampionName($id)
     {
         return array_values(array_filter(Assets::get('champion')['data'], function ($e) use ($id) {
-                return $e['key'] == $id || $e['id'] == $id || $e['name'] == $id;
-            }))[0]['name'] ?? '';
+            return $e['key'] == $id || $e['id'] == $id || $e['name'] == $id;
+        }))[0]['name'] ?? '';
     }
 
     /**
@@ -26,7 +26,7 @@ class Champion
      * @param $id
      * @return string
      */
-    public function getChampionId($id)
+    public static function getChampionId($id)
     {
         return array_values(array_filter(Assets::get('champion')['data'], function ($e) use ($id) {
                 return $e['key'] == $id || $e['id'] == $id || $e['name'] == $id;
@@ -39,7 +39,7 @@ class Champion
      * @param $id
      * @return string
      */
-    public function getChampionKey($id)
+    public static function getChampionKey($id)
     {
         return (int) array_values(array_filter(Assets::get('champion')['data'], function ($e) use ($id) {
                 return $e['key'] == $id || $e['id'] == $id || $e['name'] == $id;
