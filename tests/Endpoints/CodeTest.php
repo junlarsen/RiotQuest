@@ -5,6 +5,8 @@ namespace RiotQuest\Tests\Endpoints;
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
 
+Client::boot();
+
 class CodeTest extends TestCase
 {
 

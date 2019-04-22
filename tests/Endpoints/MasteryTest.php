@@ -7,6 +7,8 @@ use RiotQuest\Client;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
 use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
 
+Client::boot();
+
 class MasteryTest extends TestCase
 {
 

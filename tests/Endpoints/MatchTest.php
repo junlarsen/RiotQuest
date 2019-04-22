@@ -8,6 +8,8 @@ use RiotQuest\Components\Framework\Collections\Match;
 use RiotQuest\Components\Framework\Collections\MatchHistory;
 use RiotQuest\Components\Framework\Collections\MatchTimeline;
 
+Client::boot();
+
 class MatchTest extends TestCase
 {
 

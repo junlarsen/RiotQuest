@@ -3,7 +3,10 @@
 namespace RiotQuest\Tests\Framework;
 
 use PHPUnit\Framework\TestCase;
+use RiotQuest\Client;
 use RiotQuest\Components\Framework\Engine\Filesystem;
+
+Client::boot();
 
 class TemplateTest extends TestCase
 {

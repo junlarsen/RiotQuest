@@ -3,7 +3,10 @@
 namespace RiotQuest\Tests\Framework;
 
 use PHPUnit\Framework\TestCase;
+use RiotQuest\Client;
 use RiotQuest\Components\Framework\Engine\Library;
+
+Client::boot();
 
 class LibraryTest extends TestCase
 {

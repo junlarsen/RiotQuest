@@ -7,6 +7,8 @@ use RiotQuest\Client;
 use RiotQuest\Components\Framework\Collections\League;
 use RiotQuest\Components\Framework\Collections\LeaguePositionList;
 
+Client::boot();
+
 class LeagueTest extends TestCase
 {
 

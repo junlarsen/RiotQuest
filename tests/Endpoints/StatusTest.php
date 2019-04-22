@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
 use RiotQuest\Components\Framework\Collections\ShardStatus;
 
+Client::boot();
+
 class StatusTest extends TestCase
 {
 

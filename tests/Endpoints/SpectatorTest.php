@@ -8,6 +8,8 @@ use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
 use RiotQuest\Components\Framework\Collections\FeaturedGames;
 use RiotQuest\Contracts\LeagueException;
 
+Client::boot();
+
 class SpectatorTest extends TestCase
 {
 

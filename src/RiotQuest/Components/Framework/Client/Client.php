@@ -7,6 +7,7 @@ use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Cache\AutoLimitModel;
 use RiotQuest\Components\Framework\Cache\CacheModel;
 use RiotQuest\Components\Framework\Cache\RequestModel;
+use RiotQuest\Components\Framework\Engine\Filesystem;
 use RiotQuest\Components\Framework\RateLimit\Manager;
 use RiotQuest\Components\Framework\Endpoints\Champion;
 use RiotQuest\Components\Framework\Endpoints\Code;
@@ -19,6 +20,7 @@ use RiotQuest\Components\Framework\Endpoints\Summoner;
 use Psr\SimpleCache\CacheInterface;
 use RiotQuest\Contracts\LeagueException;
 use RiotQuest\Contracts\ParameterException;
+use Symfony\Component\Dotenv\Dotenv;
 
 /**
  * Class Client
@@ -110,11 +112,21 @@ class Client
     }
 
     /**
+     * Bootstrap the framework
+     *
      * @throws LeagueException
+     * @throws ParameterException
      * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public static function boot()
     {
+        if (!file_exists(__DIR__ . '/../../../../storage/templates/manifest.json')) {
+            (new Filesystem())->generateTemplates();
+        }
+        if (file_exists(__DIR__ . '/../../../../../.env')) {
+            (new Dotenv())->load(__DIR__ . '/../../../../../.env');
+        }
         static::loadFromEnvironment();
         Dragon::enable();
         Assets::enable();
