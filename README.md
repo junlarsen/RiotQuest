@@ -55,6 +55,7 @@ Make a request to Summoner V4 on NA with Summoner Name "RiotSchmick"
 require __DIR__ . '/vendor/autoload.php';
 
 use RiotQuest\Client;
+Client::boot();
 
 $summoner = Client::summoner('na1')->name('RiotSchmick');
 ?>
