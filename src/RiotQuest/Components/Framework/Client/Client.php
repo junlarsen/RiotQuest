@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Client;
 
+use RiotQuest\Components\DataProvider\DataDragon\Assets;
+use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Cache\AutoLimitModel;
 use RiotQuest\Components\Framework\Cache\CacheModel;
 use RiotQuest\Components\Framework\Cache\RequestModel;
@@ -108,6 +110,17 @@ class Client
     }
 
     /**
+     * @throws LeagueException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public static function boot()
+    {
+        static::loadFromEnvironment();
+        Dragon::enable();
+        Assets::enable();
+    }
+
+    /**
      * Loads the client from the environment variables
      */
     public static function loadFromEnvironment()
@@ -117,6 +130,8 @@ class Client
         if (getenv('RIOTQUEST_TOURNAMENT_KEY')) $discoveredKeys[] = Client::loadKeyFromEnv('TOURNAMENT');
         if ($discoveredKeys) {
             Client::initialize(...$discoveredKeys);
+        } else {
+            throw new ParameterException("No valid API keys could be located.");
         }
     }
 
