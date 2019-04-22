@@ -4,8 +4,9 @@
 define('RIOTQUEST_ENV', 'CLI');
 
 try {
-    require __DIR__ . '/../vendor/autoload.php';
-    require __DIR__ . '/../../../autoload.php';
+    // Needs stfu operator because autoload is only in one of the two
+    @require __DIR__ . '/../vendor/autoload.php';
+    @require __DIR__ . '/../../../autoload.php';
 } catch (Exception $e) {
 
 }
