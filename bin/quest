@@ -3,7 +3,12 @@
 
 define('RIOTQUEST_ENV', 'CLI');
 
-require __DIR__ . '/../vendor/autoload.php';
+try {
+    require __DIR__ . '/../vendor/autoload.php';
+    require __DIR__ . '/../../../autoload.php';
+} catch (Exception $e) {
+
+}
 
 use Symfony\Component\Console\Application;
 
