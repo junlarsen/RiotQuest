@@ -73,7 +73,7 @@ class CacheModel implements CacheInterface
     {
         if (is_string($ttl)) $ttl = explode(',', $ttl)[0];
         $key = $this->key($key);
-        @mkdir($this->path . $key, 755, true);
+        @mkdir($this->path, 755, true);
         if (!file_exists($this->path . $key)) {
             touch($this->path, $key);
         }
