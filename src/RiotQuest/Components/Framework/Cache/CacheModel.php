@@ -75,7 +75,7 @@ class CacheModel implements CacheInterface
         $key = $this->key($key);
         @mkdir($this->path, 755, true);
         if (!file_exists($this->path . $key)) {
-            touch($this->path, $key);
+            touch($this->path . $key);
         }
         file_put_contents($this->path . $key, json_encode([
             'data' => (string) $value,
