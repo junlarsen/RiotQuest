@@ -76,7 +76,7 @@ class Request
      * @param int $ttl
      * @return $this
      */
-    public function setTtl(int $ttl): self
+    public function setTtl($ttl): self
     {
         $this->vars['ttl'] = $ttl;
         return $this;
