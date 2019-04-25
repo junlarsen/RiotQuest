@@ -244,7 +244,7 @@ class Client
      * @param int $ttl
      * @return Champion
      */
-    public static function champion(string $region, int $ttl = 3600)
+    public static function champion(string $region, $ttl = 3600)
     {
         return new Champion($region, $ttl);
     }
@@ -256,7 +256,7 @@ class Client
      * @param int $ttl
      * @return Mastery
      */
-    public static function mastery(string $region, int $ttl = 3600)
+    public static function mastery(string $region, $ttl = 3600)
     {
         return new Mastery($region, $ttl);
     }
@@ -268,7 +268,7 @@ class Client
      * @param int $ttl
      * @return League
      */
-    public static function league(string $region, int $ttl = 3600)
+    public static function league(string $region, $ttl = 3600)
     {
         return new League($region, $ttl);
     }
@@ -280,7 +280,7 @@ class Client
      * @param int $ttl
      * @return Status
      */
-    public static function status(string $region, int $ttl = 3600)
+    public static function status(string $region, $ttl = 3600)
     {
         return new Status($region, $ttl);
     }
@@ -292,7 +292,7 @@ class Client
      * @param int $ttl
      * @return Match
      */
-    public static function match(string $region, int $ttl = 3600)
+    public static function match(string $region, $ttl = 3600)
     {
         return new Match($region, $ttl);
     }
@@ -304,7 +304,7 @@ class Client
      * @param int $ttl
      * @return Spectator
      */
-    public static function spectator(string $region, int $ttl = 3600)
+    public static function spectator(string $region, $ttl = 3600)
     {
         return new Spectator($region, $ttl);
     }
@@ -316,7 +316,7 @@ class Client
      * @param int $ttl
      * @return Summoner
      */
-    public static function summoner(string $region, int $ttl = 3600)
+    public static function summoner(string $region, $ttl = 3600)
     {
         return new Summoner($region, $ttl);
     }
@@ -328,7 +328,7 @@ class Client
      * @param int $ttl
      * @return Code
      */
-    public static function code(string $region, int $ttl = 3600)
+    public static function code(string $region, $ttl = 3600)
     {
         return new Code($region, $ttl);
     }

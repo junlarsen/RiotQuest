@@ -143,7 +143,7 @@ class Request
      */
     public function sendRequest()
     {
-        if (Client::getCache('request')->has($this->vars['url'])) {
+        if (Client::getCache('request')->has($this->vars['url']) && $this->vars['ttl'] !== false) {
             return $this->completeFromCache($this->vars);
         } else {
             return $this->completeFromApi($this->vars);
