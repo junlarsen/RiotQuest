@@ -2,6 +2,9 @@
 
 namespace RiotQuest\Components\Framework\Client;
 
+use RiotQuest\Components\DataProviders\BaseProvider;
+use RiotQuest\Components\DataProviders\DataDragon;
+use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Framework\Cache\AutoLimitModel;
 use RiotQuest\Components\Framework\Cache\CacheModel;
 use RiotQuest\Components\Framework\Cache\RequestModel;
@@ -63,6 +66,13 @@ class Client
     protected static $limits;
 
     /**
+     * Data Provider interface
+     *
+     * @var string
+     */
+    protected static $provider = DataDragon::class;
+
+    /**
      * Rate Limit handler
      *
      * @var Manager
@@ -108,10 +118,16 @@ class Client
         } else {
             throw new ParameterException("You must provide at least one API key to this function.");
         }
+
+        call_user_func([BaseProvider::class, 'onEnable']);
+        call_user_func([static::$provider, 'boot']);
+        call_user_func([Provider::class, 'boot']);
     }
 
     /**
      * Set the locale (used for DDragon)
+     *
+     * @internal
      *
      * @param string $locale
      */
@@ -120,6 +136,7 @@ class Client
     }
 
     /**
+     * @internal
      * @return string
      */
     public static function getLocale()
@@ -128,7 +145,30 @@ class Client
     }
 
     /**
+     * Set static data provider
+     *
+     * @internal
+     *
+     * @param string $provider
+     */
+    public static function setProvider(string $provider)
+    {
+        self::$provider = $provider;
+    }
+
+    /**
+     * @internal
+     * @return string
+     */
+    public static function getProvider()
+    {
+        return self::$provider;
+    }
+
+    /**
      * Bootstrap the framework
+     *
+     * @internal
      *
      * @throws LeagueException
      * @throws ParameterException
@@ -145,6 +185,8 @@ class Client
 
     /**
      * Loads the client from the environment variables
+     *
+     * @internal
      */
     public static function loadFromEnvironment()
     {
@@ -161,6 +203,8 @@ class Client
     /**
      * Loads a keytype from environment
      *
+     * @internal
+     *
      * @param $key
      * @return Token
      */
@@ -170,6 +214,8 @@ class Client
     }
 
     /**
+     * @internal
+     *
      * @return Manager
      */
     public static function getManager()
@@ -179,6 +225,8 @@ class Client
 
     /**
      * Get the set rate limits
+     *
+     * @internal
      *
      * @param $key
      * @return array
@@ -190,6 +238,8 @@ class Client
 
     /**
      * Hit an API region and endpoint
+     *
+     * @internal
      *
      * @param $region
      * @param $endpoint
@@ -206,6 +256,8 @@ class Client
     /**
      * Determine whether an API region and endpoint can be hit or not
      *
+     * @internal
+     *
      * @param $region
      * @param $endpoint
      * @param $key
@@ -219,6 +271,8 @@ class Client
 
     /**
      * Get cacheprovider
+     *
+     * @internal
      *
      * @param string $key
      * @return CacheInterface
@@ -235,6 +289,8 @@ class Client
 
     /**
      * Get API keys
+     *
+     * @internal
      *
      * @return array
      * @throws LeagueException

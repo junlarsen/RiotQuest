@@ -8,6 +8,13 @@ use ReflectionClass;
 
 class Templater {
 
+    /**
+     * Reads a class and creates a template for it.
+     *
+     * @param string $class
+     * @return array
+     * @throws \ReflectionException
+     */
     public static function generateSingle(string $class) {
         $template = [];
         $ref = new ReflectionClass($class);
@@ -33,6 +40,12 @@ class Templater {
         return $template;
     }
 
+    /**
+     * Generates all collection templates
+     *
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \ReflectionException
+     */
     public static function generateAll() {
         $in = new Filesystem(new Local(__DIR__ . '/../Collections/'));
         $out = new Filesystem(new Local(__DIR__ . '/../../../../storage/'));

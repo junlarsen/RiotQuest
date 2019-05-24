@@ -3,7 +3,7 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use RiotQuest\Client;
-use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\DataProviders\Provider;
 
 /**
  * Class Summoner
@@ -31,7 +31,7 @@ class Summoner extends Collection
      */
     public function getSummonerIcon()
     {
-        return Dragon::getProfileIcon($this->profileIconId);
+        return Provider::getChampionSquare($this->profileIconId);
     }
 
     /**
