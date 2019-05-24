@@ -1,12 +1,11 @@
 <?php
 
-namespace RiotQuest\Components\Framework\Utils;
+namespace RiotQuest\Components\Game;
 
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Contracts\LeagueException;
 
-class Versions
-{
+class Game {
 
     /**
      * Current Game version

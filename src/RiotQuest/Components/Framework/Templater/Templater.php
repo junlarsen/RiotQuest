@@ -35,14 +35,14 @@ class Templater {
 
     public static function generateAll() {
         $in = new Filesystem(new Local(__DIR__ . '/../Collections/'));
-        $out = new Filesystem(new Local(__DIR__ . '/../../../storage/'));
+        $out = new Filesystem(new Local(__DIR__ . '/../../../../storage/'));
 
         $out->deleteDir("templates");
         $out->createDir("templates");
 
         foreach ($in->listContents() as $file) {
             if ($file['type'] === 'file') {
-                $out->write("templates/" . $file['filename'] . ".json", json_encode(static::generateSingle("\\RiotQuest\\Components\\Framework\\Collections\\" . $file['filename'])));
+                $out->write("templates/" . strtolower($file['filename']) . ".json", json_encode(static::generateSingle("\\RiotQuest\\Components\\Framework\\Collections\\" . $file['filename'])));
             }
         }
     }

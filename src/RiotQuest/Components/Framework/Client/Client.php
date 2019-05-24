@@ -5,7 +5,6 @@ namespace RiotQuest\Components\Framework\Client;
 use RiotQuest\Components\Framework\Cache\AutoLimitModel;
 use RiotQuest\Components\Framework\Cache\CacheModel;
 use RiotQuest\Components\Framework\Cache\RequestModel;
-use RiotQuest\Components\Framework\Engine\Filesystem;
 use RiotQuest\Components\Framework\RateLimit\Manager;
 use RiotQuest\Components\Framework\Endpoints\Champion;
 use RiotQuest\Components\Framework\Endpoints\Code;
@@ -80,6 +79,8 @@ class Client
         'TOURNAMENT' => null
     ];
 
+    protected static $locale = "en_US";
+
     /**
      * Initialize the entire application, this way RiotQuest
      * doesn't interfere with your program until you actually
@@ -110,6 +111,23 @@ class Client
     }
 
     /**
+     * Set the locale (used for DDragon)
+     *
+     * @param string $locale
+     */
+    public static function setLocale(string $locale) {
+        static::$locale = $locale;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getLocale()
+    {
+        return self::$locale;
+    }
+
+    /**
      * Bootstrap the framework
      *
      * @throws LeagueException
@@ -119,9 +137,6 @@ class Client
      */
     public static function boot()
     {
-        if (!file_exists(__DIR__ . '/../../../../storage/templates/manifest.json')) {
-            (new Filesystem())->generateTemplates();
-        }
         if (file_exists(__DIR__ . '/../../../../../.env')) {
             (new Dotenv())->load(__DIR__ . '/../../../../../.env');
         }
