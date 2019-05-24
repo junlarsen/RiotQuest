@@ -36,8 +36,6 @@ class CacheModel implements CacheInterface {
     {
         if (is_string($ttl)) $ttl = explode(',', $ttl)[0];
 
-        var_dump("ttl:$ttl");
-
         $this->write($key, json_encode([
             'data' => (string) $value,
             'ttl' => ($ttl === null) ? null : (float) (time() + $ttl)

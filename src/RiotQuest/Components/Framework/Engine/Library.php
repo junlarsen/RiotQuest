@@ -197,41 +197,6 @@ class Library
     }
 
     /**
-     * Makes a skeleton for a Collection class by reading its
-     * property and list tags. Functions recursively to make
-     * sure every object is included.
-     *
-     * @param $class
-     * @return array
-     * @throws \ReflectionException
-     */
-    public static function template(string $class)
-    {
-        $template = [];
-        $ref = new ReflectionClass($class);
-        if (strpos($class, 'List')) {
-            preg_match('/(@list ([\w]+))/m', $ref->getDocComment(), $matches);
-            if (!in_array($matches[2], ['int', 'boolean', 'double', 'array', 'string'])) {
-                $template['_list'] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . $matches[2]);
-            } else {
-                $template['_list'] = $matches[2];
-            }
-        } else {
-            preg_match_all('/(@property ([\w\[\]]+) \$([\w]+))/', $ref->getDocComment(), $matches);
-            foreach ($matches[3] as $key => $value) {
-                $template[$value] = $matches[2][$key];
-            }
-            foreach ($template as $key => $value) {
-                if (!in_array($value, ['int', 'boolean', 'double', 'array', 'string'])) {
-                    $template[$key] = static::template("\\RiotQuest\\Components\\Framework\\Collections\\" . $value);
-                }
-            }
-        }
-        $template['_class'] = $class;
-        return $template;
-    }
-
-    /**
      * Fills a skeleton from static::template with the data
      * from $data.
      *
