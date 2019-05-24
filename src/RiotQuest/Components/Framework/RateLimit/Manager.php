@@ -37,12 +37,17 @@ class Manager
     {
         $ref = implode('.', [$key, $region, $endpoint]);
         $now = json_decode($this->cache->get($ref), 1);
-        if (is_string($limits[1])) $limits[1] = explode(',', $limits[1])[0];
+
+        if (is_string($limits[1])) {
+            $limits[1] = explode(',', $limits[1])[0];
+        }
+
         $this->cache->set($ref, json_encode([
-            'max' => $now['max'] ?? $limits[0],
+            'max' => (int) ($now['max'] ?? $limits[0]),
             'count' => (isset($now['count']) ? ($now['count'] + 1) : 0),
             'ttl' => $now['ttl'] ?? (float)time() + $limits[1]
         ]), $now['ttl'] ? $now['ttl'] - time() : $limits[1]);
+
     }
 
     /**
@@ -56,11 +61,15 @@ class Manager
      */
     public function canRequest(string $region, string $endpoint = 'default', string $key = 'standard')
     {
+
         $ref = implode('.', [$key, $region, $endpoint]);
+
         if ($this->cache->has($ref)) {
             $limits = json_decode($this->cache->get($ref), 1);
-            return $limits['count'] + 1 < $limits['max'];
+
+            return ($limits['count'] + 1) < $limits['max'];
         }
+        
         return true;
     }
 

@@ -2,68 +2,31 @@
 
 namespace RiotQuest\Components\Framework\Cache;
 
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
 use Psr\SimpleCache\CacheInterface;
 
-/**
- * Class CacheModel
- *
- * PSR-16 compliant simple cache provider
- *
- * @package RiotQuest\Components\Framework\Cache
- */
-class CacheModel implements CacheInterface
-{
+class CacheModel implements CacheInterface {
 
     /**
-     * Base path to CacheModel directory
-     *
-     * @var string
-     */
-    protected $path = __DIR__ . '/../../../../storage/cache/';
-
-    /**
-     * @var string
+     * @var string 
      */
     protected $namespace = '';
+
+    /**
+     * @var Filesystem
+     */
+    private $fs;
 
     /**
      * CacheModel constructor.
      */
     public function __construct()
     {
-        $this->path .= $this->namespace;
-        @mkdir($this->path);
+        $this->fs = new Filesystem(new Local(__DIR__ . "/../../../../storage/cache/$this->namespace"));
     }
 
     /**
-     * Get single key
-     *
-     * @param string $key
-     * @param null $default
-     * @return false|mixed|string|null
-     */
-    public function get($key, $default = null)
-    {
-        return $this->has($key) ? json_decode(file_get_contents($this->path . $this->key($key)), 1)['data'] : $default;
-    }
-
-    /**
-     * Get multiple keys
-     *
-     * @param iterable $keys
-     * @param null $default
-     * @return array|iterable
-     */
-    public function getMultiple($keys, $default = null)
-    {
-        return array_map(function ($e) use ($default) {
-            return $this->get($e, $default);
-        }, (array) $keys);
-    }
-
-    /**
-     * Set a key and value
-     *
      * @param string $key
      * @param mixed $value
      * @param null $ttl
@@ -71,25 +34,39 @@ class CacheModel implements CacheInterface
      */
     public function set($key, $value, $ttl = null)
     {
-        if (is_string($ttl)) $ttl = explode(',', $ttl)[0];
-        $key = $this->key($key);
-        @mkdir($this->path, 755, true);
-        if (!file_exists($this->path . $key)) {
-            touch($this->path . $key);
-        }
-        file_put_contents($this->path . $key, json_encode([
+        $this->write($key, json_encode([
             'data' => (string) $value,
-            'ttl' => $ttl === null ? null : (float) time() + $ttl
+            'ttl' => $ttl === null ? null : (double) time() + $ttl
         ]));
     }
 
     /**
-     * Set multiple keys
-     *
-     * @param iterable $values
-     * @param null $ttl
-     * @return bool|void
+     * @param string $key
+     * @param null $default
+     * @return mixed|null
      */
+    public function get($key, $default = null)
+    {
+        return $this->exists($key) ? ($this->read($key)['data']) : $default;
+    }
+
+    public function delete($key)
+    {
+        // TODO: Implement delete() method.
+    }
+
+    public function clear()
+    {
+        // TODO: Implement clear() method.
+    }
+
+    public function getMultiple($keys, $default = null)
+    {
+        return array_map(function ($e) use ($default) {
+            return $this->get($e, $default);
+        }, (array) $keys);
+    }
+
     public function setMultiple($values, $ttl = null)
     {
         foreach ($values as $key => $value) {
@@ -97,85 +74,76 @@ class CacheModel implements CacheInterface
         }
     }
 
-    /**
-     * Deletes a single key
-     *
-     * @param string $key
-     * @return bool|void
-     */
-    public function delete($key)
-    {
-        $key = $this->key($key);
-        @unlink($this->path . $key);
-    }
-
-    /**
-     * Deletes a set of keys
-     *
-     * @param iterable $keys
-     * @return bool|void
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     */
     public function deleteMultiple($keys)
     {
-        foreach ($keys as $key) {
-            $this->delete($key);
-        }
+        // TODO: Implement deleteMultiple() method.
     }
 
     /**
-     * Confirm whether the cache has this key or not
-     *
      * @param string $key
      * @return bool
      */
     public function has($key)
     {
-        $key = $this->key($key);
-        if (file_exists($this->path . $key)) {
-            $ttl = json_decode(file_get_contents($this->path . $key), 1)['ttl'];
-            return $ttl === null ? true : $ttl > time();
+        if ($this->exists($key)) {
+            if ($ttl = $this->read($key) === null) {
+                return false;
+            }
+
+            return $ttl['ttl'] === null ? true : $ttl['ttl'] > time();
         }
+
         return false;
     }
 
     /**
-     * Empties the entire cache
-     *
-     * @return bool|void
+     * @param $real
+     * @return mixed|null
+     * @throws \League\Flysystem\FileNotFoundException
      */
-    public function clear()
-    {
-        $this->remove($this->path);
+    private function read($real) {
+        $key = $this->hash($real);
+
+        if ($this->exists($real)) {
+            return json_decode($this->fs->read($key), 1);
+        }
+
+        return null;
     }
 
     /**
-     * Hashes the cache key
-     *
-     * @param $key
-     * @return string
+     * @param $real
+     * @param $content
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \League\Flysystem\FileNotFoundException
      */
-    public function key($key)
-    {
-        return md5($key);
-    }
+    private function write($real, $content) {
+        $key = $this->hash($real);
 
-    /**
-     * Recursively wipes a directory
-     *
-     * @param $path
-     */
-    private function remove($path)
-    {
-        $files = array_diff(scandir($path), ['..', '.']);
-        foreach ($files as $file) {
-            if (is_dir("$path/$file")) {
-                $this->remove($path . $file);
-                rmdir("$path/$file");
-            } else {
-                unlink($path . $file);
-            }
+        if ($this->exists($real)) {
+            $this->fs->update($key, $content);
+        } else {
+            $this->fs->write($key, $content);
         }
     }
+
+    /**
+     * @param $real
+     * @return bool
+     */
+    private function exists($real) {
+        $key = $this->hash($real);
+
+        return $this->fs->has($key);
+    }
+
+    /**
+     * @param $sub
+     * @return string
+     */
+    private function hash($sub) {
+        return md5($sub);
+    }
+
 
 }

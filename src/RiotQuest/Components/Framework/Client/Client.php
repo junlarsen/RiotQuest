@@ -2,8 +2,6 @@
 
 namespace RiotQuest\Components\Framework\Client;
 
-use RiotQuest\Components\DataProvider\DataDragon\Assets;
-use RiotQuest\Components\DataProvider\DataDragon\Dragon;
 use RiotQuest\Components\Framework\Cache\AutoLimitModel;
 use RiotQuest\Components\Framework\Cache\CacheModel;
 use RiotQuest\Components\Framework\Cache\RequestModel;
@@ -128,8 +126,6 @@ class Client
             (new Dotenv())->load(__DIR__ . '/../../../../../.env');
         }
         static::loadFromEnvironment();
-        Dragon::enable();
-        Assets::enable();
     }
 
     /**
