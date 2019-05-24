@@ -34,9 +34,13 @@ class CacheModel implements CacheInterface {
      */
     public function set($key, $value, $ttl = null)
     {
+        if (is_string($ttl)) $ttl = explode(',', $ttl)[0];
+
+        var_dump("ttl:$ttl");
+
         $this->write($key, json_encode([
             'data' => (string) $value,
-            'ttl' => $ttl === null ? null : (double) time() + $ttl
+            'ttl' => ($ttl === null) ? null : (float) (time() + $ttl)
         ]));
     }
 
@@ -86,7 +90,8 @@ class CacheModel implements CacheInterface {
     public function has($key)
     {
         if ($this->exists($key)) {
-            if ($ttl = $this->read($key) === null) {
+            $ttl = $this->read($key);
+            if ($ttl === null) {
                 return false;
             }
 
@@ -105,7 +110,8 @@ class CacheModel implements CacheInterface {
         $key = $this->hash($real);
 
         if ($this->exists($real)) {
-            return json_decode($this->fs->read($key), 1);
+            $a = json_decode($this->fs->read($key), 1);
+            return $a;
         }
 
         return null;
