@@ -34,7 +34,7 @@ class ParticipantList extends Collection
      */
     public function getWhereName(string $name)
     {
-        return array_values($this->filter(function (Participant $e) use ($name) {
+        return array_values($this->filterArr(function (Participant $e) use ($name) {
             return $e->summonerName == $name;
         }))[0];
     }

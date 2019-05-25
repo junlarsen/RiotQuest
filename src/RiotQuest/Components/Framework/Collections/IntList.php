@@ -35,7 +35,7 @@ class IntList extends Collection
      */
     public function getSum(): int
     {
-        return array_sum($this->stack);
+        return array_sum($this->items);
     }
 
 }

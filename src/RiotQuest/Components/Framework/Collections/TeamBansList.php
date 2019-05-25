@@ -21,7 +21,7 @@ class TeamBansList extends Collection
      */
     public function getBannedIds()
     {
-        return $this->map(function (TeamBans $e) {
+        return $this->mapArr(function (TeamBans $e) {
             return $e->championId;
         });
     }

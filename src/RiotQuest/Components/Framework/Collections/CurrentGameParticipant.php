@@ -2,10 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
-use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Framework\Client\Client;
-use RiotQuest\Components\Framework\Utils\Champion;
-use RiotQuest\Components\Framework\Utils\Game;
 
 /**
  * Class CurrentGameParticipant
@@ -61,7 +59,7 @@ class CurrentGameParticipant extends Collection
      */
     public function getSummonerIcon()
     {
-        return Dragon::getProfileIcon($this->profileIconId);
+        return Provider::getProfileIcon($this->profileIconId);
     }
 
     /**
@@ -71,17 +69,7 @@ class CurrentGameParticipant extends Collection
      */
     public function getChampionName()
     {
-        return Champion::getChampionName($this->championId);
-    }
-
-    /**
-     * Get the team name ( BLUE or RED )
-     *
-     * @return string
-     */
-    public function getTeamName()
-    {
-        return Game::translateTeam($this->teamId);
+        return Provider::getChampionName($this->championId);
     }
 
 }

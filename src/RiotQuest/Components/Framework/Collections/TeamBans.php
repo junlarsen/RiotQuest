@@ -2,8 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
-use RiotQuest\Components\DataProvider\DataDragon\Dragon;
-use RiotQuest\Components\Framework\Utils\Champion;
+use RiotQuest\Components\DataProviders\Provider;
 
 /**
  * Class TeamBans
@@ -25,7 +24,7 @@ class TeamBans extends Collection
      */
     public function getChampionIcon()
     {
-        return Dragon::getChampionSquare(Champion::getChampionId($this->championId));
+        return Provider::getChampionSquare(Provider::getChampionId($this->championId));
     }
 
 }

@@ -22,7 +22,7 @@ class LeagueItemList extends Collection
      */
     public function getWhereWinrateMoreThan($percentage)
     {
-        return new static(array_values($this->filter(function (LeagueItem $e) use ($percentage) {
+        return new static(array_values($this->filterArr(function (LeagueItem $e) use ($percentage) {
             return $e->getWinrate() > $percentage;
         })));
     }

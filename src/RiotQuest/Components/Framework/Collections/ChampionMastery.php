@@ -4,9 +4,8 @@ namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
-use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Framework\Client\Client;
-use RiotQuest\Components\Framework\Utils\Champion;
 
 /**
  * Class ChampionMastery
@@ -49,7 +48,7 @@ class ChampionMastery extends Collection
      */
     public function getChampionIcon()
     {
-        return Dragon::getChampionSquare(Champion::getChampionId($this->championId));
+        return Provider::getProfileIcon(Provider::getChampionName($this->championId));
     }
 
     /**
@@ -79,7 +78,7 @@ class ChampionMastery extends Collection
      */
     public function getChampionName()
     {
-        return Champion::getChampionName($this->championId);
+        return Provider::getChampionName($this->championId);
     }
 
 }

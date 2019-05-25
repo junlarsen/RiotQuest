@@ -194,7 +194,7 @@ class Library
     public static function replace(string $subject, array $replace = [])
     {
         return preg_replace_callback('/\{(\w+)\}/', function ($matches) use ($replace) {
-            return $replace[$matches[1]];
+            return $replace[$matches[1]] ?? '';
         }, $subject);
     }
 

@@ -4,10 +4,14 @@ namespace RiotQuest\Contracts;
 
 interface DataProviderInterface {
 
-    public static function boot(): void;
+    public static function getProfileIcon(int $id);
 
-    public static function getProfileIcon(int $id): string;
+    public static function getChampionSquare(string $id);
 
-    public static function getChampionSquare(int $id): string;
+    public static function getChampionId($id);
+
+    public static function getChampionName($id);
+
+    public static function getChampionKey($id);
 
 }

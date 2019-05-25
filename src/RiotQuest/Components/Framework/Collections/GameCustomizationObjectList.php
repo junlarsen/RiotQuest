@@ -21,7 +21,7 @@ class GameCustomizationObjectList extends Collection
      */
     public function getCategories()
     {
-        return $this->map(function (GameCustomizationObject $e) {
+        return $this->mapArr(function (GameCustomizationObject $e) {
             return $e->category;
         });
     }

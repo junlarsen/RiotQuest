@@ -76,7 +76,6 @@ class Application {
         static::$manager = new Manager();
 
         call_user_func([BaseProvider::class, 'onEnable']);
-        call_user_func([static::$provider, 'boot']);
         call_user_func([Provider::class, 'boot']);
     }
 

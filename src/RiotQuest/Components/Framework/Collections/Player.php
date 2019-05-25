@@ -2,7 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
-use RiotQuest\Components\DataProvider\DataDragon\Dragon;
+use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Framework\Client\Client;
 
 /**
@@ -32,7 +32,7 @@ class Player extends Collection
      */
     public function getSummonerIcon()
     {
-        return Dragon::getProfileIcon($this->profileIconId);
+        return Provider::getProfileIcon($this->profileIconId);
     }
 
     /**

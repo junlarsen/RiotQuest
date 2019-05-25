@@ -2,9 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
-use RiotQuest\Components\DataProvider\DataDragon\Dragon;
-use RiotQuest\Components\Framework\Utils\Champion;
-use RiotQuest\Components\Framework\Utils\Game;
+use RiotQuest\Components\DataProviders\Provider;
 
 /**
  * Class BannedChampion
@@ -27,7 +25,7 @@ class BannedChampion extends Collection
      */
     public function getChampionIcon()
     {
-        return Dragon::getChampionSquare(Champion::getChampionId($this->championId));
+        return Provider::getChampionSquare(Provider::getChampionId($this->championId));
     }
 
     /**
@@ -37,17 +35,7 @@ class BannedChampion extends Collection
      */
     public function getChampionName()
     {
-        return Champion::getChampionName($this->championId);
-    }
-
-    /**
-     * Get team name ( BLUE or RED )
-     *
-     * @return string
-     */
-    public function getTeamName()
-    {
-        return Game::translateTeam($this->teamId);
+        return Provider::getChampionName($this->championId);
     }
 
 }

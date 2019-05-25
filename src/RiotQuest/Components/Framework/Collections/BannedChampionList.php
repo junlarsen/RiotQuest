@@ -21,7 +21,7 @@ class BannedChampionList extends Collection
      */
     public function getListIds()
     {
-        return $this->map(function (BannedChampion $e) {
+        return $this->mapArr(function (BannedChampion $e) {
             return $e->championId;
         });
     }

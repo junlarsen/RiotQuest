@@ -21,7 +21,7 @@ class MatchReferenceList extends Collection
      */
     public function getTotalGames()
     {
-        return count($this->stack);
+        return count($this->items);
     }
 
 }

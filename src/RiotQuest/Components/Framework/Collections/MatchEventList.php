@@ -21,7 +21,7 @@ class MatchEventList extends Collection
      */
     public function getEventCount()
     {
-        return count($this->stack);
+        return count($this->items);
     }
 
 }

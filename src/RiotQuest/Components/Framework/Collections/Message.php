@@ -30,7 +30,7 @@ class Message extends Collection
      */
     public function getTranslation(string $locale)
     {
-        return $this->filter(function (Translation $translation) use ($locale) {
+        return $this->filterArr(function (Translation $translation) use ($locale) {
             return $translation->locale === $locale;
         })[$locale];
     }
