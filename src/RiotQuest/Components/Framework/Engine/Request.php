@@ -4,7 +4,7 @@ namespace RiotQuest\Components\Framework\Engine;
 
 use RiotQuest\Contracts\APIException;
 use RiotQuest\Contracts\LeagueException;
-use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Components\Framework\Client\Application;
 use GuzzleHttp\Client as HttpClient;
 use RiotQuest\Contracts\ParameterException;
 
@@ -143,7 +143,7 @@ class Request
      */
     public function sendRequest()
     {
-        if (Client::getCache('request')->has($this->vars['url']) && $this->vars['ttl'] !== false) {
+        if (Application::getCache('request')->has($this->vars['url']) && $this->vars['ttl'] !== false) {
             return $this->completeFromCache($this->vars);
         } else {
             return $this->completeFromApi($this->vars);
@@ -161,7 +161,7 @@ class Request
     private function completeFromCache(array $request)
     {
         $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
-        $items = json_decode(Client::getCache('request')->get($request['url']), 1);
+        $items = json_decode(Application::getCache('request')->get($request['url']), 1);
         return ($collection && RIOTQUEST_ENV === 'API')
             ? Library::traverse($items, Library::loadTemplate($collection), $request['region'])
             : (($collection)
@@ -180,22 +180,22 @@ class Request
      */
     private function completeFromApi(array $request)
     {
-        if (Client::isHittable($request['region'], $request['name'], $request['use'])) {
+        if (Application::hittable($request['region'], $request['name'], $request['use'])) {
             $response = (new HttpClient())->request($request['method'], $request['url'],
                 [
                     'body' => json_encode($request['body'] ?? null),
                     'headers' => [
                         'Content-Type' => 'application/json',
-                        'X-Riot-Token' => Client::getKeys()[$request['use']]->getKey()
+                        'X-Riot-Token' => Application::getKeys()[$request['use']]->getKey()
                     ],
                     'http_errors' => false
                 ]
             );
-            Client::registerHit($request['region'], $request['name'], $request['use'], explode(':', $response->getHeader('X-Method-Rate-Limit')[0]));
+            Application::register($request['region'], $request['name'], $request['use'], explode(':', $response->getHeader('X-Method-Rate-Limit')[0]));
 
             // Work with the response
             $items = (array)json_decode($response->getBody()->getContents(), 1);
-            if ($response->getStatusCode() >= 300 && !in_array($request['name'], Client::$config['HTTP_ERROR_EXCEPT'])) {
+            if ($response->getStatusCode() >= 300 && !in_array($request['name'], Application::$rules['HTTP_ERROR_EXCEPT'])) {
                 throw new APIException("API Error! Status Code:" . $response->getStatusCode(), $response->getStatusCode(), null, $items);
             }
 
@@ -203,7 +203,7 @@ class Request
             // TODO: add more fallbacks
             switch (true) {
                 // if item should be cached
-                case (!in_array($request['name'], Client::$config['FORCE_CACHE_NONE'])):
+                case (!in_array($request['name'], Application::$rules['FORCE_CACHE_NONE'])):
                     $this->saveToCache($request, $items);
 
             }
@@ -224,9 +224,9 @@ class Request
      */
     private function saveToCache(array $request, $load)
     {
-        in_array($request['name'], Client::$config['FORCE_CACHE_PERMANENT'])
-            ? Client::getCache('request')->set($request['url'], json_encode($load))
-            : Client::getCache('request')->set($request['url'], json_encode($load), $request['ttl']);
+        in_array($request['name'], Application::$rules['FORCE_CACHE_PERMANENT'])
+            ? Application::getCache('request')->set($request['url'], json_encode($load))
+            : Application::getCache('request')->set($request['url'], json_encode($load), $request['ttl']);
     }
 
     /**

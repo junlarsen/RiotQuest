@@ -3,7 +3,7 @@
 namespace RiotQuest\Components\Framework\RateLimit;
 
 use Psr\SimpleCache\CacheInterface;
-use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Components\Framework\Client\Application;
 
 class Manager
 {
@@ -20,7 +20,7 @@ class Manager
      */
     public function __construct()
     {
-        $this->cache = Client::getCache('limits');
+        $this->cache = Application::getCache('limits');
     }
 
     /**

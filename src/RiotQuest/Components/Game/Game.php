@@ -2,7 +2,7 @@
 
 namespace RiotQuest\Components\Game;
 
-use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Components\Framework\Client\Application;
 use RiotQuest\Contracts\LeagueException;
 
 class Game {
@@ -24,14 +24,14 @@ class Game {
     public static function current()
     {
         if (!static::$current) {
-            if (!Client::getCache()->has('riotquest.framework.version')) {
+            if (!Application::getCache()->has('riotquest.framework.version')) {
                 $versions = json_decode(file_get_contents('https://ddragon.leagueoflegends.com/api/versions.json'), 1);
-                Client::getCache()->set('riotquest.framework.version', json_encode([
+                Application::getCache()->set('riotquest.framework.version', json_encode([
                     'latest' => $versions[0],
                     'all' => $versions
                 ]), 7200);
             }
-            static::$current = json_decode(Client::getCache()->get('riotquest.framework.version'), 1)['latest'];
+            static::$current = json_decode(Application::getCache()->get('riotquest.framework.version'), 1)['latest'];
         }
         return static::$current;
     }

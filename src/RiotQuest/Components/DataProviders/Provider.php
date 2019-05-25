@@ -2,7 +2,7 @@
 
 namespace RiotQuest\Components\DataProviders;
 
-use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Components\Framework\Client\Application;
 use RiotQuest\Contracts\DataProviderInterface;
 
 class Provider extends BaseProvider implements DataProviderInterface {
@@ -11,7 +11,7 @@ class Provider extends BaseProvider implements DataProviderInterface {
 
     public static function boot(): void
     {
-        static::$provider = Client::getProvider();
+        static::$provider = Application::getProvider();
     }
 
     public static function getProfileIcon(int $id): string

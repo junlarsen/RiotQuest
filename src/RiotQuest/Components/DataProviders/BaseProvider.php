@@ -14,6 +14,13 @@ class BaseProvider {
     protected static $version;
 
     /**
+     * Files loaded into memory
+     *
+     * @var array
+     */
+    protected static $load = [];
+
+    /**
      * @internal Boot to set version
      * 
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -30,6 +37,10 @@ class BaseProvider {
      */
     public static function override(string $version) {
         static::$version = $version;
+    }
+
+    public static function get(string $file) {
+        
     }
 
 }
