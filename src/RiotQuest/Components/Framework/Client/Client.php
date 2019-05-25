@@ -23,8 +23,19 @@ use RiotQuest\Contracts\LeagueException;
 class Client
 {
 
+    /**
+     * @throws LeagueException
+     */
     public static function boot() {
         Application::load();
+    }
+
+    public static function setLocale(string $locale) {
+        Application::setLocale($locale);
+    }
+
+    public static function setProvider(string $provider) {
+        Application::setProvider($provider);
     }
 
     /**

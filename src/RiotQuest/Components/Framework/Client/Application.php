@@ -50,14 +50,14 @@ class Application {
     protected static $manager;
 
     /**
-     * @var
+     * @var array
      */
-    protected static $keys;
+    protected static $keys = [];
 
     /**
-     * @var
+     * @var string
      */
-    protected static $locale;
+    protected static $locale = "en_US";
 
     /**
      * @param mixed ...$keys

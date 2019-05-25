@@ -39,7 +39,7 @@ class BaseProvider {
         static::$version = $version;
     }
 
-    public static function get(string $file) {
+    protected static function get(string $file) {
         
     }
 
