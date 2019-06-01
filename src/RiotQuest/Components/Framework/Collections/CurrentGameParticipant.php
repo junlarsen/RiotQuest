@@ -35,7 +35,7 @@ class CurrentGameParticipant extends Collection
      */
     public function getChampionIcon()
     {
-        return Dragon::getChampionSquare($this->championId);
+        return Provider::getChampionSquare($this->championId);
     }
 
     /**

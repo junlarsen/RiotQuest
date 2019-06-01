@@ -26,7 +26,6 @@ class Manager
     /**
      * Registers an API call to the cache
      *
-     * @todo refactor
      * @param $region
      * @param string $endpoint
      * @param string $key

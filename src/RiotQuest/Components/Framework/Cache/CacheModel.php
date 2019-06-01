@@ -4,9 +4,8 @@ namespace RiotQuest\Components\Framework\Cache;
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
-use Psr\SimpleCache\CacheInterface;
 
-class CacheModel implements CacheInterface {
+class CacheModel {
 
     /**
      * @var string 
@@ -27,10 +26,11 @@ class CacheModel implements CacheInterface {
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
+     * @param $key
+     * @param $value
      * @param null $ttl
-     * @return bool|void
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \League\Flysystem\FileNotFoundException
      */
     public function set($key, $value, $ttl = null)
     {
@@ -43,25 +43,21 @@ class CacheModel implements CacheInterface {
     }
 
     /**
-     * @param string $key
+     * @param $key
      * @param null $default
      * @return mixed|null
+     * @throws \League\Flysystem\FileNotFoundException
      */
     public function get($key, $default = null)
     {
         return $this->exists($key) ? ($this->read($key)['data']) : $default;
     }
 
-    public function delete($key)
-    {
-        // TODO: Implement delete() method.
-    }
-
-    public function clear()
-    {
-        // TODO: Implement clear() method.
-    }
-
+    /**
+     * @param $keys
+     * @param null $default
+     * @return array
+     */
     public function getMultiple($keys, $default = null)
     {
         return array_map(function ($e) use ($default) {
@@ -69,6 +65,10 @@ class CacheModel implements CacheInterface {
         }, (array) $keys);
     }
 
+    /**
+     * @param $values
+     * @param null $ttl
+     */
     public function setMultiple($values, $ttl = null)
     {
         foreach ($values as $key => $value) {
@@ -76,14 +76,10 @@ class CacheModel implements CacheInterface {
         }
     }
 
-    public function deleteMultiple($keys)
-    {
-        // TODO: Implement deleteMultiple() method.
-    }
-
     /**
-     * @param string $key
+     * @param $key
      * @return bool
+     * @throws \League\Flysystem\FileNotFoundException
      */
     public function has($key)
     {
