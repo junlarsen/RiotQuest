@@ -28,6 +28,12 @@ class LeagueTest extends TestCase
         $this->assertInstanceOf(League::class, $collection);
     }
 
+    public function testLeagueEntries() {
+        $collection = Client::league('euw')->entries('RANKED_SOLO_5x5', 'DIAMOND', 'I', 1);
+
+        $this->assertInstanceOf(LeaguePositionList::class, $collection);
+    }
+
     /**
      * Test the apex league endpoints
      *
