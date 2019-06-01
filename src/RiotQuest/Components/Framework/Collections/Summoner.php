@@ -31,7 +31,7 @@ class Summoner extends Collection
      */
     public function getSummonerIcon()
     {
-        return Provider::getChampionSquare($this->profileIconId);
+        return Provider::getProfileIcon($this->profileIconId);
     }
 
     /**
