@@ -115,7 +115,8 @@ class Library
             'id' => League::class,
             'grandmaster' => League::class,
             'challenger' => League::class,
-            'master' => League::class
+            'master' => League::class,
+            'entries' => LeaguePositionList::class
         ],
         'status' => [
             'shard' => ShardStatus::class

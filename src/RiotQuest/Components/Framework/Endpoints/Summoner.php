@@ -36,14 +36,13 @@ class Summoner extends Template
             ->sendRequest();
     }
 
-    /**
+    /**                                            
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerName
      *
-     * @param $id
-     * @return \RiotQuest\Components\Framework\Collections\Summoner
+     * @param string $id
+     * @return array|mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
     public function name(string $id)

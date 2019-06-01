@@ -200,7 +200,7 @@ class Request
             }
 
             // using true switch here to match multiple cases
-            // TODO: add more fallbacks
+            // can add more fallbacks to this later
             switch (true) {
                 // if item should be cached
                 case (!in_array($request['name'], Application::$rules['FORCE_CACHE_NONE'])):
