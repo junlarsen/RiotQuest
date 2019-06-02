@@ -36,6 +36,9 @@ class Collection extends Module {
         $this->region = $region;
     }
 
+    /**
+     * @param string $region
+     */
     public function setRegion(string $region) {
         $this->region = $region;
     }
