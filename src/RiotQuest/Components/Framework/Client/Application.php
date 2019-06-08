@@ -89,8 +89,13 @@ class Application {
         
         $keys = [];
 
-        if (getenv('RIOTQUEST_STANDARD_KEY')) $keys[] = static::getKey('STANDARD');
-        if (getenv('RIOTQUEST_TOURNAMENT_KEY')) $keys[] = static::getKey('TOURNAMENT');
+        if ($_ENV['RIOTQUEST_STANDARD_KEY']) {
+            $keys[] = static::getKey('STANDARD');
+        }
+
+        if ($_ENV['RIOTQUEST_TOURNAMENT_KEY']) {
+            $keys[] = static::getKey('TOURNAMENT');
+        }
 
         if (count($keys)) {
             return static::initialize(...$keys);
@@ -128,7 +133,7 @@ class Application {
      * @return Token
      */
     private static function getKey($target) {
-        return new Token(getenv("RIOTQUEST_{$target}_KEY"), $target, getenv("RIOTQUEST_{$target}_LIMIT"));
+        return new Token($_ENV["RIOTQUEST_{$target}_KEY"], $target, $_ENV["RIOTQUEST_{$target}_LIMIT"]);
     }
 
     /**
