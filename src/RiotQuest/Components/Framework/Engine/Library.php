@@ -2,20 +2,18 @@
 
 namespace RiotQuest\Components\Framework\Engine;
 
-use ReflectionClass;
 use RiotQuest\Components\Framework\Collections\ChampionInfo;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
 use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
-use RiotQuest\Components\Framework\Collections\Collection;
 use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
 use RiotQuest\Components\Framework\Collections\FeaturedGames;
 use RiotQuest\Components\Framework\Collections\League;
+use RiotQuest\Components\Framework\Collections\LeagueEntryList;
 use RiotQuest\Components\Framework\Collections\Match;
 use RiotQuest\Components\Framework\Collections\MatchHistory;
 use RiotQuest\Components\Framework\Collections\MatchTimeline;
 use RiotQuest\Components\Framework\Collections\ShardStatus;
 use RiotQuest\Components\Framework\Collections\Summoner;
-use RiotQuest\Components\Framework\Collections\LeaguePositionList;
 
 /**
  * Class Library
@@ -111,12 +109,12 @@ class Library
             'rotation' => ChampionInfo::class
         ],
         'league' => [
-            'positions' => LeaguePositionList::class,
+            'positions' => LeagueEntryList::class,
             'id' => League::class,
             'grandmaster' => League::class,
             'challenger' => League::class,
             'master' => League::class,
-            'entries' => LeaguePositionList::class
+            'entries' => LeagueEntryList::class
         ],
         'status' => [
             'shard' => ShardStatus::class
