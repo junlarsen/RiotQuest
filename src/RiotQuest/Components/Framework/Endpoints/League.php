@@ -29,7 +29,7 @@ class League extends Template
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/positions/by-summoner/{id}')
+            ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{id}')
             ->setMethod('GET')
             ->setArguments(['region' => $this->region, 'id' => $id])
             ->setTtl($this->ttl)

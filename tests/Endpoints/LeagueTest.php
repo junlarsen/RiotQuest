@@ -5,7 +5,7 @@ namespace RiotQuest\Tests\Endpoints;
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
 use RiotQuest\Components\Framework\Collections\League;
-use RiotQuest\Components\Framework\Collections\LeaguePositionList;
+use RiotQuest\Components\Framework\Collections\LeagueEntryList;
 
 Client::boot();
 
@@ -31,7 +31,7 @@ class LeagueTest extends TestCase
     public function testLeagueEntries() {
         $collection = Client::league('euw')->entries('RANKED_SOLO_5x5', 'DIAMOND', 'I', 1);
 
-        $this->assertInstanceOf(LeaguePositionList::class, $collection);
+        $this->assertInstanceOf(LeagueEntryList::class, $collection);
     }
 
     /**
@@ -66,7 +66,7 @@ class LeagueTest extends TestCase
         // Summoner ID
         $collection = Client::league('euw')->positions('GtmkO-wba00dtOkpaQhQzlHa1PT9cE7nFohDuikJn0fscL4');
 
-        $this->assertInstanceOf(LeaguePositionList::class, $collection);
+        $this->assertInstanceOf(LeagueEntryList::class, $collection);
     }
 
 }
