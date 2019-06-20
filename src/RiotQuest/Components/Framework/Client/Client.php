@@ -26,16 +26,16 @@ class Client
     /**
      * @throws LeagueException
      */
-    public static function boot() {
-        Application::load();
+    public static function boot(): void {
+        Application::getInstance()->load();
     }
 
-    public static function setLocale(string $locale) {
-        Application::setLocale($locale);
+    public static function setLocale(string $locale): void {
+        Application::getInstance()->setLocale($locale);
     }
 
-    public static function setProvider(string $provider) {
-        Application::setProvider($provider);
+    public static function setProvider(string $provider): void {
+        Application::getInstance()->setProvider($provider);
     }
 
     /**
@@ -45,7 +45,7 @@ class Client
      * @param int $ttl
      * @return Champion
      */
-    public static function champion(string $region, $ttl = 3600)
+    public static function champion(string $region, $ttl = 3600): Champion
     {
         return new Champion($region, $ttl);
     }
@@ -57,7 +57,7 @@ class Client
      * @param int $ttl
      * @return Mastery
      */
-    public static function mastery(string $region, $ttl = 3600)
+    public static function mastery(string $region, $ttl = 3600): Mastery
     {
         return new Mastery($region, $ttl);
     }
@@ -69,7 +69,7 @@ class Client
      * @param int $ttl
      * @return League
      */
-    public static function league(string $region, $ttl = 3600)
+    public static function league(string $region, $ttl = 3600): League
     {
         return new League($region, $ttl);
     }
@@ -81,7 +81,7 @@ class Client
      * @param int $ttl
      * @return Status
      */
-    public static function status(string $region, $ttl = 3600)
+    public static function status(string $region, $ttl = 3600): Status
     {
         return new Status($region, $ttl);
     }
@@ -93,7 +93,7 @@ class Client
      * @param int $ttl
      * @return Match
      */
-    public static function match(string $region, $ttl = 3600)
+    public static function match(string $region, $ttl = 3600): Match
     {
         return new Match($region, $ttl);
     }
@@ -105,7 +105,7 @@ class Client
      * @param int $ttl
      * @return Spectator
      */
-    public static function spectator(string $region, $ttl = 3600)
+    public static function spectator(string $region, $ttl = 3600): Spectator
     {
         return new Spectator($region, $ttl);
     }
@@ -117,7 +117,7 @@ class Client
      * @param int $ttl
      * @return Summoner
      */
-    public static function summoner(string $region, $ttl = 3600)
+    public static function summoner(string $region, $ttl = 3600): Summoner
     {
         return new Summoner($region, $ttl);
     }
@@ -129,7 +129,7 @@ class Client
      * @param int $ttl
      * @return Code
      */
-    public static function code(string $region, $ttl = 3600)
+    public static function code(string $region, $ttl = 3600): Code
     {
         return new Code($region, $ttl);
     }
@@ -139,7 +139,7 @@ class Client
      * @todo
      * @throws LeagueException
      */
-    public static function stub()
+    public static function stub(): void
     {
         throw new LeagueException("Unsupported Endpoint.");
     }
@@ -149,7 +149,7 @@ class Client
      * @todo
      * @throws LeagueException
      */
-    public static function tournament()
+    public static function tournament(): void 
     {
         throw new LeagueException("Unsupported Endpoint.");
     }

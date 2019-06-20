@@ -12,7 +12,8 @@ use RiotQuest\Components\Framework\RateLimit\Manager;
 use RiotQuest\Contracts\LeagueException;
 use Symfony\Component\Dotenv\Dotenv;
 
-class Application {
+class Application
+{
 
     /**
      * Special rules for endpoints
@@ -34,71 +35,93 @@ class Application {
     /**
      * @var array
      */
-    protected static $caches = [];
+    protected $caches = [];
 
     /**
      * @var array
      */
-    protected static $limits = [];
+    protected $limits = [];
 
     /**
      * @var string
      */
-    protected static $provider = DataDragon::class;
+    protected $provider = DataDragon::class;
 
     /** @var Manager */
-    protected static $manager;
+    protected $manager;
 
     /**
      * @var array
      */
-    protected static $keys = [];
+    protected $keys = [];
 
     /**
      * @var string
      */
-    protected static $locale = "en_US";
+    protected $locale = "en_US";
 
     /**
-     * @param mixed ...$keys
+     * Application Singleton
+     *
+     * @var Application
      */
-    public static function initialize(...$keys) {
-        static::$caches = [
+    public static $app;
+
+    /**
+     * Application singleton function
+     * 
+     * @return Application
+     */
+    public static function getInstance(): Application
+    {
+        static::$app = static::$app ?? new Application();
+        return static::$app;
+    }
+
+    /**
+     * @param Token[] ...$keys
+     */
+    public function addKeys(...$keys): void
+    {
+        foreach ($keys as $key) {
+            $this->keys[$key->getType()] = $key;
+        }
+    }
+
+    /**
+     * Bootstrap the application
+     *
+     * @throws LeagueException
+     */
+    public function load(): void
+    {
+        $this->caches = [
             'generic' => new CacheModel(),
             'request' => new RequestModel(),
             'limits' => new AutoLimitModel()
         ];
 
-        foreach ($keys as $key) {
-            static::$keys[$key->getType()] = $key;
-        }
-
-        static::$manager = new Manager();
-
         call_user_func([BaseProvider::class, 'onEnable']);
         call_user_func([Provider::class, 'boot']);
-    }
+        $this->manager = new Manager();
 
-    /**
-     * @throws LeagueException
-     */
-    public static function load() {
         if (file_exists(__DIR__ . '/../../../../../.env')) {
             (new Dotenv())->load(__DIR__ . '/../../../../../.env');
         }
-        
+
         $keys = [];
 
         if ($_ENV['RIOTQUEST_STANDARD_KEY']) {
-            $keys[] = static::getKey('STANDARD');
+            $keys[] = $this->getKey('STANDARD');
         }
 
         if ($_ENV['RIOTQUEST_TOURNAMENT_KEY']) {
-            $keys[] = static::getKey('TOURNAMENT');
+            $keys[] = $this->getKey('TOURNAMENT');
         }
 
         if (count($keys)) {
-            return static::initialize(...$keys);
+            $this->addKeys(...$keys);
+            return;
         }
 
         throw new LeagueException("No valid API keys were found.");
@@ -111,9 +134,9 @@ class Application {
      * @return bool
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function hittable(string $region, string $endpoint, string $key)
+    public function hittable(string $region, string $endpoint, string $key): bool
     {
-        return static::getManager()->canRequest($region, $endpoint, strtolower($key)) && static::getManager()->canRequest($region, 'default', $key);
+        return $this->getManager()->canRequest($region, $endpoint, strtolower($key)) && $this->getManager()->canRequest($region, 'default', $key);
     }
 
     /**
@@ -123,77 +146,81 @@ class Application {
      * @param string $limits
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public static function register(string $region, string $endpoint, string $key, $limits = 'default') {
-        static::getManager()->registerCall($region, $endpoint, $key, $limits);
-        static::getManager()->registerCall($region, 'default', $key, static::$keys[strtoupper($key)]->getLimits());
+    public function register(string $region, string $endpoint, string $key, $limits = 'default'): void
+    {
+        $this->getManager()->registerCall($region, $endpoint, $key, $limits);
+        $this->getManager()->registerCall($region, 'default', $key, $this->keys[strtoupper($key)]->getLimits());
     }
 
     /**
      * @param $target
      * @return Token
      */
-    private static function getKey($target) {
+    private function getKey($target): Token
+    {
         return new Token($_ENV["RIOTQUEST_{$target}_KEY"], $target, $_ENV["RIOTQUEST_{$target}_LIMIT"]);
     }
 
     /**
      * @return Manager
      */
-    public static function getManager()
+    public function getManager(): Manager
     {
-        return self::$manager;
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function getLocale()
-    {
-        return self::$locale;
-    }
-
-    /**
-     * @param mixed $locale
-     */
-    public static function setLocale($locale): void
-    {
-        self::$locale = $locale;
+        return $this->manager;
     }
 
     /**
      * @return string
      */
-    public static function getProvider()
+    public function getLocale(): string
     {
-        return self::$provider;
+        return $this->locale;
+    }
+
+    /**
+     * @param mixed $locale
+     */
+    public function setLocale($locale): void
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProvider(): string 
+    {
+        return $this->provider;
     }
 
     /**
      * @param string $provider
      */
-    public static function setProvider(string $provider)
+    public function setProvider(string $provider): void 
     {
-        self::$provider = $provider;
+        $this->provider = $provider;
     }
 
     /**
      * @param string $key
-     * @return mixed
+     * @return CacheModel
      * @throws LeagueException
      */
-    public static function getCache(string $key = 'generic') {
-        if (static::$caches[$key]) {
-            return static::$caches[$key];
+    public function getCache(string $key = 'generic'): CacheModel
+    {
+        if ($this->caches[$key]) {
+            return $this->caches[$key];
         }
 
         throw new LeagueException("Cache Provider could not be located.");
     }
 
     /**
-     * @return mixed
+     * @return Token[]
      */
-    public static function getKeys() {
-        return static::$keys;
+    public function getKeys(): array 
+    {
+        return $this->keys;
     }
 
 }
