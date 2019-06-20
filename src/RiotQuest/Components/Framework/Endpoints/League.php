@@ -2,8 +2,9 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
-use RiotQuest\Components\Framework\Collections\LeaguePositionList;
+use RiotQuest\Components\Framework\Collections\LeagueEntryList;
 use RiotQuest\Components\Framework\Engine\Request;
+use RiotQuest\Components\Framework\Collections\League as LeagueCollection;
 
 /**
  * Class League
@@ -19,13 +20,13 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getAllLeaguePositionsForSummoner
      *
      * @param $id
-     * @return LeaguePositionList
+     * @return LeagueEntryList
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function positions(string $id)
+    public function positions(string $id): LeagueEntryList
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
@@ -41,13 +42,13 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getLeagueById
      *
      * @param $id
-     * @return \RiotQuest\Components\Framework\Collections\League
+     * @return LeagueCollection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function id(string $id)
+    public function id(string $id): LeagueCollection
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
@@ -66,12 +67,12 @@ class League extends Template
      * @param string $tier
      * @param string $division
      * @param int $page
-     * @return LeaguePositionList
+     * @return LeagueEntryList
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function entries(string $queue, string $tier, string $division, $page = 1) {
+    public function entries(string $queue, string $tier, string $division, $page = 1): LeagueEntryList {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
             ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/entries/{queue}/{tier}/{division}?page={page}')
@@ -92,7 +93,7 @@ class League extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function challenger(string $queue)
+    public function challenger(string $queue): LeagueCollection
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
@@ -114,7 +115,7 @@ class League extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function master(string $queue)
+    public function master(string $queue): LeagueCollection
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
@@ -136,7 +137,7 @@ class League extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function grandmaster(string $queue)
+    public function grandmaster(string $queue): LeagueCollection
     {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()

@@ -24,7 +24,7 @@ class Champion extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function rotation()
+    public function rotation(): ChampionInfo
     {
         return Request::make(['champion', __FUNCTION__])
             ->useStandard()

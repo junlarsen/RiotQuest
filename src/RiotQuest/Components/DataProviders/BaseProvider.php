@@ -25,11 +25,13 @@ class BaseProvider {
 
     /**
      * @internal Boot to set version
-     * 
+     *
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \League\Flysystem\FileNotFoundException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public static function onEnable() {
+    public static function onEnable(): void {
         static::$version = Game::current();
         $manifest = json_decode(file_get_contents(__DIR__ . "/../../../storage/static/manifest.json"), 1);
 
@@ -46,21 +48,24 @@ class BaseProvider {
      *
      * @param string $version
      */
-    public static function override(string $version) {
+    public static function override(string $version): void {
         static::$version = $version;
     }
 
     /**
      * @param string $file
-     * @return mixed
+     * @return array
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public static function get(string $file) {
-        if (!file_exists(__DIR__ . "/../../../storage/static/" . Application::getLocale() . "/champion.json")) {
+    public static function get(string $file): array {
+        if (!file_exists(__DIR__ . "/../../../storage/static/" . Application::getInstance()->getLocale() . "/champion.json")) {
             DDragonDownloader::download();
         }
 
         if (!isset(static::$load[$file])) {
-            $data = json_decode(file_get_contents(Library::replace(__DIR__ . "/../../../storage/static/{locale}/{file}.json", ['locale' => Application::getLocale(), 'file' => $file])), 1);
+            $data = json_decode(file_get_contents(Library::replace(__DIR__ . "/../../../storage/static/{locale}/{file}.json", ['locale' => Application::getInstance()->getLocale(), 'file' => $file])), 1);
 
             static::$load[$file] = $data;
         }

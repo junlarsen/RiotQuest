@@ -48,7 +48,7 @@ class Token
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -56,7 +56,7 @@ class Token
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -66,7 +66,7 @@ class Token
      *
      * @return array
      */
-    public function getLimits()
+    public function getLimits(): array 
     {
         return explode(':', $this->limits);
     }

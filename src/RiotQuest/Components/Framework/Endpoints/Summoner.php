@@ -3,6 +3,7 @@
 namespace RiotQuest\Components\Framework\Endpoints;
 
 use RiotQuest\Components\Framework\Engine\Request;
+use RiotQuest\Components\Framework\Collections\Summoner as SummonerCollection;
 
 /**
  * Class Summoner
@@ -18,13 +19,13 @@ class Summoner extends Template
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getByAccountId
      *
      * @param $id
-     * @return \RiotQuest\Components\Framework\Collections\Summoner
+     * @return SummonerCollection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function account(string $id)
+    public function account(string $id): SummonerCollection
     {
         return Request::make(['summoner', __FUNCTION__])
             ->useStandard()
@@ -40,12 +41,12 @@ class Summoner extends Template
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerName
      *
      * @param string $id
-     * @return array|mixed
+     * @return SummonerCollection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function name(string $id)
+    public function name(string $id): SummonerCollection
     {
         return Request::make(['summoner', __FUNCTION__])
             ->useStandard()
@@ -61,13 +62,13 @@ class Summoner extends Template
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getByPUUID
      *
      * @param $id
-     * @return \RiotQuest\Components\Framework\Collections\Summoner
+     * @return SummonerCollection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function unique(string $id)
+    public function unique(string $id): SummonerCollection
     {
         return Request::make(['summoner', __FUNCTION__])
             ->useStandard()
@@ -83,13 +84,13 @@ class Summoner extends Template
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerId
      *
      * @param $id
-     * @return \RiotQuest\Components\Framework\Collections\Summoner
+     * @return SummonerCollection
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function id(string $id)
+    public function id(string $id): SummonerCollection
     {
         return Request::make(['summoner', __FUNCTION__])
             ->useStandard()

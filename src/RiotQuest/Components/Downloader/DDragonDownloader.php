@@ -33,19 +33,19 @@ class DDragonDownloader {
 
     /**
      * @throws \League\Flysystem\FileExistsException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \League\Flysystem\FileNotFoundException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public static function download() {
+    public static function download(): void {
         $fs = new Filesystem(new Local(__DIR__ . "/../../../storage/static"));
         
-        $fs->deleteDir(Application::getLocale());
-        $fs->createDir(Application::getLocale());
+        $fs->deleteDir(Application::getInstance()->getLocale());
+        $fs->createDir(Application::getInstance()->getLocale());
 
         foreach (static::$map as $key => $value) {
-            $url = Library::replace(static::$baseurl . $value, ['version' => Game::current(), 'locale' => Application::getLocale()]);
+            $url = Library::replace(static::$baseurl . $value, ['version' => Game::current(), 'locale' => Application::getInstance()->getLocale()]);
             
-            $fs->write(Library::replace("{locale}/{key}.json", ['locale' => Application::getLocale(), 'key' => $key]), file_get_contents($url));
+            $fs->write(Library::replace("{locale}/{key}.json", ['locale' => Application::getInstance()->getLocale(), 'key' => $key]), file_get_contents($url));
         }
     }
 

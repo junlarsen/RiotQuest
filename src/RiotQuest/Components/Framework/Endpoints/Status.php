@@ -24,7 +24,7 @@ class Status extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function shard()
+    public function shard(): ShardStatus
     {
         return Request::make(['status', __FUNCTION__])
             ->useStandard()

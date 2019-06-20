@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Framework\Engine;
 
+use RiotQuest\Components\Framework\Collections\Collection;
 use RiotQuest\Contracts\APIException;
 use RiotQuest\Contracts\LeagueException;
 use RiotQuest\Components\Framework\Client\Application;
@@ -124,7 +125,7 @@ class Request
      * @return $this
      * @throws LeagueException
      */
-    public function compile()
+    public function compile(): self
     {
         if (!($this->vars['region'] = $this->vars['args']['region'] = Library::resolveRegion($this->vars['args']['region']))) {
             throw new ParameterException('ERROR: Specified region could not be resolved.');
@@ -139,11 +140,12 @@ class Request
      * @return array|mixed
      * @throws LeagueException
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \League\Flysystem\FileNotFoundException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function sendRequest()
     {
-        if (Application::getCache('request')->has($this->vars['url']) && $this->vars['ttl'] !== false) {
+        if (Application::getInstance()->getCache('request')->has($this->vars['url']) && $this->vars['ttl'] !== false) {
             return $this->completeFromCache($this->vars);
         } else {
             return $this->completeFromApi($this->vars);
@@ -153,45 +155,49 @@ class Request
     /**
      * Complete a request by pulling it from the cache
      *
-     * @param $request
-     * @return mixed
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @param array $request
+     * @return mixed|null
      * @throws LeagueException
+     * @throws \League\Flysystem\FileNotFoundException
      */
     private function completeFromCache(array $request)
     {
         $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
-        $items = json_decode(Application::getCache('request')->get($request['url']), 1);
-        return ($collection && RIOTQUEST_ENV === 'API')
-            ? Library::traverse($items, Library::loadTemplate($collection), $request['region'])
-            : (($collection)
-                ? $items
-                : $items[0] ?? null);
+        $items = json_decode(Application::getInstance()->getCache('request')->get($request['url']), 1);
+
+        if ($collection) {
+            return Library::traverse($items, Library::loadTemplate($collection), $request['region']);
+        }
+
+        return $collection ? $items : ($items[0] ?? null);
     }
 
     /**
      * Completes a request by pulling it from the API and caching it
      *
-     * @param $request
-     * @return array|mixed
+     * @param array $request
+     * @return mixed|null
+     * @throws APIException
      * @throws LeagueException
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \League\Flysystem\FileNotFoundException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     private function completeFromApi(array $request)
     {
-        if (Application::hittable($request['region'], $request['name'], $request['use'])) {
+        if (Application::getInstance()->hittable($request['region'], $request['name'], $request['use'])) {
             $response = (new HttpClient())->request($request['method'], $request['url'],
                 [
                     'body' => json_encode($request['body'] ?? null),
                     'headers' => [
                         'Content-Type' => 'application/json',
-                        'X-Riot-Token' => Application::getKeys()[$request['use']]->getKey()
+                        'X-Riot-Token' => Application::getInstance()->getKeys()[$request['use']]->getKey()
                     ],
                     'http_errors' => false
                 ]
             );
-            Application::register($request['region'], $request['name'], $request['use'], explode(':', $response->getHeader('X-Method-Rate-Limit')[0]));
+            Application::getInstance()->register($request['region'], $request['name'], $request['use'], explode(':', $response->getHeader('X-Method-Rate-Limit')[0]));
 
             // Work with the response
             $items = (array)json_decode($response->getBody()->getContents(), 1);
@@ -217,16 +223,17 @@ class Request
     /**
      * Save an item to the cache, whether the request resides permanently in cache or not
      *
-     * @param $request
+     * @param array $request
      * @param $load
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws LeagueException
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \League\Flysystem\FileNotFoundException
      */
     private function saveToCache(array $request, $load)
     {
         in_array($request['name'], Application::$rules['FORCE_CACHE_PERMANENT'])
-            ? Application::getCache('request')->set($request['url'], json_encode($load))
-            : Application::getCache('request')->set($request['url'], json_encode($load), $request['ttl']);
+            ? Application::getInstance()->getCache('request')->set($request['url'], json_encode($load))
+            : Application::getInstance()->getCache('request')->set($request['url'], json_encode($load), $request['ttl']);
     }
 
     /**
@@ -239,11 +246,12 @@ class Request
     private function finalize(array $request, $load)
     {
         $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
-        return ($collection && RIOTQUEST_ENV === 'API')
-            ? Library::traverse($load, Library::loadTemplate($collection), $request['region'])
-            : (($collection)
-                ? $load
-                : $load[0] ?? null);
+
+        if ($collection) {
+            return Library::traverse($load, Library::loadTemplate($collection), $request['region']);
+        }
+
+        return $collection ? $load : ($load[0] ?? null);
     }
 
 }

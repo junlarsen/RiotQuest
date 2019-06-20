@@ -3,7 +3,7 @@
 namespace RiotQuest\Components\Framework\Endpoints;
 
 use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
-use RiotQuest\Components\Framework\Collections\FeaturedGameInfoList;
+use RiotQuest\Components\Framework\Collections\FeaturedGames;
 use RiotQuest\Components\Framework\Engine\Request;
 
 /**
@@ -19,13 +19,13 @@ class Spectator extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#spectator-v4/GET_getFeaturedGames
      *
-     * @return FeaturedGameInfoList
+     * @return FeaturedGames
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function featured()
+    public function featured(): FeaturedGames
     {
         return Request::make(['spectator', __FUNCTION__])
             ->useStandard()
@@ -47,7 +47,7 @@ class Spectator extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function active(string $id)
+    public function active(string $id): CurrentGameInfo
     {
         return Request::make(['spectator', __FUNCTION__])
             ->useStandard()

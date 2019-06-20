@@ -4,6 +4,7 @@ namespace RiotQuest\Components\Framework\Cache;
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use RiotQuest\Contracts\LeagueException;
 
 class CacheModel {
 
@@ -32,7 +33,7 @@ class CacheModel {
      * @throws \League\Flysystem\FileExistsException
      * @throws \League\Flysystem\FileNotFoundException
      */
-    public function set($key, $value, $ttl = null)
+    public function set($key, $value, $ttl = null): void
     {
         if (is_string($ttl)) $ttl = explode(',', $ttl)[0];
 
@@ -69,7 +70,7 @@ class CacheModel {
      * @param $values
      * @param null $ttl
      */
-    public function setMultiple($values, $ttl = null)
+    public function setMultiple($values, $ttl = null): void 
     {
         foreach ($values as $key => $value) {
             $this->set($key, $value, $ttl);
@@ -81,7 +82,7 @@ class CacheModel {
      * @return bool
      * @throws \League\Flysystem\FileNotFoundException
      */
-    public function has($key)
+    public function has($key): bool
     {
         if ($this->exists($key)) {
             $ttl = $this->read($key);
@@ -97,18 +98,18 @@ class CacheModel {
 
     /**
      * @param $real
-     * @return mixed|null
+     * @return array
+     * @throws LeagueException
      * @throws \League\Flysystem\FileNotFoundException
      */
-    private function read($real) {
+    private function read($real): array {
         $key = $this->hash($real);
 
         if ($this->exists($real)) {
-            $a = json_decode($this->fs->read($key), 1);
-            return $a;
+            return json_decode($this->fs->read($key), 1);
         }
 
-        return null;
+        throw new LeagueException("Target file not found.");
     }
 
     /**
@@ -117,7 +118,7 @@ class CacheModel {
      * @throws \League\Flysystem\FileExistsException
      * @throws \League\Flysystem\FileNotFoundException
      */
-    private function write($real, $content) {
+    private function write($real, $content): void {
         $key = $this->hash($real);
 
         if ($this->exists($real)) {
@@ -131,17 +132,19 @@ class CacheModel {
      * @param $real
      * @return bool
      */
-    private function exists($real) {
+    private function exists($real): bool {
         $key = $this->hash($real);
 
         return $this->fs->has($key);
     }
 
     /**
+     * Note: These strings do not have to be cryptographically secure.
+     *
      * @param $sub
      * @return string
      */
-    private function hash($sub) {
+    private function hash($sub): string {
         return md5($sub);
     }
 

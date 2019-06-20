@@ -9,6 +9,7 @@ use ReflectionClass;
 class Templater {
 
     /**
+     * @internal
      * Reads a class and creates a template for it.
      *
      * @param string $class
@@ -41,6 +42,7 @@ class Templater {
     }
 
     /**
+     * @internal 
      * Generates all collection templates
      *
      * @throws \League\Flysystem\FileExistsException

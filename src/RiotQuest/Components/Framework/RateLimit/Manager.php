@@ -20,16 +20,18 @@ class Manager
      */
     public function __construct()
     {
-        $this->cache = Application::getCache('limits');
+        $this->cache = Application::getInstance()->getCache('limits');
     }
 
     /**
      * Registers an API call to the cache
      *
-     * @param $region
+     * @param string $region
      * @param string $endpoint
      * @param string $key
      * @param array $limits
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \League\Flysystem\FileNotFoundException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function registerCall(string $region, string $endpoint = 'default', string $key = 'standard', array $limits = [1, 5])
@@ -52,10 +54,11 @@ class Manager
     /**
      * Decide whether you can hit an endpoint with region, key and endpoint or not.
      *
-     * @param $region
+     * @param string $region
      * @param string $endpoint
      * @param string $key
      * @return bool
+     * @throws \League\Flysystem\FileNotFoundException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function canRequest(string $region, string $endpoint = 'default', string $key = 'standard')

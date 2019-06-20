@@ -19,14 +19,22 @@ class Provider extends BaseProvider {
 
     private static $provider;
 
+    /**
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     */
     public static function __callStatic($name, $arguments)
     {
-        return call_user_func_array([Application::getProvider(), $name], $arguments);
+        return call_user_func_array([Application::getInstance()->getProvider(), $name], $arguments);
     }
 
+    /**
+     * Boot loader for data provider
+     */
     public static function boot(): void
     {
-        static::$provider = Application::getProvider();
+        static::$provider = Application::getInstance()->getProvider();
     }
 
 

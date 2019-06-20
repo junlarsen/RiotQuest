@@ -26,7 +26,7 @@ class Mastery extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function all(string $id)
+    public function all(string $id): ChampionMasteryList
     {
         return Request::make(['mastery', __FUNCTION__])
             ->useStandard()
@@ -49,7 +49,7 @@ class Mastery extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function id(string $id, $champion)
+    public function id(string $id, $champion): ChampionMastery
     {
         return Request::make(['mastery', __FUNCTION__])
             ->useStandard()
@@ -71,7 +71,7 @@ class Mastery extends Template
      * @throws \ReflectionException
      * @throws \RiotQuest\Contracts\LeagueException
      */
-    public function score(string $id)
+    public function score(string $id): int 
     {
         return Request::make(['mastery', __FUNCTION__])
             ->useStandard()

@@ -16,22 +16,23 @@ class Game {
 
     /**
      * Get latest Game Version and caches for 2 hours
-     *
+     * 
      * @return string
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws LeagueException
+     * @throws \League\Flysystem\FileExistsException
+     * @throws \League\Flysystem\FileNotFoundException
      */
-    public static function current()
+    public static function current(): string 
     {
         if (!static::$current) {
-            if (!Application::getCache()->has('riotquest.framework.version')) {
+            if (!Application::getInstance()->getCache()->has('riotquest.framework.version')) {
                 $versions = json_decode(file_get_contents('https://ddragon.leagueoflegends.com/api/versions.json'), 1);
-                Application::getCache()->set('riotquest.framework.version', json_encode([
+                Application::getInstance()->getCache()->set('riotquest.framework.version', json_encode([
                     'latest' => $versions[0],
                     'all' => $versions
                 ]), 7200);
             }
-            static::$current = json_decode(Application::getCache()->get('riotquest.framework.version'), 1)['latest'];
+            static::$current = json_decode(Application::getInstance()->getCache()->get('riotquest.framework.version'), 1)['latest'];
         }
         return static::$current;
     }
