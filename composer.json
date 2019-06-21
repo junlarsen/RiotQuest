@@ -9,7 +9,7 @@
     }
   },
   "require": {
-    "php": "^7",
+    "php": "^7.1",
     "ext-json": "*",
     "guzzlehttp/guzzle": "6.3.3",
     "symfony/dotenv": "4.2.0",

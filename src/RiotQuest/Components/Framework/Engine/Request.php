@@ -2,12 +2,10 @@
 
 namespace RiotQuest\Components\Framework\Engine;
 
-use RiotQuest\Components\Framework\Collections\Collection;
 use RiotQuest\Contracts\APIException;
 use RiotQuest\Contracts\LeagueException;
 use RiotQuest\Components\Framework\Client\Application;
 use GuzzleHttp\Client as HttpClient;
-use RiotQuest\Contracts\ParameterException;
 
 /**
  * Class RequestCache
@@ -128,7 +126,7 @@ class Request
     public function compile(): self
     {
         if (!($this->vars['region'] = $this->vars['args']['region'] = Library::resolveRegion($this->vars['args']['region']))) {
-            throw new ParameterException('ERROR: Specified region could not be resolved.');
+            throw new LeagueException('ERROR: Specified region could not be resolved.');
         }
         $this->vars['url'] = Library::replace($this->vars['dest'], $this->vars['args']);
         return $this;
@@ -206,7 +204,7 @@ class Request
             }
 
             // using true switch here to match multiple cases
-            // can add more fallbacks to this later
+            // can add more fall backs to this later
             switch (true) {
                 // if item should be cached
                 case (!in_array($request['name'], Application::$rules['FORCE_CACHE_NONE'])):

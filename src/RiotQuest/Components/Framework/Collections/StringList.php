@@ -15,7 +15,7 @@ class StringList extends Collection
 {
 
     /**
-     * Runs strtolower on each element
+     * Runs str to lower on each element
      *
      * @return StringList
      */
@@ -27,7 +27,7 @@ class StringList extends Collection
     }
 
     /**
-     * Runs strtoupper on each element
+     * Runs str to upper on each element
      *
      * @return StringList
      */
