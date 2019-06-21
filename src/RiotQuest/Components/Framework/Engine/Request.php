@@ -7,7 +7,9 @@ use GuzzleHttp\Exception\GuzzleException;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
 use RiotQuest\Components\Framework\Client\Application;
+use RiotQuest\Components\Framework\Endpoints\Template;
 use RiotQuest\Contracts\APIException;
 use RiotQuest\Contracts\LeagueException;
 
@@ -129,28 +131,35 @@ class Request
      */
     public function compile(): self
     {
-        if (!($this->vars['region'] = $this->vars['args']['region'] = Library::resolveRegion($this->vars['args']['region']))) {
+        if (!($this->vars['region'] = $this->vars['args']['region'] = Utils::resolveRegion($this->vars['args']['region']))) {
             throw new LeagueException('ERROR: Specified region could not be resolved.');
         }
-        $this->vars['url'] = Library::replace($this->vars['dest'], $this->vars['args']);
+        $this->vars['url'] = Utils::replace($this->vars['dest'], $this->vars['args']);
         return $this;
     }
 
     /**
-     * Sends the request which has been produced
+     * Catches any third-party exception and returns a LeagueException instead.
      *
-     * @return array|mixed
+     * @return mixed|null
      * @throws LeagueException
-     * @throws GuzzleException
-     * @throws FileNotFoundException
-     * @throws InvalidArgumentException
      */
     public function sendRequest()
     {
-        if (Application::getInstance()->getCache('request')->has($this->vars['url']) && $this->vars['ttl'] !== false) {
-            return $this->completeFromCache($this->vars);
-        } else {
-            return $this->completeFromApi($this->vars);
+        try {
+            if (Application::getInstance()->getCache('request')->has($this->vars['url']) && $this->vars['ttl'] !== false) {
+                return $this->completeFromCache($this->vars);
+            } else {
+                return $this->completeFromApi($this->vars);
+            }
+        } catch (GuzzleException $ex) {
+            throw new LeagueException("ERROR: Internal Service Error. Please report this error by opening an issue on GitHub.");
+        } catch (InvalidArgumentException $ex) {
+            throw new LeagueException("ERROR: Internal Service Error. Please report this error by opening an issue on GitHub.");
+        } catch (FileExistsException $ex) {
+            throw new LeagueException("ERROR: Internal Service Error. Please report this error by opening an issue on GitHub.");
+        } catch (FileNotFoundException $ex) {
+            throw new LeagueException("ERROR: Cache Directory is not set up. Reinstall RiotQuest and try again.");
         }
     }
 
@@ -164,11 +173,11 @@ class Request
      */
     private function completeFromCache(array $request)
     {
-        $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
+        $collection = Utils::$returnTypes[$request['keys'][0]][$request['keys'][1]];
         $items = json_decode(Application::getInstance()->getCache('request')->get($request['url']), 1);
 
         if ($collection) {
-            return Library::traverse($items, Library::loadTemplate($collection), $request['region']);
+            return Utils::traverse($items, Utils::loadTemplate($collection), $request['region']);
         }
 
         return $collection ? $items : ($items[0] ?? null);
@@ -248,10 +257,10 @@ class Request
      */
     private function finalize(array $request, $load)
     {
-        $collection = Library::$returnTypes[$request['keys'][0]][$request['keys'][1]];
+        $collection = Utils::$returnTypes[$request['keys'][0]][$request['keys'][1]];
 
         if ($collection) {
-            return Library::traverse($load, Library::loadTemplate($collection), $request['region']);
+            return Utils::traverse($load, Utils::loadTemplate($collection), $request['region']);
         }
 
         return $collection ? $load : ($load[0] ?? null);

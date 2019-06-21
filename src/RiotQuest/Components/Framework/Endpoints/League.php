@@ -2,9 +2,6 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Components\Framework\Collections\League as LeagueCollection;
 use RiotQuest\Components\Framework\Collections\LeagueEntryList;
 use RiotQuest\Components\Framework\Engine\Request;
@@ -25,9 +22,6 @@ class League extends Template
      *
      * @param $id
      * @return LeagueEntryList
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function positions(string $id): LeagueEntryList
@@ -47,9 +41,6 @@ class League extends Template
      *
      * @param $id
      * @return LeagueCollection
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function id(string $id): LeagueCollection
@@ -72,8 +63,6 @@ class League extends Template
      * @param string $division
      * @param int $page
      * @return LeagueEntryList
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
      * @throws LeagueException
      */
     public function entries(string $queue, string $tier, string $division, $page = 1): LeagueEntryList
@@ -93,9 +82,6 @@ class League extends Template
      *
      * @param $queue
      * @return LeagueCollection
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function challenger(string $queue): LeagueCollection
@@ -115,9 +101,6 @@ class League extends Template
      *
      * @param $queue
      * @return LeagueCollection
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function master(string $queue): LeagueCollection
@@ -137,9 +120,6 @@ class League extends Template
      *
      * @param $queue
      * @return LeagueCollection
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function grandmaster(string $queue): LeagueCollection

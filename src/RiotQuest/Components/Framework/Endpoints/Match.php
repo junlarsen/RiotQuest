@@ -2,9 +2,6 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Components\Framework\Collections\Match as MatchCollection;
 use RiotQuest\Components\Framework\Collections\MatchHistory;
 use RiotQuest\Components\Framework\Collections\MatchTimeline;
@@ -27,9 +24,6 @@ class Match extends Template
      * @param $id
      * @param $filters
      * @return MatchHistory
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function list(string $id, array $filters = []): MatchHistory
@@ -71,9 +65,6 @@ class Match extends Template
      *
      * @param $id
      * @return MatchTimeline
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function timeline($id): MatchTimeline
@@ -93,9 +84,6 @@ class Match extends Template
      *
      * @param $id
      * @return MatchCollection
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function id($id): MatchCollection

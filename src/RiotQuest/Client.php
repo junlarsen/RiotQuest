@@ -3,7 +3,6 @@
 namespace RiotQuest;
 
 use RiotQuest\Components\Framework\Client\Client as Module;
-use RiotQuest\Components\Framework\Client\Token;
 
 /**
  * Class Client
@@ -17,16 +16,4 @@ use RiotQuest\Components\Framework\Client\Token;
 class Client extends Module
 {
 
-    /**
-     * New API key
-     *
-     * @param $token
-     * @param $type
-     * @param $limit
-     * @return Token
-     */
-    public static function token($token, $type, $limit): Token
-    {
-        return new Token($token, $type, $limit);
-    }
 }

@@ -17,13 +17,13 @@ use RiotQuest\Components\Framework\Collections\ShardStatus;
 use RiotQuest\Components\Framework\Collections\Summoner;
 
 /**
- * Class Library
+ * Class Utils
  *
  * Performs basic actions for compiling resources
  *
  * @package RiotQuest\Components\Framework
  */
-class Library
+class Utils
 {
 
     /**

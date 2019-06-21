@@ -14,7 +14,9 @@ use RiotQuest\Contracts\LeagueException;
 use Symfony\Component\Dotenv\Dotenv;
 
 /**
+ * @internal Internal Core API
  * Class Application
+ *
  * @package RiotQuest\Components\Framework\Client
  */
 class Application
@@ -70,7 +72,7 @@ class Application
      *
      * @var Application
      */
-    public static $app;
+    protected static $app;
 
     /**
      * Application singleton function

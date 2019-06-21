@@ -7,7 +7,7 @@ use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use RiotQuest\Components\Framework\Client\Application;
-use RiotQuest\Components\Framework\Engine\Library;
+use RiotQuest\Components\Framework\Engine\Utils;
 use RiotQuest\Components\Game\Game;
 use RiotQuest\Contracts\LeagueException;
 
@@ -48,9 +48,9 @@ class DDragonDownloader
         $fs->createDir(Application::getInstance()->getLocale());
 
         foreach (static::$map as $key => $value) {
-            $url = Library::replace(static::$baseurl . $value, ['version' => Game::current(), 'locale' => Application::getInstance()->getLocale()]);
+            $url = Utils::replace(static::$baseurl . $value, ['version' => Game::current(), 'locale' => Application::getInstance()->getLocale()]);
 
-            $fs->write(Library::replace("{locale}/{key}.json", ['locale' => Application::getInstance()->getLocale(), 'key' => $key]), file_get_contents($url));
+            $fs->write(Utils::replace("{locale}/{key}.json", ['locale' => Application::getInstance()->getLocale(), 'key' => $key]), file_get_contents($url));
         }
     }
 

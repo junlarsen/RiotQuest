@@ -31,11 +31,17 @@ class Client
         Application::getInstance()->load();
     }
 
+    /**
+     * @param string $locale
+     */
     public static function setLocale(string $locale): void
     {
         Application::getInstance()->setLocale($locale);
     }
 
+    /**
+     * @param string $provider
+     */
     public static function setProvider(string $provider): void
     {
         Application::getInstance()->setProvider($provider);
@@ -138,7 +144,7 @@ class Client
     }
 
     /**
-     * @return bool
+     * @return void
      * @throws LeagueException
      * @todo
      */
@@ -148,7 +154,7 @@ class Client
     }
 
     /**
-     * @return bool
+     * @return void
      * @throws LeagueException
      * @todo
      */
@@ -158,3 +164,4 @@ class Client
     }
 
 }
+                                                                                                           

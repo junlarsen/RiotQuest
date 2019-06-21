@@ -7,7 +7,7 @@ use League\Flysystem\FileNotFoundException;
 use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\Downloader\DDragonDownloader;
 use RiotQuest\Components\Framework\Client\Application;
-use RiotQuest\Components\Framework\Engine\Library;
+use RiotQuest\Components\Framework\Engine\Utils;
 use RiotQuest\Components\Game\Game;
 use RiotQuest\Contracts\LeagueException;
 
@@ -73,7 +73,7 @@ class BaseProvider
         }
 
         if (!isset(static::$load[$file])) {
-            $data = json_decode(file_get_contents(Library::replace(__DIR__ . "/../../../storage/static/{locale}/{file}.json", ['locale' => Application::getInstance()->getLocale(), 'file' => $file])), 1);
+            $data = json_decode(file_get_contents(Utils::replace(__DIR__ . "/../../../storage/static/{locale}/{file}.json", ['locale' => Application::getInstance()->getLocale(), 'file' => $file])), 1);
 
             static::$load[$file] = $data;
         }

@@ -2,9 +2,6 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
 use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
 use RiotQuest\Components\Framework\Engine\Request;
@@ -25,9 +22,6 @@ class Mastery extends Template
      *
      * @param $id
      * @return ChampionMasteryList
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function all(string $id): ChampionMasteryList
@@ -48,9 +42,6 @@ class Mastery extends Template
      * @param $id
      * @param ChampionMastery
      * @return mixed
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function id(string $id, $champion): ChampionMastery
@@ -70,9 +61,6 @@ class Mastery extends Template
      *
      * @param $id
      * @return integer
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function score(string $id): int

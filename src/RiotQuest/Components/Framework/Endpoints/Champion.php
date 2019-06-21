@@ -2,9 +2,6 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Components\Framework\Collections\ChampionInfo;
 use RiotQuest\Components\Framework\Engine\Request;
 use RiotQuest\Contracts\LeagueException;
@@ -23,9 +20,6 @@ class Champion extends Template
      * @see https://developer.riotgames.com/api-methods/#champion-v3/GET_getChampionInfo
      *
      * @return ChampionInfo
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function rotation(): ChampionInfo

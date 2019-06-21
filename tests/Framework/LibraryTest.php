@@ -4,7 +4,7 @@ namespace RiotQuest\Tests\Framework;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Engine\Library;
+use RiotQuest\Components\Framework\Engine\Utils;
 
 Client::boot();
 
@@ -16,7 +16,7 @@ class LibraryTest extends TestCase
      */
     public function testTemplateLoad()
     {
-        $this->assertIsArray(Library::loadTemplate('summoner'));
+        $this->assertIsArray(Utils::loadTemplate('summoner'));
     }
 
     /**
@@ -24,9 +24,9 @@ class LibraryTest extends TestCase
      */
     public function testRegionNames()
     {
-        $this->assertEquals('euw1', Library::resolveRegion('euw'));
-        $this->assertEquals('eun1', Library::resolveRegion('eune'));
-        $this->assertEquals('na1', Library::resolveRegion('na'));
+        $this->assertEquals('euw1', Utils::resolveRegion('euw'));
+        $this->assertEquals('eun1', Utils::resolveRegion('eune'));
+        $this->assertEquals('na1', Utils::resolveRegion('na'));
     }
 
     /**
@@ -35,7 +35,7 @@ class LibraryTest extends TestCase
     public function testStringReplacement()
     {
         $string = '{name} is a nice person.';
-        $this->assertEquals('supergrecko is a nice person.', Library::replace($string, ['name' => 'supergrecko']));
+        $this->assertEquals('supergrecko is a nice person.', Utils::replace($string, ['name' => 'supergrecko']));
     }
 
 }

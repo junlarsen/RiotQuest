@@ -4,7 +4,7 @@ namespace RiotQuest\Components\DataProviders;
 
 use League\Flysystem\FileExistsException;
 use Psr\SimpleCache\InvalidArgumentException;
-use RiotQuest\Components\Framework\Engine\Library;
+use RiotQuest\Components\Framework\Engine\Utils;
 use RiotQuest\Contracts\DataProviderInterface;
 use RiotQuest\Contracts\LeagueException;
 
@@ -19,7 +19,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface
      */
     public static function getProfileIcon(int $id): string
     {
-        return Library::replace("https://ddragon.leagueoflegends.com/cdn/{v}/img/profileicon/{id}.png", ['v' => static::$version, 'id' => $id]);
+        return Utils::replace("https://ddragon.leagueoflegends.com/cdn/{v}/img/profileicon/{id}.png", ['v' => static::$version, 'id' => $id]);
     }
 
     /**
@@ -30,7 +30,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface
      */
     public static function getChampionSquare(string $id): string
     {
-        return Library::replace("https://ddragon.leagueoflegends.com/cdn/{v}/img/champion/{id}.png", ['v' => static::$version, 'id' => $id]);
+        return Utils::replace("https://ddragon.leagueoflegends.com/cdn/{v}/img/champion/{id}.png", ['v' => static::$version, 'id' => $id]);
     }
 
     /**
