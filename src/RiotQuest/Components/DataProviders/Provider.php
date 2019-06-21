@@ -18,6 +18,9 @@ use RiotQuest\Components\Framework\Client\Application;
 class Provider extends BaseProvider
 {
 
+    /**
+     * @var
+     */
     private static $provider;
 
     /**

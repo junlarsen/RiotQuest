@@ -4,13 +4,17 @@ namespace RiotQuest\Components\DataProviders;
 
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
-use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\Downloader\DDragonDownloader;
 use RiotQuest\Components\Framework\Client\Application;
 use RiotQuest\Components\Framework\Engine\Utils;
 use RiotQuest\Components\Game\Game;
 use RiotQuest\Contracts\LeagueException;
 
+/**
+ * Class BaseProvider
+ * 
+ * @package RiotQuest\Components\DataProviders
+ */
 class BaseProvider
 {
 
@@ -31,7 +35,6 @@ class BaseProvider
     /**
      * @throws FileExistsException
      * @throws FileNotFoundException
-     * @throws InvalidArgumentException
      * @throws LeagueException
      * @internal Boot to set version
      *
@@ -63,8 +66,8 @@ class BaseProvider
      * @param string $file
      * @return array
      * @throws FileExistsException
-     * @throws InvalidArgumentException
      * @throws LeagueException
+     * @throws FileNotFoundException
      */
     public static function get(string $file): array
     {

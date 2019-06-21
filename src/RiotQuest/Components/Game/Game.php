@@ -7,6 +7,10 @@ use League\Flysystem\FileNotFoundException;
 use RiotQuest\Components\Framework\Client\Application;
 use RiotQuest\Contracts\LeagueException;
 
+/**
+ * Class Game
+ * @package RiotQuest\Components\Game
+ */
 class Game
 {
 

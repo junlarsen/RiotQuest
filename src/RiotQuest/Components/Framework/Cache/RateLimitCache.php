@@ -12,6 +12,9 @@ namespace RiotQuest\Components\Framework\Cache;
 class RateLimitCache extends Cache
 {
 
+    /**
+     * @var string
+     */
     protected $namespace = 'ratelimit/';
 
 }

@@ -67,6 +67,10 @@ class Collection extends Module
         return array_map($closure, $this->items);
     }
 
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
     public function __get($key)
     {
         return $this->items[$key] ?? null;

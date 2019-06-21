@@ -8,6 +8,10 @@ use League\Flysystem\Filesystem;
 use ReflectionClass;
 use ReflectionException;
 
+/**
+ * Class Templater
+ * @package RiotQuest\Components\Framework\Templater
+ */
 class Templater
 {
 

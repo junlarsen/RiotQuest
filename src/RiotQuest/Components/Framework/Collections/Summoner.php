@@ -2,9 +2,6 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Client;
 use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Contracts\LeagueException;
@@ -31,7 +28,6 @@ class Summoner extends Collection
      * Get the current summoner icon link
      *
      * @return string
-     * @throws InvalidArgumentException
      */
     public function getSummonerIcon()
     {
@@ -42,9 +38,6 @@ class Summoner extends Collection
      * Get the ranked positions for summoner
      *
      * @return LeagueEntryList
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getRanked()
@@ -55,10 +48,8 @@ class Summoner extends Collection
     /**
      * Get the matchlist for summoner
      *
+     * @param array $filters
      * @return MatchHistory
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getMatchlist($filters = [])
@@ -70,9 +61,6 @@ class Summoner extends Collection
      * Get the total mastery score for summoner
      *
      * @return int
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getMasteryScore()
@@ -84,9 +72,6 @@ class Summoner extends Collection
      * Get all masteries for summoner
      *
      * @return ChampionMasteryList
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getMasteryList()
@@ -98,9 +83,6 @@ class Summoner extends Collection
      * Get the live game for summoner
      *
      * @return CurrentGameInfo
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getCurrentGame()
@@ -112,9 +94,6 @@ class Summoner extends Collection
      * Get the set third-party-code for summoner
      *
      * @return string
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getThirdPartyCode()
@@ -126,9 +105,6 @@ class Summoner extends Collection
      * Returns whether this user is unranked or not
      *
      * @return bool
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function isUnranked()

@@ -12,6 +12,9 @@ namespace RiotQuest\Components\Framework\Cache;
 class RequestCache extends Cache
 {
 
+    /**
+     * @var string
+     */
     protected $namespace = 'requests/';
 
 }

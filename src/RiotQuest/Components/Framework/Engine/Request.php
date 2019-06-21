@@ -7,9 +7,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Components\Framework\Client\Application;
-use RiotQuest\Components\Framework\Endpoints\Template;
 use RiotQuest\Contracts\APIException;
 use RiotQuest\Contracts\LeagueException;
 
@@ -27,6 +25,9 @@ use RiotQuest\Contracts\LeagueException;
 class Request
 {
 
+    /**
+     * @var array
+     */
     private $vars = [];
 
     /**

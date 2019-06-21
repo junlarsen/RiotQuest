@@ -8,6 +8,10 @@ use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use RiotQuest\Contracts\LeagueException;
 
+/**
+ * Class Cache
+ * @package RiotQuest\Components\Framework\Cache
+ */
 class Cache
 {
 
@@ -51,6 +55,7 @@ class Cache
      * @param null $default
      * @return mixed|null
      * @throws FileNotFoundException
+     * @throws LeagueException
      */
     public function get($key, $default = null)
     {
@@ -72,6 +77,8 @@ class Cache
     /**
      * @param $values
      * @param null $ttl
+     * @throws FileExistsException
+     * @throws FileNotFoundException
      */
     public function setMultiple($values, $ttl = null): void
     {
@@ -84,6 +91,7 @@ class Cache
      * @param $key
      * @return bool
      * @throws FileNotFoundException
+     * @throws LeagueException
      */
     public function has($key): bool
     {

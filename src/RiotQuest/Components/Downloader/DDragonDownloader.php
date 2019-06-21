@@ -11,6 +11,10 @@ use RiotQuest\Components\Framework\Engine\Utils;
 use RiotQuest\Components\Game\Game;
 use RiotQuest\Contracts\LeagueException;
 
+/**
+ * Class DDragonDownloader
+ * @package RiotQuest\Components\Downloader
+ */
 class DDragonDownloader
 {
 

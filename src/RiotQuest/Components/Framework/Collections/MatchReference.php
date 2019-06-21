@@ -3,9 +3,6 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Client;
 use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Contracts\LeagueException;
@@ -53,9 +50,6 @@ class MatchReference extends Collection
      * Get the current match for this reference
      *
      * @return mixed
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getMatch()
@@ -63,6 +57,10 @@ class MatchReference extends Collection
         return Client::match($this->region)->id($this->gameId);
     }
 
+    /**
+     * @return MatchTimeline
+     * @throws LeagueException
+     */
     public function getTimeline()
     {
         return Client::match($this->region)->timeline($this->gameId);

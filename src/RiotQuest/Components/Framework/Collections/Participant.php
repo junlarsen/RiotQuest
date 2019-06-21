@@ -2,9 +2,6 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Contracts\LeagueException;
@@ -33,9 +30,6 @@ class Participant extends Collection
      * Get the summoner object of this participant
      *
      * @return Summoner
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getSummoner()

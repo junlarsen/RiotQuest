@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Client;
 
+use League\Flysystem\FileExistsException;
+use League\Flysystem\FileNotFoundException;
 use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\DataProviders\BaseProvider;
 use RiotQuest\Components\DataProviders\DataDragon;
@@ -140,6 +142,9 @@ class Application
      * @param string $key
      * @return bool
      * @throws InvalidArgumentException
+     * @throws FileNotFoundException
+     * @throws LeagueException
+     * @throws LeagueException
      */
     public function hittable(string $region, string $endpoint, string $key): bool
     {
@@ -150,8 +155,12 @@ class Application
      * @param string $region
      * @param string $endpoint
      * @param string $key
-     * @param array $limits
+     * @param $limits
      * @throws InvalidArgumentException
+     * @throws FileExistsException
+     * @throws FileNotFoundException
+     * @throws LeagueException
+     * @throws LeagueException
      */
     public function register(string $region, string $endpoint, string $key, $limits): void
     {

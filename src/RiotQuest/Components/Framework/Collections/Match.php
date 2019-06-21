@@ -3,9 +3,6 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Contracts\LeagueException;
 
@@ -37,9 +34,6 @@ class Match extends Collection
      * Gets the timeline for this match
      *
      * @return MatchTimeline
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getTimeline()

@@ -7,7 +7,12 @@ use League\Flysystem\FileNotFoundException;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\Framework\Client\Application;
+use RiotQuest\Contracts\LeagueException;
 
+/**
+ * Class Manager
+ * @package RiotQuest\Components\Framework\RateLimit
+ */
 class Manager
 {
 
@@ -20,6 +25,7 @@ class Manager
 
     /**
      * Manager constructor.
+     * @throws LeagueException
      */
     public function __construct()
     {
@@ -36,6 +42,7 @@ class Manager
      * @throws FileExistsException
      * @throws FileNotFoundException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
     public function registerCall(string $region, string $endpoint = 'default', string $key = 'standard', array $limits = [1, 5])
     {
@@ -63,6 +70,8 @@ class Manager
      * @return bool
      * @throws FileNotFoundException
      * @throws InvalidArgumentException
+     * @throws LeagueException
+     * @throws LeagueException
      */
     public function canRequest(string $region, string $endpoint = 'default', string $key = 'standard')
     {

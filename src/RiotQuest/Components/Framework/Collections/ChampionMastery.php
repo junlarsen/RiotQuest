@@ -4,9 +4,6 @@ namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\SimpleCache\InvalidArgumentException;
-use ReflectionException;
 use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Framework\Client\Client;
 use RiotQuest\Contracts\LeagueException;
@@ -35,9 +32,6 @@ class ChampionMastery extends Collection
      * Gets the summoner which holds this mastery
      *
      * @return Summoner
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
      * @throws LeagueException
      */
     public function getSummoner()
