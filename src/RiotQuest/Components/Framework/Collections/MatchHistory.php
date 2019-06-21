@@ -21,7 +21,7 @@ class MatchHistory extends Collection
      * Checks if given match is in this list
      *
      * @param $id
-     * @return MatchReference
+     * @return MatchReference|false
      */
     public function getMatch(int $id)
     {
@@ -39,7 +39,7 @@ class MatchHistory extends Collection
      */
     public function getWhereQueue(int $id)
     {
-        $matches = array_values($this->matches->filter(function (MatchReference $e) use ($id) {
+        $matches = array_values($this->matches->filterArr(function (MatchReference $e) use ($id) {
             return $e->queue == $id;
         }));
         return new static([
@@ -58,7 +58,7 @@ class MatchHistory extends Collection
      */
     public function getWhereChampion(int $id)
     {
-        $matches = array_values($this->matches->filter(function (MatchReference $e) use ($id) {
+        $matches = array_values($this->matches->filterArr(function (MatchReference $e) use ($id) {
             return $e->champion == $id;
         }));
         return new static([
@@ -77,7 +77,7 @@ class MatchHistory extends Collection
      */
     public function getWhereSeason(int $id)
     {
-        $matches = array_values($this->matches->filter(function (MatchReference $e) use ($id) {
+        $matches = array_values($this->matches->filterArr(function (MatchReference $e) use ($id) {
             return $e->season == $id;
         }));
         return new static([

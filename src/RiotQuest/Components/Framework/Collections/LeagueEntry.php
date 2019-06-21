@@ -2,6 +2,8 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use RiotQuest\Client;
+
 /**
  * Class LeagueEntry
  *
@@ -25,5 +27,55 @@ namespace RiotQuest\Components\Framework\Collections;
  * @package RiotQuest\Tests\Collections
  */
 class LeagueEntry extends Collection {
-    
+
+    /**
+     * Get the winrate for this player
+     *
+     * @return float|int
+     */
+    public function getWinrate()
+    {
+        return $this->wins / ($this->wins + $this->losses) * 100;
+    }
+    /**
+     * Get the league string (eg. BRONZE I 76 LP)
+     *
+     * @return string
+     */
+    public function getFormattedName()
+    {
+        return sprintf("%s %s %d LP", $this->tier, $this->rank, $this->leaguePoints);
+    }
+    /**
+     * Get amount of games played
+     *
+     * @return int
+     */
+    public function getGamesPlayed()
+    {
+        return ($this->wins ?: 0) + ($this->losses ?: 0);
+    }
+    /**
+     * Get the summoner object of this player
+     *
+     * @return Summoner
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     * @throws \RiotQuest\Contracts\LeagueException
+     */
+    public function getSummoner()
+    {
+        return Client::summoner( $this->region)->id($this->summonerId);
+    }
+    /**
+     * Determine whether this player is in a promotional series
+     *
+     * @return bool
+     */
+    public function isInMiniSeries()
+    {
+        return count($this->miniSeries) > 0;
+    }
+
 }

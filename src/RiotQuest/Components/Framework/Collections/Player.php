@@ -32,7 +32,7 @@ class Player extends Collection
      */
     public function getSummonerIcon()
     {
-        return Provider::getProfileIcon($this->profileIconId);
+        return Provider::getProfileIcon($this->profileIcon);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace RiotQuest\Components\Framework\Engine;
 use RiotQuest\Components\Framework\Collections\ChampionInfo;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
 use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
+use RiotQuest\Components\Framework\Collections\Collection;
 use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
 use RiotQuest\Components\Framework\Collections\FeaturedGames;
 use RiotQuest\Components\Framework\Collections\League;
@@ -208,6 +209,7 @@ class Library
      */
     public static function traverse($data, array $template, string $region)
     {
+        /** @var Collection $col */
         $col = new $template['_class'];
         $col->setRegion($region);
         if (isset($template['_list'])) {

@@ -195,6 +195,7 @@ class Request
                     'http_errors' => false
                 ]
             );
+            /** @noinspection PhpParamsInspection */
             Application::getInstance()->register($request['region'], $request['name'], $request['use'], explode(':', $response->getHeader('X-Method-Rate-Limit')[0]));
 
             // Work with the response

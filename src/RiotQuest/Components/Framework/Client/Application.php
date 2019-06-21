@@ -143,10 +143,10 @@ class Application
      * @param string $region
      * @param string $endpoint
      * @param string $key
-     * @param string $limits
+     * @param array $limits
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function register(string $region, string $endpoint, string $key, $limits = 'default'): void
+    public function register(string $region, string $endpoint, string $key, $limits): void
     {
         $this->getManager()->registerCall($region, $endpoint, $key, $limits);
         $this->getManager()->registerCall($region, 'default', $key, $this->keys[strtoupper($key)]->getLimits());

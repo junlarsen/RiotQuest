@@ -37,7 +37,7 @@ class Summoner extends Collection
     /**
      * Get the ranked positions for summoner
      *
-     * @return LeaguePositionList
+     * @return LeagueEntryList
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
