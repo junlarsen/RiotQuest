@@ -17,5 +17,4 @@ class Translation extends Collection
 {
 
 
-
 }

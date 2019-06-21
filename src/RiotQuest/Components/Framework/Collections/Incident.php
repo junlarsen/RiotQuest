@@ -18,5 +18,4 @@ class Incident extends Collection
 {
 
 
-
 }

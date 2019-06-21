@@ -2,9 +2,13 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
 use RiotQuest\Components\Framework\Collections\ChampionMastery;
 use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
 use RiotQuest\Components\Framework\Engine\Request;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class League
@@ -21,10 +25,10 @@ class Mastery extends Template
      *
      * @param $id
      * @return ChampionMasteryList
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function all(string $id): ChampionMasteryList
     {
@@ -44,10 +48,10 @@ class Mastery extends Template
      * @param $id
      * @param ChampionMastery
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function id(string $id, $champion): ChampionMastery
     {
@@ -66,12 +70,12 @@ class Mastery extends Template
      *
      * @param $id
      * @return integer
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
-    public function score(string $id): int 
+    public function score(string $id): int
     {
         return Request::make(['mastery', __FUNCTION__])
             ->useStandard()

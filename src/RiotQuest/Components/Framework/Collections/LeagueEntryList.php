@@ -11,7 +11,8 @@ namespace RiotQuest\Components\Framework\Collections;
  *
  * @package RiotQuest\Tests\Collections
  */
-class LeagueEntryList extends Collection {
+class LeagueEntryList extends Collection
+{
 
     /**
      * Get the SoloQ LeaguePosition
@@ -24,6 +25,7 @@ class LeagueEntryList extends Collection {
             return $e->queueType === 'RANKED_SOLO_5x5';
         })[0];
     }
+
     /**
      * Get the 3v3 LeaguePosition
      *
@@ -35,6 +37,7 @@ class LeagueEntryList extends Collection {
             return $e->queueType === 'RANKED_FLEX_SR';
         })[0];
     }
+
     /**
      * Get the 5v5 LeaguePosition
      *
@@ -46,6 +49,7 @@ class LeagueEntryList extends Collection {
             return $e->queueType === 'RANKED_FLEX_TT';
         })[0];
     }
+
     /**
      * Get the queues this user is ranked in
      *

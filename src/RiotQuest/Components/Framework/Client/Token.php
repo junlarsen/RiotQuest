@@ -66,7 +66,7 @@ class Token
      *
      * @return array
      */
-    public function getLimits(): array 
+    public function getLimits(): array
     {
         return explode(':', $this->limits);
     }

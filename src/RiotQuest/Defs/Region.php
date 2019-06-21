@@ -2,7 +2,8 @@
 
 namespace RiotQuest\Defs;
 
-class Region {
+class Region
+{
 
     const BRAZIL = "br1";
     const EUROPE_NORDIC = "eun1";

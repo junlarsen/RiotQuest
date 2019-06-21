@@ -16,5 +16,4 @@ class GameCustomizationObject extends Collection
 {
 
 
-
 }

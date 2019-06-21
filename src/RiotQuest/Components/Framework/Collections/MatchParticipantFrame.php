@@ -24,5 +24,4 @@ class MatchParticipantFrame extends Collection
 {
 
 
-
 }

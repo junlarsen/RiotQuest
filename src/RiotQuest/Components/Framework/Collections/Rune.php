@@ -17,5 +17,4 @@ class Rune extends Collection
 {
 
 
-
 }

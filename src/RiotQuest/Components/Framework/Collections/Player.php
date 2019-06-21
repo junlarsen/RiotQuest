@@ -2,8 +2,12 @@
 
 namespace RiotQuest\Components\Framework\Collections;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
 use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Framework\Client\Client;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class Player
@@ -28,7 +32,7 @@ class Player extends Collection
      * Get the summoner icon link
      *
      * @return string
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function getSummonerIcon()
     {
@@ -39,10 +43,10 @@ class Player extends Collection
      * Get the summoner object
      *
      * @return Summoner
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function getSummoner()
     {

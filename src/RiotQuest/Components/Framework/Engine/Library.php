@@ -158,7 +158,7 @@ class Library
     public static function loadTemplate(string $path)
     {
         $path = strtolower(array_reverse(explode('\\', $path))[0]) . '.json';
-        
+
         if (!isset(static::$templates[$path])) {
             $template = json_decode(file_get_contents(__DIR__ . '/../../../../storage/templates/' . $path), 1);
             static::$templates[$path] = $template;
@@ -219,7 +219,7 @@ class Library
                     : $col->put($key, $value);
             }
         } else {
-            foreach ((array) $data as $key => $value) {
+            foreach ((array)$data as $key => $value) {
                 // If it's a recursive component
                 if (is_array($template[$key])) {
                     // Recursively traverse

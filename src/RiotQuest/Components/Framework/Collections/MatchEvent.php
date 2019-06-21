@@ -37,5 +37,4 @@ class MatchEvent extends Collection
 {
 
 
-
 }

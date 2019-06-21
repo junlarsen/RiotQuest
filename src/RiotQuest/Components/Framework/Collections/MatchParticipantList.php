@@ -15,5 +15,4 @@ class MatchParticipantList extends Collection
 {
 
 
-
 }

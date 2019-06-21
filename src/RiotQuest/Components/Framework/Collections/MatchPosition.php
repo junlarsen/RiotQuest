@@ -16,5 +16,4 @@ class MatchPosition extends Collection
 {
 
 
-
 }

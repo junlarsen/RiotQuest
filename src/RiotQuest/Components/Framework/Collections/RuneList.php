@@ -5,7 +5,7 @@ namespace RiotQuest\Components\Framework\Collections;
 /**
  * Class RuneList
  *
- * @deprecated 
+ * @deprecated
  * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatch
  *
  * @list Rune
@@ -14,7 +14,6 @@ namespace RiotQuest\Components\Framework\Collections;
  */
 class RuneList extends Collection
 {
-
 
 
 }

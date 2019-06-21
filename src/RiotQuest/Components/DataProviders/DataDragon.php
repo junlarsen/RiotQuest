@@ -2,10 +2,14 @@
 
 namespace RiotQuest\Components\DataProviders;
 
+use League\Flysystem\FileExistsException;
+use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\Framework\Engine\Library;
 use RiotQuest\Contracts\DataProviderInterface;
+use RiotQuest\Contracts\LeagueException;
 
-class DataDragon extends BaseProvider implements DataProviderInterface {
+class DataDragon extends BaseProvider implements DataProviderInterface
+{
 
     /**
      * Get profile icon
@@ -20,7 +24,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface {
 
     /**
      * Get square icon for id
-     * 
+     *
      * @param string $id
      * @return string|null
      */
@@ -34,14 +38,15 @@ class DataDragon extends BaseProvider implements DataProviderInterface {
      *
      * @param $id
      * @return string
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws FileExistsException
+     * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public static function getChampionName($id): string {
+    public static function getChampionName($id): string
+    {
         return array_values(array_filter(static::get('champion')['data'], function ($el) use ($id) {
-            return $el['key'] == $id || $el['id'] == $id || $el['name'] == $id;
-        }))[0]['name'] ?? '';
+                return $el['key'] == $id || $el['id'] == $id || $el['name'] == $id;
+            }))[0]['name'] ?? '';
     }
 
     /**
@@ -49,11 +54,12 @@ class DataDragon extends BaseProvider implements DataProviderInterface {
      *
      * @param $id
      * @return int
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws FileExistsException
+     * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public static function getChampionId($id): int {
+    public static function getChampionId($id): int
+    {
         return array_values(array_filter(static::get('champion')['data'], function ($el) use ($id) {
                 return $el['key'] == $id || $el['id'] == $id || $el['name'] == $id;
             }))[0]['id'] ?? '';
@@ -64,11 +70,12 @@ class DataDragon extends BaseProvider implements DataProviderInterface {
      *
      * @param $id
      * @return string
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws FileExistsException
+     * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public static function getChampionKey($id): string {
+    public static function getChampionKey($id): string
+    {
         return array_values(array_filter(static::get('champion')['data'], function ($el) use ($id) {
                 return $el['key'] == $id || $el['id'] == $id || $el['name'] == $id;
             }))[0]['key'] ?? '';

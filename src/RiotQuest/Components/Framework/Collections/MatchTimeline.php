@@ -16,5 +16,4 @@ class MatchTimeline extends Collection
 {
 
 
-
 }

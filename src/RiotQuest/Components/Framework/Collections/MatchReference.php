@@ -3,8 +3,12 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
 use RiotQuest\Client;
 use RiotQuest\Components\DataProviders\Provider;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class MatchReference
@@ -49,10 +53,10 @@ class MatchReference extends Collection
      * Get the current match for this reference
      *
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function getMatch()
     {
@@ -71,7 +75,7 @@ class MatchReference extends Collection
      */
     public function getRelativeStartTimeMs()
     {
-        return Carbon::now()->diffInMilliseconds((int) $this->timestamp);
+        return Carbon::now()->diffInMilliseconds((int)$this->timestamp);
     }
 
 }

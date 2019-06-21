@@ -3,6 +3,7 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 /**
  * Class Message
@@ -38,7 +39,7 @@ class Message extends Collection
     /**
      * Get the Carbon interface for creation date
      *
-     * @return Carbon|\Carbon\CarbonInterface
+     * @return Carbon|CarbonInterface
      */
     public function getCreationDate()
     {
@@ -48,7 +49,7 @@ class Message extends Collection
     /**
      * Get the Carbon interface for last update time
      *
-     * @return Carbon|\Carbon\CarbonInterface
+     * @return Carbon|CarbonInterface
      */
     public function getLastUpdateDate()
     {

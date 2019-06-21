@@ -15,5 +15,4 @@ class TeamStatsList extends Collection
 {
 
 
-
 }

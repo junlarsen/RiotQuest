@@ -2,7 +2,10 @@
 
 namespace RiotQuest\Components\Framework\RateLimit;
 
+use League\Flysystem\FileExistsException;
+use League\Flysystem\FileNotFoundException;
 use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\Framework\Client\Application;
 
 class Manager
@@ -30,9 +33,9 @@ class Manager
      * @param string $endpoint
      * @param string $key
      * @param array $limits
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \League\Flysystem\FileNotFoundException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws FileExistsException
+     * @throws FileNotFoundException
+     * @throws InvalidArgumentException
      */
     public function registerCall(string $region, string $endpoint = 'default', string $key = 'standard', array $limits = [1, 5])
     {
@@ -44,7 +47,7 @@ class Manager
         }
 
         $this->cache->set($ref, json_encode([
-            'max' => (int) ($now['max'] ?? $limits[0]),
+            'max' => (int)($now['max'] ?? $limits[0]),
             'count' => (isset($now['count']) ? ($now['count'] + 1) : 0),
             'ttl' => $now['ttl'] ?? (float)time() + $limits[1]
         ]), $now['ttl'] ? $now['ttl'] - time() : $limits[1]);
@@ -58,8 +61,8 @@ class Manager
      * @param string $endpoint
      * @param string $key
      * @return bool
-     * @throws \League\Flysystem\FileNotFoundException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws FileNotFoundException
+     * @throws InvalidArgumentException
      */
     public function canRequest(string $region, string $endpoint = 'default', string $key = 'standard')
     {
@@ -71,7 +74,7 @@ class Manager
 
             return ($limits['count'] + 1) < $limits['max'];
         }
-        
+
         return true;
     }
 

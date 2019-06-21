@@ -2,12 +2,17 @@
 
 namespace RiotQuest\Components\DataProviders;
 
+use League\Flysystem\FileExistsException;
+use League\Flysystem\FileNotFoundException;
+use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\Downloader\DDragonDownloader;
 use RiotQuest\Components\Framework\Client\Application;
 use RiotQuest\Components\Framework\Engine\Library;
 use RiotQuest\Components\Game\Game;
+use RiotQuest\Contracts\LeagueException;
 
-class BaseProvider {
+class BaseProvider
+{
 
     /**
      * The version to pull data from
@@ -24,14 +29,15 @@ class BaseProvider {
     protected static $load = [];
 
     /**
+     * @throws FileExistsException
+     * @throws FileNotFoundException
+     * @throws InvalidArgumentException
+     * @throws LeagueException
      * @internal Boot to set version
      *
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \League\Flysystem\FileNotFoundException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \RiotQuest\Contracts\LeagueException
      */
-    public static function onEnable(): void {
+    public static function onEnable(): void
+    {
         static::$version = Game::current();
         $manifest = json_decode(file_get_contents(__DIR__ . "/../../../storage/static/manifest.json"), 1);
 
@@ -48,18 +54,20 @@ class BaseProvider {
      *
      * @param string $version
      */
-    public static function override(string $version): void {
+    public static function override(string $version): void
+    {
         static::$version = $version;
     }
 
     /**
      * @param string $file
      * @return array
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws FileExistsException
+     * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public static function get(string $file): array {
+    public static function get(string $file): array
+    {
         if (!file_exists(__DIR__ . "/../../../storage/static/" . Application::getInstance()->getLocale() . "/champion.json")) {
             DDragonDownloader::download();
         }

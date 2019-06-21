@@ -15,5 +15,4 @@ class TranslationList extends Collection
 {
 
 
-
 }

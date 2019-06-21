@@ -2,9 +2,13 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
+use RiotQuest\Components\Framework\Collections\League as LeagueCollection;
 use RiotQuest\Components\Framework\Collections\LeagueEntryList;
 use RiotQuest\Components\Framework\Engine\Request;
-use RiotQuest\Components\Framework\Collections\League as LeagueCollection;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class League
@@ -21,10 +25,10 @@ class League extends Template
      *
      * @param $id
      * @return LeagueEntryList
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function positions(string $id): LeagueEntryList
     {
@@ -43,10 +47,10 @@ class League extends Template
      *
      * @param $id
      * @return LeagueCollection
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function id(string $id): LeagueCollection
     {
@@ -68,11 +72,12 @@ class League extends Template
      * @param string $division
      * @param int $page
      * @return LeagueEntryList
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function entries(string $queue, string $tier, string $division, $page = 1): LeagueEntryList {
+    public function entries(string $queue, string $tier, string $division, $page = 1): LeagueEntryList
+    {
         return Request::make(['league', __FUNCTION__])
             ->useStandard()
             ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/entries/{queue}/{tier}/{division}?page={page}')
@@ -87,11 +92,11 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getChallengerLeague
      *
      * @param $queue
-     * @return \RiotQuest\Components\Framework\Collections\League
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @return LeagueCollection
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function challenger(string $queue): LeagueCollection
     {
@@ -109,11 +114,11 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getMasterLeague
      *
      * @param $queue
-     * @return \RiotQuest\Components\Framework\Collections\League
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @return LeagueCollection
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function master(string $queue): LeagueCollection
     {
@@ -131,11 +136,11 @@ class League extends Template
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getGrandmasterLeague
      *
      * @param $queue
-     * @return \RiotQuest\Components\Framework\Collections\League
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @return LeagueCollection
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function grandmaster(string $queue): LeagueCollection
     {

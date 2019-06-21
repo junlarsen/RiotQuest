@@ -100,7 +100,7 @@ class ChampionMasteryList extends Collection
     public function getWhereChestGranted()
     {
         return new Collection(array_values($this->filterArr(function (ChampionMastery $e) {
-            return (bool) $e->chestGranted;
+            return (bool)$e->chestGranted;
         })));
     }
 

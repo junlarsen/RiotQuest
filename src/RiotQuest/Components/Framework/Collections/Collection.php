@@ -15,7 +15,8 @@ use Illuminate\Support\Collection as Module;
  *
  * @package RiotQuest\Components\Framework\Collections
  */
-class Collection extends Module {
+class Collection extends Module
+{
 
     /**
      * Region identifier for requests
@@ -39,7 +40,8 @@ class Collection extends Module {
     /**
      * @param string $region
      */
-    public function setRegion(string $region) {
+    public function setRegion(string $region)
+    {
         $this->region = $region;
     }
 

@@ -24,5 +24,4 @@ class ParticipantTimeline extends Collection
 {
 
 
-
 }

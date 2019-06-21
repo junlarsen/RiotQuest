@@ -3,6 +3,7 @@
 namespace RiotQuest\Components\Framework\Collections;
 
 use RiotQuest\Components\DataProviders\Provider;
+
 /**
  * Class MatchParticipant
  *

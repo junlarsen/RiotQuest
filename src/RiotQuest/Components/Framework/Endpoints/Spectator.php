@@ -2,9 +2,13 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
 use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
 use RiotQuest\Components\Framework\Collections\FeaturedGames;
 use RiotQuest\Components\Framework\Engine\Request;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class League
@@ -20,10 +24,10 @@ class Spectator extends Template
      * @see https://developer.riotgames.com/api-methods/#spectator-v4/GET_getFeaturedGames
      *
      * @return FeaturedGames
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function featured(): FeaturedGames
     {
@@ -42,10 +46,10 @@ class Spectator extends Template
      *
      * @param $id
      * @return CurrentGameInfo
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function active(string $id): CurrentGameInfo
     {

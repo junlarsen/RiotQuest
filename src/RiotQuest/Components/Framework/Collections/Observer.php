@@ -15,5 +15,4 @@ class Observer extends Collection
 {
 
 
-
 }

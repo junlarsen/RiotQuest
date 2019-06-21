@@ -2,8 +2,12 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
-use RiotQuest\Components\Framework\Engine\Request;
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
 use RiotQuest\Components\Framework\Collections\Summoner as SummonerCollection;
+use RiotQuest\Components\Framework\Engine\Request;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class Summoner
@@ -20,10 +24,10 @@ class Summoner extends Template
      *
      * @param $id
      * @return SummonerCollection
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function account(string $id): SummonerCollection
     {
@@ -37,14 +41,14 @@ class Summoner extends Template
             ->sendRequest();
     }
 
-    /**                                            
+    /**
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerName
      *
      * @param string $id
      * @return SummonerCollection
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws LeagueException
      */
     public function name(string $id): SummonerCollection
     {
@@ -63,10 +67,10 @@ class Summoner extends Template
      *
      * @param $id
      * @return SummonerCollection
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function unique(string $id): SummonerCollection
     {
@@ -85,10 +89,10 @@ class Summoner extends Template
      *
      * @param $id
      * @return SummonerCollection
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function id(string $id): SummonerCollection
     {

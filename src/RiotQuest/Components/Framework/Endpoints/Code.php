@@ -2,7 +2,11 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
 use RiotQuest\Components\Framework\Engine\Request;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class League
@@ -19,10 +23,10 @@ class Code extends Template
      *
      * @param $id
      * @return string
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function id(string $id)
     {

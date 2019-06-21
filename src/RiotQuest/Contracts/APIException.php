@@ -6,5 +6,4 @@ class APIException extends LeagueException
 {
 
 
-
 }

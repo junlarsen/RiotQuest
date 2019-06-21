@@ -5,9 +5,11 @@ namespace RiotQuest\ServiceProviders;
 use Illuminate\Support\ServiceProvider;
 use RiotQuest\Client;
 
-class LeagueServiceProvider extends ServiceProvider {
+class LeagueServiceProvider extends ServiceProvider
+{
 
-    public function boot(): void {
+    public function boot(): void
+    {
         Client::boot();
     }
 

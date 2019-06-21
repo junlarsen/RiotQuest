@@ -3,20 +3,24 @@
 namespace RiotQuest\Components\Framework\Templater;
 
 use League\Flysystem\Adapter\Local;
+use League\Flysystem\FileExistsException;
 use League\Flysystem\Filesystem;
 use ReflectionClass;
+use ReflectionException;
 
-class Templater {
+class Templater
+{
 
     /**
+     * @param string $class
+     * @return array
+     * @throws ReflectionException
      * @internal
      * Reads a class and creates a template for it.
      *
-     * @param string $class
-     * @return array
-     * @throws \ReflectionException
      */
-    public static function generateSingle(string $class) {
+    public static function generateSingle(string $class)
+    {
         $template = [];
         $ref = new ReflectionClass($class);
         if (strpos($class, 'List')) {
@@ -42,13 +46,14 @@ class Templater {
     }
 
     /**
-     * @internal 
+     * @throws FileExistsException
+     * @throws ReflectionException
+     * @internal
      * Generates all collection templates
      *
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \ReflectionException
      */
-    public static function generateAll() {
+    public static function generateAll()
+    {
         $in = new Filesystem(new Local(__DIR__ . '/../Collections/'));
         $out = new Filesystem(new Local(__DIR__ . '/../../../../storage/'));
 
@@ -61,5 +66,5 @@ class Templater {
             }
         }
     }
-    
+
 }

@@ -2,8 +2,12 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
 use RiotQuest\Components\Framework\Collections\ShardStatus;
 use RiotQuest\Components\Framework\Engine\Request;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class League
@@ -19,10 +23,10 @@ class Status extends Template
      * @see https://developer.riotgames.com/api-methods/#lol-status-v3/GET_getShardData
      *
      * @return ShardStatus
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function shard(): ShardStatus
     {

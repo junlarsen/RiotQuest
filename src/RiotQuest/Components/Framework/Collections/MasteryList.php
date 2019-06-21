@@ -16,5 +16,4 @@ class MasteryList extends Collection
 {
 
 
-
 }

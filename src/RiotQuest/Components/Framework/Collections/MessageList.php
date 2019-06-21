@@ -15,5 +15,4 @@ class MessageList extends Collection
 {
 
 
-
 }

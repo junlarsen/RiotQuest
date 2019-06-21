@@ -15,5 +15,4 @@ class MatchFrameList extends Collection
 {
 
 
-
 }

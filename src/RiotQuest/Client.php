@@ -2,8 +2,8 @@
 
 namespace RiotQuest;
 
-use RiotQuest\Components\Framework\Client\Token;
 use RiotQuest\Components\Framework\Client\Client as Module;
+use RiotQuest\Components\Framework\Client\Token;
 
 /**
  * Class Client

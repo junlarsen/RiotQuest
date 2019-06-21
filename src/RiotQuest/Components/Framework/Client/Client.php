@@ -26,15 +26,18 @@ class Client
     /**
      * @throws LeagueException
      */
-    public static function boot(): void {
+    public static function boot(): void
+    {
         Application::getInstance()->load();
     }
 
-    public static function setLocale(string $locale): void {
+    public static function setLocale(string $locale): void
+    {
         Application::getInstance()->setLocale($locale);
     }
 
-    public static function setProvider(string $provider): void {
+    public static function setProvider(string $provider): void
+    {
         Application::getInstance()->setProvider($provider);
     }
 
@@ -136,8 +139,8 @@ class Client
 
     /**
      * @return bool
-     * @todo
      * @throws LeagueException
+     * @todo
      */
     public static function stub(): void
     {
@@ -146,10 +149,10 @@ class Client
 
     /**
      * @return bool
-     * @todo
      * @throws LeagueException
+     * @todo
      */
-    public static function tournament(): void 
+    public static function tournament(): void
     {
         throw new LeagueException("Unsupported Endpoint.");
     }

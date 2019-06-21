@@ -2,10 +2,13 @@
 
 namespace RiotQuest\Components\Game;
 
+use League\Flysystem\FileExistsException;
+use League\Flysystem\FileNotFoundException;
 use RiotQuest\Components\Framework\Client\Application;
 use RiotQuest\Contracts\LeagueException;
 
-class Game {
+class Game
+{
 
     /**
      * Current Game version
@@ -16,13 +19,13 @@ class Game {
 
     /**
      * Get latest Game Version and caches for 2 hours
-     * 
+     *
      * @return string
      * @throws LeagueException
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileExistsException
+     * @throws FileNotFoundException
      */
-    public static function current(): string 
+    public static function current(): string
     {
         if (!static::$current) {
             if (!Application::getInstance()->getCache()->has('riotquest.framework.version')) {

@@ -2,16 +2,21 @@
 
 namespace RiotQuest\Components\Framework\Client;
 
+use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\DataProviders\BaseProvider;
 use RiotQuest\Components\DataProviders\DataDragon;
 use RiotQuest\Components\DataProviders\Provider;
-use RiotQuest\Components\Framework\Cache\RateLimitCache;
 use RiotQuest\Components\Framework\Cache\Cache;
+use RiotQuest\Components\Framework\Cache\RateLimitCache;
 use RiotQuest\Components\Framework\Cache\RequestCache;
 use RiotQuest\Components\Framework\RateLimit\Manager;
 use RiotQuest\Contracts\LeagueException;
 use Symfony\Component\Dotenv\Dotenv;
 
+/**
+ * Class Application
+ * @package RiotQuest\Components\Framework\Client
+ */
 class Application
 {
 
@@ -69,7 +74,7 @@ class Application
 
     /**
      * Application singleton function
-     * 
+     *
      * @return Application
      */
     public static function getInstance(): Application
@@ -132,7 +137,7 @@ class Application
      * @param string $endpoint
      * @param string $key
      * @return bool
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function hittable(string $region, string $endpoint, string $key): bool
     {
@@ -144,7 +149,7 @@ class Application
      * @param string $endpoint
      * @param string $key
      * @param array $limits
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function register(string $region, string $endpoint, string $key, $limits): void
     {
@@ -188,7 +193,7 @@ class Application
     /**
      * @return string
      */
-    public function getProvider(): string 
+    public function getProvider(): string
     {
         return $this->provider;
     }
@@ -196,7 +201,7 @@ class Application
     /**
      * @param string $provider
      */
-    public function setProvider(string $provider): void 
+    public function setProvider(string $provider): void
     {
         $this->provider = $provider;
     }
@@ -216,9 +221,9 @@ class Application
     }
 
     /**
-     * @return Token[]
+     * @return Token[]                              
      */
-    public function getKeys(): array 
+    public function getKeys(): array
     {
         return $this->keys;
     }

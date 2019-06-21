@@ -3,13 +3,16 @@
 namespace RiotQuest\Components\Framework\Cache;
 
 use League\Flysystem\Adapter\Local;
+use League\Flysystem\FileExistsException;
+use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use RiotQuest\Contracts\LeagueException;
 
-class Cache {
+class Cache
+{
 
     /**
-     * @var string 
+     * @var string
      */
     protected $namespace = '';
 
@@ -30,16 +33,16 @@ class Cache {
      * @param $key
      * @param $value
      * @param null $ttl
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileExistsException
+     * @throws FileNotFoundException
      */
     public function set($key, $value, $ttl = null): void
     {
         if (is_string($ttl)) $ttl = explode(',', $ttl)[0];
 
         $this->write($key, json_encode([
-            'data' => (string) $value,
-            'ttl' => ($ttl === null) ? null : (float) (time() + $ttl)
+            'data' => (string)$value,
+            'ttl' => ($ttl === null) ? null : (float)(time() + $ttl)
         ]));
     }
 
@@ -47,7 +50,7 @@ class Cache {
      * @param $key
      * @param null $default
      * @return mixed|null
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function get($key, $default = null)
     {
@@ -63,14 +66,14 @@ class Cache {
     {
         return array_map(function ($e) use ($default) {
             return $this->get($e, $default);
-        }, (array) $keys);
+        }, (array)$keys);
     }
 
     /**
      * @param $values
      * @param null $ttl
      */
-    public function setMultiple($values, $ttl = null): void 
+    public function setMultiple($values, $ttl = null): void
     {
         foreach ($values as $key => $value) {
             $this->set($key, $value, $ttl);
@@ -80,7 +83,7 @@ class Cache {
     /**
      * @param $key
      * @return bool
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public function has($key): bool
     {
@@ -100,9 +103,10 @@ class Cache {
      * @param $real
      * @return array
      * @throws LeagueException
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
-    private function read($real): array {
+    private function read($real): array
+    {
         $key = $this->hash($real);
 
         if ($this->exists($real)) {
@@ -115,10 +119,11 @@ class Cache {
     /**
      * @param $real
      * @param $content
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileExistsException
+     * @throws FileNotFoundException
      */
-    private function write($real, $content): void {
+    private function write($real, $content): void
+    {
         $key = $this->hash($real);
 
         if ($this->exists($real)) {
@@ -132,7 +137,8 @@ class Cache {
      * @param $real
      * @return bool
      */
-    private function exists($real): bool {
+    private function exists($real): bool
+    {
         $key = $this->hash($real);
 
         return $this->fs->has($key);
@@ -144,7 +150,8 @@ class Cache {
      * @param $sub
      * @return string
      */
-    private function hash($sub): string {
+    private function hash($sub): string
+    {
         return md5($sub);
     }
 

@@ -15,5 +15,4 @@ class IncidentList extends Collection
 {
 
 
-
 }

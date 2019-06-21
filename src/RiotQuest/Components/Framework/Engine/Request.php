@@ -2,10 +2,14 @@
 
 namespace RiotQuest\Components\Framework\Engine;
 
+use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\GuzzleException;
+use League\Flysystem\FileExistsException;
+use League\Flysystem\FileNotFoundException;
+use Psr\SimpleCache\InvalidArgumentException;
+use RiotQuest\Components\Framework\Client\Application;
 use RiotQuest\Contracts\APIException;
 use RiotQuest\Contracts\LeagueException;
-use RiotQuest\Components\Framework\Client\Application;
-use GuzzleHttp\Client as HttpClient;
 
 /**
  * Class RequestCache
@@ -137,9 +141,9 @@ class Request
      *
      * @return array|mixed
      * @throws LeagueException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \League\Flysystem\FileNotFoundException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws GuzzleException
+     * @throws FileNotFoundException
+     * @throws InvalidArgumentException
      */
     public function sendRequest()
     {
@@ -156,7 +160,7 @@ class Request
      * @param array $request
      * @return mixed|null
      * @throws LeagueException
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     private function completeFromCache(array $request)
     {
@@ -177,10 +181,10 @@ class Request
      * @return mixed|null
      * @throws APIException
      * @throws LeagueException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \League\Flysystem\FileNotFoundException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws GuzzleException
+     * @throws FileExistsException
+     * @throws FileNotFoundException
+     * @throws InvalidArgumentException
      */
     private function completeFromApi(array $request)
     {
@@ -225,8 +229,8 @@ class Request
      * @param array $request
      * @param $load
      * @throws LeagueException
-     * @throws \League\Flysystem\FileExistsException
-     * @throws \League\Flysystem\FileNotFoundException
+     * @throws FileExistsException
+     * @throws FileNotFoundException
      */
     private function saveToCache(array $request, $load)
     {

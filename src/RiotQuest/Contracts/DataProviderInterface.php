@@ -2,7 +2,8 @@
 
 namespace RiotQuest\Contracts;
 
-interface DataProviderInterface {
+interface DataProviderInterface
+{
 
     public static function getProfileIcon(int $id): string;
 

@@ -15,7 +15,8 @@ use RiotQuest\Components\Framework\Client\Application;
  *
  * @package RiotQuest\Components\DataProviders
  */
-class Provider extends BaseProvider {
+class Provider extends BaseProvider
+{
 
     private static $provider;
 

@@ -2,10 +2,14 @@
 
 namespace RiotQuest\Components\Framework\Endpoints;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\SimpleCache\InvalidArgumentException;
+use ReflectionException;
+use RiotQuest\Components\Framework\Collections\Match as MatchCollection;
 use RiotQuest\Components\Framework\Collections\MatchHistory;
 use RiotQuest\Components\Framework\Collections\MatchTimeline;
-use RiotQuest\Components\Framework\Collections\Match as MatchCollection;
 use RiotQuest\Components\Framework\Engine\Request;
+use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class League
@@ -23,10 +27,10 @@ class Match extends Template
      * @param $id
      * @param $filters
      * @return MatchHistory
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function list(string $id, array $filters = []): MatchHistory
     {
@@ -41,15 +45,15 @@ class Match extends Template
         ], $filters);
 
         $filters = array_map(function ($e) {
-            return (array) $e;
+            return (array)$e;
         }, $filters);
 
         $str = '';
 
         foreach ($filters as $key => $value) {
-             foreach ($value as $item) {
-                 if ($item) $str .= '&' . http_build_query([$key => $item]);
-             }
+            foreach ($value as $item) {
+                if ($item) $str .= '&' . http_build_query([$key => $item]);
+            }
         }
 
         return Request::make(['match', __FUNCTION__])
@@ -67,10 +71,10 @@ class Match extends Template
      *
      * @param $id
      * @return MatchTimeline
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function timeline($id): MatchTimeline
     {
@@ -89,10 +93,10 @@ class Match extends Template
      *
      * @param $id
      * @return MatchCollection
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     * @throws LeagueException
      */
     public function id($id): MatchCollection
     {
