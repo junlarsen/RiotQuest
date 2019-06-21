@@ -5,9 +5,9 @@ namespace RiotQuest\Components\Framework\Client;
 use RiotQuest\Components\DataProviders\BaseProvider;
 use RiotQuest\Components\DataProviders\DataDragon;
 use RiotQuest\Components\DataProviders\Provider;
-use RiotQuest\Components\Framework\Cache\AutoLimitModel;
-use RiotQuest\Components\Framework\Cache\CacheModel;
-use RiotQuest\Components\Framework\Cache\RequestModel;
+use RiotQuest\Components\Framework\Cache\RateLimitCache;
+use RiotQuest\Components\Framework\Cache\Cache;
+use RiotQuest\Components\Framework\Cache\RequestCache;
 use RiotQuest\Components\Framework\RateLimit\Manager;
 use RiotQuest\Contracts\LeagueException;
 use Symfony\Component\Dotenv\Dotenv;
@@ -96,9 +96,9 @@ class Application
     public function load(): void
     {
         $this->caches = [
-            'generic' => new CacheModel(),
-            'request' => new RequestModel(),
-            'limits' => new AutoLimitModel()
+            'generic' => new Cache(),
+            'request' => new RequestCache(),
+            'limits' => new RateLimitCache()
         ];
 
         call_user_func([BaseProvider::class, 'onEnable']);
@@ -203,10 +203,10 @@ class Application
 
     /**
      * @param string $key
-     * @return CacheModel
+     * @return Cache
      * @throws LeagueException
      */
-    public function getCache(string $key = 'generic'): CacheModel
+    public function getCache(string $key = 'generic'): Cache
     {
         if ($this->caches[$key]) {
             return $this->caches[$key];

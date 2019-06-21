@@ -3,13 +3,13 @@
 namespace RiotQuest\Components\Framework\Cache;
 
 /**
- * Class RequestModel
+ * Class RequestCache
  *
  * Model for requests directory
  *
  * @package RiotQuest\Components\Framework\Cache
  */
-class RequestModel extends CacheModel
+class RequestCache extends Cache
 {
 
     protected $namespace = 'requests/';

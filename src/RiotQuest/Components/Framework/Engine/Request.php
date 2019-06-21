@@ -10,7 +10,7 @@ use GuzzleHttp\Client as HttpClient;
 use RiotQuest\Contracts\ParameterException;
 
 /**
- * Class Request
+ * Class RequestCache
  *
  * Definition to send HTTP request to the
  * Riot Games API

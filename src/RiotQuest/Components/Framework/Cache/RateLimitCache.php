@@ -3,13 +3,13 @@
 namespace RiotQuest\Components\Framework\Cache;
 
 /**
- * Class AutoLimitModel
+ * Class RateLimitCache
  *
  * Model for ratelimit directory
  *
  * @package RiotQuest\Components\Framework\Cache
  */
-class AutoLimitModel extends CacheModel
+class RateLimitCache extends Cache
 {
 
     protected $namespace = 'ratelimit/';

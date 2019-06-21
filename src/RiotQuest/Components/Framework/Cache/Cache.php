@@ -6,7 +6,7 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use RiotQuest\Contracts\LeagueException;
 
-class CacheModel {
+class Cache {
 
     /**
      * @var string 
@@ -19,7 +19,7 @@ class CacheModel {
     private $fs;
 
     /**
-     * CacheModel constructor.
+     * Cache constructor.
      */
     public function __construct()
     {
