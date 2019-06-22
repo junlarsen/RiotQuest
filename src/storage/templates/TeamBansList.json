@@ -1,1 +1,1 @@
-{"props":[],"sees":["https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"],"list":["TeamBans"],"methods":{"getBannedIds":{"name":"getBannedIds","returns":["array"],"params":[]}},"name":"TeamBansList","class":"RiotQuest\\Components\\Framework\\Collections\\TeamBansList"}
+{"props":[],"sees":["https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"],"list":["TeamBans"],"methods":{"getBannedIds":{"name":"getBannedIds","returns":["array"],"params":[]}},"name":"TeamBansList","class":"RiotQuest\\Components\\Collections\\TeamBansList"}

@@ -4,21 +4,21 @@ namespace RiotQuest\Tests\Endpoints;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Collections\ChampionMastery;
-use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
+use RiotQuest\Components\Collections\ChampionMastery;
+use RiotQuest\Components\Collections\ChampionMasteryList;
+use RiotQuest\Contracts\LeagueException;
 
-Client::boot();
-
+/**
+ * Class MasteryTest
+ * @package RiotQuest\Tests\Endpoints
+ */
 class MasteryTest extends TestCase
 {
 
     /**
      * Tests the all masteries endpoint
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestAllMasteries()
     {
@@ -31,10 +31,7 @@ class MasteryTest extends TestCase
     /**
      * Tests the single mastery endpoint
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestSingleMastery()
     {
@@ -47,10 +44,7 @@ class MasteryTest extends TestCase
     /**
      * Test total mastery score endpoint
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestTotalScore()
     {

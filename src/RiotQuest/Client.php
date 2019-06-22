@@ -2,7 +2,7 @@
 
 namespace RiotQuest;
 
-use RiotQuest\Components\Framework\Client\Client as Module;
+use RiotQuest\Components\Client\Client as Module;
 
 /**
  * Class Client

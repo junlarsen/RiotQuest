@@ -1,1 +1,1 @@
-{"props":[],"sees":["https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"],"list":["MatchParticipant"],"methods":[],"name":"MatchParticipantList","class":"RiotQuest\\Components\\Framework\\Collections\\MatchParticipantList"}
+{"props":[],"sees":["https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"],"list":["MatchParticipant"],"methods":[],"name":"MatchParticipantList","class":"RiotQuest\\Components\\Collections\\MatchParticipantList"}

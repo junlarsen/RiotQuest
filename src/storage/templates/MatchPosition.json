@@ -1,1 +1,1 @@
-{"props":{"$y":"int","$x":"int"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"],"list":[],"methods":[],"name":"MatchPosition","class":"RiotQuest\\Components\\Framework\\Collections\\MatchPosition"}
+{"props":{"$y":"int","$x":"int"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"],"list":[],"methods":[],"name":"MatchPosition","class":"RiotQuest\\Components\\Collections\\MatchPosition"}

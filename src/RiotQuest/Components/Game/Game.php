@@ -4,7 +4,7 @@ namespace RiotQuest\Components\Game;
 
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
-use RiotQuest\Components\Framework\Client\Application;
+use RiotQuest\Components\Client\Application;
 use RiotQuest\Contracts\LeagueException;
 
 /**

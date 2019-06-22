@@ -1,1 +1,1 @@
-{"props":{"$status":"string","$incidents":"IncidentList","$name":"string","$slug":"string"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"],"list":[],"methods":[],"name":"Service","class":"RiotQuest\\Components\\Framework\\Collections\\Service"}
+{"props":{"$status":"string","$incidents":"IncidentList","$name":"string","$slug":"string"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"],"list":[],"methods":[],"name":"Service","class":"RiotQuest\\Components\\Collections\\Service"}

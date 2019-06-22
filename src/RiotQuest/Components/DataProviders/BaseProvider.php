@@ -5,8 +5,8 @@ namespace RiotQuest\Components\DataProviders;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use RiotQuest\Components\Downloader\DDragonDownloader;
-use RiotQuest\Components\Framework\Client\Application;
-use RiotQuest\Components\Framework\Engine\Utils;
+use RiotQuest\Components\Client\Application;
+use RiotQuest\Components\Engine\Utils;
 use RiotQuest\Components\Game\Game;
 use RiotQuest\Contracts\LeagueException;
 

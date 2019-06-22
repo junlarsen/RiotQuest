@@ -7,7 +7,7 @@ use League\Flysystem\Filesystem;
 use League\Flysystem\Adapter\Local;
 use Illuminate\Support\Collection;
 use ReflectionException;
-use RiotQuest\Components\Framework\Collections\Collection as LeagueCollection;
+use RiotQuest\Components\Collections\Collection as LeagueCollection;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -40,11 +40,11 @@ class Codegen
     public static function createAll(Closure $closure): void {
         $codegen = static::getInstance();
 
-        $in = new Filesystem(new Local(__DIR__ . '/../Components/Framework/Collections/'));
+        $in = new Filesystem(new Local(__DIR__ . '/../Components/Collections/'));
 
         foreach ($in->listContents() as $file) {
             if ($file['type'] === 'file') {
-                $res = $codegen->createFromClass("\\RiotQuest\\Components\\Framework\\Collections\\" . $file['filename']);
+                $res = $codegen->createFromClass("\\RiotQuest\\Components\\Collections\\" . $file['filename']);
                 
                 $closure->call($res, $res);
             }

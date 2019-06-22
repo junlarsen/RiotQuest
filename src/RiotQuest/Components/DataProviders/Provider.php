@@ -2,7 +2,7 @@
 
 namespace RiotQuest\Components\DataProviders;
 
-use RiotQuest\Components\Framework\Client\Application;
+use RiotQuest\Components\Client\Application;
 
 /**
  * Class Provider

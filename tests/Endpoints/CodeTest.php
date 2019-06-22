@@ -4,19 +4,19 @@ namespace RiotQuest\Tests\Endpoints;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
+use RiotQuest\Contracts\LeagueException;
 
-Client::boot();
-
+/**
+ * Class CodeTest
+ * @package RiotQuest\Tests\Endpoints
+ */
 class CodeTest extends TestCase
 {
 
     /**
      * Assert that the code endpoint works
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestCode()
     {

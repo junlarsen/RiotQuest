@@ -4,20 +4,20 @@ namespace RiotQuest\Tests\Endpoints;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Collections\Summoner;
+use RiotQuest\Components\Collections\Summoner;
+use RiotQuest\Contracts\LeagueException;
 
-Client::boot();
-
+/**
+ * Class SummonerTest
+ * @package RiotQuest\Tests\Endpoints
+ */
 class SummonerTest extends TestCase
 {
 
     /**
      * Makes sure that the summoner by name endpoint works
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestByName()
     {
@@ -30,10 +30,7 @@ class SummonerTest extends TestCase
     /**
      * Make sure that the summoner by summoner id works
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestById()
     {
@@ -46,10 +43,7 @@ class SummonerTest extends TestCase
     /**
      * Make sure that the summoner by account id endpoint works
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestByAccount()
     {
@@ -62,10 +56,7 @@ class SummonerTest extends TestCase
     /**
      * Make sure that the summoner by puuid endpoint works
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestByUnique()
     {

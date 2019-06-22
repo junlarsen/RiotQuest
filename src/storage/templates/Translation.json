@@ -1,1 +1,1 @@
-{"props":{"$locale":"string","$content":"string","$heading":"string"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"],"list":[],"methods":[],"name":"Translation","class":"RiotQuest\\Components\\Framework\\Collections\\Translation"}
+{"props":{"$locale":"string","$content":"string","$heading":"string"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"],"list":[],"methods":[],"name":"Translation","class":"RiotQuest\\Components\\Collections\\Translation"}
