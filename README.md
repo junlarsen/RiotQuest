@@ -1,6 +1,6 @@
 # RiotQuest &mdash; API Framework
 
-RiotQuest is a modern PHP 7+ framework for the League of Legends API
+RiotQuest is a modern PHP 7.1+ framework for the League of Legends API
 
 The framework aims at giving you a simple and elegant way to interact with the API.
 
@@ -42,7 +42,7 @@ The documentation for RiotQuest can be located at https://riotquest.supergrecko.
 
 The library uses Composer for class autoloading and dependency management. Here is a list of things you'll need to get started with RiotQuest.
 
-- PHP 7.0+
+- PHP 7.1+
 - ext-json
 - ext-curl
 - Composer
