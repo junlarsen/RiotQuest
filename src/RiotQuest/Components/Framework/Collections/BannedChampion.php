@@ -15,7 +15,7 @@ use RiotQuest\Components\DataProviders\Provider;
  *
  * @package RiotQuest\Components\Framework\Collections
  */
-class BannedChampion extends Collection
+class                            BannedChampion extends Collection
 {
 
     /**

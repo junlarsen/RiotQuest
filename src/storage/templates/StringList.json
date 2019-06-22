@@ -1,0 +1,1 @@
+{"props":[],"sees":["https:\/\/www.php.net\/manual\/en\/language.types.string.php"],"list":["string"],"methods":{"toLowerCase":{"name":"toLowerCase","returns":["StringList"],"params":[]},"toUpperCase":{"name":"toUpperCase","returns":["StringList"],"params":[]}},"name":"StringList","class":"RiotQuest\\Components\\Framework\\Collections\\StringList"}

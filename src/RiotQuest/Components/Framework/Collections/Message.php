@@ -26,7 +26,7 @@ class Message extends Collection
     /**
      * Get a translation by locale code
      *
-     * @param $locale
+     * @param string $locale
      * @return mixed
      */
     public function getTranslation(string $locale)

@@ -209,27 +209,38 @@ class Utils
      */
     public static function traverse($data, array $template, string $region)
     {
+        $primitives = ['int', 'integer' , 'string', 'bool', 'boolean', 'double', 'array'];
         /** @var Collection $col */
-        $col = new $template['_class'];
+
+        $col = new $template['class'];
         $col->setRegion($region);
-        if (isset($template['_list'])) {
-            foreach ($data as $key => $value) {
-                isset($template['_list']['_class'])
-                    ? $col->put($key, static::traverse($value, $template['_list'], $region))
-                    : $col->put($key, $value);
+
+        if (!empty($template['list'])) {
+            if (in_array($template['list'][0], $primitives)) {
+                foreach ((array)$data as $key => $value) {
+                    $col->put($key, $value);
+                }
+            } else {
+                $temp = static::loadTemplate($template['list'][0]);
+
+                foreach ((array)$data as $key => $value) {
+                    $col->put($key, static::traverse($value, $temp, $region));
+                }
             }
         } else {
             foreach ((array)$data as $key => $value) {
-                // If it's a recursive component
-                if (is_array($template[$key])) {
-                    // Recursively traverse
-                    $col->put($key, static::traverse($value, $template[$key], $region));
-                } else {
-                    settype($value, $template[$key]);
+                $type = $template['props']['$' . $key];
+
+                if (in_array($type, $primitives)) {
+                    settype($value, $type);
                     $col->put($key, $value);
+                } else {
+                    $temp = static::loadTemplate($template['props']['$' . $key]);
+                    $col->put($key, static::traverse($value, $temp, $region));
                 }
             }
         }
+
         return $col;
     }
 

@@ -29,7 +29,7 @@ class ParticipantList extends Collection
     /**
      * Search for summoner name
      *
-     * @param $name
+     * @param string $name
      * @return string
      */
     public function getWhereName(string $name)

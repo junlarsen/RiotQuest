@@ -1,1 +1,0 @@
-{"chestGranted":"boolean","championLevel":"int","championPoints":"int","championId":"double","championPointsUntilNextLevel":"double","lastPlayTime":"double","tokensEarned":"int","championPointsSinceLastLevel":"double","summonerId":"string","_class":"\\RiotQuest\\Components\\Framework\\Collections\\ChampionMastery"}
