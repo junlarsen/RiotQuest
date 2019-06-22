@@ -1,0 +1,1841 @@
+{
+  "BannedChampion": {
+    "props": {
+      "$pickTurn": "int",
+      "$championId": "double",
+      "$teamId": "double"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"
+    ],
+    "list": [],
+    "methods": {
+      "getChampionIcon": {
+        "name": "getChampionIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getChampionName": {
+        "name": "getChampionName",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      }
+    },
+    "name": "BannedChampion",
+    "class": "RiotQuest\\Components\\Collections\\BannedChampion"
+  },
+  "BannedChampionList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"
+    ],
+    "list": [
+      "BannedChampion"
+    ],
+    "methods": {
+      "getListIds": {
+        "name": "getListIds",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      }
+    },
+    "name": "BannedChampionList",
+    "class": "RiotQuest\\Components\\Collections\\BannedChampionList"
+  },
+  "ChampionInfo": {
+    "props": {
+      "$freeChampionIdsForNewPlayers": "IntList",
+      "$freeChampionIds": "IntList",
+      "$maxNewPlayerLevel": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#champion-v3\/GET_getChampionInfo"
+    ],
+    "list": [],
+    "methods": {
+      "getCombinedList": {
+        "name": "getCombinedList",
+        "returns": [
+          "Collection"
+        ],
+        "params": []
+      }
+    },
+    "name": "ChampionInfo",
+    "class": "RiotQuest\\Components\\Collections\\ChampionInfo"
+  },
+  "ChampionMastery": {
+    "props": {
+      "$chestGranted": "boolean",
+      "$championLevel": "int",
+      "$championPoints": "int",
+      "$championId": "double",
+      "$championPointsUntilNextLevel": "double",
+      "$lastPlayTime": "double",
+      "$tokensEarned": "int",
+      "$championPointsSinceLastLevel": "double",
+      "$summonerId": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#champion-mastery-v4\/GET_getChampionMastery"
+    ],
+    "list": [],
+    "methods": {
+      "getSummoner": {
+        "name": "getSummoner",
+        "returns": [
+          "Summoner"
+        ],
+        "params": []
+      },
+      "getChampionIcon": {
+        "name": "getChampionIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getLastPlayed": {
+        "name": "getLastPlayed",
+        "returns": [
+          "Carbon|CarbonInterface"
+        ],
+        "params": []
+      },
+      "isChestGranted": {
+        "name": "isChestGranted",
+        "returns": [
+          "bool"
+        ],
+        "params": []
+      },
+      "getChampionName": {
+        "name": "getChampionName",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      }
+    },
+    "name": "ChampionMastery",
+    "class": "RiotQuest\\Components\\Collections\\ChampionMastery"
+  },
+  "ChampionMasteryList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#champion-mastery-v4\/GET_getAllChampionMasteries"
+    ],
+    "list": [
+      "ChampionMastery"
+    ],
+    "methods": {
+      "findChampion": {
+        "name": "findChampion",
+        "returns": [
+          "ChampionMastery"
+        ],
+        "params": {
+          "$id": "int"
+        }
+      },
+      "getWhereLevelEquals": {
+        "name": "getWhereLevelEquals",
+        "returns": [
+          "Collection"
+        ],
+        "params": {
+          "$level": "int"
+        }
+      },
+      "getWhereLevelMoreThan": {
+        "name": "getWhereLevelMoreThan",
+        "returns": [
+          "Collection"
+        ],
+        "params": {
+          "$level": "int"
+        }
+      },
+      "getWhereLevelLessThan": {
+        "name": "getWhereLevelLessThan",
+        "returns": [
+          "Collection"
+        ],
+        "params": {
+          "$level": "int"
+        }
+      },
+      "getWherePointsMoreThan": {
+        "name": "getWherePointsMoreThan",
+        "returns": [
+          "Collection"
+        ],
+        "params": {
+          "$points": "int"
+        }
+      },
+      "getWherePointsLessThan": {
+        "name": "getWherePointsLessThan",
+        "returns": [
+          "Collection"
+        ],
+        "params": {
+          "$points": "int"
+        }
+      },
+      "getWhereChestGranted": {
+        "name": "getWhereChestGranted",
+        "returns": [
+          "Collection"
+        ],
+        "params": []
+      }
+    },
+    "name": "ChampionMasteryList",
+    "class": "RiotQuest\\Components\\Collections\\ChampionMasteryList"
+  },
+  "Collection": {
+    "props": [],
+    "sees": [
+      "https:\/\/github.com\/supergrecko\/RiotQuest\/wiki\/Return-Types"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "Collection",
+    "class": "RiotQuest\\Components\\Collections\\Collection"
+  },
+  "CurrentGameInfo": {
+    "props": {
+      "$gameId": "double",
+      "$gameStartTime": "double",
+      "$platformId": "string",
+      "$gameMode": "string",
+      "$mapId": "double",
+      "$gameType": "string",
+      "$bannedChampions": "BannedChampionList",
+      "$observers": "Observer",
+      "$participants": "CurrentGameParticipantList",
+      "$gameLength": "double",
+      "$gameQueueConfigId": "double"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getCurrentGameInfoBySummoner"
+    ],
+    "list": [],
+    "methods": {
+      "getStartTime": {
+        "name": "getStartTime",
+        "returns": [
+          "Carbon"
+        ],
+        "params": []
+      },
+      "getRelativeStartTimeMs": {
+        "name": "getRelativeStartTimeMs",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      },
+      "getObserverKey": {
+        "name": "getObserverKey",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getBannedChampionIds": {
+        "name": "getBannedChampionIds",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      }
+    },
+    "name": "CurrentGameInfo",
+    "class": "RiotQuest\\Components\\Collections\\CurrentGameInfo"
+  },
+  "CurrentGameParticipant": {
+    "props": {
+      "$profileIconId": "double",
+      "$championId": "double",
+      "$summonerName": "string",
+      "$gameCustomizationObjects": "GameCustomizationObjectList",
+      "$bot": "boolean",
+      "$perks": "Perks",
+      "$spell1Id": "double",
+      "$spell2Id": "double",
+      "$teamId": "double",
+      "$summonerId": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getCurrentGameInfoBySummoner"
+    ],
+    "list": [],
+    "methods": {
+      "getChampionIcon": {
+        "name": "getChampionIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getSummoner": {
+        "name": "getSummoner",
+        "returns": [
+          "Summoner"
+        ],
+        "params": []
+      },
+      "getSummonerIcon": {
+        "name": "getSummonerIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getChampionName": {
+        "name": "getChampionName",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      }
+    },
+    "name": "CurrentGameParticipant",
+    "class": "RiotQuest\\Components\\Collections\\CurrentGameParticipant"
+  },
+  "CurrentGameParticipantList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getCurrentGameInfoBySummoner"
+    ],
+    "list": [
+      "CurrentGameParticipant"
+    ],
+    "methods": {
+      "getSummoners": {
+        "name": "getSummoners",
+        "returns": [
+          "Collection"
+        ],
+        "params": []
+      },
+      "getWhereName": {
+        "name": "getWhereName",
+        "returns": [
+          "string"
+        ],
+        "params": {
+          "$name": "string"
+        }
+      }
+    },
+    "name": "CurrentGameParticipantList",
+    "class": "RiotQuest\\Components\\Collections\\CurrentGameParticipantList"
+  },
+  "FeaturedGameInfo": {
+    "props": {
+      "$gameId": "double",
+      "$gameStartTime": "double",
+      "$platformId": "string",
+      "$gameMode": "string",
+      "$mapId": "double",
+      "$gameType": "string",
+      "$bannedChampions": "BannedChampionList",
+      "$observers": "Observer",
+      "$participants": "ParticipantList",
+      "$gameLength": "double",
+      "$gameQueueConfigId": "double"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"
+    ],
+    "list": [],
+    "methods": {
+      "getStartTime": {
+        "name": "getStartTime",
+        "returns": [
+          "Carbon|CarbonInterface"
+        ],
+        "params": []
+      },
+      "getRelativeStartTimeMs": {
+        "name": "getRelativeStartTimeMs",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      },
+      "getObserverKey": {
+        "name": "getObserverKey",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getBannedChampionIds": {
+        "name": "getBannedChampionIds",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      }
+    },
+    "name": "FeaturedGameInfo",
+    "class": "RiotQuest\\Components\\Collections\\FeaturedGameInfo"
+  },
+  "FeaturedGameInfoList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"
+    ],
+    "list": [
+      "FeaturedGameInfo"
+    ],
+    "methods": {
+      "getGameIds": {
+        "name": "getGameIds",
+        "returns": [
+          "Collection"
+        ],
+        "params": []
+      }
+    },
+    "name": "FeaturedGameInfoList",
+    "class": "RiotQuest\\Components\\Collections\\FeaturedGameInfoList"
+  },
+  "FeaturedGames": {
+    "props": {
+      "$clientRefreshInterval": "double",
+      "$gameList": "FeaturedGameInfoList"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"
+    ],
+    "list": [],
+    "methods": {
+      "getGameIds": {
+        "name": "getGameIds",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      }
+    },
+    "name": "FeaturedGames",
+    "class": "RiotQuest\\Components\\Collections\\FeaturedGames"
+  },
+  "GameCustomizationObject": {
+    "props": {
+      "$category": "string",
+      "$content": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getCurrentGameInfoBySummoner"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "GameCustomizationObject",
+    "class": "RiotQuest\\Components\\Collections\\GameCustomizationObject"
+  },
+  "GameCustomizationObjectList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getCurrentGameInfoBySummoner"
+    ],
+    "list": [
+      "GameCustomizationObject"
+    ],
+    "methods": {
+      "getCategories": {
+        "name": "getCategories",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      }
+    },
+    "name": "GameCustomizationObjectList",
+    "class": "RiotQuest\\Components\\Collections\\GameCustomizationObjectList"
+  },
+  "Incident": {
+    "props": {
+      "$active": "boolean",
+      "$created_at": "string",
+      "$id": "double",
+      "$updates": "MessageList"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "Incident",
+    "class": "RiotQuest\\Components\\Collections\\Incident"
+  },
+  "IncidentList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [
+      "Incident"
+    ],
+    "methods": [],
+    "name": "IncidentList",
+    "class": "RiotQuest\\Components\\Collections\\IncidentList"
+  },
+  "IntList": {
+    "props": [],
+    "sees": [
+      "https:\/\/www.php.net\/manual\/en\/language.types.integer.php"
+    ],
+    "list": [
+      "int"
+    ],
+    "methods": {
+      "getAverage": {
+        "name": "getAverage",
+        "returns": [
+          "float|int"
+        ],
+        "params": []
+      },
+      "getSum": {
+        "name": "getSum",
+        "returns": [
+          "float|int"
+        ],
+        "params": []
+      }
+    },
+    "name": "IntList",
+    "class": "RiotQuest\\Components\\Collections\\IntList"
+  },
+  "League": {
+    "props": {
+      "$leagueId": "string",
+      "$tier": "string",
+      "$entries": "LeagueItemList",
+      "$queue": "string",
+      "$name": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#league-v4\/GET_getAllLeaguePositionsForSummoner"
+    ],
+    "list": [],
+    "methods": {
+      "getPlayerWhereId": {
+        "name": "getPlayerWhereId",
+        "returns": [
+          "LeagueItem"
+        ],
+        "params": {
+          "$id": "string"
+        }
+      }
+    },
+    "name": "League",
+    "class": "RiotQuest\\Components\\Collections\\League"
+  },
+  "LeagueEntry": {
+    "props": {
+      "$queueType": "string",
+      "$summonerName": "string",
+      "$hotStreak": "boolean",
+      "$miniSeries": "MiniSeries",
+      "$wins": "int",
+      "$veteran": "boolean",
+      "$losses": "int",
+      "$rank": "string",
+      "$leagueId": "string",
+      "$inactive": "boolean",
+      "$freshBlood": "boolean",
+      "$tier": "string",
+      "$summonerId": "string",
+      "$leaguePoints": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#league-v4\/GET_getLeagueEntriesForSummoner"
+    ],
+    "list": [],
+    "methods": {
+      "getWinrate": {
+        "name": "getWinrate",
+        "returns": [
+          "float|int"
+        ],
+        "params": []
+      },
+      "getFormattedName": {
+        "name": "getFormattedName",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getGamesPlayed": {
+        "name": "getGamesPlayed",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      },
+      "getSummoner": {
+        "name": "getSummoner",
+        "returns": [
+          "Summoner"
+        ],
+        "params": []
+      },
+      "isInMiniSeries": {
+        "name": "isInMiniSeries",
+        "returns": [
+          "bool"
+        ],
+        "params": []
+      }
+    },
+    "name": "LeagueEntry",
+    "class": "RiotQuest\\Components\\Collections\\LeagueEntry"
+  },
+  "LeagueEntryList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#league-v4\/GET_getLeagueEntriesForSummoner"
+    ],
+    "list": [
+      "LeagueEntry"
+    ],
+    "methods": {
+      "getSoloQueue": {
+        "name": "getSoloQueue",
+        "returns": [
+          "LeagueEntry"
+        ],
+        "params": []
+      },
+      "getFlexTreeline": {
+        "name": "getFlexTreeline",
+        "returns": [
+          "LeagueEntry"
+        ],
+        "params": []
+      },
+      "getFlexRift": {
+        "name": "getFlexRift",
+        "returns": [
+          "LeagueEntry"
+        ],
+        "params": []
+      },
+      "getRankedQueues": {
+        "name": "getRankedQueues",
+        "returns": [
+          "StringList"
+        ],
+        "params": []
+      }
+    },
+    "name": "LeagueEntryList",
+    "class": "RiotQuest\\Components\\Collections\\LeagueEntryList"
+  },
+  "LeagueItem": {
+    "props": {
+      "$summonerName": "string",
+      "$hotStreak": "boolean",
+      "$miniSeries": "MiniSeries",
+      "$wins": "int",
+      "$veteran": "boolean",
+      "$losses": "int",
+      "$freshBlood": "boolean",
+      "$inactive": "boolean",
+      "$rank": "string",
+      "$summonerId": "string",
+      "$leaguePoints": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#league-v4\/GET_getLeagueById"
+    ],
+    "list": [],
+    "methods": {
+      "getSummoner": {
+        "name": "getSummoner",
+        "returns": [
+          "Summoner"
+        ],
+        "params": []
+      },
+      "getWinrate": {
+        "name": "getWinrate",
+        "returns": [
+          "float|int"
+        ],
+        "params": []
+      },
+      "getGamesPlayed": {
+        "name": "getGamesPlayed",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      },
+      "isInMiniSeries": {
+        "name": "isInMiniSeries",
+        "returns": [
+          "bool"
+        ],
+        "params": []
+      }
+    },
+    "name": "LeagueItem",
+    "class": "RiotQuest\\Components\\Collections\\LeagueItem"
+  },
+  "LeagueItemList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#league-v4\/GET_getLeagueById"
+    ],
+    "list": [
+      "LeagueItem"
+    ],
+    "methods": {
+      "getWhereWinrateMoreThan": {
+        "name": "getWhereWinrateMoreThan",
+        "returns": [
+          "LeagueItemList"
+        ],
+        "params": {
+          "$percentage": "float"
+        }
+      }
+    },
+    "name": "LeagueItemList",
+    "class": "RiotQuest\\Components\\Collections\\LeagueItemList"
+  },
+  "Mastery": {
+    "props": {
+      "$masteryId": "int",
+      "$rank": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "Mastery",
+    "class": "RiotQuest\\Components\\Collections\\Mastery"
+  },
+  "MasteryList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [
+      "Mastery"
+    ],
+    "methods": [],
+    "name": "MasteryList",
+    "class": "RiotQuest\\Components\\Collections\\MasteryList"
+  },
+  "Match": {
+    "props": {
+      "$seasonId": "int",
+      "$queueId": "int",
+      "$gameId": "double",
+      "$participantIdentities": "ParticipantIdentityList",
+      "$gameVersion": "string",
+      "$platformId": "string",
+      "$gameMode": "string",
+      "$mapId": "int",
+      "$gameType": "string",
+      "$teams": "TeamStatsList",
+      "$participants": "MatchParticipantList",
+      "$gameDuration": "double",
+      "$gameCreation": "double"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": {
+      "getTimeline": {
+        "name": "getTimeline",
+        "returns": [
+          "MatchTimeline"
+        ],
+        "params": []
+      },
+      "getRelativeStartTimeMs": {
+        "name": "getRelativeStartTimeMs",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      }
+    },
+    "name": "Match",
+    "class": "RiotQuest\\Components\\Collections\\Match"
+  },
+  "MatchEvent": {
+    "props": {
+      "$eventType": "string",
+      "$towerType": "string",
+      "$teamId": "int",
+      "$ascendedType": "string",
+      "$killerId": "int",
+      "$levelUpType": "string",
+      "$pointCaptured": "string",
+      "$assistingParticipantIds": "IntList",
+      "$wardType": "string",
+      "$monsterType": "string",
+      "$type": "string",
+      "$skillSlot": "int",
+      "$victimId": "int",
+      "$timestamp": "double",
+      "$afterId": "int",
+      "$monsterSubType": "string",
+      "$laneType": "string",
+      "$itemId": "int",
+      "$participantId": "int",
+      "$buildingType": "string",
+      "$creatorId": "int",
+      "$position": "MatchPosition",
+      "$beforeId": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "MatchEvent",
+    "class": "RiotQuest\\Components\\Collections\\MatchEvent"
+  },
+  "MatchEventList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"
+    ],
+    "list": [
+      "MatchEvent"
+    ],
+    "methods": {
+      "getEventCount": {
+        "name": "getEventCount",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      }
+    },
+    "name": "MatchEventList",
+    "class": "RiotQuest\\Components\\Collections\\MatchEventList"
+  },
+  "MatchFrame": {
+    "props": {
+      "$timestamp": "double",
+      "$participantFrames": "MatchParticipantFrameList",
+      "$events": "MatchEventList"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "MatchFrame",
+    "class": "RiotQuest\\Components\\Collections\\MatchFrame"
+  },
+  "MatchFrameList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"
+    ],
+    "list": [
+      "MatchFrame"
+    ],
+    "methods": [],
+    "name": "MatchFrameList",
+    "class": "RiotQuest\\Components\\Collections\\MatchFrameList"
+  },
+  "MatchHistory": {
+    "props": {
+      "$matches": "MatchReferenceList",
+      "$totalGames": "int",
+      "$startIndex": "int",
+      "$endIndex": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchlist"
+    ],
+    "list": [],
+    "methods": {
+      "getMatch": {
+        "name": "getMatch",
+        "returns": [
+          "MatchReference|false"
+        ],
+        "params": {
+          "$id": "int"
+        }
+      },
+      "getWhereQueue": {
+        "name": "getWhereQueue",
+        "returns": [
+          "MatchHistory"
+        ],
+        "params": {
+          "$id": "int"
+        }
+      },
+      "getWhereChampion": {
+        "name": "getWhereChampion",
+        "returns": [
+          "MatchHistory"
+        ],
+        "params": {
+          "$id": "int"
+        }
+      },
+      "getWhereSeason": {
+        "name": "getWhereSeason",
+        "returns": [
+          "MatchHistory"
+        ],
+        "params": {
+          "$id": "int"
+        }
+      }
+    },
+    "name": "MatchHistory",
+    "class": "RiotQuest\\Components\\Collections\\MatchHistory"
+  },
+  "MatchParticipant": {
+    "props": {
+      "$stats": "ParticipantStats",
+      "$participantId": "int",
+      "$runes": "RuneList",
+      "$timeline": "ParticipantTimeline",
+      "$teamId": "int",
+      "$spell1Id": "int",
+      "$spell2Id": "int",
+      "$masteries": "MasteryList",
+      "$highestAchievedSeasonTier": "string",
+      "$championId": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": {
+      "getChampionIcon": {
+        "name": "getChampionIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getChampionName": {
+        "name": "getChampionName",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      }
+    },
+    "name": "MatchParticipant",
+    "class": "RiotQuest\\Components\\Collections\\MatchParticipant"
+  },
+  "MatchParticipantFrame": {
+    "props": {
+      "$totalGold": "int",
+      "$teamScore": "int",
+      "$participantId": "int",
+      "$level": "int",
+      "$currentGold": "int",
+      "$minionsKilled": "int",
+      "$dominionScore": "int",
+      "$position": "MatchPosition",
+      "$xp": "int",
+      "$jungleMinionsKilled": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "MatchParticipantFrame",
+    "class": "RiotQuest\\Components\\Collections\\MatchParticipantFrame"
+  },
+  "MatchParticipantFrameList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"
+    ],
+    "list": [
+      "MatchParticipantFrame"
+    ],
+    "methods": [],
+    "name": "MatchParticipantFrameList",
+    "class": "RiotQuest\\Components\\Collections\\MatchParticipantFrameList"
+  },
+  "MatchParticipantList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [
+      "MatchParticipant"
+    ],
+    "methods": [],
+    "name": "MatchParticipantList",
+    "class": "RiotQuest\\Components\\Collections\\MatchParticipantList"
+  },
+  "MatchPosition": {
+    "props": {
+      "$y": "int",
+      "$x": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "MatchPosition",
+    "class": "RiotQuest\\Components\\Collections\\MatchPosition"
+  },
+  "MatchReference": {
+    "props": {
+      "$lane": "string",
+      "$gameId": "double",
+      "$champion": "int",
+      "$platformId": "string",
+      "$season": "int",
+      "$queue": "int",
+      "$role": "string",
+      "$timestamp": "double"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchlist"
+    ],
+    "list": [],
+    "methods": {
+      "getChampionIcon": {
+        "name": "getChampionIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getChampionName": {
+        "name": "getChampionName",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getMatch": {
+        "name": "getMatch",
+        "returns": [
+          "mixed"
+        ],
+        "params": []
+      },
+      "getTimeline": {
+        "name": "getTimeline",
+        "returns": [
+          "MatchTimeline"
+        ],
+        "params": []
+      },
+      "getRelativeStartTimeMs": {
+        "name": "getRelativeStartTimeMs",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      }
+    },
+    "name": "MatchReference",
+    "class": "RiotQuest\\Components\\Collections\\MatchReference"
+  },
+  "MatchReferenceList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchlist"
+    ],
+    "list": [
+      "MatchReference"
+    ],
+    "methods": {
+      "getTotalGames": {
+        "name": "getTotalGames",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      }
+    },
+    "name": "MatchReferenceList",
+    "class": "RiotQuest\\Components\\Collections\\MatchReferenceList"
+  },
+  "MatchTimeline": {
+    "props": {
+      "$frames": "MatchFrameList",
+      "$frameInterval": "double"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "MatchTimeline",
+    "class": "RiotQuest\\Components\\Collections\\MatchTimeline"
+  },
+  "Message": {
+    "props": {
+      "$severity": "string",
+      "$author": "string",
+      "$created_at": "string",
+      "$translations": "TranslationList",
+      "$updated_at": "string",
+      "$content": "string",
+      "$id": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [],
+    "methods": {
+      "getTranslation": {
+        "name": "getTranslation",
+        "returns": [
+          "mixed"
+        ],
+        "params": {
+          "$locale": "string"
+        }
+      },
+      "getCreationDate": {
+        "name": "getCreationDate",
+        "returns": [
+          "Carbon|CarbonInterface"
+        ],
+        "params": []
+      },
+      "getLastUpdateDate": {
+        "name": "getLastUpdateDate",
+        "returns": [
+          "Carbon|CarbonInterface"
+        ],
+        "params": []
+      }
+    },
+    "name": "Message",
+    "class": "RiotQuest\\Components\\Collections\\Message"
+  },
+  "MessageList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [
+      "Message"
+    ],
+    "methods": [],
+    "name": "MessageList",
+    "class": "RiotQuest\\Components\\Collections\\MessageList"
+  },
+  "MiniSeries": {
+    "props": {
+      "$progress": "string",
+      "$losses": "int",
+      "$target": "int",
+      "$wins": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#league-v4\/GET_getAllLeaguePositionsForSummoner"
+    ],
+    "list": [],
+    "methods": {
+      "getParsedSeries": {
+        "name": "getParsedSeries",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      }
+    },
+    "name": "MiniSeries",
+    "class": "RiotQuest\\Components\\Collections\\MiniSeries"
+  },
+  "Observer": {
+    "props": {
+      "$encryptionKey": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "Observer",
+    "class": "RiotQuest\\Components\\Collections\\Observer"
+  },
+  "Participant": {
+    "props": {
+      "$profileIconId": "double",
+      "$championId": "double",
+      "$summonerName": "string",
+      "$bot": "boolean",
+      "$spell1Id": "double",
+      "$spell2Id": "double",
+      "$teamId": "double"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"
+    ],
+    "list": [],
+    "methods": {
+      "getSummoner": {
+        "name": "getSummoner",
+        "returns": [
+          "Summoner"
+        ],
+        "params": []
+      },
+      "getProfileIcon": {
+        "name": "getProfileIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getChampionIcon": {
+        "name": "getChampionIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getChampionName": {
+        "name": "getChampionName",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      }
+    },
+    "name": "Participant",
+    "class": "RiotQuest\\Components\\Collections\\Participant"
+  },
+  "ParticipantIdentity": {
+    "props": {
+      "$player": "Player",
+      "$participantId": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "ParticipantIdentity",
+    "class": "RiotQuest\\Components\\Collections\\ParticipantIdentity"
+  },
+  "ParticipantIdentityList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [
+      "ParticipantIdentity"
+    ],
+    "methods": {
+      "getSummoners": {
+        "name": "getSummoners",
+        "returns": [
+          "Collection"
+        ],
+        "params": []
+      },
+      "getSummonerNames": {
+        "name": "getSummonerNames",
+        "returns": [
+          "Collection"
+        ],
+        "params": []
+      }
+    },
+    "name": "ParticipantIdentityList",
+    "class": "RiotQuest\\Components\\Collections\\ParticipantIdentityList"
+  },
+  "ParticipantList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"
+    ],
+    "list": [
+      "Participant"
+    ],
+    "methods": {
+      "getSummoners": {
+        "name": "getSummoners",
+        "returns": [
+          "Collection"
+        ],
+        "params": []
+      },
+      "getWhereName": {
+        "name": "getWhereName",
+        "returns": [
+          "string"
+        ],
+        "params": {
+          "$name": "string"
+        }
+      }
+    },
+    "name": "ParticipantList",
+    "class": "RiotQuest\\Components\\Collections\\ParticipantList"
+  },
+  "ParticipantStats": {
+    "props": {
+      "$firstBloodAssist": "boolean",
+      "$visionScore": "double",
+      "$magicDamageDealtToChampions": "double",
+      "$damageDealtToObjectives": "double",
+      "$totalTimeCrowdControlDealt": "int",
+      "$longestTimeSpentLiving": "int",
+      "$nodeNeutralizeAssist": "int",
+      "$totalScoreRank": "int",
+      "$neutralMinionsKilled": "int",
+      "$damageDealtToTurrets": "double",
+      "$physicalDamageDealtToChampions": "double",
+      "$nodeCapture": "int",
+      "$totalUnitsHealed": "int",
+      "$wardsKilled": "int",
+      "$largestCriticalStrike": "int",
+      "$largestKillingSpree": "int",
+      "$teamObjective": "int",
+      "$magicDamageDealt": "double",
+      "$neutralMinionsKilledTeamJungle": "double",
+      "$damageSelfMitigated": "double",
+      "$firstInhibitorKill": "boolean",
+      "$trueDamageTaken": "double",
+      "$nodeNeutralize": "int",
+      "$combatPlayerScore": "int",
+      "$perkPrimaryStyle": "int",
+      "$goldSpent": "int",
+      "$trueDamageDealt": "double",
+      "$participantId": "int",
+      "$totalDamageTaken": "double",
+      "$physicalDamageDealt": "double",
+      "$sightWardsBoughtInGame": "int",
+      "$totalDamageDealtToChampions": "double",
+      "$physicalDamageTaken": "double",
+      "$magicalDamageTaken": "double",
+      "$totalPlayerScore": "int",
+      "$win": "boolean",
+      "$objectivePlayerScore": "int",
+      "$totalDamageDealt": "double",
+      "$neutralMinionsKilledEnemyJungle": "int",
+      "$wardsPlaced": "int",
+      "$perkSubStyle": "int",
+      "$turretKills": "int",
+      "$firstBloodKill": "boolean",
+      "$trueDamageDealtToChampions": "double",
+      "$goldEarned": "int",
+      "$killingSprees": "int",
+      "$altarsCaptured": "int",
+      "$firstTowerAssist": "boolean",
+      "$firstTowerKill": "boolean",
+      "$champLevel": "int",
+      "$nodeCaptureAssist": "int",
+      "$inhibitorKills": "int",
+      "$firstInhibitorAssist": "boolean",
+      "$visionWardsBoughtInGame": "int",
+      "$altarsNeutralized": "int",
+      "$totalHeal": "double",
+      "$totalMinionsKilled": "int",
+      "$timeCCingOthers": "double",
+      "$kills": "int",
+      "$doubleKills": "int",
+      "$tripleKills": "int",
+      "$quadraKills": "int",
+      "$pentaKills": "int",
+      "$largestMultiKill": "int",
+      "$assists": "int",
+      "$deaths": "int",
+      "$unrealKills": "int",
+      "$item0": "int",
+      "$item1": "int",
+      "$item2": "int",
+      "$item3": "int",
+      "$item4": "int",
+      "$item5": "int",
+      "$item6": "int",
+      "$perk0": "int",
+      "$perk1": "int",
+      "$perk2": "int",
+      "$perk3": "int",
+      "$perk4": "int",
+      "$perk5": "int",
+      "$statPerk0": "int",
+      "$statPerk1": "int",
+      "$statPerk2": "int",
+      "$perk0Var1": "int",
+      "$perk0Var2": "int",
+      "$perk0Var3": "int",
+      "$perk1Var1": "int",
+      "$perk1Var2": "int",
+      "$perk1Var3": "int",
+      "$perk2Var1": "int",
+      "$perk2Var2": "int",
+      "$perk2Var3": "int",
+      "$perk3Var1": "int",
+      "$perk3Var2": "int",
+      "$perk3Var3": "int",
+      "$perk4Var1": "int",
+      "$perk4Var2": "int",
+      "$perk4Var3": "int",
+      "$perk5Var1": "int",
+      "$perk5Var2": "int",
+      "$perk5Var3": "int",
+      "$playerScore0": "int",
+      "$playerScore1": "int",
+      "$playerScore2": "int",
+      "$playerScore3": "int",
+      "$playerScore4": "int",
+      "$playerScore5": "int",
+      "$playerScore6": "int",
+      "$playerScore7": "int",
+      "$playerScore8": "int",
+      "$playerScore9": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": {
+      "getMultiKills": {
+        "name": "getMultiKills",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      },
+      "getGoldUsage": {
+        "name": "getGoldUsage",
+        "returns": [
+          "float|int"
+        ],
+        "params": []
+      },
+      "getDamageToChampions": {
+        "name": "getDamageToChampions",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      },
+      "getDamageAmounts": {
+        "name": "getDamageAmounts",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      },
+      "getKDAString": {
+        "name": "getKDAString",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getKDAArray": {
+        "name": "getKDAArray",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      },
+      "getItemList": {
+        "name": "getItemList",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      }
+    },
+    "name": "ParticipantStats",
+    "class": "RiotQuest\\Components\\Collections\\ParticipantStats"
+  },
+  "ParticipantTimeline": {
+    "props": {
+      "$lane": "string",
+      "$participantId": "int",
+      "$csDiffPerMinDeltas": "IntList",
+      "$goldPerMinDeltas": "IntList",
+      "$xpDiffPerMinDeltas": "IntList",
+      "$creepsPerMinDeltas": "IntList",
+      "$xpPerMinDeltas": "IntList",
+      "$role": "string",
+      "$damageTakenDiffPerMinDeltas": "IntList",
+      "$damageTakenPerMinDeltas": "IntList"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "ParticipantTimeline",
+    "class": "RiotQuest\\Components\\Collections\\ParticipantTimeline"
+  },
+  "Perks": {
+    "props": {
+      "$perkStyle": "double",
+      "$perkIds": "IntList",
+      "$perkSubStyle": "double"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getCurrentGameInfoBySummoner"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "Perks",
+    "class": "RiotQuest\\Components\\Collections\\Perks"
+  },
+  "Player": {
+    "props": {
+      "$currentPlatformId": "string",
+      "$summonerName": "string",
+      "$matchHistoryUri": "string",
+      "$platformId": "string",
+      "$currentAccountId": "string",
+      "$profileIcon": "int",
+      "$summonerId": "string",
+      "$accountId": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": {
+      "getSummonerIcon": {
+        "name": "getSummonerIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getSummoner": {
+        "name": "getSummoner",
+        "returns": [
+          "Summoner"
+        ],
+        "params": []
+      }
+    },
+    "name": "Player",
+    "class": "RiotQuest\\Components\\Collections\\Player"
+  },
+  "Rune": {
+    "props": {
+      "$runeId": "int",
+      "$rank": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "Rune",
+    "class": "RiotQuest\\Components\\Collections\\Rune"
+  },
+  "RuneList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [
+      "Rune"
+    ],
+    "methods": [],
+    "name": "RuneList",
+    "class": "RiotQuest\\Components\\Collections\\RuneList"
+  },
+  "Service": {
+    "props": {
+      "$status": "string",
+      "$incidents": "IncidentList",
+      "$name": "string",
+      "$slug": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "Service",
+    "class": "RiotQuest\\Components\\Collections\\Service"
+  },
+  "ServiceList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [
+      "Service"
+    ],
+    "methods": [],
+    "name": "ServiceList",
+    "class": "RiotQuest\\Components\\Collections\\ServiceList"
+  },
+  "ShardStatus": {
+    "props": {
+      "$name": "string",
+      "$region_tag": "string",
+      "$hostname": "string",
+      "$services": "ServiceList",
+      "$locales": "StringList",
+      "$slug": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "ShardStatus",
+    "class": "RiotQuest\\Components\\Collections\\ShardStatus"
+  },
+  "StringList": {
+    "props": [],
+    "sees": [
+      "https:\/\/www.php.net\/manual\/en\/language.types.string.php"
+    ],
+    "list": [
+      "string"
+    ],
+    "methods": {
+      "toLowerCase": {
+        "name": "toLowerCase",
+        "returns": [
+          "StringList"
+        ],
+        "params": []
+      },
+      "toUpperCase": {
+        "name": "toUpperCase",
+        "returns": [
+          "StringList"
+        ],
+        "params": []
+      }
+    },
+    "name": "StringList",
+    "class": "RiotQuest\\Components\\Collections\\StringList"
+  },
+  "Summoner": {
+    "props": {
+      "$id": "string",
+      "$accountId": "string",
+      "$puuid": "string",
+      "$name": "string",
+      "$profileIconId": "int",
+      "$revisionDate": "double",
+      "$summonerLevel": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#summoner-v4\/GET_getBySummonerName"
+    ],
+    "list": [],
+    "methods": {
+      "getSummonerIcon": {
+        "name": "getSummonerIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "getRanked": {
+        "name": "getRanked",
+        "returns": [
+          "LeagueEntryList"
+        ],
+        "params": []
+      },
+      "getMatchlist": {
+        "name": "getMatchlist",
+        "returns": [
+          "MatchHistory"
+        ],
+        "params": {
+          "$filters": "array"
+        }
+      },
+      "getMasteryScore": {
+        "name": "getMasteryScore",
+        "returns": [
+          "int"
+        ],
+        "params": []
+      },
+      "getMasteryList": {
+        "name": "getMasteryList",
+        "returns": [
+          "ChampionMasteryList"
+        ],
+        "params": []
+      },
+      "getCurrentGame": {
+        "name": "getCurrentGame",
+        "returns": [
+          "CurrentGameInfo"
+        ],
+        "params": []
+      },
+      "getThirdPartyCode": {
+        "name": "getThirdPartyCode",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      },
+      "isUnranked": {
+        "name": "isUnranked",
+        "returns": [
+          "bool"
+        ],
+        "params": []
+      },
+      "isAboveNewPlayerThreshold": {
+        "name": "isAboveNewPlayerThreshold",
+        "returns": [
+          "bool"
+        ],
+        "params": []
+      }
+    },
+    "name": "Summoner",
+    "class": "RiotQuest\\Components\\Collections\\Summoner"
+  },
+  "TeamBans": {
+    "props": {
+      "$pickTurn": "int",
+      "$championId": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": {
+      "getChampionIcon": {
+        "name": "getChampionIcon",
+        "returns": [
+          "string"
+        ],
+        "params": []
+      }
+    },
+    "name": "TeamBans",
+    "class": "RiotQuest\\Components\\Collections\\TeamBans"
+  },
+  "TeamBansList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [
+      "TeamBans"
+    ],
+    "methods": {
+      "getBannedIds": {
+        "name": "getBannedIds",
+        "returns": [
+          "array"
+        ],
+        "params": []
+      }
+    },
+    "name": "TeamBansList",
+    "class": "RiotQuest\\Components\\Collections\\TeamBansList"
+  },
+  "TeamStats": {
+    "props": {
+      "$firstDragon": "boolean",
+      "$firstInhibitor": "boolean",
+      "$bans": "TeamBansList",
+      "$baronKills": "int",
+      "$firstRiftHerald": "boolean",
+      "$firstBaron": "boolean",
+      "$riftHeraldKills": "int",
+      "$teamId": "int",
+      "$firstBlood": "boolean",
+      "$firstTower": "boolean",
+      "$vilemawKills": "int",
+      "$inhibitorKills": "int",
+      "$towerKills": "int",
+      "$dominionVictoryScore": "int",
+      "$win": "string",
+      "$dragonKills": "int"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [],
+    "methods": {
+      "getWinBoolean": {
+        "name": "getWinBoolean",
+        "returns": [
+          "bool"
+        ],
+        "params": []
+      }
+    },
+    "name": "TeamStats",
+    "class": "RiotQuest\\Components\\Collections\\TeamStats"
+  },
+  "TeamStatsList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatch"
+    ],
+    "list": [
+      "TeamStats"
+    ],
+    "methods": [],
+    "name": "TeamStatsList",
+    "class": "RiotQuest\\Components\\Collections\\TeamStatsList"
+  },
+  "Translation": {
+    "props": {
+      "$locale": "string",
+      "$content": "string",
+      "$heading": "string"
+    },
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [],
+    "methods": [],
+    "name": "Translation",
+    "class": "RiotQuest\\Components\\Collections\\Translation"
+  },
+  "TranslationList": {
+    "props": [],
+    "sees": [
+      "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"
+    ],
+    "list": [
+      "Translation"
+    ],
+    "methods": [],
+    "name": "TranslationList",
+    "class": "RiotQuest\\Components\\Collections\\TranslationList"
+  }
+}
