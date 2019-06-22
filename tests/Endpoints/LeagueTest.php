@@ -4,8 +4,8 @@ namespace RiotQuest\Tests\Endpoints;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Collections\League;
-use RiotQuest\Components\Framework\Collections\LeagueEntryList;
+use RiotQuest\Components\Collections\League;
+use RiotQuest\Components\Collections\LeagueEntryList;
 
 Client::boot();
 

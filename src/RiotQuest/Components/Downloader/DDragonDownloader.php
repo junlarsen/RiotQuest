@@ -6,8 +6,8 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
-use RiotQuest\Components\Framework\Client\Application;
-use RiotQuest\Components\Framework\Engine\Utils;
+use RiotQuest\Components\Client\Application;
+use RiotQuest\Components\Engine\Utils;
 use RiotQuest\Components\Game\Game;
 use RiotQuest\Contracts\LeagueException;
 

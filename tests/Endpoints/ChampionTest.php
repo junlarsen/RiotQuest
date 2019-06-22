@@ -4,7 +4,7 @@ namespace RiotQuest\Tests\Endpoints;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Collections\ChampionInfo;
+use RiotQuest\Components\Collections\ChampionInfo;
 
 Client::boot();
 

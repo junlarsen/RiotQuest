@@ -1,1 +1,1 @@
-{"props":{"$perkStyle":"double","$perkIds":"IntList","$perkSubStyle":"double"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getCurrentGameInfoBySummoner"],"list":[],"methods":[],"name":"Perks","class":"RiotQuest\\Components\\Framework\\Collections\\Perks"}
+{"props":{"$perkStyle":"double","$perkIds":"IntList","$perkSubStyle":"double"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getCurrentGameInfoBySummoner"],"list":[],"methods":[],"name":"Perks","class":"RiotQuest\\Components\\Collections\\Perks"}

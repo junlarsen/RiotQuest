@@ -1,1 +1,1 @@
-{"props":{"$encryptionKey":"string"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"],"list":[],"methods":[],"name":"Observer","class":"RiotQuest\\Components\\Framework\\Collections\\Observer"}
+{"props":{"$encryptionKey":"string"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#spectator-v4\/GET_getFeaturedGames"],"list":[],"methods":[],"name":"Observer","class":"RiotQuest\\Components\\Collections\\Observer"}

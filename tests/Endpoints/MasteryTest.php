@@ -4,8 +4,8 @@ namespace RiotQuest\Tests\Endpoints;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Collections\ChampionMastery;
-use RiotQuest\Components\Framework\Collections\ChampionMasteryList;
+use RiotQuest\Components\Collections\ChampionMastery;
+use RiotQuest\Components\Collections\ChampionMasteryList;
 
 Client::boot();
 

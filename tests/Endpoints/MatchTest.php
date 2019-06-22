@@ -4,9 +4,9 @@ namespace RiotQuest\Tests\Endpoints;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Collections\Match;
-use RiotQuest\Components\Framework\Collections\MatchHistory;
-use RiotQuest\Components\Framework\Collections\MatchTimeline;
+use RiotQuest\Components\Collections\Match;
+use RiotQuest\Components\Collections\MatchHistory;
+use RiotQuest\Components\Collections\MatchTimeline;
 
 Client::boot();
 

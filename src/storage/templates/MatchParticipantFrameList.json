@@ -1,1 +1,1 @@
-{"props":[],"sees":["https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"],"list":["MatchParticipantFrame"],"methods":[],"name":"MatchParticipantFrameList","class":"RiotQuest\\Components\\Framework\\Collections\\MatchParticipantFrameList"}
+{"props":[],"sees":["https:\/\/developer.riotgames.com\/api-methods\/#match-v4\/GET_getMatchTimeline"],"list":["MatchParticipantFrame"],"methods":[],"name":"MatchParticipantFrameList","class":"RiotQuest\\Components\\Collections\\MatchParticipantFrameList"}

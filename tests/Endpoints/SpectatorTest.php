@@ -4,8 +4,8 @@ namespace RiotQuest\Tests\Endpoints;
 
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
-use RiotQuest\Components\Framework\Collections\CurrentGameInfo;
-use RiotQuest\Components\Framework\Collections\FeaturedGames;
+use RiotQuest\Components\Collections\CurrentGameInfo;
+use RiotQuest\Components\Collections\FeaturedGames;
 use RiotQuest\Contracts\LeagueException;
 
 Client::boot();
