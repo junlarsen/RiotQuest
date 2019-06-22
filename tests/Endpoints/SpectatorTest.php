@@ -8,18 +8,17 @@ use RiotQuest\Components\Collections\CurrentGameInfo;
 use RiotQuest\Components\Collections\FeaturedGames;
 use RiotQuest\Contracts\LeagueException;
 
-Client::boot();
-
+/**
+ * Class SpectatorTest
+ * @package RiotQuest\Tests\Endpoints
+ */
 class SpectatorTest extends TestCase
 {
 
     /**
      * Tests the featured games endpoint
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestFeaturedGames()
     {
@@ -30,10 +29,6 @@ class SpectatorTest extends TestCase
     /**
      * Tests the live game endpoint
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
      */
     public function testRequestActiveGame()
     {

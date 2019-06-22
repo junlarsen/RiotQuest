@@ -5,19 +5,19 @@ namespace RiotQuest\Tests\Endpoints;
 use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
 use RiotQuest\Components\Collections\ChampionInfo;
+use RiotQuest\Contracts\LeagueException;
 
-Client::boot();
-
+/**
+ * Class ChampionTest
+ * @package RiotQuest\Tests\Endpoints
+ */
 class ChampionTest extends TestCase
 {
 
     /**
      * Test the champion rotations endpoint
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestRotation()
     {

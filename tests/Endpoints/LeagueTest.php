@@ -6,19 +6,19 @@ use PHPUnit\Framework\TestCase;
 use RiotQuest\Client;
 use RiotQuest\Components\Collections\League;
 use RiotQuest\Components\Collections\LeagueEntryList;
+use RiotQuest\Contracts\LeagueException;
 
-Client::boot();
-
+/**
+ * Class LeagueTest
+ * @package RiotQuest\Tests\Endpoints
+ */
 class LeagueTest extends TestCase
 {
 
     /**
      * Test the single league ID endpoint
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestSingleLeague()
     {
@@ -28,6 +28,9 @@ class LeagueTest extends TestCase
         $this->assertInstanceOf(League::class, $collection);
     }
 
+    /**
+     * @throws LeagueException
+     */
     public function testLeagueEntries() {
         $collection = Client::league('euw')->entries('RANKED_SOLO_5x5', 'DIAMOND', 'I', 1);
 
@@ -37,10 +40,7 @@ class LeagueTest extends TestCase
     /**
      * Test the apex league endpoints
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestApexLeagues()
     {
@@ -56,10 +56,7 @@ class LeagueTest extends TestCase
     /**
      * Test positions for summoner endpoint
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
-     * @throws \RiotQuest\Contracts\LeagueException
+     * @throws LeagueException
      */
     public function testRequestPositions()
     {

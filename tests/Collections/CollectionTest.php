@@ -3,11 +3,8 @@
 namespace RiotQuest\Tests\Collections;
 
 use PHPUnit\Framework\TestCase;
-use RiotQuest\Client;
 use RiotQuest\Components\Collections\Collection;
 use RiotQuest\Components\Collections\Match;
-
-Client::boot();
 
 /**
  * Class CollectionTest
