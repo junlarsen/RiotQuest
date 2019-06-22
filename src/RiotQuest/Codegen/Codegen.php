@@ -68,7 +68,8 @@ class Codegen
             ->put('sees', $this->parseSeeTags($tags))
             ->put('list', $this->parseListTags($tags))
             ->put('methods', $this->parseFunctions($fns))
-            ->put('name', $reflector->getShortName());
+            ->put('name', $reflector->getShortName())
+            ->put('class', $reflector->getName());
         
         return new Result($template);
     }
