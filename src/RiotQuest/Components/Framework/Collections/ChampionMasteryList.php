@@ -17,7 +17,7 @@ class ChampionMasteryList extends Collection
     /**
      * Get the mastery object where the champion ID is equal to given ID
      *
-     * @param $id
+     * @param int $id
      * @return ChampionMastery
      */
     public function findChampion(int $id)
@@ -30,7 +30,7 @@ class ChampionMasteryList extends Collection
     /**
      * Get every mastery record where level is equal to given level
      *
-     * @param $level
+     * @param int $level
      * @return Collection
      */
     public function getWhereLevelEquals(int $level)
@@ -43,7 +43,7 @@ class ChampionMasteryList extends Collection
     /**
      * Get every mastery record where level is more than given level
      *
-     * @param $level
+     * @param int $level
      * @return Collection
      */
     public function getWhereLevelMoreThan(int $level)
@@ -56,7 +56,7 @@ class ChampionMasteryList extends Collection
     /**
      * Get every mastery record where level is less than given level
      *
-     * @param $level
+     * @param int $level
      * @return Collection
      */
     public function getWhereLevelLessThan(int $level)
@@ -69,7 +69,7 @@ class ChampionMasteryList extends Collection
     /**
      * Get every mastery record where points is more than given points
      *
-     * @param $points
+     * @param int $points
      * @return Collection
      */
     public function getWherePointsMoreThan(int $points)
@@ -82,7 +82,7 @@ class ChampionMasteryList extends Collection
     /**
      * Get every mastery record where points is less than given points
      *
-     * @param $points
+     * @param int $points
      * @return Collection
      */
     public function getWherePointsLessThan(int $points)

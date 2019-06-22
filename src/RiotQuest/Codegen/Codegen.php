@@ -2,6 +2,9 @@
 
 namespace RiotQuest\Codegen;
 
+use Closure;
+use League\Flysystem\Filesystem;
+use League\Flysystem\Adapter\Local;
 use Illuminate\Support\Collection;
 use ReflectionException;
 use RiotQuest\Components\Framework\Collections\Collection as LeagueCollection;
@@ -31,6 +34,24 @@ class Codegen
     }
 
     /**
+     * @param Closure $closure
+     * @throws ReflectionException
+     */
+    public static function createAll(Closure $closure): void {
+        $codegen = static::getInstance();
+
+        $in = new Filesystem(new Local(__DIR__ . '/../Components/Framework/Collections/'));
+
+        foreach ($in->listContents() as $file) {
+            if ($file['type'] === 'file') {
+                $res = $codegen->createFromClass("\\RiotQuest\\Components\\Framework\\Collections\\" . $file['filename']);
+                
+                $closure->call($res, $res);
+            }
+        }
+    }
+
+    /**
      * @param string $namespace
      * @return Result
      * @throws ReflectionException
@@ -46,7 +67,8 @@ class Codegen
         $template->put('props', $this->parsePropertyTags($tags))
             ->put('sees', $this->parseSeeTags($tags))
             ->put('list', $this->parseListTags($tags))
-            ->put('methods', $this->parseFunctions($fns));
+            ->put('methods', $this->parseFunctions($fns))
+            ->put('name', $reflector->getShortName());
         
         return new Result($template);
     }

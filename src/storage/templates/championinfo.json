@@ -1,1 +1,0 @@
-{"freeChampionIdsForNewPlayers":{"_list":"int","_class":"\\RiotQuest\\Components\\Framework\\Collections\\IntList"},"freeChampionIds":{"_list":"int","_class":"\\RiotQuest\\Components\\Framework\\Collections\\IntList"},"maxNewPlayerLevel":"int","_class":"\\RiotQuest\\Components\\Framework\\Collections\\ChampionInfo"}

@@ -21,7 +21,7 @@ class League extends Collection
     /**
      * Get player in league where summoner ID is equal to given ID
      *
-     * @param $id
+     * @param string $id
      * @return LeagueItem
      */
     public function getPlayerWhereId(string $id)

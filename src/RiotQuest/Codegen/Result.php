@@ -33,6 +33,13 @@ class Result {
     }
 
     /**
+     * @return Collection
+     */
+    public function get(): Collection {
+        return $this->result;
+    }
+
+    /**
      * @param string $path
      * @return Result
      */

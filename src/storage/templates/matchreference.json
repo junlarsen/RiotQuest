@@ -1,1 +1,0 @@
-{"lane":"string","gameId":"double","champion":"int","platformId":"string","season":"int","queue":"int","role":"string","timestamp":"double","_class":"\\RiotQuest\\Components\\Framework\\Collections\\MatchReference"}

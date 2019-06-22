@@ -20,7 +20,7 @@ class MatchHistory extends Collection
     /**
      * Checks if given match is in this list
      *
-     * @param $id
+     * @param int $id
      * @return MatchReference|false
      */
     public function getMatch(int $id)
@@ -34,7 +34,7 @@ class MatchHistory extends Collection
     /**
      * Pulls all matches where Queue is given id
      *
-     * @param $id
+     * @param int $id
      * @return MatchHistory
      */
     public function getWhereQueue(int $id)
@@ -53,7 +53,7 @@ class MatchHistory extends Collection
     /**
      * Pulls all matches where Champion is given id
      *
-     * @param $id
+     * @param int $id
      * @return MatchHistory
      */
     public function getWhereChampion(int $id)
@@ -72,7 +72,7 @@ class MatchHistory extends Collection
     /**
      * Pulls all matches where Season is given id
      *
-     * @param $id
+     * @param int $id
      * @return MatchHistory
      */
     public function getWhereSeason(int $id)

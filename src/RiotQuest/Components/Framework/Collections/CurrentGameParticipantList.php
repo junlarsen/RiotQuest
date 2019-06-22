@@ -29,10 +29,10 @@ class CurrentGameParticipantList extends Collection
     /**
      * Search for summoner name
      *
-     * @param $name
+     * @param string $name
      * @return string
      */
-    public function getWhereName($name)
+    public function getWhereName(string $name)
     {
         return array_values($this->filterArr(function (CurrentGameParticipant $e) use ($name) {
             return $e->summonerName == $name;
