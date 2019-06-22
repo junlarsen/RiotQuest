@@ -46,6 +46,19 @@ class Collection extends Module
     }
 
     /**
+     * @return Collection
+     */
+    public function recursive() {
+        return $this->map(function ($value) {
+            if (is_array($value) || is_object($value)) {
+                return (new self($value))->recursive();
+            }
+
+            return $value;
+        });
+    }
+
+    /**
      * Array filter, but returns array instead of collection
      *
      * @param Closure $closure
