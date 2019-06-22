@@ -30,7 +30,7 @@ class DocumentGenerator {
 
         $blade = new Blade(__DIR__ . '/assets', __DIR__ . '/cache');
 
-        file_put_contents(__DIR__ . '/out/' . $collection->get('name'), $blade->make('layout', ['page' => $collection]));
+        file_put_contents(__DIR__ . '/out/' . $collection->get('name') . '.md', $blade->make('layout', ['page' => $collection]));
     }
 
 }
