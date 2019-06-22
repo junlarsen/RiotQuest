@@ -1,0 +1,1 @@
+{"props":{"$active":"boolean","$created_at":"string","$id":"double","$updates":"MessageList"},"sees":["https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"],"list":[],"methods":[],"name":"Incident","class":"RiotQuest\\Components\\Framework\\Collections\\Incident"}
