@@ -121,7 +121,7 @@ class Cache
             return json_decode($this->fs->read($key), 1);
         }
 
-        throw new LeagueException("Target file not found.");
+        throw new LeagueException("ERROR (code 9): Target file not found.");
     }
 
     /**

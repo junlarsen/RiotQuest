@@ -150,7 +150,7 @@ class Client
      */
     public static function stub(): void
     {
-        throw new LeagueException("Unsupported Endpoint.");
+        throw new LeagueException("ERROR (code 11): Unsupported Endpoint.");
     }
 
     /**
@@ -160,7 +160,7 @@ class Client
      */
     public static function tournament(): void
     {
-        throw new LeagueException("Unsupported Endpoint.");
+        throw new LeagueException("ERROR (code 10): Unsupported Endpoint.");
     }
 
 }

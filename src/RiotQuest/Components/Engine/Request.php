@@ -2,13 +2,15 @@
 
 namespace RiotQuest\Components\Engine;
 
-use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\Client\Application;
-use RiotQuest\Contracts\APIException;
+use RiotQuest\Components\Client\Token;
 use RiotQuest\Contracts\LeagueException;
 
 /**
@@ -26,245 +28,207 @@ class Request
 {
 
     /**
-     * @var array
+     *
      */
-    private $vars = [];
+    private const FROM_CACHE = 1;
+    /**
+     *
+     */
+    private const FROM_API = 0;
 
     /**
-     * Tell request to use standard API key
-     *
-     * @return $this
+     * @var Collection
      */
-    public function useStandard(): self
+    private $variables;
+
+    /**
+     * Request constructor.
+     */
+    public function __construct()
     {
-        $this->vars['use'] = 'STANDARD';
-        return $this;
+        // Default values
+        $this->variables = new Collection([
+            'key' => 'STANDARD',
+            'body' => null,
+            'ttl' => 3600,
+            'method' => 'GET',
+            'arguments' => [],
+            'destination' => 'https://{?}.api.riotgames.com/',
+            'function' => null,
+            'region' => 'euw1'
+        ]);
     }
 
     /**
-     * Tell request to use tournament API key
-     *
-     * @return $this
-     */
-    public function useTournament(): self
-    {
-        $this->vars['use'] = 'TOURNAMENT';
-        return $this;
-    }
-
-    /**
-     * Statically make a new request builder
-     *
-     * @param $parent
      * @return Request
      */
-    public static function make(array $parent): self
+    public static function create(): Request
     {
-        $me = new static;
-        $me->vars['name'] = implode('.', $parent);
-        $me->vars['keys'] = $parent;
-        return $me;
+        return new Request();
     }
 
     /**
-     * Set the request payload
-     *
-     * @param $payload
-     * @return $this
+     * @param string $key
+     * @param $value
+     * @return Request
      */
-    public function setPayload($payload): self
+    public function with(string $key, $value): self
     {
-        $this->vars['body'] = $payload;
+        $this->variables->put($key, $value);
+
         return $this;
     }
 
     /**
-     * @param int $ttl
-     * @return $this
-     */
-    public function setTtl($ttl): self
-    {
-        $this->vars['ttl'] = $ttl;
-        return $this;
-    }
-
-    /**
-     * Set the HTTP method
-     *
-     * @param $method
-     * @return $this
-     */
-    public function setMethod(string $method): self
-    {
-        $this->vars['method'] = $method;
-        return $this;
-    }
-
-    /**
-     * Set destination URL
-     *
-     * @param $destination
-     * @return $this
-     */
-    public function setDestination(string $destination): self
-    {
-        $this->vars['dest'] = $destination;
-        return $this;
-    }
-
-    /**
-     * Set the supplements for the destination URL
-     *
-     * @param $arguments
-     * @return $this
-     */
-    public function setArguments(array $arguments = []): self
-    {
-        $this->vars['args'] = $arguments;
-        return $this;
-    }
-
-    /**
-     * Build the request from its own properties
-     *
-     * @return $this
-     * @throws LeagueException
-     */
-    public function compile(): self
-    {
-        if (!($this->vars['region'] = $this->vars['args']['region'] = Utils::resolveRegion($this->vars['args']['region']))) {
-            throw new LeagueException('ERROR: Specified region could not be resolved.');
-        }
-        $this->vars['url'] = Utils::replace($this->vars['dest'], $this->vars['args']);
-        return $this;
-    }
-
-    /**
-     * Catches any third-party exception and returns a LeagueException instead.
-     *
      * @return mixed|null
      * @throws LeagueException
      */
-    public function sendRequest()
+    public function send()
     {
         try {
-            if (Application::getInstance()->getCache('request')->has($this->vars['url']) && $this->vars['ttl'] !== false) {
-                return $this->completeFromCache($this->vars);
-            } else {
-                return $this->completeFromApi($this->vars);
+            $type = $this->validate();
+
+            switch ($type) {
+                case self::FROM_API:
+                    return $this->fromAPI();
+                case self::FROM_CACHE:
+                    return $this->fromCache();
             }
+            
+            throw new LeagueException("ERROR (code 1): Internal Service Error. Please report this error by opening an issue on GitHub.");
         } catch (GuzzleException $ex) {
-            throw new LeagueException("ERROR: Internal Service Error. Please report this error by opening an issue on GitHub.");
+            throw new LeagueException("ERROR (code 2): Internal Service Error. Please report this error by opening an issue on GitHub.");
         } catch (InvalidArgumentException $ex) {
-            throw new LeagueException("ERROR: Internal Service Error. Please report this error by opening an issue on GitHub.");
+            throw new LeagueException("ERROR (code 3): Internal Service Error. Please report this error by opening an issue on GitHub.");
         } catch (FileExistsException $ex) {
-            throw new LeagueException("ERROR: Internal Service Error. Please report this error by opening an issue on GitHub.");
+            throw new LeagueException("ERROR (code 4): Cache Directory is set up incorrectly. Attempt to reinstall RiotQuest.");
         } catch (FileNotFoundException $ex) {
-            throw new LeagueException("ERROR: Cache Directory is not set up. Reinstall RiotQuest and try again.");
+            throw new LeagueException("ERROR (code 5): Cache Directory is not set up. Attempt to reinstall RiotQuest.");
         }
     }
 
     /**
-     * Complete a request by pulling it from the cache
-     *
-     * @param array $request
-     * @return mixed|null
-     * @throws LeagueException
+     * @return int
      * @throws FileNotFoundException
+     * @throws LeagueException
      */
-    private function completeFromCache(array $request)
+    private function validate(): int
     {
-        $collection = Utils::$returnTypes[$request['keys'][0]][$request['keys'][1]];
-        $items = json_decode(Application::getInstance()->getCache('request')->get($request['url']), 1);
-
-        if ($collection) {
-            return Utils::traverse($items, Utils::loadTemplate($collection), $request['region']);
+        if (!($new = (Utils::resolveRegion($this->variables->get('region'))))) {
+            throw new LeagueException('ERROR (code 6): Specified region could not be resolved.');
         }
 
-        return $collection ? $items : ($items[0] ?? null);
+        $this->variables->put('region', $new);
+
+        $this->variables->put('destination', Str::replaceFirst(
+            '{region}',
+            $this->variables->get('region'),
+            $this->variables->get('destination')
+        ));
+
+        $this->variables->put('destination', Str::replaceArray(
+            '{?}',
+            $this->variables->get('arguments'),
+            $this->variables->get('destination')
+        ));
+
+        $cache = Application::getInstance()->getCache('request');
+
+        if ($cache->has($this->variables->get('destination')) && $this->variables->get('ttl') !== false) {
+            return self::FROM_CACHE;
+        } else {
+            return self::FROM_API;
+        }
     }
 
     /**
-     * Completes a request by pulling it from the API and caching it
-     *
-     * @param array $request
      * @return mixed|null
-     * @throws APIException
+     * @throws FileNotFoundException
      * @throws LeagueException
-     * @throws GuzzleException
+     */
+    private function fromCache()
+    {
+        $cache = Application::getInstance()->getCache('request');
+        $collection = Utils::$responses[$this->variables->get('function')];
+
+        $items = json_decode($cache->get($this->variables->get('destination')), 1);
+
+        return $this->respond($collection, $items);
+    }
+
+    /**
+     * @return mixed|null
      * @throws FileExistsException
      * @throws FileNotFoundException
+     * @throws GuzzleException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    private function completeFromApi(array $request)
+    private function fromAPI()
     {
-        if (Application::getInstance()->hittable($request['region'], $request['name'], $request['use'])) {
-            $response = (new HttpClient())->request($request['method'], $request['url'],
+        $region = $this->variables->get('region');
+        $function = $this->variables->get('function');
+        $key = $this->variables->get('key');
+
+        if (Application::getInstance()->hittable($region, $function, $key)) {
+            /** @var Token $token */
+            $token = Application::getInstance()->getKeys()[$this->variables->get('key')];
+
+            $res = (new Client())->request(
+                $this->variables->get('method'),
+                $this->variables->get('destination'),
                 [
-                    'body' => json_encode($request['body'] ?? null),
+                    'body' => json_encode($this->variables->get('body')),
                     'headers' => [
                         'Content-Type' => 'application/json',
-                        'X-Riot-Token' => Application::getInstance()->getKeys()[$request['use']]->getKey()
+                        'X-Riot-Token' => $token->getKey()
                     ],
                     'http_errors' => false
                 ]
             );
-            /** @noinspection PhpParamsInspection */
-            Application::getInstance()->register($request['region'], $request['name'], $request['use'], explode(':', $response->getHeader('X-Method-Rate-Limit')[0]));
 
-            // Work with the response
-            $items = (array)json_decode($response->getBody()->getContents(), 1);
-            if ($response->getStatusCode() >= 300 && !in_array($request['name'], Application::$rules['HTTP_ERROR_EXCEPT'])) {
-                throw new APIException("API Error! Status Code:" . $response->getStatusCode(), $response->getStatusCode(), null, $items);
+            $limits = explode(':', $res->getHeader('X-Method-Rate-Limit')[0]);
+
+            // Note: Application::register registers both endpoint and global limit
+            Application::getInstance()->register($region, $function, $key, $limits);
+
+            $items = (array)json_decode($res->getBody()->getContents(), 1);
+
+            if ($res->getStatusCode() >= 300 && !in_array($function, Application::$rules['HTTP_ERROR_EXCEPT'])) {
+                throw new LeagueException("ERROR (code 7): API Error. Status Code: " . $res->getStatusCode(), 0, null, $items);
             }
 
-            // using true switch here to match multiple cases
-            // can add more fall backs to this later
-            switch (true) {
-                // if item should be cached
-                case (!in_array($request['name'], Application::$rules['FORCE_CACHE_NONE'])):
-                    $this->saveToCache($request, $items);
+            if (!in_array($function, Application::$rules['CACHE_NONE'])) {
+                $cache = Application::getInstance()->getCache('request');
 
+                if (in_array($function, Application::$rules['CACHE_PERMANENT'])) {
+                    $cache->set($this->variables->get('destination'), json_encode($items));
+                } else {
+                    $cache->set($this->variables->get('destination'), json_encode($items), $this->variables->get('ttl'));
+                }
             }
 
-            return $this->finalize($request, $items);
-        } else {
-            throw new APIException("Rate Limit would be exceeded by making this call.");
+            $collection = Utils::$responses[$function];
+
+            return $this->respond($collection, $items);
         }
+
+        throw new LeagueException('ERROR (code 8): Rate Limit wiuld be exceeded by making this call.');
     }
 
     /**
-     * Save an item to the cache, whether the request resides permanently in cache or not
-     *
-     * @param array $request
-     * @param $load
-     * @throws LeagueException
-     * @throws FileExistsException
-     * @throws FileNotFoundException
-     */
-    private function saveToCache(array $request, $load)
-    {
-        in_array($request['name'], Application::$rules['FORCE_CACHE_PERMANENT'])
-            ? Application::getInstance()->getCache('request')->set($request['url'], json_encode($load))
-            : Application::getInstance()->getCache('request')->set($request['url'], json_encode($load), $request['ttl']);
-    }
-
-    /**
-     * Finalize the response
-     *
-     * @param $request
-     * @param $load
+     * @param $collection
+     * @param $items
      * @return mixed|null
      */
-    private function finalize(array $request, $load)
+    private function respond($collection, $items)
     {
-        $collection = Utils::$returnTypes[$request['keys'][0]][$request['keys'][1]];
-
-        if ($collection) {
-            return Utils::traverse($load, Utils::loadTemplate($collection), $request['region']);
+        if ($collection !== false) {
+            $template = Utils::loadTemplate($collection);
+            return Utils::traverse($items, $template, $this->variables->get('region'));
         }
 
-        return $collection ? $load : ($load[0] ?? null);
+        return $collection ? $items : ($items[0] ?? null);
     }
 
 }

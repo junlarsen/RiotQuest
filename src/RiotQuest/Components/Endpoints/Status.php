@@ -24,14 +24,12 @@ class Status extends Template
      */
     public function shard(): ShardStatus
     {
-        return Request::make(['status', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/status/v3/shard-data')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/status/v3/shard-data')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'status.shard')
+            ->with('region', $this->region)
+            ->send();
     }
 
 }

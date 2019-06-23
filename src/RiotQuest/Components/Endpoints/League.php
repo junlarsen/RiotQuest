@@ -26,14 +26,13 @@ class League extends Template
      */
     public function positions(string $id): LeagueEntryList
     {
-        return Request::make(['league', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'league.positions')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -45,14 +44,13 @@ class League extends Template
      */
     public function id(string $id): LeagueCollection
     {
-        return Request::make(['league', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/leagues/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/league/v4/leagues/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'league.id')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -67,14 +65,13 @@ class League extends Template
      */
     public function entries(string $queue, string $tier, string $division, $page = 1): LeagueEntryList
     {
-        return Request::make(['league', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/entries/{queue}/{tier}/{division}?page={page}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'queue' => $queue, 'tier' => $tier, 'division' => $division, 'page' => $page])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/league/v4/entries/{?}/{?}/{?}?page={?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'league.entries')
+            ->with('arguments', [$queue, $tier, $division, $page])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -86,14 +83,13 @@ class League extends Template
      */
     public function challenger(string $queue): LeagueCollection
     {
-        return Request::make(['league', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/{queue}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'queue' => $queue])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'league.challenger')
+            ->with('arguments', [$queue])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -105,14 +101,13 @@ class League extends Template
      */
     public function master(string $queue): LeagueCollection
     {
-        return Request::make(['league', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/masterleagues/by-queue/{queue}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'queue' => $queue])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/league/v4/masterleagues/by-queue/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'league.challenger')
+            ->with('arguments', [$queue])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -124,14 +119,13 @@ class League extends Template
      */
     public function grandmaster(string $queue): LeagueCollection
     {
-        return Request::make(['league', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/{queue}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'queue' => $queue])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'league.challenger')
+            ->with('arguments', [$queue])
+            ->with('region', $this->region)
+            ->send();
     }
 
 }

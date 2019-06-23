@@ -25,14 +25,12 @@ class Spectator extends Template
      */
     public function featured(): FeaturedGames
     {
-        return Request::make(['spectator', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/spectator/v4/featured-games')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/spectator/v4/featured-games')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'spectator.featured')
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -44,14 +42,13 @@ class Spectator extends Template
      */
     public function active(string $id): CurrentGameInfo
     {
-        return Request::make(['spectator', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'spectator.active')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
 }

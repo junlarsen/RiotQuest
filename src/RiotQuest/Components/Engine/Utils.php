@@ -100,46 +100,36 @@ class Utils
      *
      * @var array
      */
-    public static $returnTypes = [
-        'mastery' => [
-            'all' => ChampionMasteryList::class,
-            'id' => ChampionMastery::class,
-            'score' => false
-        ],
-        'champion' => [
-            'rotation' => ChampionInfo::class
-        ],
-        'league' => [
-            'positions' => LeagueEntryList::class,
-            'id' => League::class,
-            'grandmaster' => League::class,
-            'challenger' => League::class,
-            'master' => League::class,
-            'entries' => LeagueEntryList::class
-        ],
-        'status' => [
-            'shard' => ShardStatus::class
-        ],
-        'match' => [
-            'tournamentList', // n/a
-            'id' => Match::class,
-            'tournament', // n/a
-            'list' => MatchHistory::class,
-            'timeline' => MatchTimeline::class
-        ],
-        'spectator' => [
-            'featured' => FeaturedGames::class,
-            'active' => CurrentGameInfo::class
-        ],
-        'summoner' => [
-            'name' => Summoner::class,
-            'account' => Summoner::class,
-            'id' => Summoner::class,
-            'unique' => Summoner::class
-        ],
-        'code' => [
-            'id' => false
-        ]
+    public static $responses = [
+        'mastery.all' => ChampionMasteryList::class,
+        'mastery.id' => ChampionMastery::class,
+        'mastery.score' => false,
+
+        'champion.rotation' => ChampionInfo::class,
+
+        'league.positions' => LeagueEntryList::class,
+        'league.id' => League::class,
+        'league.grandmaster' => League::class,
+        'league.challenger' => League::class,
+        'league.master' => League::class,
+        'league.entries' => LeagueEntryList::class,
+
+        'status.shard' => ShardStatus::class,
+
+        'match.tournamentList' => false, // n/a
+        'match.id' => Match::class,
+        'match.tournament' => false, // n/a
+        'match.list' => MatchHistory::class,
+        'match.timeline' => MatchTimeline::class,
+        'spectator.featured' => FeaturedGames::class,
+        'spectator.active' => CurrentGameInfo::class,
+
+        'summoner.name' => Summoner::class,
+        'summoner.account' => Summoner::class,
+        'summoner.id' => Summoner::class,
+        'summoner.unique' => Summoner::class,
+
+        'code.id' => false
     ];
 
     /**
@@ -209,7 +199,7 @@ class Utils
      */
     public static function traverse($data, array $template, string $region)
     {
-        $primitives = ['int', 'integer' , 'string', 'bool', 'boolean', 'double', 'array'];
+        $primitives = ['int', 'integer', 'string', 'bool', 'boolean', 'double', 'array'];
         /** @var Collection $col */
 
         $col = new $template['class'];

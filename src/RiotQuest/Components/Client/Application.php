@@ -33,10 +33,10 @@ class Application
         'HTTP_ERROR_EXCEPT' => [
             'code.id'
         ],
-        'FORCE_CACHE_PERMANENT' => [
+        'CACHE_PERMANENT' => [
             'match.id', 'match.timeline'
         ],
-        'FORCE_CACHE_NONE' => [
+        'CACHE_NONE' => [
             'code.id'
         ]
     ];
@@ -133,7 +133,7 @@ class Application
             return;
         }
 
-        throw new LeagueException("No valid API keys were found.");
+        throw new LeagueException("ERROR (code 12): No valid API keys were found.");
     }
 
     /**
@@ -224,11 +224,11 @@ class Application
      */
     public function getCache(string $key = 'generic'): Cache
     {
-        if ($this->caches[$key]) {
+        if (isset($this->caches[$key])) {
             return $this->caches[$key];
         }
 
-        throw new LeagueException("Cache Provider could not be located.");
+        throw new LeagueException("ERROR (code 13): Cache Provider could not be located.");
     }
 
     /**

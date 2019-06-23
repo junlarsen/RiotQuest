@@ -49,15 +49,13 @@ class Match extends Template
                 if ($item) $str .= '&' . http_build_query([$key => $item]);
             }
         }
-
-        return Request::make(['match', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{id}?' . trim($str, '&'))
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{?}?' . trim($str, '&'))
+            ->with('ttl', $this->ttl)
+            ->with('function', 'match.list')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -69,14 +67,13 @@ class Match extends Template
      */
     public function timeline($id): MatchTimeline
     {
-        return Request::make(['match', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/match/v4/timelines/by-match/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/match/v4/timelines/by-match/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'match.timeline')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -88,14 +85,13 @@ class Match extends Template
      */
     public function id($id): MatchCollection
     {
-        return Request::make(['match', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/match/v4/matches/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/match/v4/matches/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'match.id')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
 }
