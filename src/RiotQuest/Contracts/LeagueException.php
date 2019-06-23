@@ -50,4 +50,19 @@ class LeagueException extends Exception
         return $this->data;
     }
 
+    /**
+     * @return string|void
+     */
+    public function __toString()
+    {
+        return
+            "A RiotQuest LeagueException has been thrown.
+             Match the given error code with the ones described 
+             at (https://riotquest.supergrecko.dev/docs/exceptions/) 
+             for a more verbose description.
+             
+             $this->message
+             ";
+    }
+
 }

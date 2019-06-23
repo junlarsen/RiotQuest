@@ -24,14 +24,12 @@ class Champion extends Template
      */
     public function rotation(): ChampionInfo
     {
-        return Request::make(['champion', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/platform/v3/champion-rotations')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/platform/v3/champion-rotations')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'champion.rotation')
+            ->with('region', $this->region)
+            ->send();
     }
 
 }

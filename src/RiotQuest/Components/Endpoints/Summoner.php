@@ -25,14 +25,13 @@ class Summoner extends Template
      */
     public function account(string $id): SummonerCollection
     {
-        return Request::make(['summoner', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-account/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-account/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('arguments', [$id])
+            ->with('function', 'summoner.account')
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -44,14 +43,13 @@ class Summoner extends Template
      */
     public function name(string $id): SummonerCollection
     {
-        return Request::make(['summoner', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('arguments', [$id])
+            ->with('function', 'summoner.name')
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -63,14 +61,13 @@ class Summoner extends Template
      */
     public function unique(string $id): SummonerCollection
     {
-        return Request::make(['summoner', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('arguments', [$id])
+            ->with('function', 'summoner.unique')
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -82,14 +79,13 @@ class Summoner extends Template
      */
     public function id(string $id): SummonerCollection
     {
-        return Request::make(['summoner', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/summoner/v4/summoners/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/summoner/v4/summoners/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('arguments', [$id])
+            ->with('function', 'summoner.id')
+            ->with('region', $this->region)
+            ->send();
     }
 
 }

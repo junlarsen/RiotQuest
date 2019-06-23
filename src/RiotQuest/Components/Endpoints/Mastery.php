@@ -26,14 +26,13 @@ class Mastery extends Template
      */
     public function all(string $id): ChampionMasteryList
     {
-        return Request::make(['mastery', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'mastery.all')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -46,14 +45,13 @@ class Mastery extends Template
      */
     public function id(string $id, $champion): ChampionMastery
     {
-        return Request::make(['mastery', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{id}/by-champion/{champion}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id, 'champion' => $champion])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/{?}/by-champion/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'mastery.id')
+            ->with('arguments', [$id, $champion])
+            ->with('region', $this->region)
+            ->send();
     }
 
     /**
@@ -65,14 +63,13 @@ class Mastery extends Template
      */
     public function score(string $id): int
     {
-        return Request::make(['mastery', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'mastery.score')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
 }

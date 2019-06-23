@@ -24,14 +24,13 @@ class Code extends Template
      */
     public function id(string $id)
     {
-        return Request::make(['code', __FUNCTION__])
-            ->useStandard()
-            ->setDestination('https://{region}.api.riotgames.com/lol/platform/v4/third-party-code/by-summoner/{id}')
-            ->setMethod('GET')
-            ->setArguments(['region' => $this->region, 'id' => $id])
-            ->setTtl($this->ttl)
-            ->compile()
-            ->sendRequest();
+        return Request::create()
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/platform/v4/third-party-code/by-summoner/{?}')
+            ->with('ttl', $this->ttl)
+            ->with('function', 'code.id')
+            ->with('arguments', [$id])
+            ->with('region', $this->region)
+            ->send();
     }
 
 }
