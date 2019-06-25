@@ -54,7 +54,7 @@ class Client
      * @param int $ttl
      * @return Champion
      */
-    public static function champion(string $region, $ttl = 3600): Champion
+    public static function champion(string $region, $ttl = 3600): Champion  
     {
         return new Champion($region, $ttl);
     }

@@ -11,6 +11,7 @@ use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Cache\Cache;
 use RiotQuest\Components\Cache\RateLimitCache;
 use RiotQuest\Components\Cache\RequestCache;
+use RiotQuest\Components\Logger\Logger;
 use RiotQuest\Components\RateLimit\Manager;
 use RiotQuest\Contracts\LeagueException;
 use Symfony\Component\Dotenv\Dotenv;
@@ -50,6 +51,11 @@ class Application
      * @var array
      */
     protected $limits = [];
+
+    /**
+     * @var Logger
+     */
+    protected $logger;
 
     /**
      * @var string
@@ -110,6 +116,8 @@ class Application
             'limits' => new RateLimitCache()
         ];
 
+        $this->logger = new Logger();
+
         call_user_func([BaseProvider::class, 'onEnable']);
         call_user_func([Provider::class, 'boot']);
         $this->manager = new Manager();
@@ -169,12 +177,30 @@ class Application
     }
 
     /**
+     * @param $level
+     * @param $message
+     * @param array $context
+     */
+    public static function log($level, $message, $context = []): void
+    {
+        self::getInstance()->getLogger()->log($level, $message, $context);
+    }
+
+    /**
      * @param $target
      * @return Token
      */
     private function getKey($target): Token
     {
         return new Token($_ENV["RIOTQUEST_{$target}_KEY"], $target, $_ENV["RIOTQUEST_{$target}_LIMIT"]);
+    }
+
+    /**
+     * @return Logger
+     */
+    public function getLogger(): Logger
+    {
+        return $this->logger;
     }
 
     /**
@@ -232,7 +258,7 @@ class Application
     }
 
     /**
-     * @return Token[]                              
+     * @return Token[]
      */
     public function getKeys(): array
     {

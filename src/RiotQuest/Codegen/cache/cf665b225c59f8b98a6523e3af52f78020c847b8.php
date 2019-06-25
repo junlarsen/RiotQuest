@@ -1,5 +1,5 @@
 ---
-title: <?php echo e($page->name); ?>
+title:  <?php echo e($page->name); ?>
 
 extends: _layouts.documentation
 section: content
