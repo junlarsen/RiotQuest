@@ -6,13 +6,14 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
+use Psr\SimpleCache\CacheInterface;
 use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class Cache
  * @package RiotQuest\Components\Framework\Cache
  */
-class Cache
+class Cache implements CacheInterface
 {
 
     /**
@@ -164,4 +165,33 @@ class Cache
     }
 
 
+    /**
+     * @param string $key
+     * @return bool|void
+     * @throws FileNotFoundException
+     */
+    public function delete($key)
+    {
+        @$this->fs->delete($this->hash($key));
+    }
+
+    /**
+     * @return bool|void
+     */
+    public function clear()
+    {
+        $this->fs->deleteDir('/');
+    }
+
+    /**
+     * @param iterable $keys
+     * @return bool|void
+     * @throws FileNotFoundException
+     */
+    public function deleteMultiple($keys)
+    {
+        foreach ($keys as $key) {
+            $this->delete($key);
+        }
+    }
 }

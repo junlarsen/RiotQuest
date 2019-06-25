@@ -80,6 +80,15 @@ class Request
     }
 
     /**
+     * @param string $key
+     * @return mixed
+     */
+    private function get(string $key)
+    {
+        return $this->variables->get($key);
+    }
+
+    /**
      * @return mixed|null
      * @throws LeagueException
      */
@@ -88,13 +97,15 @@ class Request
         try {
             $type = $this->validate();
 
+            Application::log('INFO', 'Accessing {endpoint} at {url}', ['endpoint' => $this->get('function'), 'url' => $this->get('destination')]);
+
             switch ($type) {
                 case self::FROM_API:
                     return $this->fromAPI();
                 case self::FROM_CACHE:
                     return $this->fromCache();
             }
-            
+
             throw new LeagueException("ERROR (code 1): Internal Service Error. Please report this error by opening an issue on GitHub.");
         } catch (GuzzleException $ex) {
             throw new LeagueException("ERROR (code 2): Internal Service Error. Please report this error by opening an issue on GitHub.");
@@ -114,7 +125,7 @@ class Request
      */
     private function validate(): int
     {
-        if (!($new = (Utils::resolveRegion($this->variables->get('region'))))) {
+        if (!($new = (Utils::resolveRegion($this->get('region'))))) {
             throw new LeagueException('ERROR (code 6): Specified region could not be resolved.');
         }
 
@@ -122,19 +133,19 @@ class Request
 
         $this->variables->put('destination', Str::replaceFirst(
             '{region}',
-            $this->variables->get('region'),
-            $this->variables->get('destination')
+            $this->get('region'),
+            $this->get('destination')
         ));
 
         $this->variables->put('destination', Str::replaceArray(
             '{?}',
-            $this->variables->get('arguments'),
-            $this->variables->get('destination')
+            $this->get('arguments'),
+            $this->get('destination')
         ));
 
         $cache = Application::getInstance()->getCache('request');
 
-        if ($cache->has($this->variables->get('destination')) && $this->variables->get('ttl') !== false) {
+        if ($cache->has($this->get('destination')) && $this->get('ttl') !== false) {
             return self::FROM_CACHE;
         } else {
             return self::FROM_API;
@@ -149,9 +160,9 @@ class Request
     private function fromCache()
     {
         $cache = Application::getInstance()->getCache('request');
-        $collection = Utils::$responses[$this->variables->get('function')];
+        $collection = Utils::$responses[$this->get('function')];
 
-        $items = json_decode($cache->get($this->variables->get('destination')), 1);
+        $items = json_decode($cache->get($this->get('destination')), 1);
 
         return $this->respond($collection, $items);
     }
@@ -166,19 +177,19 @@ class Request
      */
     private function fromAPI()
     {
-        $region = $this->variables->get('region');
-        $function = $this->variables->get('function');
-        $key = $this->variables->get('key');
+        $region = $this->get('region');
+        $function = $this->get('function');
+        $key = $this->get('key');
 
         if (Application::getInstance()->hittable($region, $function, $key)) {
             /** @var Token $token */
-            $token = Application::getInstance()->getKeys()[$this->variables->get('key')];
+            $token = Application::getInstance()->getKeys()[$this->get('key')];
 
             $res = (new Client())->request(
-                $this->variables->get('method'),
-                $this->variables->get('destination'),
+                $this->get('method'),
+                $this->get('destination'),
                 [
-                    'body' => json_encode($this->variables->get('body')),
+                    'body' => json_encode($this->get('body')),
                     'headers' => [
                         'Content-Type' => 'application/json',
                         'X-Riot-Token' => $token->getKey()
@@ -198,13 +209,17 @@ class Request
                 throw new LeagueException("ERROR (code 7): API Error. Status Code: " . $res->getStatusCode(), 0, null, $items);
             }
 
+            Application::log('INFO', 'Sent HTTP request to API at {url}.', [
+                'url' => $this->get('destination'),
+            ]);
+
             if (!in_array($function, Application::$rules['CACHE_NONE'])) {
                 $cache = Application::getInstance()->getCache('request');
 
                 if (in_array($function, Application::$rules['CACHE_PERMANENT'])) {
-                    $cache->set($this->variables->get('destination'), json_encode($items));
+                    $cache->set($this->get('destination'), json_encode($items));
                 } else {
-                    $cache->set($this->variables->get('destination'), json_encode($items), $this->variables->get('ttl'));
+                    $cache->set($this->get('destination'), json_encode($items), $this->get('ttl'));
                 }
             }
 
@@ -213,7 +228,7 @@ class Request
             return $this->respond($collection, $items);
         }
 
-        throw new LeagueException('ERROR (code 8): Rate Limit wiuld be exceeded by making this call.');
+        throw new LeagueException('ERROR (code 8): Rate Limit would be exceeded by making this call.');
     }
 
     /**
@@ -225,7 +240,7 @@ class Request
     {
         if ($collection !== false) {
             $template = Utils::loadTemplate($collection);
-            return Utils::traverse($items, $template, $this->variables->get('region'));
+            return Utils::traverse($items, $template, $this->get('region'));
         }
 
         return $collection ? $items : ($items[0] ?? null);

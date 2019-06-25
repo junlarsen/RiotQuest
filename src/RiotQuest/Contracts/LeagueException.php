@@ -3,6 +3,7 @@
 namespace RiotQuest\Contracts;
 
 use Exception;
+use RiotQuest\Components\Client\Application;
 use Throwable;
 
 /**
@@ -36,6 +37,7 @@ class LeagueException extends Exception
      */
     public function __construct($message = "", $code = 0, Throwable $previous = null, $data = null)
     {
+        Application::log('CRITICAL', $message);
         $this->data = $data;
         parent::__construct($message, $code, $previous);
     }
