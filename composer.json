@@ -13,7 +13,7 @@
     "ext-json": "*",
     "guzzlehttp/guzzle": "6.3.3",
     "symfony/dotenv": "4.2.0",
-    "nesbot/carbon": "2.9.1",
+    "nesbot/carbon": "2.20.0",
     "psr/simple-cache": "1.0.1",
     "league/flysystem": "^1.0",
     "illuminate/support": "5.8.*",
