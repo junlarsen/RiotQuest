@@ -37,6 +37,8 @@ $summoner = Client::summoner('euw')->name('supergrecko');
 
 The documentation for RiotQuest can be located at https://riotquest.supergrecko.dev/
 
+There is also a mirror available at https://riotquest.netlify.com/
+
 
 ## Prerequisites
 
