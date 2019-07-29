@@ -9,6 +9,7 @@ use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Client\Application;
 use RiotQuest\Contracts\LeagueException;
 use Symfony\Contracts\Cache\ItemInterface;
+use Exception;
 
 /**
  * Class RequestCache
@@ -91,23 +92,35 @@ class Request
 
     /**
      * @return mixed|null
+     * @throws InvalidArgumentException
      * @throws LeagueException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function send()
     {
         try {
             Application::log('INFO', 'Accessing {endpoint} at {url}', ['endpoint' => $this->get('function'), 'url' => $this->get('destination')]);
 
-            return $this->validate();
-        } catch (InvalidArgumentException $ex) {
+            $this->validate();
+
+            if (Application::getInstance()->hittable(
+                $this->get('region'),
+                $this->get('function'),
+                $this->get('key')
+            )) {
+                return $this->finalize();
+            }
+            throw new LeagueException(("ERROR (code 8): Rate Limit would of been reached by sending this request."));
+        } catch (LeagueException $ex) {
+            throw $ex;
+        } catch (Exception $ex) {
             throw new LeagueException("ERROR (code 3): Internal Service Error. Please report this error by opening an issue on GitHub.");
         }
     }
 
     /**
-     * @return mixed
+     * @return $this
      * @throws LeagueException
-     * @throws \Psr\Cache\InvalidArgumentException
      */
     private function validate()
     {
@@ -129,12 +142,12 @@ class Request
             $this->get('destination')
         ));
 
-        return $this->finalize();
+        return $this;
     }
 
     /**
      * @return mixed|null
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     private function finalize() {
         $collection = Utils::$responses[$this->get('function')];
@@ -166,16 +179,51 @@ class Request
                 ]
             );
 
+            $rl = Application::getInstance()->getManager();
+
+            // Some endpoints don't have method limit
+            if ($method = $res->getHeader('X-Method-Rate-Limit')) {
+                $method = explode(':', $method[0]);
+                if (isset($method[2])) {
+                    $method = [$method[0], explode(',', $method[1])[0]];
+                }
+
+                $rl->register(
+                    $this->get('region'),
+                    $this->get('function'),
+                    $this->get('key'),
+                    $method
+                );
+            }
+
+            // Some endpoints don't have app limit
+            if ($app = $res->getHeader('X-App-Rate-Limit')) {
+                $app = explode(':', $app[0]);
+
+                if (isset($app[2])) {
+                    $app = [$app[0], explode(',', $app[1])[0]];
+                }
+
+                $rl->register(
+                    $this->get('region'),
+                    'default',
+                    $this->get('key'),
+                    $app
+                );
+            }
+
             $body = (array)json_decode($res->getBody()->getContents(), 1);
+
+            // If res is not in whitelist and the code was not a 200 code
             if ($res->getStatusCode() >= 300 && !in_array($function, Application::$rules['HTTP_ERROR_EXCEPT'])) {
                 throw new LeagueException("ERROR (code 7): API Error. Status Code: " . $res->getStatusCode(), 0, null, $body);
             }
+
             Application::log('INFO', 'Sent HTTP request to API at {url}.', [
                 'url' => $this->get('destination'),
             ]);
 
             return $body;
-            #throw new LeagueException('ERROR (code 8): Rate Limit would be exceeded by making this call.');
         });
 
         return $this->respond($collection, $items);

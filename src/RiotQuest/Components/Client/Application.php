@@ -112,6 +112,7 @@ class Application
     {
         $this->adapter = new FilesystemAdapter();
         $this->logger = new Logger();
+        $this->manager = new RateLimiter();
 
         call_user_func([BaseProvider::class, 'onEnable']);
         call_user_func([Provider::class, 'boot']);
@@ -150,7 +151,7 @@ class Application
      */
     public function hittable(string $region, string $endpoint, string $key): bool
     {
-        return $this->getManager()->canRequest($region, $endpoint, strtolower($key)) && $this->getManager()->canRequest($region, 'default', $key);
+        return $this->getManager()->requestable($region, $endpoint, $key) && $this->getManager()->requestable($region, 'default', $key);
     }
 
     /**
@@ -166,8 +167,8 @@ class Application
      */
     public function register(string $region, string $endpoint, string $key, $limits): void
     {
-        $this->getManager()->registerCall($region, $endpoint, $key, $limits);
-        $this->getManager()->registerCall($region, 'default', $key, $this->keys[strtoupper($key)]->getLimits());
+        $this->getManager()->register($region, $endpoint, $key, $limits);
+        $this->getManager()->register($region, 'default', $key, $this->keys[strtoupper($key)]->getLimits());
     }
 
     /**
