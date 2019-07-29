@@ -187,7 +187,7 @@ class Application
      */
     private function getKey($target): Token
     {
-        return new Token($_ENV["RIOTQUEST_{$target}_KEY"], $target, $_ENV["RIOTQUEST_{$target}_LIMIT"]);
+        return new Token($_ENV["RIOTQUEST_{$target}_KEY"], $target);
     }
 
     /**
