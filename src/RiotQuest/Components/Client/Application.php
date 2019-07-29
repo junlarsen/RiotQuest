@@ -175,10 +175,17 @@ class Application
      * @param $level
      * @param $message
      * @param array $context
+     * @throws LeagueException
      */
     public static function log($level, $message, $context = []): void
     {
-        self::getInstance()->getLogger()->log($level, $message, $context);
+        // Hack to boot if the user forgot to
+        try {
+            self::getInstance()->getLogger()->log($level, $message, $context);
+        } catch (\TypeError $ex) {
+            Client::boot();
+            self::getInstance()->getLogger()->log($level, $message, $context);
+        }
     }
 
     /**
