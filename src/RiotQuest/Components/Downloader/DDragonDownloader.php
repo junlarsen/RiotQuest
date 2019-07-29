@@ -4,12 +4,11 @@ namespace RiotQuest\Components\Downloader;
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\FileExistsException;
-use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Client\Application;
 use RiotQuest\Components\Engine\Utils;
 use RiotQuest\Components\Game\Game;
-use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class DDragonDownloader
@@ -41,8 +40,7 @@ class DDragonDownloader
 
     /**
      * @throws FileExistsException
-     * @throws FileNotFoundException
-     * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public static function download(): void
     {

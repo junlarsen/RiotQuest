@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Collections;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Client;
 use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Contracts\LeagueException;
@@ -39,6 +40,7 @@ class Summoner extends Collection
      *
      * @return LeagueEntryList
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getRanked()
     {
@@ -51,6 +53,7 @@ class Summoner extends Collection
      * @param array $filters
      * @return MatchHistory
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getMatchlist($filters = [])
     {
@@ -62,6 +65,7 @@ class Summoner extends Collection
      *
      * @return int
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getMasteryScore()
     {
@@ -73,6 +77,7 @@ class Summoner extends Collection
      *
      * @return ChampionMasteryList
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getMasteryList()
     {
@@ -84,6 +89,7 @@ class Summoner extends Collection
      *
      * @return CurrentGameInfo
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getCurrentGame()
     {
@@ -95,6 +101,7 @@ class Summoner extends Collection
      *
      * @return string
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getThirdPartyCode()
     {
@@ -106,6 +113,7 @@ class Summoner extends Collection
      *
      * @return bool
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function isUnranked()
     {

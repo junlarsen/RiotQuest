@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Endpoints;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Collections\CurrentGameInfo;
 use RiotQuest\Components\Collections\FeaturedGames;
 use RiotQuest\Components\Engine\Request;
@@ -22,6 +23,7 @@ class Spectator extends Template
      *
      * @return FeaturedGames
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function featured(): FeaturedGames
     {
@@ -36,9 +38,10 @@ class Spectator extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#spectator-v4/GET_getCurrentGameInfoBySummoner
      *
-     * @param $id
+     * @param string $id
      * @return CurrentGameInfo
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function active(string $id): CurrentGameInfo
     {

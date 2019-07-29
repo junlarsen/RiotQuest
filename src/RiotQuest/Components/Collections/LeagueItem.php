@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Collections;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Client\Client;
 use RiotQuest\Contracts\LeagueException;
 
@@ -32,6 +33,7 @@ class LeagueItem extends Collection
      *
      * @return Summoner
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getSummoner()
     {

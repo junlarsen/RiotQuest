@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Collections;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Client;
 use RiotQuest\Contracts\LeagueException;
 
@@ -65,6 +66,7 @@ class LeagueEntry extends Collection
      *
      * @return Summoner
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getSummoner()
     {

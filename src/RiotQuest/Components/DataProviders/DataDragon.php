@@ -3,10 +3,9 @@
 namespace RiotQuest\Components\DataProviders;
 
 use League\Flysystem\FileExistsException;
-use League\Flysystem\FileNotFoundException;
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Engine\Utils;
 use RiotQuest\Contracts\DataProviderInterface;
-use RiotQuest\Contracts\LeagueException;
 
 /**
  * Class DataDragon
@@ -43,8 +42,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface
      * @param $id
      * @return string
      * @throws FileExistsException
-     * @throws LeagueException
-     * @throws FileNotFoundException
+     * @throws InvalidArgumentException
      */
     public static function getChampionName($id): string
     {
@@ -59,8 +57,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface
      * @param $id
      * @return int
      * @throws FileExistsException
-     * @throws LeagueException
-     * @throws FileNotFoundException
+     * @throws InvalidArgumentException
      */
     public static function getChampionId($id): int
     {
@@ -75,8 +72,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface
      * @param $id
      * @return string
      * @throws FileExistsException
-     * @throws LeagueException
-     * @throws FileNotFoundException
+     * @throws InvalidArgumentException
      */
     public static function getChampionKey($id): string
     {

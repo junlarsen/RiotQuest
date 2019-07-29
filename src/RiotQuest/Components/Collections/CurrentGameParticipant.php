@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Collections;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Components\Client\Client;
 use RiotQuest\Contracts\LeagueException;
@@ -44,6 +45,7 @@ class CurrentGameParticipant extends Collection
      *
      * @return Summoner
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getSummoner()
     {

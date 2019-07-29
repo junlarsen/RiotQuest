@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Endpoints;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Collections\Match as MatchCollection;
 use RiotQuest\Components\Collections\MatchHistory;
 use RiotQuest\Components\Collections\MatchTimeline;
@@ -21,10 +22,11 @@ class Match extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#match-v4/GET_getMatchlist
      *
-     * @param $id
-     * @param $filters
+     * @param string $id
+     * @param array $filters
      * @return MatchHistory
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function list(string $id, array $filters = []): MatchHistory
     {
@@ -65,6 +67,7 @@ class Match extends Template
      * @param $id
      * @return MatchTimeline
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function timeline($id): MatchTimeline
     {
@@ -83,6 +86,7 @@ class Match extends Template
      * @param $id
      * @return MatchCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function id($id): MatchCollection
     {

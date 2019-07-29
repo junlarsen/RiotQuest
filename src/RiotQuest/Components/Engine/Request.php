@@ -26,15 +26,6 @@ class Request
 {
 
     /**
-     *
-     */
-    private const FROM_CACHE = 1;
-    /**
-     *
-     */
-    private const FROM_API = 0;
-
-    /**
      * @var Collection
      */
     private $variables;
@@ -57,6 +48,10 @@ class Request
         ]);
     }
 
+    /**
+     * @param string $key
+     * @return string
+     */
     private static function encode(string $key): string {
         return base64_encode($key);
     }
@@ -94,7 +89,6 @@ class Request
      * @return mixed|null
      * @throws InvalidArgumentException
      * @throws LeagueException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function send()
     {

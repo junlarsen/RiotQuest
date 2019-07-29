@@ -1,5 +1,5 @@
 ---
-title:  <?php echo e($page->name); ?>
+title:  /** @noinspection PhpUndefinedVariableInspection */<?php echo e($page->name); ?>
 
 extends: _layouts.documentation
 section: content
@@ -19,6 +19,6 @@ This page describes the methods for the <?php echo e($page->name); ?> Collection
 public function <?php echo e($name); ?>( <?php echo e(count($state->params) > 0 ? implode(', ', $state->params->map(function ($el, $idx) { return "$el $idx"; })->toArray()) : 'void'); ?> ): <?php echo e($state->returns[0]); ?>
 
 ```
-    
+
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php /**PATH D:\Projects\PHP\LeagueQuest\src\RiotQuest\Codegen\assets/layout.blade.php ENDPATH**/ ?>

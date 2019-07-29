@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Game;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Client\Application;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -23,7 +24,7 @@ class Game
      * Get the latest game version and cache for 6h
      *
      * @return mixed
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function current()
     {

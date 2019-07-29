@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Endpoints;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Collections\ChampionMastery;
 use RiotQuest\Components\Collections\ChampionMasteryList;
 use RiotQuest\Components\Engine\Request;
@@ -20,9 +21,10 @@ class Mastery extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#champion-mastery-v4/GET_getAllChampionMasteries
      *
-     * @param $id
+     * @param string $id
      * @return ChampionMasteryList
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function all(string $id): ChampionMasteryList
     {
@@ -38,10 +40,11 @@ class Mastery extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#champion-mastery-v4/GET_getChampionMastery
      *
-     * @param $id
+     * @param string $id
      * @param ChampionMastery
      * @return mixed
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function id(string $id, $champion): ChampionMastery
     {
@@ -57,9 +60,10 @@ class Mastery extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#champion-mastery-v4/GET_getChampionMasteryScore
      *
-     * @param $id
+     * @param string $id
      * @return integer
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function score(string $id): int
     {

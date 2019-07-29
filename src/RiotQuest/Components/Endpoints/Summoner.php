@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Endpoints;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Collections\Summoner as SummonerCollection;
 use RiotQuest\Components\Engine\Request;
 use RiotQuest\Contracts\LeagueException;
@@ -19,9 +20,10 @@ class Summoner extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getByAccountId
      *
-     * @param $id
+     * @param string $id
      * @return SummonerCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function account(string $id): SummonerCollection
     {
@@ -40,6 +42,7 @@ class Summoner extends Template
      * @param string $id
      * @return SummonerCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function name(string $id): SummonerCollection
     {
@@ -55,9 +58,10 @@ class Summoner extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getByPUUID
      *
-     * @param $id
+     * @param string $id
      * @return SummonerCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function unique(string $id): SummonerCollection
     {
@@ -73,9 +77,10 @@ class Summoner extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#summoner-v4/GET_getBySummonerId
      *
-     * @param $id
+     * @param string $id
      * @return SummonerCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function id(string $id): SummonerCollection
     {

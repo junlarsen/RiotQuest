@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Endpoints;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Collections\ShardStatus;
 use RiotQuest\Components\Engine\Request;
 use RiotQuest\Contracts\LeagueException;
@@ -21,6 +22,7 @@ class Status extends Template
      *
      * @return ShardStatus
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function shard(): ShardStatus
     {

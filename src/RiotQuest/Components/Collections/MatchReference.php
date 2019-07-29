@@ -3,6 +3,7 @@
 namespace RiotQuest\Components\Collections;
 
 use Carbon\Carbon;
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Client;
 use RiotQuest\Components\DataProviders\Provider;
 use RiotQuest\Contracts\LeagueException;
@@ -51,6 +52,7 @@ class MatchReference extends Collection
      *
      * @return mixed
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getMatch()
     {
@@ -60,6 +62,7 @@ class MatchReference extends Collection
     /**
      * @return MatchTimeline
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function getTimeline()
     {

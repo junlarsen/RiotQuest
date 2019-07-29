@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Endpoints;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Collections\League as LeagueCollection;
 use RiotQuest\Components\Collections\LeagueEntryList;
 use RiotQuest\Components\Engine\Request;
@@ -20,9 +21,10 @@ class League extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getAllLeaguePositionsForSummoner
      *
-     * @param $id
+     * @param string $id
      * @return LeagueEntryList
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function positions(string $id): LeagueEntryList
     {
@@ -38,9 +40,10 @@ class League extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getLeagueById
      *
-     * @param $id
+     * @param string $id
      * @return LeagueCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function id(string $id): LeagueCollection
     {
@@ -62,6 +65,7 @@ class League extends Template
      * @param int $page
      * @return LeagueEntryList
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function entries(string $queue, string $tier, string $division, $page = 1): LeagueEntryList
     {
@@ -77,9 +81,10 @@ class League extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getChallengerLeague
      *
-     * @param $queue
+     * @param string $queue
      * @return LeagueCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function challenger(string $queue): LeagueCollection
     {
@@ -95,9 +100,10 @@ class League extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getMasterLeague
      *
-     * @param $queue
+     * @param string $queue
      * @return LeagueCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function master(string $queue): LeagueCollection
     {
@@ -113,9 +119,10 @@ class League extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#league-v4/GET_getGrandmasterLeague
      *
-     * @param $queue
+     * @param string $queue
      * @return LeagueCollection
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function grandmaster(string $queue): LeagueCollection
     {

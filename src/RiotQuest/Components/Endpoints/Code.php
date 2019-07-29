@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Endpoints;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Engine\Request;
 use RiotQuest\Contracts\LeagueException;
 
@@ -18,9 +19,10 @@ class Code extends Template
     /**
      * @see https://developer.riotgames.com/api-methods/#third-party-code-v4/GET_getThirdPartyCodeBySummonerId
      *
-     * @param $id
+     * @param string $id
      * @return string
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function id(string $id)
     {

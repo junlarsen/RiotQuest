@@ -2,9 +2,6 @@
 
 namespace RiotQuest\Components\Client;
 
-use League\Flysystem\FileExistsException;
-use League\Flysystem\FileNotFoundException;
-use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\DataProviders\BaseProvider;
 use RiotQuest\Components\DataProviders\DataDragon;
 use RiotQuest\Components\DataProviders\Provider;
@@ -13,6 +10,7 @@ use RiotQuest\Components\RateLimit\RateLimiter;
 use RiotQuest\Contracts\LeagueException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Dotenv\Dotenv;
+use TypeError;
 
 /**
  * @internal Internal Core API
@@ -144,10 +142,6 @@ class Application
      * @param string $endpoint
      * @param string $key
      * @return bool
-     * @throws InvalidArgumentException
-     * @throws FileNotFoundException
-     * @throws LeagueException
-     * @throws LeagueException
      */
     public function hittable(string $region, string $endpoint, string $key): bool
     {
@@ -159,11 +153,6 @@ class Application
      * @param string $endpoint
      * @param string $key
      * @param $limits
-     * @throws InvalidArgumentException
-     * @throws FileExistsException
-     * @throws FileNotFoundException
-     * @throws LeagueException
-     * @throws LeagueException
      */
     public function register(string $region, string $endpoint, string $key, $limits): void
     {
@@ -182,7 +171,7 @@ class Application
         // Hack to boot if the user forgot to
         try {
             self::getInstance()->getLogger()->log($level, $message, $context);
-        } catch (\TypeError $ex) {
+        } catch (TypeError $ex) {
             Client::boot();
             self::getInstance()->getLogger()->log($level, $message, $context);
         }

@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Endpoints;
 
+use Psr\Cache\InvalidArgumentException;
 use RiotQuest\Components\Collections\ChampionInfo;
 use RiotQuest\Components\Engine\Request;
 use RiotQuest\Contracts\LeagueException;
@@ -21,6 +22,7 @@ class Champion extends Template
      *
      * @return ChampionInfo
      * @throws LeagueException
+     * @throws InvalidArgumentException
      */
     public function rotation(): ChampionInfo
     {
