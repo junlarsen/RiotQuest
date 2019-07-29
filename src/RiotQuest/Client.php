@@ -11,7 +11,7 @@ use RiotQuest\Components\Client\Client as Module;
  * Provides helper method to essential usages
  * for the API.
  *
- * @package RiotQuest\Support\Facades
+ * @package RiotQuest
  */
 class Client extends Module
 {

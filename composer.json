@@ -14,7 +14,8 @@
     "guzzlehttp/guzzle": "6.3.3",
     "symfony/dotenv": "4.3.2",
     "nesbot/carbon": "2.21.3",
-    "psr/simple-cache": "1.0.1",
+    "psr/cache": "1.0.1",
+    "symfony/cache": "4.3.1",
     "league/flysystem": "^1.0",
     "illuminate/support": "5.8.*",
     "psr/log": "^1.1"

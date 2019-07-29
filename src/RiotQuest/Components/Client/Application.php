@@ -8,12 +8,10 @@ use Psr\SimpleCache\InvalidArgumentException;
 use RiotQuest\Components\DataProviders\BaseProvider;
 use RiotQuest\Components\DataProviders\DataDragon;
 use RiotQuest\Components\DataProviders\Provider;
-use RiotQuest\Components\Cache\Cache;
-use RiotQuest\Components\Cache\RateLimitCache;
-use RiotQuest\Components\Cache\RequestCache;
 use RiotQuest\Components\Logger\Logger;
-use RiotQuest\Components\RateLimit\Manager;
+use RiotQuest\Components\RateLimit\RateLimiter;
 use RiotQuest\Contracts\LeagueException;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Dotenv\Dotenv;
 
 /**
@@ -43,9 +41,9 @@ class Application
     ];
 
     /**
-     * @var array
+     * @var FilesystemAdapter
      */
-    protected $caches = [];
+    protected $adapter;
 
     /**
      * @var array
@@ -62,7 +60,9 @@ class Application
      */
     protected $provider = DataDragon::class;
 
-    /** @var Manager */
+    /**
+     * @var RateLimiter
+     */
     protected $manager;
 
     /**
@@ -110,17 +110,11 @@ class Application
      */
     public function load(): void
     {
-        $this->caches = [
-            'generic' => new Cache(),
-            'request' => new RequestCache(),
-            'limits' => new RateLimitCache()
-        ];
-
+        $this->adapter = new FilesystemAdapter();
         $this->logger = new Logger();
 
         call_user_func([BaseProvider::class, 'onEnable']);
         call_user_func([Provider::class, 'boot']);
-        $this->manager = new Manager();
 
         if (file_exists(__DIR__ . '/../../../../.env')) {
             (new Dotenv())->load(__DIR__ . '/../../../../.env');
@@ -204,9 +198,9 @@ class Application
     }
 
     /**
-     * @return Manager
+     * @return RateLimiter
      */
-    public function getManager(): Manager
+    public function getManager(): RateLimiter
     {
         return $this->manager;
     }
@@ -244,17 +238,11 @@ class Application
     }
 
     /**
-     * @param string $key
-     * @return Cache
-     * @throws LeagueException
+     * @return FilesystemAdapter
      */
-    public function getCache(string $key = 'generic'): Cache
+    public function getCache(): FilesystemAdapter
     {
-        if (isset($this->caches[$key])) {
-            return $this->caches[$key];
-        }
-
-        throw new LeagueException("ERROR (code 13): Cache Provider could not be located.");
+        return $this->adapter;
     }
 
     /**

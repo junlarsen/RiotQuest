@@ -6,6 +6,7 @@ use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 use RiotQuest\Components\Client\Application;
 use RiotQuest\Contracts\LeagueException;
+use Symfony\Contracts\Cache\ItemInterface;
 
 /**
  * Class Game
@@ -17,31 +18,30 @@ class Game
     /**
      * Current Game version
      *
-     * @var string
+     * @var array
      */
     private static $current;
 
     /**
-     * Get latest Game Version and caches for 2 hours
+     * Get the latest game version and cache for 6h
      *
-     * @return string
-     * @throws LeagueException
-     * @throws FileExistsException
-     * @throws FileNotFoundException
+     * @return mixed
+     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public static function current(): string
+    public static function current()
     {
-        if (!static::$current) {
-            if (!Application::getInstance()->getCache()->has('riotquest.framework.version')) {
-                $versions = json_decode(file_get_contents('https://ddragon.leagueoflegends.com/api/versions.json'), 1);
-                Application::getInstance()->getCache()->set('riotquest.framework.version', json_encode([
-                    'latest' => $versions[0],
-                    'all' => $versions
-                ]), 7200);
-            }
-            static::$current = json_decode(Application::getInstance()->getCache()->get('riotquest.framework.version'), 1)['latest'];
-        }
-        return static::$current;
+        static::$current = Application::getInstance()->getCache()->get('riotquest.internal.gameversion', function(ItemInterface $item) {
+            $item->expiresAfter(3600 * 6); // 6 Hours
+
+            $data = json_decode(file_get_contents('https://ddragon.leagueoflegends.com/api/versions.json'));
+
+            return [
+                'latest' => $data[0],
+                'all' => $data
+            ];
+        });
+
+        return static::$current['latest'];
     }
 
 }
