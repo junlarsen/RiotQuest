@@ -29,13 +29,13 @@ class Match extends Template
     public function list(string $id, array $filters = []): MatchHistory
     {
         $filters = array_merge([
-            'startIndex' => false,
-            'endIndex' => false,
-            'queue' => [],
-            'champion' => [],
-            'season' => [],
-            'beginTime' => false,
-            'endTime' => false
+            'startIndex' => null,
+            'endIndex' => null,
+            'queue' => null,
+            'champion' => null,
+            'season' => null,
+            'beginTime' => null,
+            'endTime' => null
         ], $filters);
 
         $filters = array_map(function ($e) {
@@ -49,8 +49,9 @@ class Match extends Template
                 if ($item) $str .= '&' . http_build_query([$key => $item]);
             }
         }
+
         return Request::create()
-            ->with('destination', 'https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{?}?' . trim($str, '&'))
+            ->with('destination', 'https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{?}' . ($str ? '?' . trim($str, '&') : ''))
             ->with('ttl', $this->ttl)
             ->with('function', 'match.list')
             ->with('arguments', [$id])
