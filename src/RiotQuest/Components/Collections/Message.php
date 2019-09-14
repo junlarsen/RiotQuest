@@ -12,6 +12,7 @@ use Carbon\CarbonInterface;
  *
  * @property string $severity How severe this incident was
  * @property string $author Who created this message
+ * @property string $heading
  * @property string $created_at When was this message created
  * @property TranslationList $translations Translations of message
  * @property string $updated_at Last time message was updated
