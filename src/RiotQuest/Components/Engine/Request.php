@@ -108,6 +108,7 @@ class Request
         } catch (LeagueException $ex) {
             throw $ex;
         } catch (Exception $ex) {
+            echo $ex->getTraceAsString();
             throw new LeagueException("ERROR (code 3): Internal Service Error. Please report this error by opening an issue on GitHub.");
         }
     }
