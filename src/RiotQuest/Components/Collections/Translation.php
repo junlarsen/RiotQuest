@@ -10,6 +10,7 @@ namespace RiotQuest\Components\Collections;
  * @property string $locale Language translated to
  * @property string $content Message
  * @property string $heading Title
+ * @property string $updated_at
  *
  * @package RiotQuest\Components\Framework\Collections
  */
