@@ -121,17 +121,16 @@ class Application
 
         $keys = [];
 
-        if ($_ENV['RIOTQUEST_STANDARD_KEY']) {
+        if (isset($_ENV['RIOTQUEST_STANDARD_KEY'])) {
             $keys[] = $this->getKey('STANDARD');
         }
 
-        if ($_ENV['RIOTQUEST_TOURNAMENT_KEY']) {
+        if (isset($_ENV['RIOTQUEST_TOURNAMENT_KEY'])) {
             $keys[] = $this->getKey('TOURNAMENT');
         }
 
         if (count($keys)) {
-            $this->addKeys(...$keys);
-            return;
+            return $this->addKeys(...$keys);
         }
 
         throw new LeagueException("ERROR (code 12): No valid API keys were found.");
