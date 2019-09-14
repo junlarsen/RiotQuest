@@ -130,7 +130,8 @@ class Application
         }
 
         if (count($keys)) {
-            return $this->addKeys(...$keys);
+            $this->addKeys(...$keys);
+            return;
         }
 
         throw new LeagueException("ERROR (code 12): No valid API keys were found.");
