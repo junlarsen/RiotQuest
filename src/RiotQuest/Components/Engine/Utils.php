@@ -39,6 +39,7 @@ class Utils
 
         'eune' => 'eun1',
         'eune1' => 'eun1',
+        'eun1' => 'eun1',
         'eu-nordic' => 'eun1',
         'europe-nordic' => 'eun1',
 
