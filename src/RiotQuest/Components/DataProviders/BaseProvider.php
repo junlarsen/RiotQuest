@@ -39,7 +39,13 @@ class BaseProvider
     public static function onEnable(): void
     {
         static::$version = Game::current();
-        $manifest = json_decode(file_get_contents(__DIR__ . "/../../../storage/static/manifest.json"), 1);
+        $path = __DIR__ . "/../../../storage/static/manifest.json";
+
+        if (!file_exists($path)) {
+            file_put_contents($path, json_encode(['version' => static::$version]));
+        }
+
+        $manifest = json_decode(file_get_contents($path), 1);
 
         if ($manifest['version'] !== static::$version) {
             DDragonDownloader::download();
