@@ -37,7 +37,7 @@ class RateLimiter
      * @param array $limits
      */
     public function register(string $region, string $target, string $key, array $limits): void {
-        $key = implode('.', ['riotquest', 'request', $key, $region, $target]);
+        $key = md5(implode('.', ['riotquest', 'request', $key, $region, $target]));
         $item = $this->cache->getItem($key);
 
         // If item is empty
@@ -71,7 +71,7 @@ class RateLimiter
      * @return bool
      */
     public function requestable(string $region, string $target, string $key): bool {
-        $key = implode('.', ['riotquest', 'request', $key, $region, $target]);
+        $key = md5(implode('.', ['riotquest', 'request', $key, $region, $target]));
 
         $item = $this->cache->getItem($key);
 
