@@ -146,7 +146,8 @@ class Request
      */
     private function finalize() {
         $collection = Utils::$responses[$this->get('function')];
-        $items = Application::getInstance()->getCache()->get("riotquest.requests." . static::encode($this->get('destination')), function (ItemInterface $item) {
+        $key = md5("riotquest.requests." . static::encode($this->get('destination')));
+        $items = Application::getInstance()->getCache()->get($key, function (ItemInterface $item) {
             $function = $this->get('function');
 
             if (!in_array($function, Application::$rules['CACHE_NONE'])) {
