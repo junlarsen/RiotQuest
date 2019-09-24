@@ -32,6 +32,14 @@ class Client
     }
 
     /**
+     * @param bool $state
+     */
+    public static function setLogging(bool $state): void
+    {
+        Application::getInstance()->setLogging($state);
+    }
+
+    /**
      * @param string $locale
      */
     public static function setLocale(string $locale): void
