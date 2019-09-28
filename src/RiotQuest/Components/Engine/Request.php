@@ -155,7 +155,7 @@ class Request
                     $item->expiresAfter(86400 * 360 * 3); // 3 years
                 } else {
                     $time = $this->get('ttl') ?: 0;
-                    $item->expiresAfter($time);
+                    $item->expiresAfter((int)$time);
                 }
             } else {
                 $item->expiresAfter(0);
