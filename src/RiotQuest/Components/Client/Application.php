@@ -44,9 +44,9 @@ class Application
     protected $adapter;
 
     /**
-     * @var array
+     * @var bool
      */
-    protected $limits = [];
+    protected static $state = true;
 
     /**
      * @var Logger
@@ -170,11 +170,21 @@ class Application
     {
         // Hack to boot if the user forgot to
         try {
-            self::getInstance()->getLogger()->log($level, $message, $context);
+            if (self::$state) {
+                self::getInstance()->getLogger()->log($level, $message, $context);
+            }
         } catch (TypeError $ex) {
             Client::boot();
-            self::getInstance()->getLogger()->log($level, $message, $context);
+            self::log($level, $message, $context);
         }
+    }
+
+    /**
+     * @param bool $state
+     */
+    public function setLogging(bool $state): void
+    {
+        self::$state = $state;
     }
 
     /**

@@ -154,7 +154,8 @@ class Request
                 if (in_array($function, Application::$rules['CACHE_PERMANENT'])) {
                     $item->expiresAfter(86400 * 360 * 3); // 3 years
                 } else {
-                    $item->expiresAfter($this->get('ttl'));
+                    $time = $this->get('ttl') ?: 0;
+                    $item->expiresAfter($time);
                 }
             } else {
                 $item->expiresAfter(0);
