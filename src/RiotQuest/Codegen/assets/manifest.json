@@ -92,7 +92,9 @@
         "returns": [
           "Summoner"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "getChampionIcon": {
         "name": "getChampionIcon",
@@ -291,7 +293,9 @@
         "returns": [
           "Summoner"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "getSummonerIcon": {
         "name": "getSummonerIcon",
@@ -593,7 +597,9 @@
         "returns": [
           "Summoner"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "isInMiniSeries": {
         "name": "isInMiniSeries",
@@ -671,7 +677,9 @@
         "returns": [
           "Summoner"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "getWinrate": {
         "name": "getWinrate",
@@ -1102,6 +1110,7 @@
     "props": {
       "$severity": "string",
       "$author": "string",
+      "$heading": "string",
       "$created_at": "string",
       "$translations": "TranslationList",
       "$updated_at": "string",
@@ -1207,7 +1216,9 @@
         "returns": [
           "Summoner"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "getProfileIcon": {
         "name": "getProfileIcon",
@@ -1538,7 +1549,9 @@
         "returns": [
           "Summoner"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       }
     },
     "name": "Player",
@@ -1667,7 +1680,9 @@
         "returns": [
           "LeagueEntryList"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "getMatchlist": {
         "name": "getMatchlist",
@@ -1675,6 +1690,7 @@
           "MatchHistory"
         ],
         "params": {
+          "$ttl": "int",
           "$filters": "array"
         }
       },
@@ -1683,21 +1699,27 @@
         "returns": [
           "int"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "getMasteryList": {
         "name": "getMasteryList",
         "returns": [
           "ChampionMasteryList"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "getCurrentGame": {
         "name": "getCurrentGame",
         "returns": [
           "CurrentGameInfo"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "getThirdPartyCode": {
         "name": "getThirdPartyCode",
@@ -1711,7 +1733,9 @@
         "returns": [
           "bool"
         ],
-        "params": []
+        "params": {
+          "$ttl": "int"
+        }
       },
       "isAboveNewPlayerThreshold": {
         "name": "isAboveNewPlayerThreshold",
@@ -1816,7 +1840,8 @@
     "props": {
       "$locale": "string",
       "$content": "string",
-      "$heading": "string"
+      "$heading": "string",
+      "$updated_at": "string"
     },
     "sees": [
       "https:\/\/developer.riotgames.com\/api-methods\/#lol-status-v3\/GET_getShardData"

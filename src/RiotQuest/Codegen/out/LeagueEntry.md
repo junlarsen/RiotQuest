@@ -31,7 +31,7 @@ public function getGamesPlayed( void ): int
 ### Method <code>LeagueEntry::getSummoner => Summoner</code>
 
 ```php
-public function getSummoner( void ): Summoner
+public function getSummoner( int $ttl ): Summoner
 ```
     
 ### Method <code>LeagueEntry::isInMiniSeries => bool</code>

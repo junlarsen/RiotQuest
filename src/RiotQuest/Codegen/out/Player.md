@@ -19,6 +19,6 @@ public function getSummonerIcon( void ): string
 ### Method <code>Player::getSummoner => Summoner</code>
 
 ```php
-public function getSummoner( void ): Summoner
+public function getSummoner( int $ttl ): Summoner
 ```
     

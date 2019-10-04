@@ -19,31 +19,31 @@ public function getSummonerIcon( void ): string
 ### Method <code>Summoner::getRanked => LeagueEntryList</code>
 
 ```php
-public function getRanked( void ): LeagueEntryList
+public function getRanked( int $ttl ): LeagueEntryList
 ```
     
 ### Method <code>Summoner::getMatchlist => MatchHistory</code>
 
 ```php
-public function getMatchlist( array $filters ): MatchHistory
+public function getMatchlist( int $ttl, array $filters ): MatchHistory
 ```
     
 ### Method <code>Summoner::getMasteryScore => int</code>
 
 ```php
-public function getMasteryScore( void ): int
+public function getMasteryScore( int $ttl ): int
 ```
     
 ### Method <code>Summoner::getMasteryList => ChampionMasteryList</code>
 
 ```php
-public function getMasteryList( void ): ChampionMasteryList
+public function getMasteryList( int $ttl ): ChampionMasteryList
 ```
     
 ### Method <code>Summoner::getCurrentGame => CurrentGameInfo</code>
 
 ```php
-public function getCurrentGame( void ): CurrentGameInfo
+public function getCurrentGame( int $ttl ): CurrentGameInfo
 ```
     
 ### Method <code>Summoner::getThirdPartyCode => string</code>
@@ -55,7 +55,7 @@ public function getThirdPartyCode( void ): string
 ### Method <code>Summoner::isUnranked => bool</code>
 
 ```php
-public function isUnranked( void ): bool
+public function isUnranked( int $ttl ): bool
 ```
     
 ### Method <code>Summoner::isAboveNewPlayerThreshold => bool</code>
