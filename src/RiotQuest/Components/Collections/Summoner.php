@@ -38,66 +38,73 @@ class Summoner extends Collection
     /**
      * Get the ranked positions for summoner
      *
+     * @param int $ttl
      * @return LeagueEntryList
-     * @throws LeagueException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function getRanked()
+    public function getRanked($ttl = 3600)
     {
-        return Client::league($this->region)->positions($this->id);
+        return Client::league($this->region, $ttl)->positions($this->id);
     }
 
     /**
      * Get the matchlist for summoner
      *
+     * @param int $ttl
      * @param array $filters
      * @return MatchHistory
-     * @throws LeagueException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function getMatchlist($filters = [])
+    public function getMatchlist($ttl = 3600, $filters = [])
     {
-        return Client::match($this->region)->list($this->accountId, $filters);
+        return Client::match($this->region, $ttl)->list($this->accountId, $filters);
     }
 
     /**
      * Get the total mastery score for summoner
      *
+     * @param int $ttl
      * @return int
-     * @throws LeagueException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function getMasteryScore()
+    public function getMasteryScore($ttl = 3600)
     {
-        return Client::mastery($this->region)->score($this->id);
+        return Client::mastery($this->region, $ttl)->score($this->id);
     }
 
     /**
      * Get all masteries for summoner
      *
+     * @param int $ttl
      * @return ChampionMasteryList
-     * @throws LeagueException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function getMasteryList()
+    public function getMasteryList($ttl = 3600)
     {
-        return Client::mastery($this->region)->all($this->id);
+        return Client::mastery($this->region, $ttl)->all($this->id);
     }
 
     /**
      * Get the live game for summoner
      *
+     * @param int $ttl
      * @return CurrentGameInfo
-     * @throws LeagueException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function getCurrentGame()
+    public function getCurrentGame($ttl = 3600)
     {
-        return Client::spectator($this->region)->active($this->id);
+        return Client::spectator($this->region, $ttl)->active($this->id);
     }
 
     /**
      * Get the set third-party-code for summoner
+     *
+     * Note: does not need TTL as Code always has 0 ttl
      *
      * @return string
      * @throws LeagueException
@@ -111,13 +118,14 @@ class Summoner extends Collection
     /**
      * Returns whether this user is unranked or not
      *
+     * @param int $ttl
      * @return bool
-     * @throws LeagueException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function isUnranked()
+    public function isUnranked($ttl = 3600)
     {
-        return count($this->getRanked()->getRankedQueues()) === 0;
+        return count($this->getRanked($ttl)->getRankedQueues()) === 0;
     }
 
     /**

@@ -31,13 +31,14 @@ class LeagueItem extends Collection
     /**
      * Get the summoner object for this league item
      *
+     * @param int $ttl
      * @return Summoner
-     * @throws LeagueException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function getSummoner()
+    public function getSummoner($ttl = 3600)
     {
-        return Client::summoner($this->region)->id($this->summonerId);
+        return Client::summoner($this->region, $ttl)->id($this->summonerId);
     }
 
     /**
