@@ -13,7 +13,7 @@ This page describes the methods for the ChampionMastery Collection.
 ### Method <code>ChampionMastery::getSummoner => Summoner</code>
 
 ```php
-public function getSummoner( void ): Summoner
+public function getSummoner( int $ttl ): Summoner
 ```
     
 ### Method <code>ChampionMastery::getChampionIcon => string</code>

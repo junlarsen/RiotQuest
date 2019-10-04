@@ -13,7 +13,7 @@ This page describes the methods for the Participant Collection.
 ### Method <code>Participant::getSummoner => Summoner</code>
 
 ```php
-public function getSummoner( void ): Summoner
+public function getSummoner( int $ttl ): Summoner
 ```
     
 ### Method <code>Participant::getProfileIcon => string</code>

@@ -19,7 +19,7 @@ public function getChampionIcon( void ): string
 ### Method <code>CurrentGameParticipant::getSummoner => Summoner</code>
 
 ```php
-public function getSummoner( void ): Summoner
+public function getSummoner( int $ttl ): Summoner
 ```
     
 ### Method <code>CurrentGameParticipant::getSummonerIcon => string</code>

@@ -13,7 +13,7 @@ This page describes the methods for the LeagueItem Collection.
 ### Method <code>LeagueItem::getSummoner => Summoner</code>
 
 ```php
-public function getSummoner( void ): Summoner
+public function getSummoner( int $ttl ): Summoner
 ```
     
 ### Method <code>LeagueItem::getWinrate => float|int</code>

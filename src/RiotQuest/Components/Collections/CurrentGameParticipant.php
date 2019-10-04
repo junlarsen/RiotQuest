@@ -43,13 +43,14 @@ class CurrentGameParticipant extends Collection
     /**
      * Get summoner object
      *
+     * @param int $ttl
      * @return Summoner
-     * @throws LeagueException
      * @throws InvalidArgumentException
+     * @throws LeagueException
      */
-    public function getSummoner()
+    public function getSummoner($ttl = 3600)
     {
-        return Client::summoner($this->region)->id($this->summonerId);
+        return Client::summoner($this->region, $ttl)->id($this->summonerId);
     }
 
     /**
