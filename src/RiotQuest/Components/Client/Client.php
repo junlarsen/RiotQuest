@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Client;
 
+use Psr\Log\LoggerInterface;
 use RiotQuest\Components\Endpoints\Champion;
 use RiotQuest\Components\Endpoints\Code;
 use RiotQuest\Components\Endpoints\League;
@@ -31,12 +32,18 @@ class Client
         Application::getInstance()->load();
     }
 
-    /**
-     * @param bool $state
-     */
-    public static function setLogging(bool $state): void
+    public static function disableLogging(): void
     {
-        Application::getInstance()->setLogging($state);
+        Application::getInstance()->setLogging(false);
+    }
+
+    /**
+     * Change the default logger implementation
+     *
+     * @param LoggerInterface $logger
+     */
+    public static function setLogger(LoggerInterface $logger) {
+        Application::getInstance()->setLogger($logger);
     }
 
     /**

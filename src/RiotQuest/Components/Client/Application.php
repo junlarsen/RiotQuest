@@ -2,6 +2,7 @@
 
 namespace RiotQuest\Components\Client;
 
+use Psr\Log\LoggerInterface;
 use RiotQuest\Components\DataProviders\BaseProvider;
 use RiotQuest\Components\DataProviders\DataDragon;
 use RiotQuest\Components\DataProviders\Provider;
@@ -49,7 +50,7 @@ class Application
     protected static $state = true;
 
     /**
-     * @var Logger
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -102,6 +103,14 @@ class Application
     }
 
     /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
+    }
+
+    /**
      * Bootstrap the application
      *
      * @throws LeagueException
@@ -112,6 +121,7 @@ class Application
         $this->logger = new Logger();
         $this->manager = new RateLimiter();
 
+        // TODO complete these features
         call_user_func([BaseProvider::class, 'onEnable']);
         call_user_func([Provider::class, 'boot']);
 
