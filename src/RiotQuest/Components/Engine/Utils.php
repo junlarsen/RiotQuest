@@ -148,7 +148,7 @@ class Utils
      */
     public static function loadTemplate(string $path)
     {
-        $path = strtolower(array_reverse(explode('\\', $path))[0]) . '.json';
+        $path = array_reverse(explode('\\', $path))[0] . '.json';
 
         if (!isset(static::$templates[$path])) {
             $template = json_decode(file_get_contents(__DIR__ . '/../../../storage/templates/' . $path), 1);

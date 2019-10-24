@@ -22,7 +22,7 @@ class SummonerTest extends TestCase
     public function testRequestByName()
     {
         // Summoner Name
-        $collection = Client::summoner('euw')->name('headhunter meow');
+        $collection = Client::summoner('euw')->name('kotlin dev btw');
 
         $this->assertInstanceOf(Summoner::class, $collection);
     }
