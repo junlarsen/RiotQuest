@@ -11,14 +11,14 @@
   "require": {
     "php": "^7.1",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "6.3.3",
-    "symfony/dotenv": "4.3.4",
-    "nesbot/carbon": "^2.25",
+    "guzzlehttp/guzzle": "^6.3.3",
+    "symfony/dotenv": "^4.3.4",
+    "nesbot/carbon": "^2.25.0",
     "psr/cache": "1.0.1",
-    "symfony/cache": "4.3.4",
+    "symfony/cache": "^4.3.4",
     "league/flysystem": "^1.0",
-    "illuminate/support": "^6.0",
-    "psr/log": "^1.1"
+    "illuminate/support": "^5.8",
+    "psr/log": "1.1"
   },
   "require-dev": {
     "phpunit/phpunit": "8.4.0",
