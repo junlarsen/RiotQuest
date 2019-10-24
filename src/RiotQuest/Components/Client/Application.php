@@ -131,11 +131,11 @@ class Application
 
         $keys = [];
 
-        if (!empty(env('RIOTQUEST_STANDARD_KEY'))) {
+        if (isset($_ENV['RIOTQUEST_STANDARD_KEY'])) {
             $keys[] = $this->getKey('STANDARD');
         }
 
-        if (!empty(env('RIOTQUEST_TOURNAMENT_KEY'))) {
+        if (isset($_ENV['RIOTQUEST_TOURNAMENT_KEY'])) {
             $keys[] = $this->getKey('TOURNAMENT');
         }
 
@@ -202,7 +202,7 @@ class Application
      */
     private function getKey($target): Token
     {
-        return new Token(env("RIOTQUEST_{$target}_KEY"), $target);
+        return new Token($_ENV["RIOTQUEST_{$target}_KEY"], $target);
     }
 
     /**
