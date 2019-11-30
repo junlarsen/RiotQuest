@@ -24,10 +24,8 @@ class Application
 
     /**
      * Special rules for endpoints
-     *
-     * @var array
      */
-    public static $rules = [
+    public static array $rules = [
         'HTTP_ERROR_EXCEPT' => [
             'code.id'
         ],
@@ -39,47 +37,15 @@ class Application
         ]
     ];
 
-    /**
-     * @var FilesystemAdapter
-     */
-    protected $adapter;
+    protected static bool $state = true;
 
-    /**
-     * @var bool
-     */
-    protected static $state = true;
-
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @var string
-     */
-    protected $provider = DataDragon::class;
-
-    /**
-     * @var RateLimiter
-     */
-    protected $manager;
-
-    /**
-     * @var array
-     */
-    protected $keys = [];
-
-    /**
-     * @var string
-     */
-    protected $locale = "en_US";
-
-    /**
-     * Application Singleton
-     *
-     * @var Application
-     */
-    protected static $app;
+    protected FilesystemAdapter $adapter;
+    protected LoggerInterface $logger;
+    protected string $provider = DataDragon::class;
+    protected RateLimiter $manager;
+    protected array $keys = [];
+    protected string $locale = "en_US";
+    protected static Application $app;
 
     /**
      * Application singleton function

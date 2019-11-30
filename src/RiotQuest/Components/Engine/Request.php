@@ -25,14 +25,8 @@ use Exception;
 class Request
 {
 
-    /**
-     * @var Collection
-     */
-    private $variables;
+    private Collection $variables;
 
-    /**
-     * Request constructor.
-     */
     public function __construct()
     {
         // Default values
@@ -48,27 +42,15 @@ class Request
         ]);
     }
 
-    /**
-     * @param string $key
-     * @return string
-     */
     private static function encode(string $key): string {
         return base64_encode($key);
     }
 
-    /**
-     * @return Request
-     */
     public static function create(): Request
     {
         return new Request();
     }
 
-    /**
-     * @param string $key
-     * @param $value
-     * @return Request
-     */
     public function with(string $key, $value): self
     {
         $this->variables->put($key, $value);
@@ -76,10 +58,6 @@ class Request
         return $this;
     }
 
-    /**
-     * @param string $key
-     * @return mixed
-     */
     private function get(string $key)
     {
         return $this->variables->get($key);

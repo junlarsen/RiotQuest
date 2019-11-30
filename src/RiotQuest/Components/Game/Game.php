@@ -18,7 +18,7 @@ class Game
      *
      * @var array
      */
-    private static $current;
+    private static array $current;
 
     /**
      * Get the latest game version and cache for 6h
@@ -28,7 +28,7 @@ class Game
      */
     public static function current()
     {
-        static::$current = Application::getInstance()->getCache()->get('riotquest.internal.gameversion', function(ItemInterface $item) {
+        static::$current = Application::getInstance()->getCache()->get('riotquest.internal.gameversion', function (ItemInterface $item) {
             $item->expiresAfter(3600 * 6); // 6 Hours
 
             $data = json_decode(file_get_contents('https://ddragon.leagueoflegends.com/api/versions.json'));

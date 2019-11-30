@@ -46,9 +46,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface
      */
     public static function getChampionName($id): string
     {
-        return array_values(array_filter(static::get('champion')['data'], function ($el) use ($id) {
-                return $el['key'] == $id || $el['id'] == $id || $el['name'] == $id;
-            }))[0]['name'] ?? '';
+        return array_values(array_filter(static::get('champion')['data'], fn ($el) => in_array($id, [$el['key'], $el['id'], $el['name']])))[0]['name'] ?? '';
     }
 
     /**
@@ -61,9 +59,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface
      */
     public static function getChampionId($id): int
     {
-        return array_values(array_filter(static::get('champion')['data'], function ($el) use ($id) {
-                return $el['key'] == $id || $el['id'] == $id || $el['name'] == $id;
-            }))[0]['id'] ?? '';
+        return array_values(array_filter(static::get('champion')['data'], fn ($el) => in_array($id, [$el['key'], $el['id'], $el['name']])))[0]['id'] ?? '';
     }
 
     /**
@@ -76,9 +72,7 @@ class DataDragon extends BaseProvider implements DataProviderInterface
      */
     public static function getChampionKey($id): string
     {
-        return array_values(array_filter(static::get('champion')['data'], function ($el) use ($id) {
-                return $el['key'] == $id || $el['id'] == $id || $el['name'] == $id;
-            }))[0]['key'] ?? '';
+        return array_values(array_filter(static::get('champion')['data'], fn ($el) => in_array($id, [$el['key'], $el['id'], $el['name']])))[0]['key'] ?? '';
     }
 
 }

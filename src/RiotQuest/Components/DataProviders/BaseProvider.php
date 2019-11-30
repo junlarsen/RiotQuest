@@ -19,17 +19,13 @@ class BaseProvider
 
     /**
      * The version to pull data from
-     *
-     * @var string
      */
-    protected static $version;
+    protected static string $version;
 
     /**
      * Files loaded into memory
-     *
-     * @var array
      */
-    protected static $load = [];
+    protected static array $load = [];
 
     /**
      * @throws FileExistsException

@@ -17,17 +17,9 @@ use RiotQuest\Components\Game\Game;
 class DDragonDownloader
 {
 
-    /**
-     * @var string
-     */
-    public static $baseurl = "https://ddragon.leagueoflegends.com/cdn/{version}";
-
-    /**
-     * Files to download
-     *
-     * @var array
-     */
-    private static $map = [
+    // TODO: implement #67
+    public static string $baseurl = "https://ddragon.leagueoflegends.com/cdn/{version}";
+    private static array $map = [
         'champion' => '/data/{locale}/champion.json',
         'item' => '/data/{locale}/item.json',
         'championFull' => '/data/{locale}/championFull.json',

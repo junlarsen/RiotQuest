@@ -14,17 +14,13 @@ class Token
 
     /**
      * The raw API key
-     *
-     * @var string
      */
-    private $key;
+    private string $key;
 
     /**
      * The key type: STANDARD | TOURNAMENT
-     *
-     * @var string
      */
-    private $type;
+    private string $type;
 
     /**
      * Create a new API key

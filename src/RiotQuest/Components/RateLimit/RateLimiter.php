@@ -15,14 +15,9 @@ class RateLimiter
 
     /**
      * Cache namespace for requests
-     *
-     * @var FilesystemAdapter
      */
-    private $cache;
+    private FilesystemAdapter $cache;
 
-    /**
-     * RateLimiter constructor.
-     */
     public function __construct()
     {
         $this->cache = new FilesystemAdapter();
@@ -35,6 +30,7 @@ class RateLimiter
      * @param string $target
      * @param string $key
      * @param array $limits
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function register(string $region, string $target, string $key, array $limits): void {
         $key = md5(implode('.', ['riotquest', 'request', $key, $region, $target]));
@@ -69,6 +65,7 @@ class RateLimiter
      * @param string $target
      * @param string $key
      * @return bool
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function requestable(string $region, string $target, string $key): bool {
         $key = md5(implode('.', ['riotquest', 'request', $key, $region, $target]));

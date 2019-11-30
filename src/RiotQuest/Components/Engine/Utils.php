@@ -26,12 +26,7 @@ use RiotQuest\Components\Collections\Summoner;
 class Utils
 {
 
-    /**
-     * Collection of Regions and region aliases
-     *
-     * @var array
-     */
-    public static $map = [
+    public static array $map = [
         'euw' => 'euw1',
         'euw1' => 'euw1',
         'eu-west' => 'euw1',
@@ -101,7 +96,7 @@ class Utils
      *
      * @var array
      */
-    public static $responses = [
+    public static array $responses = [
         'mastery.all' => ChampionMasteryList::class,
         'mastery.id' => ChampionMastery::class,
         'mastery.score' => false,
@@ -133,12 +128,7 @@ class Utils
         'code.id' => false
     ];
 
-    /**
-     * The loaded templates from file
-     *
-     * @var array
-     */
-    static $templates = [];
+    static array $templates = [];
 
     /**
      * Load template from file and save into memory
