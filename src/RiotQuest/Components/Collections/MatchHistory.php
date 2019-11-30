@@ -25,9 +25,8 @@ class MatchHistory extends Collection
      */
     public function getMatch(int $id)
     {
-        $matches = $this->matches->filter(function (MatchReference $e) use ($id) {
-            return $e->gameId == $id;
-        });
+        $matches = $this->matches->filter(fn (MatchReference $e) => $e->gameId == $id);
+
         return count($matches) ? $matches[0] : false;
     }
 
@@ -39,9 +38,8 @@ class MatchHistory extends Collection
      */
     public function getWhereQueue(int $id)
     {
-        $matches = array_values($this->matches->filterArr(function (MatchReference $e) use ($id) {
-            return $e->queue == $id;
-        }));
+        $matches = array_values($this->matches->filterArr(fn (MatchReference $e) => $e->queue == $id));
+
         return new static([
             'matches' => new MatchReferenceList($matches),
             'totalGames' => count($matches),
@@ -58,9 +56,8 @@ class MatchHistory extends Collection
      */
     public function getWhereChampion(int $id)
     {
-        $matches = array_values($this->matches->filterArr(function (MatchReference $e) use ($id) {
-            return $e->champion == $id;
-        }));
+        $matches = array_values($this->matches->filterArr(fn (MatchReference $e) => $e->champion == $id));
+
         return new static([
             'matches' => new MatchReferenceList($matches),
             'totalGames' => count($matches),
@@ -77,9 +74,8 @@ class MatchHistory extends Collection
      */
     public function getWhereSeason(int $id)
     {
-        $matches = array_values($this->matches->filterArr(function (MatchReference $e) use ($id) {
-            return $e->season == $id;
-        }));
+        $matches = array_values($this->matches->filterArr(fn (MatchReference $e) => $e->season == $id));
+
         return new static([
             'matches' => new MatchReferenceList($matches),
             'totalGames' => count($matches),

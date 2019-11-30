@@ -21,9 +21,7 @@ class FeaturedGameInfoList extends Collection
      */
     public function getGameIds()
     {
-        return new Collection(array_values($this->mapArr(function (FeaturedGameInfo $e) {
-            return $e->gameId;
-        })));
+        return new Collection(array_values($this->mapArr(fn (FeaturedGameInfo $e) => $e->gameId)));
     }
 
 }

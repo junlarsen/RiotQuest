@@ -21,9 +21,7 @@ class StringList extends Collection
      */
     public function toLowerCase()
     {
-        return new static($this->map(function ($e) {
-            return strtolower($e);
-        }));
+        return new static($this->map(fn ($e) => strtolower($e)));
     }
 
     /**
@@ -33,9 +31,7 @@ class StringList extends Collection
      */
     public function toUpperCase()
     {
-        return new static($this->map(function ($e) {
-            return strtoupper($e);
-        }));
+        return new static($this->map(fn ($e) => strtoupper($e)));
     }
 
 }

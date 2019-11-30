@@ -24,9 +24,7 @@ class MiniSeries extends Collection
      */
     public function getParsedSeries()
     {
-        return array_map(function ($e) {
-            return $e == 'W' ? true : ($e == 'L' ? false : null);
-        }, str_split($this->progress));
+        return array_map(fn ($e) => $e == 'W' ? true : ($e == 'L' ? false : null), str_split($this->progress));
     }
 
 }

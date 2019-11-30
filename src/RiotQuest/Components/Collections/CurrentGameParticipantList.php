@@ -21,9 +21,7 @@ class CurrentGameParticipantList extends Collection
      */
     public function getSummoners()
     {
-        return new Collection($this->mapArr(function (CurrentGameParticipant $e) {
-            return $e->getSummoner();
-        }));
+        return new Collection($this->mapArr(fn (CurrentGameParticipant $e) => $e->getSummoner()));
     }
 
     /**
@@ -34,9 +32,7 @@ class CurrentGameParticipantList extends Collection
      */
     public function getWhereName(string $name)
     {
-        return array_values($this->filterArr(function (CurrentGameParticipant $e) use ($name) {
-            return $e->summonerName == $name;
-        }))[0];
+        return array_values($this->filterArr(fn (CurrentGameParticipant $e) => $e->summonerName === $name))[0];
     }
 
 }

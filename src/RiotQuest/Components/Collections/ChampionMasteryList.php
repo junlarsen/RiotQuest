@@ -22,9 +22,7 @@ class ChampionMasteryList extends Collection
      */
     public function findChampion(int $id)
     {
-        return array_values($this->filterArr(function (ChampionMastery $e) use ($id) {
-            return $e->championId == $id;
-        }))[0];
+        return array_values($this->filterArr(fn (ChampionMastery $e) => $e->championId == $id))[0];
     }
 
     /**
@@ -35,9 +33,7 @@ class ChampionMasteryList extends Collection
      */
     public function getWhereLevelEquals(int $level)
     {
-        return new Collection(array_values($this->filterArr(function (ChampionMastery $e) use ($level) {
-            return $e->championLevel == $level;
-        })));
+        return new Collection(array_values($this->filterArr(fn (ChampionMastery $e) => $e->championLevel == $level)));
     }
 
     /**
@@ -48,9 +44,7 @@ class ChampionMasteryList extends Collection
      */
     public function getWhereLevelMoreThan(int $level)
     {
-        return new Collection(array_values($this->filterArr(function (ChampionMastery $e) use ($level) {
-            return $e->championLevel > $level;
-        })));
+        return new Collection(array_values($this->filterArr(fn (ChampionMastery $e) => $e->championLevel > $level)));
     }
 
     /**
@@ -61,9 +55,7 @@ class ChampionMasteryList extends Collection
      */
     public function getWhereLevelLessThan(int $level)
     {
-        return new Collection(array_values($this->filterArr(function (ChampionMastery $e) use ($level) {
-            return $e->championLevel < $level;
-        })));
+        return new Collection(array_values($this->filterArr(fn (ChampionMastery $e) => $e->championLevel < $level)));
     }
 
     /**
@@ -74,9 +66,7 @@ class ChampionMasteryList extends Collection
      */
     public function getWherePointsMoreThan(int $points)
     {
-        return new Collection(array_values($this->filterArr(function (ChampionMastery $e) use ($points) {
-            return $e->championPoints > $points;
-        })));
+        return new Collection(array_values($this->filterArr(fn (ChampionMastery $e) => $e->championPoints > $points)));
     }
 
     /**
@@ -87,9 +77,7 @@ class ChampionMasteryList extends Collection
      */
     public function getWherePointsLessThan(int $points)
     {
-        return new Collection(array_values($this->filterArr(function (ChampionMastery $e) use ($points) {
-            return $e->championPoints < $points;
-        })));
+        return new Collection(array_values($this->filterArr(fn (ChampionMastery $e) => $e->championPoints < $points)));
     }
 
     /**
@@ -99,9 +87,7 @@ class ChampionMasteryList extends Collection
      */
     public function getWhereChestGranted()
     {
-        return new Collection(array_values($this->filterArr(function (ChampionMastery $e) {
-            return (bool)$e->chestGranted;
-        })));
+        return new Collection(array_values($this->filterArr(fn (ChampionMastery $e) => (bool) $e->chestGranted)));
     }
 
 }

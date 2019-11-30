@@ -22,9 +22,7 @@ class FeaturedGames extends Collection
      */
     public function getGameIds()
     {
-        return $this->mapArr(function (FeaturedGameInfo $featuredGameInfo) {
-            return $featuredGameInfo->gameId;
-        });
+        return $this->mapArr(fn (FeaturedGameInfo $e) => $e->gameId);
     }
 
 }

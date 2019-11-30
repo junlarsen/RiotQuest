@@ -21,21 +21,20 @@ class LeagueEntryList extends Collection
      */
     public function getSoloQueue()
     {
-        return array_filter($this->items, function (LeagueEntry $e) {
-            return $e->queueType === 'RANKED_SOLO_5x5';
-        })[0];
+        return array_fill($this->items, fn (LeagueEntry $e) => $e->queueType === 'RANKED_SOLO_5x5')[0];
     }
 
     /**
      * Get the 3v3 LeaguePosition
      *
+     * @deprecated This queue no longer actually exists, but this
+     * is here for backwards compatability for older games
+     *
      * @return LeagueEntry
      */
     public function getFlexTreeline()
     {
-        return array_filter($this->items, function (LeagueEntry $e) {
-            return $e->queueType === 'RANKED_FLEX_SR';
-        })[0];
+        return array_filter($this->items, fn (LeagueEntry $e) => $e->queueType === 'RANKED_FLEX_TT')[0];
     }
 
     /**
@@ -45,9 +44,7 @@ class LeagueEntryList extends Collection
      */
     public function getFlexRift()
     {
-        return array_filter($this->items, function (LeagueEntry $e) {
-            return $e->queueType === 'RANKED_FLEX_TT';
-        })[0];
+        return array_filter($this->items, fn (LeagueEntry $e) => $e->queueType === 'RANKED_FLEX_SR')[0];
     }
 
     /**
@@ -57,9 +54,7 @@ class LeagueEntryList extends Collection
      */
     public function getRankedQueues()
     {
-        return new StringList(array_values(array_map(function (LeagueEntry $e) {
-            return $e->queueType;
-        }, $this->items)));
+        return new StringList(array_values($this->mapArr(fn (LeagueEntry $e) => $e->queueType)));
     }
 
 }

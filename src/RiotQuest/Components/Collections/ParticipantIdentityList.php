@@ -21,9 +21,7 @@ class ParticipantIdentityList extends Collection
      */
     public function getSummoners()
     {
-        return new Collection(array_values($this->mapArr(function (ParticipantIdentity $e) {
-            return $e->player->getSummoner();
-        })));
+        return new Collection(array_values($this->mapArr(fn (ParticipantIdentity $e) => $e->player->getSummoner())));
     }
 
     /**
@@ -33,9 +31,7 @@ class ParticipantIdentityList extends Collection
      */
     public function getSummonerNames()
     {
-        return new Collection(array_values($this->mapArr(function (ParticipantIdentity $e) {
-            return $e->player->summonerName;
-        })));
+        return new Collection(array_values($this->mapArr(fn (ParticipantIdentity $e) => $e->player->summonerName)));
     }
 
 }
